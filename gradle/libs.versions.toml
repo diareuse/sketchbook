@@ -14,7 +14,7 @@ android = "8.4.0-alpha03"
 coil = "2.5.0"
 instant = "18.0.1"
 haze = "0.4.0"
-publishing = "0.25.3"
+publishing = "0.27.0"
 
 [libraries]
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "androidx-appcompat" }
