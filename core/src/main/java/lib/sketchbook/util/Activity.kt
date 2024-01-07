@@ -9,6 +9,7 @@ import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.*
+import lib.sketchbook.theme.Theme
 
 fun Context.findActivity(): Activity {
     return findActivityOrNull() ?: error("Unknown Context $this")
@@ -29,5 +30,7 @@ fun ComponentActivity.setContent(
     content: @Composable () -> Unit
 ) {
     enableEdgeToEdge(statusBarStyle, navigationBarStyle)
-    setContent(parent, content)
+    setContent(parent) {
+        Theme(content = content)
+    }
 }
