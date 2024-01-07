@@ -9,12 +9,12 @@ androidx-palette = "1.0.0"
 compose-material3 = "1.2.0-beta01"
 compose-compiler = "1.5.7"
 kotlin = "1.9.21"
-collections = "0.3.6"
+collections = "0.3.7"
 android = "8.4.0-alpha03"
 coil = "2.5.0"
 instant = "18.0.1"
-haze = "0.4.0"
-publishing = "0.25.3"
+haze = "0.4.3"
+publishing = "0.27.0"
 
 [libraries]
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "androidx-appcompat" }
