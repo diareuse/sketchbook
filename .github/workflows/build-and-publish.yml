@@ -21,7 +21,7 @@ jobs:
           refType=${{ github.ref_type }}
           if [ $refType = "branch" ]; then
             now=`date "+%Y%m%d"`
-            refName="$refType-$now"
+            refName="$refName-$now"
           fi
           echo "VERSION_NAME=$refName" >> gradle.properties
           echo "GithubPassword=${{ secrets.AUTH_TOKEN }}" >> gradle.properties
