@@ -1,0 +1,43 @@
+name: Build and Publish
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+    paths:
+      - "**/src/main/**"
+    tags:
+      - "*"
+
+jobs:
+  publish-aar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - run: |
+          refName=${{ github.ref_name }}
+          refType=${{ github.ref_type }}
+          if [ $refType = "branch" ]; then
+            now=`date "+%Y%m%d"`
+            refName="$refType-$now"
+          fi
+          echo "VERSION_NAME=$refName" >> gradle.properties
+          echo "GithubPassword=${{ secrets.AUTH_TOKEN }}" >> gradle.properties
+          echo "GithubUsername=${{ secrets.AUTH_USER }}" >> gradle.properties
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          distribution: temurin
+          cache: gradle
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v2
+
+      - name: Build with Gradle
+        uses: gradle/gradle-build-action@v2.4.2
+        with:
+          arguments: publishAllPublicationsToGithubRepository --continue

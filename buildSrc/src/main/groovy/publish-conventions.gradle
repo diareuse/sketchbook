@@ -1,0 +1,27 @@
+plugins {
+    id "maven-publish"
+    id "com.vanniktech.maven.publish.base"
+}
+
+android {
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+        }
+    }
+}
+
+mavenPublishing {
+    pomFromGradleProperties()
+}
+
+publishing {
+    repositories {
+        maven {
+            name = "Github"
+            url = "https://maven.pkg.github.com/diareuse/sketchbook"
+            credentials(PasswordCredentials)
+        }
+    }
+}
