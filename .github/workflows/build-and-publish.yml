@@ -13,6 +13,9 @@ on:
 jobs:
   publish-aar:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     steps:
       - uses: actions/checkout@v3
 
@@ -21,10 +24,10 @@ jobs:
           refType=${{ github.ref_type }}
           if [ $refType = "branch" ]; then
             now=`date "+%Y%m%d"`
-            refName="$refType-$now"
+            refName="$refName-$now"
           fi
           echo "VERSION_NAME=$refName" >> gradle.properties
-          echo "GithubPassword=${{ secrets.AUTH_TOKEN }}" >> gradle.properties
+          echo "GithubPassword=${{ secrets.GITHUB_TOKEN }}" >> gradle.properties
           echo "GithubUsername=${{ secrets.AUTH_USER }}" >> gradle.properties
 
       - name: Set up JDK

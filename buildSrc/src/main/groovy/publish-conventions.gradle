@@ -1,19 +1,15 @@
 plugins {
     id "maven-publish"
-    id "com.vanniktech.maven.publish.base"
+    id "com.vanniktech.maven.publish"
 }
 
 android {
     buildTypes {
         release {
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
-}
-
-mavenPublishing {
-    pomFromGradleProperties()
 }
 
 publishing {
