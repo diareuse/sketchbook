@@ -16,12 +16,74 @@ import lib.sketchbook.modifier.surface
 import lib.sketchbook.theme.Theme
 import lib.sketchbook.util.toPath
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SketchbookColorSlider(
-    modifier: Modifier = Modifier,
+    hue: Float,
+    onHueChange: (Float) -> Unit,
+    saturation: Float,
+    onSaturationChange: (Float) -> Unit,
     value: Float,
-    onValueChange: (Float) -> Unit
+    onValueChange: (Float) -> Unit,
+    modifier: Modifier = Modifier,
+    thumbSize: Dp = 32.dp,
+    trackHeight: Dp = 48.dp,
+    verticalArrangement: Arrangement.Vertical = Arrangement.spacedBy(8.dp),
+    thumbShape: Shape = Theme.container.buttonSmall,
+    trackShape: Shape = Theme.container.button
+) {
+    Column(
+        modifier = modifier,
+        verticalArrangement = verticalArrangement
+    ) {
+        SketchbookColorSliderSimple(
+            value = hue,
+            onValueChange = onHueChange,
+            valueRange = 0f..360f,
+            background = { List(360) { Color.hsv(it.toFloat(), saturation, value) } },
+            color = { Color.hsv(it, saturation, value) },
+            trackHeight = trackHeight,
+            thumbSize = thumbSize,
+            thumbShape = thumbShape,
+            trackShape = trackShape,
+        )
+        SketchbookColorSliderSimple(
+            value = saturation,
+            onValueChange = onSaturationChange,
+            valueRange = 0f..1f,
+            background = { List(10) { Color.hsv(hue, it / 10f, value) } },
+            color = { Color.hsv(hue, it, value) },
+            trackHeight = trackHeight,
+            thumbSize = thumbSize,
+            thumbShape = thumbShape,
+            trackShape = trackShape,
+        )
+        SketchbookColorSliderSimple(
+            value = value,
+            onValueChange = onValueChange,
+            valueRange = 0f..1f,
+            background = { List(10) { Color.hsv(hue, saturation, it / 10f) } },
+            color = { Color.hsv(hue, saturation, it) },
+            trackHeight = trackHeight,
+            thumbSize = thumbSize,
+            thumbShape = thumbShape,
+            trackShape = trackShape,
+        )
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun SketchbookColorSliderSimple(
+    value: Float,
+    onValueChange: (Float) -> Unit,
+    valueRange: ClosedFloatingPointRange<Float>,
+    background: () -> List<Color>,
+    color: (Float) -> Color,
+    trackHeight: Dp,
+    thumbSize: Dp,
+    modifier: Modifier = Modifier,
+    thumbShape: Shape = Theme.container.buttonSmall,
+    trackShape: Shape = Theme.container.button
 ) {
     Slider(
         modifier = modifier,
@@ -39,31 +101,29 @@ fun SketchbookColorSlider(
             disabledInactiveTrackColor = Color.Transparent,
             disabledInactiveTickColor = Color.Transparent,
         ),
-        valueRange = 0f..360f,
+        valueRange = valueRange,
         thumb = {
             val interactionSource = remember { MutableInteractionSource() }
             Spacer(
                 modifier
-                    .size(32.dp)
+                    .size(thumbSize)
                     .hoverable(interactionSource = interactionSource)
                     .surface(
-                        color = Color.hsv(it.value, 1f, 1f),
-                        shape = Theme.container.buttonSmall,
+                        color = color(it.value),
+                        shape = thumbShape,
                         elevation = 16.dp,
                         shadowColor = Color.Black
                     )
             )
         },
         track = {
-            val background = remember { List(360) { Color.hsv(it.toFloat(), 1f, .75f) } }
-            val shape = Theme.container.button
+            val background = remember { background() }
             Canvas(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(48.dp)
+                    .height(trackHeight)
             ) {
-                val outline = shape.createOutline(size, layoutDirection, this)
-
+                val outline = trackShape.createOutline(size, layoutDirection, this)
                 clipPath(outline.toPath()) {
                     drawRect(Brush.horizontalGradient(background))
                 }
@@ -78,5 +138,5 @@ fun SketchbookColorSlider(
 private fun SketchbookColorSliderPreview(
 ) = SketchbookPreviewLayout {
     var value by remember { mutableFloatStateOf(120f) }
-    SketchbookColorSlider(value = value, onValueChange = { value = it })
+    SketchbookColorSlider(0f, {}, .5f, {}, .75f, {})
 }
