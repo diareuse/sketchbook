@@ -117,7 +117,6 @@ private fun SketchbookColorSliderSimple(
             )
         },
         track = {
-            val background = remember { background() }
             Canvas(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -125,7 +124,7 @@ private fun SketchbookColorSliderSimple(
             ) {
                 val outline = trackShape.createOutline(size, layoutDirection, this)
                 clipPath(outline.toPath()) {
-                    drawRect(Brush.horizontalGradient(background))
+                    drawRect(Brush.horizontalGradient(background()))
                 }
             }
         }
@@ -137,6 +136,8 @@ private fun SketchbookColorSliderSimple(
 @Composable
 private fun SketchbookColorSliderPreview(
 ) = SketchbookPreviewLayout {
-    var value by remember { mutableFloatStateOf(120f) }
-    SketchbookColorSlider(0f, {}, .5f, {}, .75f, {})
+    var hue by remember { mutableFloatStateOf(120f) }
+    var saturation by remember { mutableFloatStateOf(1f) }
+    var value by remember { mutableFloatStateOf(1f) }
+    SketchbookColorSlider(hue, { hue = it }, saturation, { saturation = it }, value, { value = it })
 }
