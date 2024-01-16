@@ -2,7 +2,6 @@ package lib.sketchbook
 
 import android.content.res.Configuration.UI_MODE_NIGHT_NO
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
-import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -12,44 +11,6 @@ import androidx.compose.ui.graphics.*
 import androidx.compose.ui.text.input.*
 import androidx.compose.ui.tooling.preview.*
 import lib.sketchbook.theme.Theme
-
-@Composable
-fun RowScope.SketchbookTextField(
-    value: String,
-    onValueChange: (String) -> Unit,
-    modifier: Modifier = Modifier,
-    weight: Float = 1f,
-    label: (@Composable () -> Unit)? = null,
-    placeholder: (@Composable () -> Unit)? = null,
-    supportingText: (@Composable () -> Unit)? = null,
-    trailingIcon: (@Composable () -> Unit)? = null,
-    leadingIcon: (@Composable () -> Unit)? = null,
-    enabled: Boolean = true,
-    readOnly: Boolean = false,
-    singleLine: Boolean = true,
-    isError: Boolean = false,
-    visualTransformation: VisualTransformation = VisualTransformation.None,
-    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
-    keyboardActions: KeyboardActions = KeyboardActions.Default,
-    compositeColor: Color = Theme.color.emphasis.background
-): Unit = SketchbookTextField(
-    value = value,
-    onValueChange = onValueChange,
-    modifier = modifier.weight(weight),
-    label = label,
-    placeholder = placeholder,
-    supportingText = supportingText,
-    trailingIcon = trailingIcon,
-    leadingIcon = leadingIcon,
-    enabled = enabled,
-    readOnly = readOnly,
-    singleLine = singleLine,
-    isError = isError,
-    visualTransformation = visualTransformation,
-    keyboardOptions = keyboardOptions,
-    keyboardActions = keyboardActions,
-    compositeColor = compositeColor
-)
 
 @Composable
 fun SketchbookTextField(
