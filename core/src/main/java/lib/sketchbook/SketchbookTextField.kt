@@ -11,6 +11,7 @@ import androidx.compose.ui.graphics.*
 import androidx.compose.ui.text.input.*
 import androidx.compose.ui.tooling.preview.*
 import lib.sketchbook.theme.Theme
+import lib.sketchbook.theme.contentColorFor
 
 @Composable
 fun SketchbookTextField(
@@ -45,6 +46,12 @@ fun SketchbookTextField(
         readOnly = readOnly,
         visualTransformation = visualTransformation,
         colors = TextFieldDefaults.colors(
+            focusedTextColor = Theme.color.contentColorFor(compositeColor),
+            unfocusedTextColor = Theme.color.contentColorFor(compositeColor).copy(.8f),
+            disabledTextColor = Theme.color.contentColorFor(compositeColor).copy(.5f),
+            focusedLabelColor = Theme.color.contentColorFor(compositeColor),
+            unfocusedLabelColor = Theme.color.contentColorFor(compositeColor).copy(.8f),
+            disabledLabelColor = Theme.color.contentColorFor(compositeColor).copy(.5f),
             disabledIndicatorColor = Color.Transparent,
             errorIndicatorColor = Color.Transparent,
             focusedIndicatorColor = Color.Transparent,
@@ -81,5 +88,10 @@ private fun SketchbookTextFieldFocusPreview() = SketchbookPreviewLayout {
     SideEffect {
         fr.requestFocus()
     }
-    SketchbookTextField("", {}, label = { Text("Label") }, modifier = Modifier.focusRequester(fr))
+    SketchbookTextField(
+        "ABC",
+        {},
+        label = { Text("Label") },
+        modifier = Modifier.focusRequester(fr)
+    )
 }
