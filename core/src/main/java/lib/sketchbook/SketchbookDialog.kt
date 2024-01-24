@@ -4,14 +4,20 @@ import android.content.res.Configuration.UI_MODE_NIGHT_NO
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.blur
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -47,6 +53,7 @@ internal object DialogScopeImpl : DialogScope
 fun DialogScope.Container(
     onDismissRequest: () -> Unit,
     modifier: Modifier = Modifier,
+    contentAlignment: Alignment = Alignment.Center,
     content: @Composable () -> Unit,
 ) = Dialog(
     onDismissRequest = onDismissRequest,
@@ -64,14 +71,19 @@ fun DialogScope.Container(
         }
     }
     Box(
-        modifier = modifier
-            .padding(24.dp)
-            .alignForLargeScreen()
-            .surface(1.dp, Theme.container.card)
-            .glow(Theme.container.card),
-        propagateMinConstraints = true
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = contentAlignment
     ) {
-        content()
+        Box(
+            modifier = modifier
+                .padding(24.dp)
+                .alignForLargeScreen()
+                .surface(1.dp, Theme.container.card)
+                .glow(Theme.container.card),
+            propagateMinConstraints = true
+        ) {
+            content()
+        }
     }
 }
 
@@ -80,9 +92,26 @@ fun DialogScope.Container(
 @Composable
 private fun SketchbookDialogPreview() = SketchbookPreviewLayout {
     SketchbookDialog(
-        visible = false,
-        dialog = { Text("Dialog") }
+        visible = true,
+        dialog = {
+            Container(
+                onDismissRequest = {},
+                contentAlignment = Alignment.BottomCenter
+            ) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp)
+                ) {
+                    Text("Dialog")
+                }
+            }
+        }
     ) {
-        Box(Modifier)
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Color.Gray)
+        )
     }
 }
