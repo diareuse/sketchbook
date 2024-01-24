@@ -1,7 +1,7 @@
 package lib.sketchbook.animation
 
 import android.view.animation.AnticipateOvershootInterpolator
-import androidx.compose.animation.core.*
+import androidx.compose.animation.core.Easing
 
 val AnticipateOvershootEasing = object : Easing {
     val easing = AnticipateOvershootInterpolator()

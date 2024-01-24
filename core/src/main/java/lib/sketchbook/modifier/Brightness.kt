@@ -1,8 +1,9 @@
 package lib.sketchbook.modifier
 
-import androidx.compose.runtime.*
-import androidx.compose.ui.*
-import androidx.compose.ui.platform.*
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.composed
+import androidx.compose.ui.platform.LocalContext
 import lib.sketchbook.util.findActivity
 
 fun Modifier.screenBrightness(full: Boolean) = screenBrightness(if (full) 1f else -1f)

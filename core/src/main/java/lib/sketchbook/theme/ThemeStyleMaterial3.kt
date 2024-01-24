@@ -1,7 +1,7 @@
 package lib.sketchbook.theme
 
-import androidx.compose.material3.*
-import androidx.compose.ui.graphics.*
+import androidx.compose.material3.ColorScheme
+import androidx.compose.ui.graphics.Color
 
 internal class ThemeStyleMaterial3(
     private val scheme: ColorScheme

@@ -3,13 +3,21 @@ package lib.sketchbook.haptic
 import android.os.Build
 import android.view.HapticFeedbackConstants
 import android.view.ViewConfiguration
-import androidx.compose.foundation.*
-import androidx.compose.foundation.interaction.*
-import androidx.compose.material.ripple.*
-import androidx.compose.runtime.*
-import androidx.compose.runtime.saveable.*
-import androidx.compose.ui.hapticfeedback.*
-import androidx.compose.ui.platform.*
+import androidx.compose.foundation.Indication
+import androidx.compose.foundation.IndicationInstance
+import androidx.compose.foundation.interaction.InteractionSource
+import androidx.compose.foundation.interaction.PressInteraction
+import androidx.compose.material.ripple.rememberRipple
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.hapticfeedback.HapticFeedback
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.platform.LocalHapticFeedback
 
 fun HapticFeedback.click() {
     performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)

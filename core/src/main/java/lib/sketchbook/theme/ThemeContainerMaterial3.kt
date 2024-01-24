@@ -1,7 +1,7 @@
 package lib.sketchbook.theme
 
-import androidx.compose.foundation.shape.*
-import androidx.compose.material3.*
+import androidx.compose.foundation.shape.CornerBasedShape
+import androidx.compose.material3.Shapes
 
 internal class ThemeContainerMaterial3(
     private val shapes: Shapes

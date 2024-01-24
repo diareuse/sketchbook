@@ -1,6 +1,7 @@
 package lib.sketchbook.util
 
-import androidx.compose.ui.graphics.*
+import androidx.compose.ui.graphics.Outline
+import androidx.compose.ui.graphics.Path
 
 fun Outline.toPath() = when (this) {
     is Outline.Generic -> path

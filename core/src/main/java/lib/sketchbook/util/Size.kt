@@ -1,7 +1,11 @@
 package lib.sketchbook.util
 
-import androidx.compose.ui.geometry.*
-import androidx.compose.ui.unit.*
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.unit.Density
+import androidx.compose.ui.unit.DpOffset
+import androidx.compose.ui.unit.DpSize
+import androidx.compose.ui.unit.IntSize
 import kotlin.math.roundToInt
 
 fun IntSize.toDpSize(density: Density): DpSize {

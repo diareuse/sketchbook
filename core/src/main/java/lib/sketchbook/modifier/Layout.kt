@@ -1,8 +1,8 @@
 package lib.sketchbook.modifier
 
-import androidx.compose.ui.*
-import androidx.compose.ui.draw.*
-import androidx.compose.ui.layout.*
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.layout.layout
 
 fun Modifier.vertical(rotation: Float = 90f) = layout { measurable, constraints ->
     val placeable = measurable.measure(constraints)

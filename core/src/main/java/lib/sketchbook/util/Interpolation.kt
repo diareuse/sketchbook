@@ -1,9 +1,10 @@
 package lib.sketchbook.util
 
-import androidx.compose.ui.text.*
-import androidx.compose.ui.text.font.*
-import androidx.compose.ui.unit.*
-import androidx.compose.ui.util.*
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.Constraints
+import androidx.compose.ui.unit.lerp
+import androidx.compose.ui.util.lerp
 
 fun lerp(start: Float, stop: Float, fraction: Float) =
     (1 - fraction) * start + fraction * stop

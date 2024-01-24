@@ -1,8 +1,9 @@
 package lib.sketchbook.haptic
 
 import android.view.View
-import androidx.compose.runtime.*
-import androidx.compose.ui.hapticfeedback.*
+import androidx.compose.runtime.Immutable
+import androidx.compose.ui.hapticfeedback.HapticFeedback
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 
 @Immutable
 class PlatformHapticFeedback(

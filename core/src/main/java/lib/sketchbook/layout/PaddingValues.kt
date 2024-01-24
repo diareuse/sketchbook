@@ -1,7 +1,9 @@
 package lib.sketchbook.layout
 
-import androidx.compose.foundation.layout.*
-import androidx.compose.ui.unit.*
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.LayoutDirection
+import androidx.compose.ui.unit.dp
 
 private class ExtendedPaddingValues(
     private val origin: PaddingValues,

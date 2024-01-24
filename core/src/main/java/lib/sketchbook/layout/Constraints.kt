@@ -1,6 +1,6 @@
 package lib.sketchbook.layout
 
-import androidx.compose.ui.unit.*
+import androidx.compose.ui.unit.Constraints
 
 fun Constraints.minusWidth(width: Int): Constraints {
     val newMinWidth = (minWidth - width).coerceAtLeast(0)

@@ -1,7 +1,7 @@
 package lib.sketchbook.theme
 
-import androidx.compose.material3.*
-import androidx.compose.ui.text.*
+import androidx.compose.material3.Typography
+import androidx.compose.ui.text.TextStyle
 
 internal class ThemeTextMaterial3(
     private val typography: Typography

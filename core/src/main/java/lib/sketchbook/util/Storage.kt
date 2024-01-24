@@ -2,8 +2,9 @@ package lib.sketchbook.util
 
 import android.content.Context
 import android.content.SharedPreferences
-import androidx.compose.runtime.*
-import androidx.compose.ui.platform.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.ui.platform.LocalContext
 
 @Composable
 fun rememberSharedPrefs(name: String): SharedPreferences {
