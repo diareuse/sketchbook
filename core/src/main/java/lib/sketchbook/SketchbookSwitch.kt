@@ -33,10 +33,10 @@ fun SketchbookSwitch(
             .compositeOver(compositeColor),
         disabledUncheckedTrackColor = Theme.color.overlay.background.copy(.05f)
             .compositeOver(compositeColor),
-        uncheckedTrackColor = Theme.color.emphasis.primary.copy(.15f)
+        uncheckedTrackColor = Theme.color.overlay.background.copy(.1f)
             .compositeOver(compositeColor),
         checkedThumbColor = Theme.color.emphasis.primary,
-        uncheckedThumbColor = Theme.color.emphasis.primary,
+        uncheckedThumbColor = Theme.color.emphasis.background,
         disabledCheckedThumbColor = Theme.color.contentColorFor(compositeColor).copy(.15f),
         disabledUncheckedThumbColor = Theme.color.contentColorFor(compositeColor).copy(.15f)
     ),
