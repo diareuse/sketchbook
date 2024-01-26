@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CornerSize
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.remember
@@ -139,7 +138,7 @@ class CompositeShape private constructor(
 @Preview(showBackground = true)
 @Composable
 private fun CompositeShapePreview() {
-    val rect = RoundedCornerShape(16.dp)
+    val rect = SquircleShape(16.dp)
     val cutout = CutoutShape(
         cornerSize = CornerSize(16.dp),
         orientation = CutoutShape.Orientation.TopRight

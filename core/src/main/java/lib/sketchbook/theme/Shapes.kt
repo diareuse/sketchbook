@@ -2,7 +2,6 @@ package lib.sketchbook.theme
 
 import androidx.compose.foundation.shape.CornerBasedShape
 import androidx.compose.foundation.shape.CornerSize
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Shapes
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.geometry.Size
@@ -10,13 +9,14 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import lib.sketchbook.shape.SquircleShape
 
 internal val ThemeShapes = Shapes(
-    extraSmall = RoundedCornerShape(4.dp),
-    small = RoundedCornerShape(8.dp),
-    medium = RoundedCornerShape(16.dp),
-    large = RoundedCornerShape(32.dp),
-    extraLarge = RoundedCornerShape(0.dp),
+    extraSmall = SquircleShape(6.dp),
+    small = SquircleShape(12.dp),
+    medium = SquircleShape(24.dp),
+    large = SquircleShape(48.dp),
+    extraLarge = SquircleShape(0.dp),
 )
 
 @Composable
