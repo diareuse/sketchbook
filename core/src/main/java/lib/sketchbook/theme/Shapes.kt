@@ -15,7 +15,7 @@ internal val ThemeShapes = Shapes(
     extraSmall = SquircleShape(6.dp),
     small = SquircleShape(12.dp),
     medium = SquircleShape(24.dp),
-    large = SquircleShape(48.dp),
+    large = SquircleShape(32.dp),
     extraLarge = SquircleShape(0.dp),
 )
 
