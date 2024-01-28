@@ -17,8 +17,7 @@ import androidx.compose.animation.core.updateTransition
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.background
-import androidx.compose.foundation.gestures.awaitEachGesture
-import androidx.compose.foundation.gestures.awaitFirstDown
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -99,14 +98,12 @@ fun SketchbookDialog(
             modifier = Modifier
                 .fillMaxSize()
                 .pointerInput(Unit) {
-                    awaitEachGesture {
-                        awaitFirstDown()
-                        onVisibleChange(false)
-                    }
+                    detectTapGestures { onVisibleChange(false) }
                 },
             contentAlignment = contentAlignment
         ) {
             transition.AnimatedVisibility(
+                modifier = Modifier.pointerInput(Unit) { detectTapGestures {} },
                 visible = { it || contentVisible },
                 enter = slideInVertically(
                     animationSpec = spring(
