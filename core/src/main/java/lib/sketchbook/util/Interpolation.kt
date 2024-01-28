@@ -3,8 +3,10 @@ package lib.sketchbook.util
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Constraints
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.lerp
 import androidx.compose.ui.util.lerp
+import kotlin.math.pow
 
 fun lerp(start: Float, stop: Float, fraction: Float) =
     (1 - fraction) * start + fraction * stop
@@ -24,3 +26,12 @@ fun lerp(start: Constraints, end: Constraints, fraction: Float) = start.copy(
     maxWidth = lerp(start.maxWidth, end.maxWidth, fraction),
     maxHeight = lerp(start.maxHeight, end.maxHeight, fraction)
 )
+
+fun smoothStep(start: Float, stop: Float, progress: Float): Float {
+    val step = progress.pow(2) * (3f - 2f * progress)
+    return lerp(start, stop, step)
+}
+
+fun smoothStep(start: Dp, end: Dp, progress: Float): Dp {
+    return Dp(smoothStep(start.value, end.value, progress))
+}
