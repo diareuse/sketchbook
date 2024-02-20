@@ -8,7 +8,6 @@ import androidx.compose.ui.tooling.preview.Preview
     name = "Light",
     group = "display",
     showSystemUi = true,
-    showBackground = false,
     uiMode = Configuration.UI_MODE_NIGHT_NO,
     device = Devices.PIXEL_7
 )
@@ -16,7 +15,6 @@ import androidx.compose.ui.tooling.preview.Preview
     name = "Dark",
     group = "display",
     showSystemUi = true,
-    showBackground = false,
     uiMode = Configuration.UI_MODE_NIGHT_YES,
     device = Devices.PIXEL_7
 )
@@ -39,7 +37,6 @@ annotation class SketchbookValidation
     group = "display",
     showSystemUi = false,
     showBackground = true,
-    backgroundColor = 0xFFFFFFFF,
     uiMode = Configuration.UI_MODE_NIGHT_NO
 )
 @Preview(
@@ -47,7 +44,6 @@ annotation class SketchbookValidation
     group = "display",
     showSystemUi = false,
     showBackground = true,
-    backgroundColor = 0xFF000000,
     uiMode = Configuration.UI_MODE_NIGHT_YES
 )
 annotation class SketchbookComponentPreview

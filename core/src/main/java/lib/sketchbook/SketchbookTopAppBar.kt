@@ -209,7 +209,8 @@ private fun SketchbookTopAppBarPreview() = SketchbookPreviewLayout(padding = Pad
     }
 }
 
-@Preview(showBackground = true)
+@SketchbookComponentPreview
+@SketchbookValidation
 @Composable
 private fun SketchbookTopAppBarTitleOnlyPreview() =
     SketchbookPreviewLayout(padding = PaddingValues()) {
@@ -229,7 +230,8 @@ private fun SketchbookTopAppBarTitleOnlyPreview() =
         }
     }
 
-@Preview(showBackground = true)
+@SketchbookComponentPreview
+@SketchbookValidation
 @Composable
 private fun SketchbookTopAppBarExpandedPreview() =
     SketchbookPreviewLayout(padding = PaddingValues()) {
@@ -257,7 +259,7 @@ private fun SketchbookTopAppBarExpandedPreview() =
     }
 
 @Composable
-fun SampleContent(padding: PaddingValues, behavior: TopAppBarScrollBehavior) {
+private fun SampleContent(padding: PaddingValues, behavior: TopAppBarScrollBehavior) {
     LazyColumn(
         modifier = Modifier.nestedScroll(behavior.nestedScrollConnection),
         contentPadding = padding.plus(24.dp),

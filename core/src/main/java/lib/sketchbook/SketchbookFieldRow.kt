@@ -1,7 +1,5 @@
 package lib.sketchbook
 
-import android.content.res.Configuration.UI_MODE_NIGHT_NO
-import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
@@ -13,7 +11,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
@@ -32,14 +29,14 @@ fun SketchbookFieldRow(
     }
 }
 
-@Preview(showBackground = true, uiMode = UI_MODE_NIGHT_YES)
-@Preview(showBackground = true, uiMode = UI_MODE_NIGHT_NO)
+@SketchbookComponentPreview
+@SketchbookValidation
 @Composable
 private fun SketchbookFieldPreview() = SketchbookPreviewLayout(modifier = Modifier.padding(16.dp)) {
     SketchbookFieldRow(
         icon = { Icon(Icons.Default.Add, null) }
     ) {
-        SketchbookTextField("", {}, label = { Text("First") })
-        SketchbookTextField("", {}, label = { Text("Second") })
+        SketchbookTextField("", {}, modifier = Modifier.weight(1f), label = { Text("First") })
+        SketchbookTextField("", {}, modifier = Modifier.weight(1f), label = { Text("Second") })
     }
 }

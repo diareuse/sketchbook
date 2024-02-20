@@ -18,12 +18,12 @@ import androidx.compose.ui.graphics.Outline
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.PathOperation
 import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
+import lib.sketchbook.SketchbookComponentPreview
 import lib.sketchbook.shape.CutoutShape.Orientation
 
 class CutoutShape(
@@ -104,7 +104,7 @@ class CutoutShape(
 
 }
 
-@Preview(showBackground = true)
+@SketchbookComponentPreview
 @Composable
 private fun CutoutShapePreview(
     @PreviewParameter(OrientationProvider::class)

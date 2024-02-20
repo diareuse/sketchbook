@@ -1,7 +1,5 @@
 package lib.sketchbook
 
-import android.content.res.Configuration.UI_MODE_NIGHT_NO
-import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.hoverable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -24,7 +22,6 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.drawscope.clipPath
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import lib.sketchbook.modifier.surface
@@ -146,8 +143,7 @@ private fun SketchbookColorSliderSimple(
     )
 }
 
-@Preview(showBackground = true, uiMode = UI_MODE_NIGHT_YES)
-@Preview(showBackground = true, uiMode = UI_MODE_NIGHT_NO)
+@SketchbookComponentPreview
 @Composable
 private fun SketchbookColorSliderPreview(
 ) = SketchbookPreviewLayout {

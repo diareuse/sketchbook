@@ -1,7 +1,5 @@
 package lib.sketchbook
 
-import android.content.res.Configuration.UI_MODE_NIGHT_NO
-import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Switch
@@ -12,7 +10,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.compositeOver
-import androidx.compose.ui.tooling.preview.Preview
 import lib.sketchbook.theme.Theme
 import lib.sketchbook.theme.contentColorFor
 
@@ -55,8 +52,7 @@ fun SketchbookSwitch(
     )
 }
 
-@Preview(showBackground = true, uiMode = UI_MODE_NIGHT_YES)
-@Preview(showBackground = true, uiMode = UI_MODE_NIGHT_NO)
+@SketchbookComponentPreview
 @Composable
 private fun SketchbookSwitchPreview() = SketchbookPreviewLayout {
     Column {

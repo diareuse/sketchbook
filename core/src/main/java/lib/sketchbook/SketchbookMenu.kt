@@ -46,7 +46,6 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.platform.LocalView
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.DpSize
@@ -275,7 +274,7 @@ private fun AnchoredLayout(
     }
 }
 
-@Preview(showBackground = true)
+@SketchbookComponentPreview
 @Composable
 private fun DialogClonePreview() {
     val overlay = remember { OverlayState() }

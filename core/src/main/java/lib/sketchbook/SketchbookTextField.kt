@@ -1,7 +1,5 @@
 package lib.sketchbook
 
-import android.content.res.Configuration.UI_MODE_NIGHT_NO
-import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Text
@@ -17,7 +15,6 @@ import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.compositeOver
 import androidx.compose.ui.text.input.VisualTransformation
-import androidx.compose.ui.tooling.preview.Preview
 import lib.sketchbook.theme.Theme
 import lib.sketchbook.theme.contentColorFor
 
@@ -80,16 +77,15 @@ fun SketchbookTextField(
     )
 }
 
-@Preview(showBackground = true, uiMode = UI_MODE_NIGHT_YES)
-@Preview(showBackground = true, uiMode = UI_MODE_NIGHT_NO)
+@SketchbookComponentPreview
 @Composable
 private fun SketchbookTextFieldPreview() = SketchbookPreviewLayout {
     SketchbookTextField("", {}, label = { Text("Label") })
 }
 
 @OptIn(ExperimentalComposeUiApi::class)
-@Preview(showBackground = true, uiMode = UI_MODE_NIGHT_YES)
-@Preview(showBackground = true, uiMode = UI_MODE_NIGHT_NO)
+@SketchbookComponentPreview
+@SketchbookValidation
 @Composable
 private fun SketchbookTextFieldFocusPreview() = SketchbookPreviewLayout {
     val (fr) = remember { FocusRequester.createRefs() }

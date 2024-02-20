@@ -2,8 +2,6 @@
 
 package lib.sketchbook
 
-import android.content.res.Configuration.UI_MODE_NIGHT_NO
-import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
@@ -39,7 +37,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalView
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
@@ -147,8 +144,7 @@ fun DialogSurface(
 }
 
 
-@Preview(showBackground = true, uiMode = UI_MODE_NIGHT_YES)
-@Preview(showBackground = true, uiMode = UI_MODE_NIGHT_NO)
+@SketchbookComponentPreview
 @Composable
 private fun SketchbookDialogPreview() = SketchbookPreviewLayout {
     SketchbookDialog(

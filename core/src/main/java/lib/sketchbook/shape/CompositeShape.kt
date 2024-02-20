@@ -18,7 +18,6 @@ import androidx.compose.ui.graphics.PathOperation
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.addOutline
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.LayoutDirection
@@ -27,6 +26,7 @@ import androidx.compose.ui.unit.isSpecified
 import androidx.compose.ui.unit.toOffset
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
+import lib.sketchbook.SketchbookComponentPreview
 import lib.sketchbook.util.toIntSize
 import lib.sketchbook.util.toPath
 import lib.sketchbook.util.toSize
@@ -135,7 +135,7 @@ class CompositeShape private constructor(
 
 }
 
-@Preview(showBackground = true)
+@SketchbookComponentPreview
 @Composable
 private fun CompositeShapePreview() {
     val rect = SquircleShape(16.dp)
