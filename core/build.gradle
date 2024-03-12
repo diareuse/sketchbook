@@ -39,8 +39,9 @@ dependencies {
     implementation libs.bundles.compose
     implementation libs.androidx.palette
     implementation libs.androidx.activity
-    implementation libs.google.haze
     implementation libs.coil.compose
     implementation libs.coil.svg
+    compileOnly libs.google.haze
+    compileOnly libs.androidx.paging
 
 }

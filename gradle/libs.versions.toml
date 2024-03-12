@@ -2,15 +2,16 @@
 accompanist = "0.34.0"
 androidx-activity = "1.8.2"
 androidx-appcompat = "1.7.0-alpha03"
-androidx-compose = "1.6.0-rc01"
-androidx-wear = "1.3.0-rc01"
-androidx-navigation = "2.7.6"
+androidx-compose = "1.6.3"
+androidx-wear = "1.3.0"
+androidx-navigation = "2.7.7"
 androidx-palette = "1.0.0"
-compose-material3 = "1.2.0-beta02"
+androidx-paging = "3.2.1"
+compose-material3 = "1.2.1"
 compose-compiler = "1.5.8"
 kotlin = "1.9.22"
 collections = "0.3.7"
-android = "8.2.1"
+android = "8.3.0"
 coil = "2.6.0"
 instant = "18.0.1"
 haze = "0.6.0"
@@ -20,6 +21,7 @@ publishing = "0.27.0"
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "androidx-appcompat" }
 androidx-palette = { module = "androidx.palette:palette-ktx", version.ref = "androidx-palette" }
 androidx-activity = { module = "androidx.activity:activity-ktx", version.ref = "androidx-activity" }
+androidx-paging = { module = "androidx.paging:paging-compose", version.ref = "androidx-paging" }
 coil-svg = { module = "io.coil-kt:coil-svg", version.ref = "coil" }
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 google-permissions = { module = "com.google.accompanist:accompanist-permissions", version.ref = "accompanist" }
