@@ -14,7 +14,7 @@ collections = "0.3.7"
 android = "8.3.0"
 coil = "2.6.0"
 instant = "18.0.1"
-haze = "0.6.2"
+haze = "0.7.0"
 publishing = "0.28.0"
 
 [libraries]
