@@ -9,9 +9,9 @@ androidx-palette = "1.0.0"
 androidx-paging = "3.2.1"
 compose-material3 = "1.2.1"
 compose-compiler = "1.5.8"
-kotlin = "2.0.20"
 collections = "0.3.7"
 android = "8.3.0"
+kotlin = "2.2.10"
 coil = "2.7.0"
 instant = "18.0.1"
 haze = "0.7.0"
@@ -44,6 +44,7 @@ kotlinx-collections = { module = "org.jetbrains.kotlinx:kotlinx-collections-immu
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 android-library = { id = "com.android.library", version.ref = "android" }
 android-application = { id = "com.android.application", version.ref = "android" }
 publish = { id = "com.vanniktech.maven.publish.base", version.ref = "publishing" }

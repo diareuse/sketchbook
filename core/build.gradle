@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.compose)
     id "publish-conventions"
 }
 
@@ -28,9 +29,6 @@ android {
     }
     kotlinOptions {
         jvmTarget = '17'
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion libs.versions.compose.compiler.get()
     }
 }
 
