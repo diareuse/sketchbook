@@ -16,6 +16,8 @@ concurrency:
 jobs:
   publish-tag:
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
     steps:
       - uses: actions/checkout@v4
       - uses: googleapis/release-please-action@v4
