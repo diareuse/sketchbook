@@ -2,22 +2,16 @@ package lib.sketchbook.haptic
 
 import android.os.Build
 import android.view.HapticFeedbackConstants
-import android.view.ViewConfiguration
-import androidx.compose.foundation.Indication
-import androidx.compose.foundation.IndicationInstance
-import androidx.compose.foundation.interaction.InteractionSource
-import androidx.compose.foundation.interaction.PressInteraction
-import androidx.compose.material.ripple.rememberRipple
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.hapticfeedback.HapticFeedback
-import androidx.compose.ui.hapticfeedback.HapticFeedbackType
-import androidx.compose.ui.platform.LocalHapticFeedback
+import androidx.compose.foundation.*
+import androidx.compose.foundation.interaction.*
+import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.*
+import androidx.compose.ui.*
+import androidx.compose.ui.hapticfeedback.*
+import androidx.compose.ui.node.*
+import androidx.compose.ui.platform.*
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 fun HapticFeedback.click() {
     performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
@@ -76,35 +70,36 @@ fun <T> ClickOnChange(value: T, key: Any? = Unit) {
 }
 
 @Composable
-fun rememberVibrateIndication(indication: Indication = rememberRipple()): Indication {
-    return remember { VibrateIndication(indication) }
+fun rememberVibrateIndication(): Indication {
+    val feedback = LocalHapticFeedback.current
+    return remember(feedback) { VibrateIndicationNodeFactory(feedback) }
 }
 
-class VibrateIndication(
-    private val origin: Indication
-) : Indication {
+class VibrateIndicationNodeFactory(
+    private val feedback: HapticFeedback
+) : IndicationNodeFactory {
+    override fun create(interactionSource: InteractionSource): DelegatableNode {
+        return VibrateNode(interactionSource, feedback)
+    }
 
-    @Composable
-    override fun rememberUpdatedInstance(interactionSource: InteractionSource): IndicationInstance {
-        val haptic = LocalHapticFeedback.current
-        val timeout = ViewConfiguration.getLongPressTimeout().toLong()
-        LaunchedEffect(interactionSource) {
-            var lastPress = 0L
-            interactionSource.interactions.collect {
-                when (it) {
-                    is PressInteraction.Press -> {
-                        lastPress = System.currentTimeMillis()
-                        haptic.fastTick()
-                    }
+    override fun equals(other: Any?): Boolean = other === this
 
-                    is PressInteraction.Release -> {
-                        if (timeout > System.currentTimeMillis() - lastPress)
-                            haptic.click()
-                    }
+    override fun hashCode(): Int = -1
+}
+
+class VibrateNode(
+    private val interactionSource: InteractionSource,
+    private val feedback: HapticFeedback
+) : Modifier.Node() {
+    override fun onAttach() {
+        coroutineScope.launch {
+            interactionSource.interactions.collectLatest { interaction ->
+                when (interaction) {
+                    is PressInteraction.Press -> feedback.tick()
+                    is PressInteraction.Release -> feedback.fastTick()
+                    is PressInteraction.Cancel -> feedback.reject()
                 }
             }
         }
-        return origin.rememberUpdatedInstance(interactionSource)
     }
-
 }

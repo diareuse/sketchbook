@@ -1,21 +1,21 @@
 [versions]
-accompanist = "0.34.0"
-androidx-activity = "1.8.2"
-androidx-appcompat = "1.7.0-alpha03"
-androidx-compose = "1.6.3"
-androidx-wear = "1.3.0"
-androidx-navigation = "2.7.7"
+accompanist = "0.37.3"
+androidx-activity = "1.10.1"
+androidx-appcompat = "1.7.1"
+androidx-compose = "1.9.0"
+androidx-wear = "1.5.0"
+androidx-navigation = "2.9.3"
 androidx-palette = "1.0.0"
-androidx-paging = "3.2.1"
-compose-material3 = "1.2.1"
+androidx-paging = "3.3.6"
+compose-material3 = "1.3.2"
 compose-compiler = "1.5.8"
-collections = "0.3.7"
-android = "8.3.0"
 kotlin = "2.2.10"
+collections = "0.4.0"
+android = "8.12.2"
 coil = "2.7.0"
-instant = "18.0.1"
+instant = "18.2.0"
 haze = "0.7.0"
-publishing = "0.29.0"
+publishing = "0.34.0"
 
 [libraries]
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "androidx-appcompat" }
@@ -25,7 +25,6 @@ androidx-paging = { module = "androidx.paging:paging-compose", version.ref = "an
 coil-svg = { module = "io.coil-kt:coil-svg", version.ref = "coil" }
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 google-permissions = { module = "com.google.accompanist:accompanist-permissions", version.ref = "accompanist" }
-google-instant = { module = "com.google.android.gms:play-services-instantapps", version.ref = "instant" }
 google-haze = { module = "dev.chrisbanes.haze:haze-jetpack-compose", version.ref = "haze" }
 compose-ui-core = { module = "androidx.compose.ui:ui", version.ref = "androidx-compose" }
 compose-activity = { module = "androidx.activity:activity-compose", version.ref = "androidx-activity" }
