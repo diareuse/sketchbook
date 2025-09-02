@@ -1,15 +1,13 @@
 package lib.sketchbook
 
-import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.layout.Column
-import androidx.compose.material3.Switch
-import androidx.compose.material3.SwitchColors
-import androidx.compose.material3.SwitchDefaults
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.compositeOver
+import androidx.compose.foundation.interaction.*
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.*
+import androidx.compose.ui.graphics.*
+import androidx.compose.ui.hapticfeedback.*
+import androidx.compose.ui.platform.*
 import lib.sketchbook.theme.Theme
 import lib.sketchbook.theme.contentColorFor
 
@@ -41,10 +39,15 @@ fun SketchbookSwitch(
     enabled: Boolean = true,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() }
 ) {
+    val haptics = LocalHapticFeedback.current
     Switch(
         modifier = modifier,
         checked = checked,
-        onCheckedChange = onCheckedChange,
+        onCheckedChange = {
+            onCheckedChange(it)
+            val feedback = if (it) HapticFeedbackType.ToggleOn else HapticFeedbackType.ToggleOff
+            haptics.performHapticFeedback(feedback)
+        },
         colors = colors,
         thumbContent = thumbContent,
         enabled = enabled,

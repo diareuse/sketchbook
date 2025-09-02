@@ -14,7 +14,9 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 fun HapticFeedback.click() {
-    performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+    }
 }
 
 fun HapticFeedback.tick() {
@@ -75,6 +77,87 @@ fun rememberVibrateIndication(): Indication {
     return remember(feedback) { VibrateIndicationNodeFactory(feedback) }
 }
 
+fun Modifier.hapticIndication(interactionSource: InteractionSource) = composed {
+    HapticIndicationModifier(interactionSource, LocalHapticFeedback.current)
+}
+
+@Composable
+fun rememberMutableInteractionSource(): MutableInteractionSourceState = remember {
+    MutableInteractionSourceState()
+}
+
+class MutableInteractionSourceState {
+    private val sources = mutableStateMapOf<Int, MutableInteractionSource>()
+
+    operator fun component1(): MutableInteractionSource =
+        sources.getOrPut(1, ::MutableInteractionSource)
+
+    operator fun component2(): MutableInteractionSource =
+        sources.getOrPut(2, ::MutableInteractionSource)
+
+    operator fun component3(): MutableInteractionSource =
+        sources.getOrPut(3, ::MutableInteractionSource)
+
+    operator fun component4(): MutableInteractionSource =
+        sources.getOrPut(4, ::MutableInteractionSource)
+
+    operator fun component5(): MutableInteractionSource =
+        sources.getOrPut(5, ::MutableInteractionSource)
+
+    operator fun component6(): MutableInteractionSource =
+        sources.getOrPut(6, ::MutableInteractionSource)
+
+    operator fun component7(): MutableInteractionSource =
+        sources.getOrPut(7, ::MutableInteractionSource)
+
+    operator fun component8(): MutableInteractionSource =
+        sources.getOrPut(8, ::MutableInteractionSource)
+
+    operator fun component9(): MutableInteractionSource =
+        sources.getOrPut(9, ::MutableInteractionSource)
+
+    operator fun component10(): MutableInteractionSource =
+        sources.getOrPut(10, ::MutableInteractionSource)
+
+    operator fun component11(): MutableInteractionSource =
+        sources.getOrPut(11, ::MutableInteractionSource)
+
+    operator fun component12(): MutableInteractionSource =
+        sources.getOrPut(12, ::MutableInteractionSource)
+}
+
+class HapticIndicationModifier(
+    private val interactionSource: InteractionSource,
+    private val haptics: HapticFeedback
+) : ModifierNodeElement<VibrateNode>() {
+
+    override fun create(): VibrateNode = VibrateNode(interactionSource, haptics)
+
+    override fun update(node: VibrateNode) {
+        node.interactionSource = interactionSource
+        node.haptics = haptics
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as HapticIndicationModifier
+
+        if (interactionSource != other.interactionSource) return false
+        if (haptics != other.haptics) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = interactionSource.hashCode()
+        result = 31 * result + haptics.hashCode()
+        return result
+    }
+
+}
+
 class VibrateIndicationNodeFactory(
     private val feedback: HapticFeedback
 ) : IndicationNodeFactory {
@@ -88,16 +171,17 @@ class VibrateIndicationNodeFactory(
 }
 
 class VibrateNode(
-    private val interactionSource: InteractionSource,
-    private val feedback: HapticFeedback
+    var interactionSource: InteractionSource,
+    var haptics: HapticFeedback
 ) : Modifier.Node() {
     override fun onAttach() {
         coroutineScope.launch {
             interactionSource.interactions.collectLatest { interaction ->
+                println("interaction $interaction")
                 when (interaction) {
-                    is PressInteraction.Press -> feedback.tick()
-                    is PressInteraction.Release -> feedback.fastTick()
-                    is PressInteraction.Cancel -> feedback.reject()
+                    is PressInteraction.Press -> haptics.tick()
+                    is PressInteraction.Release -> haptics.fastTick()
+                    is PressInteraction.Cancel -> haptics.reject()
                 }
             }
         }
