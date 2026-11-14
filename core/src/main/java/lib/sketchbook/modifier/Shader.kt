@@ -7,7 +7,8 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import lib.sketchbook.shader.MeshGradientElement
 import lib.sketchbook.shader.ShimmerElement
-import lib.sketchbook.shader.SpecularBorderElement
+import lib.sketchbook.shader.BeamLook
+import lib.sketchbook.shader.BorderBeamElement
 import lib.sketchbook.shader.toMeshColors
 
 fun Modifier.shimmer(
@@ -22,7 +23,13 @@ fun Modifier.specularBorder(
     color: Color = Color.White,
     durationMillis: Int = 4000,
     animated: Boolean = true
-): Modifier = this then SpecularBorderElement(shape, width, color, durationMillis, animated)
+): Modifier = this then BorderBeamElement(
+    shape = shape,
+    look = BeamLook(BeamPalette.glass(color), BeamStyle.Large, BeamDirection.Clockwise, 1f, width),
+    active = true,
+    animated = animated,
+    durationMillis = durationMillis
+)
 
 fun Modifier.meshGradientBackground(
     colors: List<Color>,

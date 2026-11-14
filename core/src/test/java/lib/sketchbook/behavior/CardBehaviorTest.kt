@@ -177,6 +177,15 @@ class CardBehaviorTest : BehaviorTest() {
         return distance(image.opaque(180, 20), image.opaque(180 + 360, 20))
     }
 
+    private fun strongestRimDifference(): Int {
+        val image = pixels()
+        var strongest = 0
+        for (y in 20..40 step 2) for (x in 30..310 step 2) {
+            strongest = maxOf(strongest, distance(image.opaque(x, y), image.opaque(x + 360, y)))
+        }
+        return strongest
+    }
+
     @Test
     @Config(sdk = [26])
     fun `glow brightens the card rim`() {
@@ -190,7 +199,7 @@ class CardBehaviorTest : BehaviorTest() {
     fun `specular rim draws a highlight along the card border`() {
         showPair(false to false, false to true)
 
-        assertTrue("rim difference ${rimDifference()}", rimDifference() > 20)
+        assertTrue("rim difference ${strongestRimDifference()}", strongestRimDifference() > 20)
     }
 
     @Test

@@ -20,23 +20,6 @@ half4 main(float2 coord) {
 }
 """
 
-    const val SpecularRimSweep = """
-uniform float2 size;
-uniform float angle;
-uniform half4 color;
-
-const float TAU = 6.2831853;
-
-half4 main(float2 coord) {
-    float2 p = coord - size * 0.5;
-    float a = atan(p.y, p.x);
-    float d = abs(fract((a - angle) / TAU + 0.5) - 0.5);
-    float glint = exp(-d * d * 90.0);
-    float k = clamp(0.2 + glint, 0.0, 1.0) * color.a;
-    return half4(color.rgb * k, k);
-}
-"""
-
     const val Shimmer = """
 uniform float2 size;
 uniform float phase;

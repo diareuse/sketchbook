@@ -73,10 +73,11 @@ abstract class ShaderEffectsBehavior : BehaviorTest() {
             Modifier.size(100.dp).background(Color.Black, shape).specularBorder(shape, 3.dp, Color.White, animated = false)
         }
         val image = composeRule.onRoot().captureToImage().toPixelMap()
-        val rim = image[100, 2]
-        val interior = image[100, 100]
-        assertTrue(rim.red > .1f)
-        assertEquals(0f, interior.red, 0f)
+        var rim = 0f
+        for (y in 2..8) for (x in 24..176) rim = maxOf(rim, image[x, y].let { maxOf(it.red, it.green, it.blue) })
+        for (x in 24..176) rim = maxOf(rim, image[x, 198].let { maxOf(it.red, it.green, it.blue) })
+        assertTrue("rim $rim", rim > .1f)
+        assertEquals(0f, image[100, 100].red, 0f)
     }
 
     @Test

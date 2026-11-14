@@ -749,6 +749,35 @@ public final class lib/sketchbook/modifier/AnimationKt {
 	public static final fun animateItemAppearance-1k6DkX8 (Landroidx/compose/ui/Modifier;JFLandroidx/compose/animation/core/AnimationSpec;Landroidx/compose/animation/core/AnimationSpec;Landroidx/compose/runtime/Composer;II)Landroidx/compose/ui/Modifier;
 }
 
+public final class lib/sketchbook/modifier/BeamDirection : java/lang/Enum {
+	public static final field Clockwise Llib/sketchbook/modifier/BeamDirection;
+	public static final field CounterClockwise Llib/sketchbook/modifier/BeamDirection;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Llib/sketchbook/modifier/BeamDirection;
+	public static fun values ()[Llib/sketchbook/modifier/BeamDirection;
+}
+
+public final class lib/sketchbook/modifier/BeamPalette {
+	public static final field $stable I
+	public static final field INSTANCE Llib/sketchbook/modifier/BeamPalette;
+	public final fun getColorful ()Ljava/util/List;
+	public final fun glass-8_81llA (J)Ljava/util/List;
+}
+
+public final class lib/sketchbook/modifier/BeamStyle : java/lang/Enum {
+	public static final field Large Llib/sketchbook/modifier/BeamStyle;
+	public static final field Line Llib/sketchbook/modifier/BeamStyle;
+	public static final field Small Llib/sketchbook/modifier/BeamStyle;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Llib/sketchbook/modifier/BeamStyle;
+	public static fun values ()[Llib/sketchbook/modifier/BeamStyle;
+}
+
+public final class lib/sketchbook/modifier/BorderBeamKt {
+	public static final fun borderBeam-i-NP2pc (Landroidx/compose/ui/Modifier;Landroidx/compose/ui/graphics/Shape;Ljava/util/List;Llib/sketchbook/modifier/BeamStyle;Llib/sketchbook/modifier/BeamDirection;ZFFI)Landroidx/compose/ui/Modifier;
+	public static synthetic fun borderBeam-i-NP2pc$default (Landroidx/compose/ui/Modifier;Landroidx/compose/ui/graphics/Shape;Ljava/util/List;Llib/sketchbook/modifier/BeamStyle;Llib/sketchbook/modifier/BeamDirection;ZFFIILjava/lang/Object;)Landroidx/compose/ui/Modifier;
+}
+
 public final class lib/sketchbook/modifier/BrightnessKt {
 	public static final fun screenBrightness (Landroidx/compose/ui/Modifier;F)Landroidx/compose/ui/Modifier;
 	public static final fun screenBrightness (Landroidx/compose/ui/Modifier;Z)Landroidx/compose/ui/Modifier;

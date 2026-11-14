@@ -70,7 +70,11 @@ abstract class GlassBorderBehavior : BehaviorTest() {
         }
 
         val image = pixels()
-        assertTrue(distance(image.opaque(100, 2), image.opaque(100 + 200, 2)) > 30)
+        var strongest = 0
+        for (y in 2..20 step 2) for (x in 20..180 step 2) {
+            strongest = maxOf(strongest, distance(image.opaque(x, y), image.opaque(x + 200, y)))
+        }
+        assertTrue("rim difference $strongest", strongest > 30)
     }
 
     @Test
