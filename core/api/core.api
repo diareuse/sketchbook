@@ -206,6 +206,18 @@ public final class lib/sketchbook/ComposableSingletons$SketchbookSwitchKt {
 	public final fun getLambda$1403615748$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
 }
 
+public final class lib/sketchbook/ComposableSingletons$SketchbookTabRowKt {
+	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookTabRowKt;
+	public fun <init> ()V
+	public final fun getLambda$-1379672458$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-1445523486$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-634302130$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-884636292$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$1389197421$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$1648396453$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$1861934486$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+}
+
 public final class lib/sketchbook/ComposableSingletons$SketchbookTextFieldKt {
 	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookTextFieldKt;
 	public fun <init> ()V
@@ -427,6 +439,12 @@ public final class lib/sketchbook/SketchbookSliderKt {
 
 public final class lib/sketchbook/SketchbookSwitchKt {
 	public static final fun SketchbookSwitch-8r3B23s (ZLkotlin/jvm/functions/Function1;Landroidx/compose/ui/Modifier;JLandroidx/compose/material3/SwitchColors;Lkotlin/jvm/functions/Function2;ZLandroidx/compose/foundation/interaction/MutableInteractionSource;Landroidx/compose/runtime/Composer;II)V
+}
+
+public final class lib/sketchbook/SketchbookTabRowKt {
+	public static final fun SketchbookScrollableTabRow-zkFDczg (ILandroidx/compose/ui/Modifier;Landroidx/compose/ui/graphics/Shape;JZFLkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;II)V
+	public static final fun SketchbookTab-3csKH6Y (ZLkotlin/jvm/functions/Function0;Landroidx/compose/ui/Modifier;ZLkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;JLandroidx/compose/foundation/interaction/MutableInteractionSource;Landroidx/compose/runtime/Composer;II)V
+	public static final fun SketchbookTabRow-fWhpE4E (ILandroidx/compose/ui/Modifier;Landroidx/compose/ui/graphics/Shape;JZLkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;II)V
 }
 
 public final class lib/sketchbook/SketchbookTextFieldKt {
