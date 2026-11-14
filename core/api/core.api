@@ -107,6 +107,12 @@ public final class lib/sketchbook/ComposableSingletons$SketchbookRockerCounterKt
 	public final fun getLambda$853691156$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
 }
 
+public final class lib/sketchbook/ComposableSingletons$SketchbookSliderKt {
+	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookSliderKt;
+	public fun <init> ()V
+	public final fun getLambda$-1517110230$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+}
+
 public final class lib/sketchbook/ComposableSingletons$SketchbookSwitchKt {
 	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookSwitchKt;
 	public fun <init> ()V
@@ -290,6 +296,10 @@ public final class lib/sketchbook/SketchbookRockerCounterKt {
 }
 
 public abstract interface annotation class lib/sketchbook/SketchbookScreenPreview : java/lang/annotation/Annotation {
+}
+
+public final class lib/sketchbook/SketchbookSliderKt {
+	public static final fun SketchbookSlider-lmFMXvc (FLkotlin/jvm/functions/Function1;Landroidx/compose/ui/Modifier;Lkotlin/ranges/ClosedFloatingPointRange;ILkotlin/jvm/functions/Function0;ZJLandroidx/compose/foundation/interaction/MutableInteractionSource;Landroidx/compose/runtime/Composer;II)V
 }
 
 public final class lib/sketchbook/SketchbookSwitchKt {
