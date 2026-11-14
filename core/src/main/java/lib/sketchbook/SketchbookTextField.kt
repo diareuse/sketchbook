@@ -18,6 +18,10 @@ import androidx.compose.ui.text.input.VisualTransformation
 import lib.sketchbook.theme.Theme
 import lib.sketchbook.theme.contentColorFor
 
+private const val UnfocusedTint = .75f
+private const val FocusedTint = .85f
+private const val DisabledTint = .5f
+
 @Composable
 fun SketchbookTextField(
     value: String,
@@ -61,13 +65,14 @@ fun SketchbookTextField(
             errorIndicatorColor = Color.Transparent,
             focusedIndicatorColor = Color.Transparent,
             unfocusedIndicatorColor = Color.Transparent,
-            unfocusedContainerColor = Theme.color.overlay.background.copy(.1f)
-                .compositeOver(compositeColor),
-            focusedContainerColor = Theme.color.overlay.background.copy(.15f)
-                .compositeOver(compositeColor),
-            errorContainerColor = Theme.color.overlay.error.copy(.3f).compositeOver(compositeColor),
-            disabledContainerColor = Theme.color.overlay.background.copy(.05f)
-                .compositeOver(compositeColor)
+            unfocusedContainerColor = Theme.color.overlay.background.copy(.06f)
+                .compositeOver(compositeColor.copy(UnfocusedTint)),
+            focusedContainerColor = Theme.color.overlay.background.copy(.1f)
+                .compositeOver(compositeColor.copy(FocusedTint)),
+            errorContainerColor = Theme.color.overlay.error.copy(.3f)
+                .compositeOver(compositeColor.copy(UnfocusedTint)),
+            disabledContainerColor = Theme.color.overlay.background.copy(.03f)
+                .compositeOver(compositeColor.copy(DisabledTint))
         ),
         shape = Theme.container.button,
         trailingIcon = trailingIcon,
