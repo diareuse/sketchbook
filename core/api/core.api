@@ -107,6 +107,16 @@ public final class lib/sketchbook/ComposableSingletons$SketchbookRockerCounterKt
 	public final fun getLambda$853691156$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
 }
 
+public final class lib/sketchbook/ComposableSingletons$SketchbookSearchBarKt {
+	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookSearchBarKt;
+	public fun <init> ()V
+	public final fun getLambda$-1300050021$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function3;
+	public final fun getLambda$-336030176$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-487401706$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$1034222908$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$1098059187$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+}
+
 public final class lib/sketchbook/ComposableSingletons$SketchbookSegmentedButtonKt {
 	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookSegmentedButtonKt;
 	public fun <init> ()V
@@ -302,6 +312,10 @@ public final class lib/sketchbook/SketchbookRockerCounterKt {
 }
 
 public abstract interface annotation class lib/sketchbook/SketchbookScreenPreview : java/lang/annotation/Annotation {
+}
+
+public final class lib/sketchbook/SketchbookSearchBarKt {
+	public static final fun SketchbookSearchBar-6RhP_wg (Ljava/lang/String;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Ljava/lang/String;Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function3;ZJLandroidx/compose/runtime/Composer;II)V
 }
 
 public final class lib/sketchbook/SketchbookSegmentedButtonKt {
