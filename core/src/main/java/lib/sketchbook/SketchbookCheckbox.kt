@@ -2,6 +2,7 @@ package lib.sketchbook
 
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CheckboxColors
 import androidx.compose.material3.CheckboxDefaults
@@ -37,14 +38,17 @@ fun SketchbookCheckbox(
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() }
 ) {
     if (label == null) {
-        Checkbox(
-            checked = checked,
-            onCheckedChange = onCheckedChange,
-            modifier = modifier,
-            enabled = enabled,
-            colors = colors,
-            interactionSource = interactionSource
-        )
+        val control = modifier.pressControl(CircleShape, interactionSource)
+        ThemePressHost {
+            Checkbox(
+                checked = checked,
+                onCheckedChange = onCheckedChange,
+                modifier = control,
+                enabled = enabled,
+                colors = colors,
+                interactionSource = interactionSource
+            )
+        }
     } else {
         ToggleRow(
             checked = checked,

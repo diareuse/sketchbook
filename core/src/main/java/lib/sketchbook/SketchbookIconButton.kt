@@ -50,10 +50,11 @@ private fun IconButtonCore(
 ) {
     val described = if (contentDescription == null) modifier
     else modifier.semantics { this.contentDescription = contentDescription }
-    GlassTouchTarget(glass) {
+    val control = if (glass) described else described.pressControl(shape, interactionSource)
+    ThemePressHost {
         FilledIconButton(
             onClick = onClick,
-            modifier = if (glass) described.glassControl(shape, enabled) else described,
+            modifier = if (glass) control.glassControl(shape, enabled, interactionSource) else control,
             enabled = enabled,
             shape = shape,
             colors = colors,

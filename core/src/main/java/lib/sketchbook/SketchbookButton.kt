@@ -48,10 +48,11 @@ internal fun ButtonCore(
     interactionSource: MutableInteractionSource,
     content: @Composable RowScope.() -> Unit
 ) {
-    GlassTouchTarget(glass) {
+    val control = if (glass) modifier else modifier.pressControl(shape, interactionSource)
+    ThemePressHost {
         Button(
             onClick = onClick,
-            modifier = if (glass) modifier.glassControl(shape, enabled) else modifier,
+            modifier = if (glass) control.glassControl(shape, enabled, interactionSource) else control,
             enabled = enabled,
             shape = shape,
             colors = colors,

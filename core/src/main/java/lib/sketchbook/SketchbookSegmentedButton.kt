@@ -1,5 +1,6 @@
 package lib.sketchbook
 
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CornerBasedShape
@@ -10,6 +11,7 @@ import androidx.compose.material3.SegmentedButtonDefaults
 import androidx.compose.material3.SingleChoiceSegmentedButtonRow
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
@@ -59,14 +61,21 @@ fun SketchbookSegmentedButton(
     val colors = segmentedColors(compositeColor)
     SingleChoiceSegmentedButtonRow(modifier = modifier.glass(shape, SegmentedGlassElevation, useGlow = enabled)) {
         repeat(count) { index ->
-            SegmentedButton(
-                selected = index == selectedIndex,
-                onClick = { onSelectedIndexChange(index) },
-                shape = SegmentedButtonDefaults.itemShape(index, count, shape),
-                enabled = enabled,
-                colors = colors,
-                label = { label(index) }
-            )
+            val itemShape = SegmentedButtonDefaults.itemShape(index, count, shape)
+            val interactionSource = remember { MutableInteractionSource() }
+            val control = Modifier.pressControl(itemShape, interactionSource)
+            ThemePressHost {
+                SegmentedButton(
+                    selected = index == selectedIndex,
+                    onClick = { onSelectedIndexChange(index) },
+                    shape = itemShape,
+                    modifier = control,
+                    enabled = enabled,
+                    colors = colors,
+                    interactionSource = interactionSource,
+                    label = { label(index) }
+                )
+            }
         }
     }
 }
@@ -85,16 +94,23 @@ fun SketchbookMultiChoiceSegmentedButton(
     val colors = segmentedColors(compositeColor)
     MultiChoiceSegmentedButtonRow(modifier = modifier.glass(shape, SegmentedGlassElevation, useGlow = enabled)) {
         repeat(count) { index ->
-            SegmentedButton(
-                checked = index in selectedIndices,
-                onCheckedChange = { checked ->
-                    onSelectedIndicesChange(if (checked) selectedIndices + index else selectedIndices - index)
-                },
-                shape = SegmentedButtonDefaults.itemShape(index, count, shape),
-                enabled = enabled,
-                colors = colors,
-                label = { label(index) }
-            )
+            val itemShape = SegmentedButtonDefaults.itemShape(index, count, shape)
+            val interactionSource = remember { MutableInteractionSource() }
+            val control = Modifier.pressControl(itemShape, interactionSource)
+            ThemePressHost {
+                SegmentedButton(
+                    checked = index in selectedIndices,
+                    onCheckedChange = { checked ->
+                        onSelectedIndicesChange(if (checked) selectedIndices + index else selectedIndices - index)
+                    },
+                    shape = itemShape,
+                    modifier = control,
+                    enabled = enabled,
+                    colors = colors,
+                    interactionSource = interactionSource,
+                    label = { label(index) }
+                )
+            }
         }
     }
 }

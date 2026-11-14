@@ -61,19 +61,22 @@ fun SketchbookSwitch(
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() }
 ) {
     val haptics = LocalHapticFeedback.current
-    Switch(
-        modifier = modifier,
-        checked = checked,
-        onCheckedChange = {
-            onCheckedChange(it)
-            val feedback = if (it) HapticFeedbackType.ToggleOn else HapticFeedbackType.ToggleOff
-            haptics.performHapticFeedback(feedback)
-        },
-        colors = colors,
-        thumbContent = thumbContent?.let { inner -> { ThumbRim(enabled, inner) } },
-        enabled = enabled,
-        interactionSource = interactionSource
-    )
+    val control = modifier.pressControl(CircleShape, interactionSource)
+    ThemePressHost {
+        Switch(
+            modifier = control,
+            checked = checked,
+            onCheckedChange = {
+                onCheckedChange(it)
+                val feedback = if (it) HapticFeedbackType.ToggleOn else HapticFeedbackType.ToggleOff
+                haptics.performHapticFeedback(feedback)
+            },
+            colors = colors,
+            thumbContent = thumbContent?.let { inner -> { ThumbRim(enabled, inner) } },
+            enabled = enabled,
+            interactionSource = interactionSource
+        )
+    }
 }
 
 @SketchbookComponentPreview

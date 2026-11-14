@@ -7,17 +7,21 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import lib.sketchbook.theme.Theme
+
+private val FabElevation = 6.dp
 
 @Composable
 fun SketchbookFloatingActionButton(
@@ -29,16 +33,21 @@ fun SketchbookFloatingActionButton(
     contentColor: Color = Theme.color.overlay.primary,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     content: @Composable () -> Unit
-) = FloatingActionButton(
-    onClick = onClick,
-    modifier = if (contentDescription == null) modifier
-    else modifier.semantics { this.contentDescription = contentDescription },
-    shape = shape,
-    containerColor = containerColor,
-    contentColor = contentColor,
-    interactionSource = interactionSource,
-    content = content
-)
+): Unit = ThemePressHost {
+    FloatingActionButton(
+        onClick = onClick,
+        modifier = (if (contentDescription == null) modifier
+        else modifier.semantics { this.contentDescription = contentDescription })
+            .shadow(FabElevation, shape)
+            .pressIndicated(shape, interactionSource),
+        shape = shape,
+        elevation = FloatingActionButtonDefaults.elevation(0.dp, 0.dp, 0.dp, 0.dp),
+        containerColor = containerColor,
+        contentColor = contentColor,
+        interactionSource = interactionSource,
+        content = content
+    )
+}
 
 @Composable
 fun SketchbookExtendedFloatingActionButton(
@@ -51,17 +60,20 @@ fun SketchbookExtendedFloatingActionButton(
     contentColor: Color = Theme.color.overlay.primary,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     text: @Composable () -> Unit
-) = ExtendedFloatingActionButton(
-    text = text,
-    icon = icon,
-    onClick = onClick,
-    modifier = modifier,
-    expanded = expanded,
-    shape = shape,
-    containerColor = containerColor,
-    contentColor = contentColor,
-    interactionSource = interactionSource
-)
+): Unit = ThemePressHost {
+    ExtendedFloatingActionButton(
+        text = text,
+        icon = icon,
+        onClick = onClick,
+        modifier = modifier.shadow(FabElevation, shape).pressIndicated(shape, interactionSource),
+        expanded = expanded,
+        shape = shape,
+        elevation = FloatingActionButtonDefaults.elevation(0.dp, 0.dp, 0.dp, 0.dp),
+        containerColor = containerColor,
+        contentColor = contentColor,
+        interactionSource = interactionSource
+    )
+}
 
 @SketchbookComponentPreview
 @SketchbookValidation

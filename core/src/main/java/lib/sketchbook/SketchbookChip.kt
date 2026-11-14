@@ -51,11 +51,11 @@ fun SketchbookChip(
     val content = Theme.color.contentColorFor(compositeColor)
     val overlay = Theme.color.overlay.background.copy(ChipOverlayAlpha)
     val disabled = Theme.color.content.background.copy(DisabledAlpha)
-    GlassTouchTarget(glass = true) {
+    ThemePressHost {
         AssistChip(
             onClick = onClick,
             label = label,
-            modifier = modifier.glassControl(shape, enabled),
+            modifier = modifier.glassControl(shape, enabled, interactionSource),
             enabled = enabled,
             leadingIcon = leadingIcon,
             trailingIcon = trailingIcon,
@@ -94,12 +94,12 @@ fun SketchbookFilterChip(
     val overlay = Theme.color.overlay.background.copy(ChipOverlayAlpha)
     val disabled = Theme.color.content.background.copy(DisabledAlpha)
     val selectedContainer = Theme.color.emphasis.primary.copy(SelectedAlpha)
-    GlassTouchTarget(glass = true) {
+    ThemePressHost {
         FilterChip(
             selected = selected,
             onClick = onClick,
             label = label,
-            modifier = modifier.glassControl(shape, enabled),
+            modifier = modifier.glassControl(shape, enabled, interactionSource),
             enabled = enabled,
             leadingIcon = leadingIcon,
             trailingIcon = trailingIcon,

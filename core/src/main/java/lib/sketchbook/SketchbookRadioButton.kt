@@ -2,6 +2,7 @@ package lib.sketchbook
 
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.RadioButtonColors
 import androidx.compose.material3.RadioButtonDefaults
@@ -35,14 +36,17 @@ fun SketchbookRadioButton(
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() }
 ) {
     if (label == null) {
-        RadioButton(
-            selected = selected,
-            onClick = onClick,
-            modifier = modifier,
-            enabled = enabled,
-            colors = colors,
-            interactionSource = interactionSource
-        )
+        val control = modifier.pressControl(CircleShape, interactionSource)
+        ThemePressHost {
+            RadioButton(
+                selected = selected,
+                onClick = onClick,
+                modifier = control,
+                enabled = enabled,
+                colors = colors,
+                interactionSource = interactionSource
+            )
+        }
     } else {
         SelectableRow(
             selected = selected,
