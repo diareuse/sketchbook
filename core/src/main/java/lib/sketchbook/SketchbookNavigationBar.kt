@@ -25,6 +25,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.dp
+import lib.sketchbook.glass.asGlassShape
 import lib.sketchbook.glass.glass
 import lib.sketchbook.theme.Theme
 
@@ -47,7 +48,7 @@ fun SketchbookNavigationBar(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .glass(shape, BarGlassElevation, useGlow)
+                .glass(shape.asGlassShape(), BarGlassElevation, useGlow)
                 .padding(BarPadding)
                 .selectableGroup(),
             verticalAlignment = Alignment.CenterVertically,

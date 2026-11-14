@@ -24,6 +24,7 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.lerp
+import lib.sketchbook.glass.asGlassShape
 import lib.sketchbook.theme.Theme
 import lib.sketchbook.theme.contentColorFor
 
@@ -56,7 +57,7 @@ internal fun NavigationItemCore(
         else -> content.copy(UnselectedAlpha)
     }
     val indicatorColor = Theme.color.emphasis.primary.copy(IndicatorAlpha)
-    val shape = Theme.container.buttonSmall
+    val shape = Theme.container.buttonSmall.asGlassShape()
     Column(
         modifier = modifier
             .defaultMinSize(minWidth = ItemMinSize, minHeight = ItemMinSize)

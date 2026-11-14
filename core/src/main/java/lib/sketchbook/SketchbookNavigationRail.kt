@@ -25,6 +25,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.dp
+import lib.sketchbook.glass.asGlassShape
 import lib.sketchbook.glass.glass
 import lib.sketchbook.theme.Theme
 
@@ -49,7 +50,7 @@ fun SketchbookNavigationRail(
         Column(
             modifier = Modifier
                 .fillMaxHeight()
-                .glass(shape, RailGlassElevation, useGlow)
+                .glass(shape.asGlassShape(), RailGlassElevation, useGlow)
                 .padding(RailPadding)
                 .selectableGroup(),
             horizontalAlignment = Alignment.CenterHorizontally,
