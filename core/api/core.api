@@ -131,6 +131,18 @@ public final class lib/sketchbook/ComposableSingletons$SketchbookNavigationBarKt
 	public final fun getLambda$594240834$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
 }
 
+public final class lib/sketchbook/ComposableSingletons$SketchbookNavigationRailKt {
+	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookNavigationRailKt;
+	public fun <init> ()V
+	public final fun getLambda$-1985204893$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-2075862048$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-284468794$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-586371764$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$1733446895$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$269473571$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function3;
+	public final fun getLambda$943540356$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function3;
+}
+
 public final class lib/sketchbook/ComposableSingletons$SketchbookRadioButtonKt {
 	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookRadioButtonKt;
 	public fun <init> ()V
@@ -373,6 +385,11 @@ public final class lib/sketchbook/SketchbookMenuKt {
 public final class lib/sketchbook/SketchbookNavigationBarKt {
 	public static final fun SketchbookNavigationBar (Landroidx/compose/ui/Modifier;Landroidx/compose/foundation/layout/WindowInsets;Landroidx/compose/ui/graphics/Shape;ZLkotlin/jvm/functions/Function3;Landroidx/compose/runtime/Composer;II)V
 	public static final fun SketchbookNavigationBarItem-bZJ3-2A (Landroidx/compose/foundation/layout/RowScope;ZLkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function2;Landroidx/compose/ui/Modifier;ZLkotlin/jvm/functions/Function2;ZLkotlin/jvm/functions/Function2;JLandroidx/compose/foundation/interaction/MutableInteractionSource;Landroidx/compose/runtime/Composer;III)V
+}
+
+public final class lib/sketchbook/SketchbookNavigationRailKt {
+	public static final fun SketchbookNavigationRail (Landroidx/compose/ui/Modifier;Landroidx/compose/foundation/layout/WindowInsets;Landroidx/compose/ui/graphics/Shape;ZLkotlin/jvm/functions/Function3;Lkotlin/jvm/functions/Function3;Landroidx/compose/runtime/Composer;II)V
+	public static final fun SketchbookNavigationRailItem-FItCLgY (ZLkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function2;Landroidx/compose/ui/Modifier;ZLkotlin/jvm/functions/Function2;ZLkotlin/jvm/functions/Function2;JLandroidx/compose/foundation/interaction/MutableInteractionSource;Landroidx/compose/runtime/Composer;II)V
 }
 
 public final class lib/sketchbook/SketchbookPreviewLayoutKt {
