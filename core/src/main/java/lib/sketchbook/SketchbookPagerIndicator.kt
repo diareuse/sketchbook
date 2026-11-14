@@ -1,6 +1,7 @@
 package lib.sketchbook
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -127,7 +128,7 @@ private fun DrawScope.paintIndicator(
     val radius = dot / 2f
     for (i in 0 until count) {
         val proximity = (1f - abs(position - i)).coerceIn(0f, 1f)
-        val centerX = mirror(radius + i * step, dot, rtl)
+        val centerX = mirror(radius + i * step, rtl)
         when (style) {
             PagerIndicatorStyle.Dots -> drawCircle(
                 color = lerp(inactive, active, proximity),
@@ -141,7 +142,7 @@ private fun DrawScope.paintIndicator(
     if (style == PagerIndicatorStyle.Worm) paintWorm(position, dot, step, active, rtl)
 }
 
-private fun DrawScope.mirror(x: Float, extent: Float, rtl: Boolean): Float =
+private fun DrawScope.mirror(x: Float, rtl: Boolean): Float =
     if (rtl) size.width - x else x
 
 private fun DrawScope.paintWorm(position: Float, dot: Float, step: Float, color: Color, rtl: Boolean) {
@@ -157,7 +158,7 @@ private fun DrawScope.paintWorm(position: Float, dot: Float, step: Float, color:
 @SketchbookComponentPreview
 @Composable
 private fun SketchbookPagerIndicatorPreview() = SketchbookPreviewLayout {
-    androidx.compose.foundation.layout.Column(Modifier.padding(16.dp)) {
+    Column(Modifier.padding(16.dp)) {
         SketchbookPagerIndicator(pageCount = 5, currentPage = 1, currentPageOffsetFraction = { .3f })
         SketchbookPagerIndicator(
             pageCount = 5,

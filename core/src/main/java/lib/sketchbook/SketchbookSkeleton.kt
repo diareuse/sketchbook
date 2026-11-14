@@ -66,6 +66,7 @@ fun SketchbookSkeletonText(
     animated: Boolean = true
 ) {
     require(lines >= 1) { "lines must be at least 1" }
+    require(lastLineFraction in 0f..1f) { "lastLineFraction must be within 0..1" }
     Column(modifier, verticalArrangement = Arrangement.spacedBy(lineSpacing)) {
         repeat(lines) { index ->
             val fraction = if (index == lines - 1 && lines > 1) lastLineFraction else 1f

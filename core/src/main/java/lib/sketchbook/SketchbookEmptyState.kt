@@ -33,11 +33,11 @@ fun SketchbookEmptyState(
     icon: (@Composable () -> Unit)? = null,
     action: (@Composable () -> Unit)? = null
 ) = BoxWithConstraints(modifier) {
+    val bounded = constraints.hasBoundedHeight
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .heightIn(min = maxHeight)
-            .verticalScroll(rememberScrollState())
+            .then(if (bounded) Modifier.heightIn(min = maxHeight).verticalScroll(rememberScrollState()) else Modifier)
             .padding(EmptyStatePadding),
         verticalArrangement = Arrangement.spacedBy(EmptyStateSpacing, Alignment.CenterVertically),
         horizontalAlignment = Alignment.CenterHorizontally

@@ -1,6 +1,9 @@
 package lib.sketchbook.behavior
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Text
 import androidx.compose.runtime.CompositionLocalProvider
@@ -113,5 +116,19 @@ class EmptyStateBehaviorTest : BehaviorTest() {
 
         composeRule.onNode(hasScrollAction()).assertExists()
         composeRule.onNodeWithTag("action").performScrollTo().assertIsDisplayed()
+    }
+
+    @Test
+    fun `empty state renders inside a scrolling parent of unbounded height`() {
+        composeRule.setContent {
+            Theme(darkTheme = false, dynamicColor = false) {
+                Column(Modifier.size(360.dp, 400.dp).verticalScroll(rememberScrollState())) {
+                    SketchbookEmptyState(title = "No results", message = "Nothing here yet")
+                }
+            }
+        }
+        composeRule.waitForIdle()
+
+        composeRule.onNodeWithText("No results").assertIsDisplayed()
     }
 }
