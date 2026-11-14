@@ -107,6 +107,12 @@ public final class lib/sketchbook/ComposableSingletons$SketchbookRockerCounterKt
 	public final fun getLambda$853691156$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
 }
 
+public final class lib/sketchbook/ComposableSingletons$SketchbookSegmentedButtonKt {
+	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookSegmentedButtonKt;
+	public fun <init> ()V
+	public final fun getLambda$201512604$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+}
+
 public final class lib/sketchbook/ComposableSingletons$SketchbookSliderKt {
 	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookSliderKt;
 	public fun <init> ()V
@@ -296,6 +302,11 @@ public final class lib/sketchbook/SketchbookRockerCounterKt {
 }
 
 public abstract interface annotation class lib/sketchbook/SketchbookScreenPreview : java/lang/annotation/Annotation {
+}
+
+public final class lib/sketchbook/SketchbookSegmentedButtonKt {
+	public static final fun SketchbookMultiChoiceSegmentedButton-88mDfTA (Ljava/util/Set;Lkotlin/jvm/functions/Function1;ILandroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function3;ZLandroidx/compose/foundation/shape/CornerBasedShape;JLandroidx/compose/runtime/Composer;II)V
+	public static final fun SketchbookSegmentedButton-88mDfTA (ILkotlin/jvm/functions/Function1;ILandroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function3;ZLandroidx/compose/foundation/shape/CornerBasedShape;JLandroidx/compose/runtime/Composer;II)V
 }
 
 public final class lib/sketchbook/SketchbookSliderKt {
