@@ -101,6 +101,30 @@ class SearchBarGlassBehaviorTest : BehaviorTest() {
     }
 
     @Test
+    @Config(sdk = [26], qualifiers = "w360dp-h640dp-normal-night-xhdpi")
+    fun `search bar is a glass pane with a lit rim rather than a flat fill`() {
+        composeRule.setContent {
+            Theme(darkTheme = true, dynamicColor = false) {
+                androidx.compose.foundation.layout.Box(Modifier.size(360.dp, 120.dp).background(Color.Black)) {
+                    SketchbookSearchBar(
+                        query = "",
+                        onQueryChange = {},
+                        onSearch = {},
+                        clearContentDescription = "Clear",
+                        modifier = Modifier.fillMaxWidth(),
+                        leadingIcon = null
+                    )
+                }
+            }
+        }
+        composeRule.waitForIdle()
+        val image = composeRule.onRoot().captureToImage().toPixelMap()
+
+        val rim = (0..4).maxOf { distance(image.opaque(300, it), image.opaque(300, 50)) }
+        assertTrue("rim $rim", rim > 15)
+    }
+
+    @Test
     @Config(sdk = [31])
     fun `search bar blurs the backdrop on android 12`() {
         val image = render()

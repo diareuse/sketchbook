@@ -43,23 +43,23 @@ import org.junit.Assert.assertTrue
 import org.junit.Test
 import org.robolectric.annotation.Config
 
-private interface NavigationFlavour {
+interface NavigationFlavour {
     @Composable
-    fun Container(selected: Int, item: @Composable (Int, Boolean, Modifier) -> Unit)
+    fun Container(selected: Int)
 }
 
-private object BarFlavour : NavigationFlavour {
+internal object BarFlavour : NavigationFlavour {
     @Composable
-    override fun Container(selected: Int, item: @Composable (Int, Boolean, Modifier) -> Unit) {
+    override fun Container(selected: Int) {
         SketchbookNavigationBar {
             repeat(3) { index ->
-                BarItem(index, index == selected, item)
+                BarItem(index, index == selected)
             }
         }
     }
 
     @Composable
-    private fun RowScope.BarItem(index: Int, selected: Boolean, item: @Composable (Int, Boolean, Modifier) -> Unit) {
+    private fun RowScope.BarItem(index: Int, selected: Boolean) {
         SketchbookNavigationBarItem(
             selected = selected,
             onClick = {},
@@ -69,9 +69,9 @@ private object BarFlavour : NavigationFlavour {
     }
 }
 
-private object RailFlavour : NavigationFlavour {
+internal object RailFlavour : NavigationFlavour {
     @Composable
-    override fun Container(selected: Int, item: @Composable (Int, Boolean, Modifier) -> Unit) {
+    override fun Container(selected: Int) {
         SketchbookNavigationRail {
             repeat(3) { index ->
                 SketchbookNavigationRailItem(
@@ -87,7 +87,7 @@ private object RailFlavour : NavigationFlavour {
 
 abstract class NavigationShapeBehavior : GlassPaneBehavior() {
 
-    protected abstract fun flavourOf(): Any
+    protected abstract val flavour: NavigationFlavour
 
     override val paneShape: @Composable () -> Shape = { Theme.container.card }
 
@@ -95,11 +95,9 @@ abstract class NavigationShapeBehavior : GlassPaneBehavior() {
     private var density = Density(1f)
     private var itemShape: Shape = RectangleShape
 
-    private fun navigation(): NavigationFlavour = flavourOf() as NavigationFlavour
-
     @Test
     fun `navigation container pane edge matches the theme card shape`() = assertPane {
-        navigation().Container(1) { _, _, _ -> }
+        flavour.Container(1)
     }
 
     private fun showStriped() {
@@ -108,7 +106,7 @@ abstract class NavigationShapeBehavior : GlassPaneBehavior() {
                 itemShape = Theme.container.buttonSmall.asGlassShape()
                 density = LocalDensity.current
                 StripedBackdrop(Modifier.size(260.dp, 200.dp)) {
-                    Box(Modifier.align(Alignment.Center)) { navigation().Container(selected) { _, _, _ -> } }
+                    Box(Modifier.align(Alignment.Center)) { flavour.Container(selected) }
                 }
             }
         }
@@ -170,11 +168,11 @@ abstract class NavigationShapeBehavior : GlassPaneBehavior() {
 }
 
 abstract class NavigationBarShapeBehavior : NavigationShapeBehavior() {
-    override fun flavourOf(): Any = BarFlavour
+    override val flavour: NavigationFlavour = BarFlavour
 }
 
 abstract class NavigationRailShapeBehavior : NavigationShapeBehavior() {
-    override fun flavourOf(): Any = RailFlavour
+    override val flavour: NavigationFlavour = RailFlavour
 }
 
 @Config(sdk = [26])

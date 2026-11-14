@@ -28,7 +28,6 @@ private const val FocusedTint = .85f
 private const val DisabledTint = .5f
 private const val GlassTint = .8f
 private const val GlassDisabledTint = .5f
-private const val ErrorOverlay = .3f
 private val GlassElevation = 8.dp
 
 private interface TextFieldContainer {
@@ -39,7 +38,7 @@ private interface TextFieldContainer {
     fun colors(compositeColor: Color): TextFieldColors
 
     @Composable
-    fun Modifier.surface(compositeColor: Color, enabled: Boolean, isError: Boolean): Modifier
+    fun Modifier.surface(compositeColor: Color, enabled: Boolean): Modifier
 }
 
 private object TintedTextFieldContainer : TextFieldContainer {
@@ -56,7 +55,7 @@ private object TintedTextFieldContainer : TextFieldContainer {
     )
 
     @Composable
-    override fun Modifier.surface(compositeColor: Color, enabled: Boolean, isError: Boolean): Modifier = this
+    override fun Modifier.surface(compositeColor: Color, enabled: Boolean): Modifier = this
 }
 
 private object GlassTextFieldContainer : TextFieldContainer {
@@ -73,12 +72,11 @@ private object GlassTextFieldContainer : TextFieldContainer {
     )
 
     @Composable
-    override fun Modifier.surface(compositeColor: Color, enabled: Boolean, isError: Boolean): Modifier {
-        val tint = if (isError) Theme.color.overlay.error.copy(ErrorOverlay).compositeOver(compositeColor) else compositeColor
+    override fun Modifier.surface(compositeColor: Color, enabled: Boolean): Modifier {
         return glass(
             shape(),
             GlassElevation,
-            tint = tint,
+            tint = compositeColor,
             tintStrength = if (enabled) GlassTint else GlassDisabledTint
         )
     }
@@ -132,7 +130,7 @@ private fun TextFieldCore(
     compositeColor: Color
 ) {
     TextField(
-        modifier = with(container) { modifier.surface(compositeColor, enabled, isError) },
+        modifier = with(container) { modifier.surface(compositeColor, enabled) },
         value = value,
         onValueChange = onValueChange,
         label = label,

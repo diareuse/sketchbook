@@ -52,7 +52,7 @@ fun SketchbookCard(
 ) {
     val glassShape = shape.asGlassShape()
     Surface(
-        modifier = modifier.cardGlass(glassShape, true, useGlow, specularRim),
+        modifier = modifier.cardGlass(glassShape, enabled = true, useGlow = useGlow, specularRim = specularRim),
         shape = glassShape,
         color = Color.Transparent,
         contentColor = Theme.color.contentColorFor(compositeColor)

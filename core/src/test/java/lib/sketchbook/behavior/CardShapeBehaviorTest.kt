@@ -162,6 +162,39 @@ abstract class CardMatteBehavior : BehaviorTest() {
         assertTrue("enabled ${spread(0)} disabled ${spread(360)}", spread(0) > spread(360) + 20)
     }
 
+    private fun hostedSpread(enabled: Boolean): Int {
+        composeRule.mainClock.autoAdvance = false
+        composeRule.setContent {
+            Theme(darkTheme = false, dynamicColor = false) {
+                lib.sketchbook.StripedBackdrop(Modifier.size(360.dp, 100.dp), colors = listOf(Color.Gray)) {
+                    SketchbookCard(
+                        onClick = {},
+                        modifier = Modifier.padding(10.dp).size(340.dp, 80.dp),
+                        enabled = enabled,
+                        useGlow = true,
+                        specularRim = true
+                    ) {}
+                }
+            }
+        }
+        composeRule.mainClock.advanceTimeBy(100)
+        composeRule.waitForIdle()
+        val image = pixels()
+        val reference = image.opaque(360, 100)
+        var worst = 0
+        for (y in 20 until 180) for (x in 100 until 620 step 2) worst = maxOf(worst, distance(image.opaque(x, y), reference))
+        return worst
+    }
+
+    @Test
+    fun `disabled card over a glass host is flat while the enabled one shows glow and rim`() {
+        val disabled = hostedSpread(enabled = false)
+        composeRule.activityRule.scenario.recreate()
+        val enabled = hostedSpread(enabled = true)
+
+        assertTrue("enabled $enabled disabled $disabled", disabled <= 6 && enabled > disabled + 20)
+    }
+
     @Test
     fun `pressing a disabled card shows no press highlight and does not click`() {
         show(
