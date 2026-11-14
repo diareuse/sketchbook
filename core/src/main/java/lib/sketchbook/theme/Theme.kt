@@ -1,5 +1,6 @@
 package lib.sketchbook.theme
 
+import android.os.Build
 import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.shape.CornerBasedShape
@@ -17,14 +18,22 @@ import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.text.TextStyle
 import lib.sketchbook.haptic.PlatformHapticFeedback
+import lib.sketchbook.glass.ProvideGlass
 import lib.sketchbook.haptic.rememberVibrateIndication
 
 @Composable
 fun Theme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
+) = Theme(darkTheme, Build.VERSION.SDK_INT >= Build.VERSION_CODES.S, content)
+
+@Composable
+fun Theme(
+    darkTheme: Boolean,
+    dynamicColor: Boolean,
+    content: @Composable () -> Unit
 ) = MaterialTheme(
-    colorScheme = themeColors(useDarkTheme = darkTheme),
+    colorScheme = themeColors(useDarkTheme = darkTheme, dynamicColor = dynamicColor),
     typography = ThemeTypography,
     shapes = ThemeShapes
 ) {
@@ -47,7 +56,7 @@ fun Theme(
             LocalTextStyle provides Theme.textStyle.body,
             LocalContentColor provides Theme.color.content.background
         ) {
-            content()
+            ProvideGlass(content)
         }
     }
 }
