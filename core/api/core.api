@@ -168,6 +168,12 @@ public final class lib/sketchbook/ComposableSingletons$SketchbookNavigationRailK
 	public final fun getLambda$943540356$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function3;
 }
 
+public final class lib/sketchbook/ComposableSingletons$SketchbookProgressKt {
+	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookProgressKt;
+	public fun <init> ()V
+	public final fun getLambda$1725919826$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+}
+
 public final class lib/sketchbook/ComposableSingletons$SketchbookRadioButtonKt {
 	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookRadioButtonKt;
 	public fun <init> ()V
@@ -452,6 +458,13 @@ public final class lib/sketchbook/SketchbookNavigationRailKt {
 public final class lib/sketchbook/SketchbookPreviewLayoutKt {
 	public static final fun SketchbookPreviewLayout (Landroidx/compose/ui/Modifier;Landroidx/compose/foundation/layout/PaddingValues;Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;II)V
 	public static final fun SketchbookPreviewWearLayout (Landroidx/compose/ui/Modifier;Landroidx/compose/foundation/layout/PaddingValues;Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;II)V
+}
+
+public final class lib/sketchbook/SketchbookProgressKt {
+	public static final fun SketchbookCircularProgress-eaDK9VM (Lkotlin/jvm/functions/Function0;Landroidx/compose/ui/Modifier;JJLandroidx/compose/runtime/Composer;II)V
+	public static final fun SketchbookCircularProgress-eopBjH0 (Landroidx/compose/ui/Modifier;JJILandroidx/compose/runtime/Composer;II)V
+	public static final fun SketchbookLinearProgress-eaDK9VM (Lkotlin/jvm/functions/Function0;Landroidx/compose/ui/Modifier;JJLandroidx/compose/runtime/Composer;II)V
+	public static final fun SketchbookLinearProgress-eopBjH0 (Landroidx/compose/ui/Modifier;JJILandroidx/compose/runtime/Composer;II)V
 }
 
 public final class lib/sketchbook/SketchbookRadioButtonKt {
