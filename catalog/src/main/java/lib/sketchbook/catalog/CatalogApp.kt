@@ -16,6 +16,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
@@ -36,6 +37,7 @@ import lib.sketchbook.SketchbookNavigationBarItem
 import lib.sketchbook.SketchbookScaffold
 import lib.sketchbook.SketchbookTopAppBar
 import lib.sketchbook.glass.glassSource
+import lib.sketchbook.theme.Theme
 
 @Composable
 internal fun CatalogApp() {
@@ -59,6 +61,7 @@ private fun ListScreen(group: Group, onGroupChange: (Group) -> Unit, onOpen: (De
     SketchbookScaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         containerColor = Color.Transparent,
+        contentColor = Theme.color.content.background,
         topBar = { SketchbookTopAppBar(title = { Text(group.title) }, scrollBehavior = scrollBehavior) },
         bottomBar = {
             SketchbookNavigationBar {
@@ -92,9 +95,10 @@ private fun ListScreen(group: Group, onGroupChange: (Group) -> Unit, onOpen: (De
 @Composable
 private fun DetailScreen(demo: Demo, onBack: () -> Unit) {
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
-    SketchbookScaffold(
+    Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         containerColor = Color.Transparent,
+        contentColor = Theme.color.content.background,
         topBar = {
             SketchbookTopAppBar(
                 title = { Text(demo.title) },

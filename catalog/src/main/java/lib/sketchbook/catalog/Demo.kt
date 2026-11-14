@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.draw.clip
@@ -45,7 +46,7 @@ internal val Catalog: List<Demo> = ActionDemos + ContainerDemos + FeedbackDemos 
 internal fun Showcase(label: String, content: @Composable ColumnScope.() -> Unit) {
     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
         Text(label, style = Theme.textStyle.caption)
-        Box(Modifier.clip(RoundedCornerShape(16.dp))) {
+        Box(Modifier.fillMaxWidth().clip(RoundedCornerShape(16.dp))) {
             Row(Modifier.matchParentSize().glassSource()) {
                 Backdrop.forEach { Box(Modifier.weight(1f).fillMaxHeight().background(it)) }
             }
