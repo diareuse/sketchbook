@@ -137,6 +137,20 @@ public final class lib/sketchbook/ComposableSingletons$SketchbookRockerCounterKt
 	public final fun getLambda$853691156$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
 }
 
+public final class lib/sketchbook/ComposableSingletons$SketchbookScaffoldKt {
+	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookScaffoldKt;
+	public fun <init> ()V
+	public final fun getLambda$-1466741209$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-1823400137$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-416802745$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-467569978$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-872551740$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$1714360743$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$1868866688$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$1990226172$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function3;
+	public final fun getLambda$852056582$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+}
+
 public final class lib/sketchbook/ComposableSingletons$SketchbookSearchBarKt {
 	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookSearchBarKt;
 	public fun <init> ()V
@@ -353,6 +367,10 @@ public final class lib/sketchbook/SketchbookRadioButtonKt {
 
 public final class lib/sketchbook/SketchbookRockerCounterKt {
 	public static final fun SketchbookRockerCounter (Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;II)V
+}
+
+public final class lib/sketchbook/SketchbookScaffoldKt {
+	public static final fun SketchbookScaffold-TvnljyQ (Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;IJJLandroidx/compose/foundation/layout/WindowInsets;Lkotlin/jvm/functions/Function3;Landroidx/compose/runtime/Composer;II)V
 }
 
 public abstract interface annotation class lib/sketchbook/SketchbookScreenPreview : java/lang/annotation/Annotation {
