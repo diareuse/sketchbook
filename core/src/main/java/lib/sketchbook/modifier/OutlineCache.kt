@@ -11,7 +11,8 @@ import lib.sketchbook.util.toPath
 internal class OutlineCache {
     private var size = Size.Unspecified
     private var direction: LayoutDirection? = null
-    private var density: Density? = null
+    private var densityScale = Float.NaN
+    private var fontScale = Float.NaN
     private var cachedOutline: Outline? = null
     private var cachedPath: Path? = null
 
@@ -22,7 +23,8 @@ internal class OutlineCache {
         }
         this.size = size
         this.direction = direction
-        this.density = density
+        this.densityScale = density.density
+        this.fontScale = density.fontScale
         cachedPath = null
         return shape.createOutline(size, direction, density).also { cachedOutline = it }
     }
@@ -38,7 +40,6 @@ internal class OutlineCache {
     }
 
     private fun sameDensity(other: Density): Boolean {
-        val current = density ?: return false
-        return current.density == other.density && current.fontScale == other.fontScale
+        return densityScale == other.density && fontScale == other.fontScale
     }
 }

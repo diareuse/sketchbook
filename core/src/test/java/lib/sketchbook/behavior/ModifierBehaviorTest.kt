@@ -28,6 +28,7 @@ import lib.sketchbook.modifier.screenBrightness
 import lib.sketchbook.modifier.stroke
 import lib.sketchbook.modifier.vertical
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class ModifierBehaviorTest : BehaviorTest() {
@@ -71,6 +72,7 @@ class ModifierBehaviorTest : BehaviorTest() {
         composeRule.waitForIdle()
         composeRule.onNodeWithTag("s").captureToImage()
         val first = shape.outlines
+        assertTrue(first > 0)
 
         repeat(3) {
             tick++
