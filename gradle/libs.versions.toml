@@ -17,6 +17,9 @@ instant = "18.2.0"
 haze = "0.7.0"
 publishing = "0.34.0"
 bcv = "0.18.1"
+roborazzi = "1.79.0"
+robolectric = "4.17"
+junit = "4.13.2"
 
 [libraries]
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "androidx-appcompat" }
@@ -39,6 +42,13 @@ compose-ui-window = { module = "androidx.compose.material3:material3-window-size
 compose-wear-navigation = { module = "androidx.wear.compose:compose-navigation", version.ref = "androidx-wear" }
 compose-wear-foundation = { module = "androidx.wear.compose:compose-foundation", version.ref = "androidx-wear" }
 compose-wear-material = { module = "androidx.wear.compose:compose-material", version.ref = "androidx-wear" }
+junit = { module = "junit:junit", version.ref = "junit" }
+robolectric = { module = "org.robolectric:robolectric", version.ref = "robolectric" }
+roborazzi = { module = "io.github.takahirom.roborazzi:roborazzi", version.ref = "roborazzi" }
+roborazzi-compose = { module = "io.github.takahirom.roborazzi:roborazzi-compose", version.ref = "roborazzi" }
+roborazzi-junit-rule = { module = "io.github.takahirom.roborazzi:roborazzi-junit-rule", version.ref = "roborazzi" }
+compose-ui-test-junit4 = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "androidx-compose" }
+compose-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest", version.ref = "androidx-compose" }
 kotlinx-collections = { module = "org.jetbrains.kotlinx:kotlinx-collections-immutable", version.ref = "collections" }
 
 [plugins]
@@ -48,6 +58,7 @@ kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "ko
 android-library = { id = "com.android.library", version.ref = "android" }
 android-application = { id = "com.android.application", version.ref = "android" }
 bcv = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version.ref = "bcv" }
+roborazzi = { id = "io.github.takahirom.roborazzi", version.ref = "roborazzi" }
 publish = { id = "com.vanniktech.maven.publish.base", version.ref = "publishing" }
 
 [bundles]
