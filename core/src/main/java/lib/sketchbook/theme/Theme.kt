@@ -58,7 +58,7 @@ private val LocalText =
 private val LocalContainer =
     staticCompositionLocalOf<Theme.Container> { error("Not provided") }
 
-private val LocalStyle =
+internal val LocalStyle =
     staticCompositionLocalOf<Theme.Style> { error("Not provided") }
 
 object Theme {

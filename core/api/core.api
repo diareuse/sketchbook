@@ -409,6 +409,8 @@ public final class lib/sketchbook/shape/CompositeShape : androidx/compose/ui/gra
 	public static final field Companion Llib/sketchbook/shape/CompositeShape$Companion;
 	public fun <init> (Llib/sketchbook/shape/CompositeShape$Builder;)V
 	public fun createOutline-Pq9zytI (JLandroidx/compose/ui/unit/LayoutDirection;Landroidx/compose/ui/unit/Density;)Landroidx/compose/ui/graphics/Outline;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
 }
 
 public final class lib/sketchbook/shape/CompositeShape$Builder {
@@ -442,6 +444,8 @@ public final class lib/sketchbook/shape/CutoutShape : androidx/compose/ui/graphi
 	public static final field $stable I
 	public fun <init> (Landroidx/compose/foundation/shape/CornerSize;Llib/sketchbook/shape/CutoutShape$Orientation;)V
 	public fun createOutline-Pq9zytI (JLandroidx/compose/ui/unit/LayoutDirection;Landroidx/compose/ui/unit/Density;)Landroidx/compose/ui/graphics/Outline;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
 }
 
 public final class lib/sketchbook/shape/CutoutShape$Orientation : java/lang/Enum {

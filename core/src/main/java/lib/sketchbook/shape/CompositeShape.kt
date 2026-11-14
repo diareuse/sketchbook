@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -31,6 +32,7 @@ import lib.sketchbook.util.toIntSize
 import lib.sketchbook.util.toPath
 import lib.sketchbook.util.toSize
 
+@Immutable
 class CompositeShape private constructor(
     private val baseline: Shape,
     private val shapes: ImmutableList<ShapeDefinition>
@@ -59,6 +61,14 @@ class CompositeShape private constructor(
         }
         return Outline.Generic(path)
     }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is CompositeShape) return false
+        return baseline == other.baseline && shapes == other.shapes
+    }
+
+    override fun hashCode(): Int = 31 * baseline.hashCode() + shapes.hashCode()
 
     @Stable
     class Builder {

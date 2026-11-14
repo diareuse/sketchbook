@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Immutable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
@@ -26,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import lib.sketchbook.SketchbookComponentPreview
 import lib.sketchbook.shape.CutoutShape.Orientation
 
+@Immutable
 class CutoutShape(
     private val cornerSize: CornerSize,
     private val orientation: Orientation
@@ -84,8 +86,8 @@ class CutoutShape(
         moveTo(0f, 0f)
         lineTo(radius.x, 0f)
         lineTo(0f, radius.y)
-        quadraticBezierTo(0f, 0f, 0f, radius.y)
-        quadraticBezierTo(0f, 0f, -radius.x, 0f)
+        quadraticTo(0f, 0f, 0f, radius.y)
+        quadraticTo(0f, 0f, -radius.x, 0f)
         close()
     }
 
@@ -93,10 +95,18 @@ class CutoutShape(
         moveTo(0f, 0f)
         lineTo(-radius.x, 0f)
         lineTo(0f, -radius.y)
-        quadraticBezierTo(0f, 0f, 0f, -radius.y)
-        quadraticBezierTo(0f, 0f, radius.x, 0f)
+        quadraticTo(0f, 0f, 0f, -radius.y)
+        quadraticTo(0f, 0f, radius.x, 0f)
         close()
     }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is CutoutShape) return false
+        return cornerSize == other.cornerSize && orientation == other.orientation
+    }
+
+    override fun hashCode(): Int = 31 * cornerSize.hashCode() + orientation.hashCode()
 
     enum class Orientation {
         TopLeft, TopRight, BottomRight, BottomLeft

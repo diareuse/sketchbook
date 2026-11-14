@@ -20,6 +20,7 @@ private val DpSaver = Saver<Dp, Float>({ it.value }, { it.dp })
 val Dp.Companion.Saver
     get() = DpSaver
 
+@Suppress("UNUSED_PARAMETER")
 @Composable
 fun rememberSaveable(
     init: Dp,
@@ -29,7 +30,6 @@ fun rememberSaveable(
     return rememberSaveable(
         inputs = inputs,
         stateSaver = Dp.Saver,
-        key = key,
         init = { mutableStateOf(init) }
     )
 }
@@ -38,6 +38,7 @@ private val TextUnitSaver = Saver<TextUnit, Float>({ it.value }, { it.sp })
 val TextUnit.Companion.Saver
     get() = TextUnitSaver
 
+@Suppress("UNUSED_PARAMETER")
 @Composable
 fun rememberSaveable(
     init: TextUnit,
@@ -47,7 +48,6 @@ fun rememberSaveable(
     return rememberSaveable(
         inputs = inputs,
         stateSaver = TextUnit.Saver,
-        key = key,
         init = { mutableStateOf(init) }
     )
 }
@@ -59,6 +59,7 @@ private val DpOffsetSaver = listSaver(
 val DpOffset.Companion.Saver
     get() = DpOffsetSaver
 
+@Suppress("UNUSED_PARAMETER")
 @Composable
 fun rememberSaveable(
     init: DpOffset,
@@ -68,7 +69,6 @@ fun rememberSaveable(
     return rememberSaveable(
         inputs = inputs,
         stateSaver = DpOffset.Saver,
-        key = key,
         init = { mutableStateOf(init) }
     )
 }
@@ -77,6 +77,7 @@ private val OffsetSaver = listSaver({ listOf(it.x, it.y) }, { Offset(it[0], it[1
 val Offset.Companion.Saver
     get() = OffsetSaver
 
+@Suppress("UNUSED_PARAMETER")
 @Composable
 fun rememberSaveable(
     init: Offset,
@@ -86,7 +87,6 @@ fun rememberSaveable(
     return rememberSaveable(
         inputs = inputs,
         stateSaver = Offset.Saver,
-        key = key,
         init = { mutableStateOf(init) }
     )
 }
@@ -95,6 +95,7 @@ private val IntOffsetSaver = listSaver({ listOf(it.x, it.y) }, { IntOffset(it[0]
 val IntOffset.Companion.Saver
     get() = IntOffsetSaver
 
+@Suppress("UNUSED_PARAMETER")
 @Composable
 fun rememberSaveable(
     vararg inputs: Any?,
@@ -104,7 +105,6 @@ fun rememberSaveable(
     return rememberSaveable(
         inputs = inputs,
         stateSaver = IntOffset.Saver,
-        key = key,
         init = { mutableStateOf(init) }
     )
 }
@@ -113,6 +113,7 @@ private val ColorSaver = Saver<Color, Int>({ it.toArgb() }, { Color(it) })
 val Color.Companion.Saver
     get() = ColorSaver
 
+@Suppress("UNUSED_PARAMETER")
 @Composable
 fun rememberSaveable(
     init: Color,
@@ -122,7 +123,6 @@ fun rememberSaveable(
     return rememberSaveable(
         inputs = inputs,
         stateSaver = Color.Saver,
-        key = key,
         init = { mutableStateOf(init) }
     )
 }

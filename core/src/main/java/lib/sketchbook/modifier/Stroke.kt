@@ -5,9 +5,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.composed
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.drawWithContent
+import androidx.compose.ui.node.DrawModifierNode
+import androidx.compose.ui.node.ModifierNodeElement
+import androidx.compose.ui.node.invalidateDraw
+import androidx.compose.ui.graphics.drawscope.ContentDrawScope
+import androidx.compose.ui.graphics.drawscope.clipPath
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.graphics.Shape
@@ -15,8 +17,6 @@ import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.StrokeJoin
 import androidx.compose.ui.graphics.drawOutline
 import androidx.compose.ui.graphics.drawscope.Stroke
-import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -27,19 +27,49 @@ fun Modifier.stroke(
     shape: Shape,
     width: Dp = 4.dp,
     stride: Dp = 4.dp
-) = composed {
-    val density = LocalDensity.current
-    val direction = LocalLayoutDirection.current
-    val strokeWidth = with(density) { width.toPx() }
-    val strideSize = with(density) { stride.toPx() }
-    drawWithContent {
-        drawContent()
+): Modifier = this then StrokeElement(color, shape, width, stride)
+
+private data class StrokeElement(
+    val color: Color,
+    val shape: Shape,
+    val width: Dp,
+    val stride: Dp
+) : ModifierNodeElement<StrokeNode>() {
+
+    override fun create() = StrokeNode(color, shape, width, stride)
+
+    override fun update(node: StrokeNode) {
+        node.update(color, shape, width, stride)
+    }
+}
+
+private class StrokeNode(
+    private var color: Color,
+    private var shape: Shape,
+    private var width: Dp,
+    private var stride: Dp
+) : Modifier.Node(), DrawModifierNode {
+
+    private val cache = OutlineCache()
+
+    fun update(color: Color, shape: Shape, width: Dp, stride: Dp) {
+        this.color = color
+        this.shape = shape
+        this.width = width
+        this.stride = stride
+        cache.clear()
+        invalidateDraw()
+    }
+
+    override fun ContentDrawScope.draw() {
+        val outline = cache.outline(shape, size, layoutDirection, this)
+        val strokeWidth = width.toPx()
+        val strideSize = stride.toPx()
+        clipPath(cache.path(shape, size, layoutDirection, this)) {
+            this@draw.drawContent()
+        }
         drawOutline(
-            outline = shape.createOutline(
-                size = size,
-                layoutDirection = direction,
-                density = density
-            ),
+            outline = outline,
             color = color,
             style = Stroke(
                 width = strokeWidth,
@@ -52,7 +82,7 @@ fun Modifier.stroke(
                 )
             )
         )
-    }.clip(shape)
+    }
 }
 
 @Preview(showBackground = true)
