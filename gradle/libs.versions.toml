@@ -45,6 +45,7 @@ kotlinx-collections = { module = "org.jetbrains.kotlinx:kotlinx-collections-immu
 [plugins]
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+android-application = { id = "com.android.application", version.ref = "android" }
 android-library = { id = "com.android.library", version.ref = "android" }
 bcv = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version.ref = "bcv" }
 roborazzi = { id = "io.github.takahirom.roborazzi", version.ref = "roborazzi" }
