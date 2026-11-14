@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.PrimaryScrollableTabRow
 import androidx.compose.material3.PrimaryTabRow
 import androidx.compose.material3.Tab
@@ -15,10 +14,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import lib.sketchbook.glass.asGlassShape
 import lib.sketchbook.glass.glass
 import lib.sketchbook.theme.Theme
 import lib.sketchbook.theme.contentColorFor
@@ -32,13 +31,14 @@ private const val UnselectedAlpha = .8f
 
 @Composable
 private fun TabIndicatorScope.GlassIndicator(selectedTabIndex: Int) {
+    val shape = Theme.container.buttonSmall.asGlassShape()
     Box(
         Modifier
             .tabIndicatorOffset(selectedTabIndex)
             .padding(horizontal = IndicatorInset)
             .height(IndicatorHeight)
             .glass(
-                shape = CircleShape,
+                shape = shape,
                 tonalElevation = IndicatorGlassElevation,
                 useGlow = true,
                 tint = Theme.color.emphasis.primary
@@ -55,7 +55,7 @@ private fun GlassTabContainer(
 ) {
     Box(
         modifier
-            .glass(shape, RowGlassElevation, useGlow)
+            .glass(shape.asGlassShape(), RowGlassElevation, useGlow)
             .padding(RowPadding)
     ) { content() }
 }
@@ -120,7 +120,7 @@ fun SketchbookTab(
         Tab(
             selected = selected,
             onClick = onClick,
-            modifier = modifier.pressIndicated(RectangleShape, interactionSource),
+            modifier = modifier.pressIndicated(Theme.container.buttonSmall.asGlassShape(), interactionSource),
             enabled = enabled,
             text = text,
             icon = icon,
