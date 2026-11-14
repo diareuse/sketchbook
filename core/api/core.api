@@ -9,6 +9,15 @@ public final class lib/sketchbook/ComposableSingletons$SketchbookButtonKt {
 	public final fun getLambda$747361146$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function3;
 }
 
+public final class lib/sketchbook/ComposableSingletons$SketchbookCheckboxKt {
+	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookCheckboxKt;
+	public fun <init> ()V
+	public final fun getLambda$-1674782096$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-1918318959$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-411444826$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$1288193768$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+}
+
 public final class lib/sketchbook/ComposableSingletons$SketchbookChipKt {
 	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookChipKt;
 	public fun <init> ()V
@@ -76,6 +85,15 @@ public final class lib/sketchbook/ComposableSingletons$SketchbookMenuKt {
 	public fun <init> ()V
 	public final fun getLambda$-198701684$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
 	public final fun getLambda$1026392444$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function3;
+}
+
+public final class lib/sketchbook/ComposableSingletons$SketchbookRadioButtonKt {
+	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookRadioButtonKt;
+	public fun <init> ()V
+	public final fun getLambda$-136146116$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-1458644603$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-276411868$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$711543836$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
 }
 
 public final class lib/sketchbook/ComposableSingletons$SketchbookRockerCounterKt {
@@ -207,6 +225,10 @@ public final class lib/sketchbook/SketchbookButtonKt {
 	public static final fun SketchbookTonalButton-3f6hBDE (Lkotlin/jvm/functions/Function0;Landroidx/compose/ui/Modifier;ZLandroidx/compose/ui/graphics/Shape;JLandroidx/compose/foundation/interaction/MutableInteractionSource;Lkotlin/jvm/functions/Function3;Landroidx/compose/runtime/Composer;II)V
 }
 
+public final class lib/sketchbook/SketchbookCheckboxKt {
+	public static final fun SketchbookCheckbox (ZLkotlin/jvm/functions/Function1;Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function2;ZLandroidx/compose/material3/CheckboxColors;Landroidx/compose/foundation/interaction/MutableInteractionSource;Landroidx/compose/runtime/Composer;II)V
+}
+
 public final class lib/sketchbook/SketchbookChipKt {
 	public static final fun SketchbookChip-lmFMXvc (Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function2;Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;ZLandroidx/compose/ui/graphics/Shape;JLandroidx/compose/foundation/interaction/MutableInteractionSource;Landroidx/compose/runtime/Composer;II)V
 	public static final fun SketchbookFilterChip-FItCLgY (ZLkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function2;Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;ZLandroidx/compose/ui/graphics/Shape;JLandroidx/compose/foundation/interaction/MutableInteractionSource;Landroidx/compose/runtime/Composer;II)V
@@ -257,6 +279,10 @@ public final class lib/sketchbook/SketchbookMenuKt {
 public final class lib/sketchbook/SketchbookPreviewLayoutKt {
 	public static final fun SketchbookPreviewLayout (Landroidx/compose/ui/Modifier;Landroidx/compose/foundation/layout/PaddingValues;Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;II)V
 	public static final fun SketchbookPreviewWearLayout (Landroidx/compose/ui/Modifier;Landroidx/compose/foundation/layout/PaddingValues;Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;II)V
+}
+
+public final class lib/sketchbook/SketchbookRadioButtonKt {
+	public static final fun SketchbookRadioButton (ZLkotlin/jvm/functions/Function0;Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function2;ZLandroidx/compose/material3/RadioButtonColors;Landroidx/compose/foundation/interaction/MutableInteractionSource;Landroidx/compose/runtime/Composer;II)V
 }
 
 public final class lib/sketchbook/SketchbookRockerCounterKt {
