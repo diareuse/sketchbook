@@ -32,10 +32,11 @@ internal fun Modifier.glass(
     tonalElevation: Dp = 0.dp,
     useGlow: Boolean = false,
     blurRadius: Dp = 24.dp,
-    tint: Color = Theme.color.emphasis.background
+    tint: Color = Theme.color.emphasis.background,
+    tintStrength: Float? = null
 ): Modifier {
-    val spec = remember(shape, tint, tonalElevation, useGlow, blurRadius) {
-        GlassSpec.of(shape, tint, tonalElevation, useGlow, blurRadius)
+    val spec = remember(shape, tint, tonalElevation, useGlow, blurRadius, tintStrength) {
+        GlassSpec.of(shape, tint, tonalElevation, useGlow, blurRadius, tintStrength)
     }
     val glass = LocalGlass.current
     val source = if (LocalGlassDepth.current > 0) null else LocalGlassHost.current?.takeIf { it.active }

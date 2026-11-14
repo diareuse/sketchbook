@@ -119,11 +119,11 @@ class ButtonBehaviorTest : BehaviorTest() {
 
     @Test
     @Config(sdk = [26])
-    fun `glass and tonal buttons are translucent over the backdrop`() {
+    fun `every button variant is a translucent glass over the backdrop`() {
         composeRule.setContent {
             Theme(darkTheme = false, dynamicColor = false) {
                 Column {
-                    listOf(1, 3).forEach { index ->
+                    variants.indices.forEach { index ->
                         Row {
                             Box(Modifier.background(Color.Red)) {
                                 variants[index].second({}, true, Modifier.testTag("a$index"))
@@ -138,37 +138,13 @@ class ButtonBehaviorTest : BehaviorTest() {
         }
         composeRule.waitForIdle()
         val image = composeRule.onRoot().captureToImage().toPixelMap()
-        listOf(1, 3).forEach { index ->
+        variants.indices.forEach { index ->
             val a = composeRule.onNodeWithTag("a$index").getBoundsInRoot()
             val b = composeRule.onNodeWithTag("b$index").getBoundsInRoot()
             val y = ((a.top + a.bottom).value).toInt()
-            val ax = (a.left.value * 2 + 6).toInt()
-            val bx = (b.left.value * 2 + 6).toInt()
+            val ax = (a.left.value * 2 + 14).toInt()
+            val bx = (b.left.value * 2 + 14).toInt()
             assertTrue("variant $index", distance(image.opaque(ax, y), image.opaque(bx, y)) > 30)
         }
-    }
-
-    @Test
-    @Config(sdk = [26])
-    fun `filled button container is opaque over any backdrop`() {
-        composeRule.setContent {
-            Theme(darkTheme = false, dynamicColor = false) {
-                Row {
-                    Box(Modifier.background(Color.Red)) {
-                        SketchbookButton({}, Modifier.testTag("a")) { Text("Go") }
-                    }
-                    Box(Modifier.background(Color.Blue)) {
-                        SketchbookButton({}, Modifier.testTag("b")) { Text("Go") }
-                    }
-                }
-            }
-        }
-        composeRule.waitForIdle()
-        val image = composeRule.onRoot().captureToImage().toPixelMap()
-        val a = composeRule.onNodeWithTag("a").getBoundsInRoot()
-        val b = composeRule.onNodeWithTag("b").getBoundsInRoot()
-        val y = ((a.top + a.bottom).value).toInt()
-
-        assertTrue(distance(image.opaque((a.left.value * 2 + 10).toInt(), y), image.opaque((b.left.value * 2 + 10).toInt(), y)) < 10)
     }
 }

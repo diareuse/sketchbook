@@ -14,7 +14,11 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.isUnspecified
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.graphics.Color
+import lib.sketchbook.glass.asGlassShape
 import lib.sketchbook.glass.glass
+import lib.sketchbook.haptic.deniedWhenDisabled
+import lib.sketchbook.theme.Theme
 
 private val ControlGlassElevation = 12.dp
 
@@ -23,8 +27,13 @@ internal fun Modifier.pressIndicated(shape: Shape, interactionSource: Interactio
     clip(shape).indication(interactionSource, LocalIndication.current)
 
 @Composable
-internal fun Modifier.pressControl(shape: Shape, interactionSource: InteractionSource): Modifier =
-    minimumTouchTarget(LocalMinimumInteractiveComponentSize.current).pressIndicated(shape, interactionSource)
+internal fun Modifier.pressControl(
+    shape: Shape,
+    interactionSource: InteractionSource,
+    enabled: Boolean = true
+): Modifier = deniedWhenDisabled(enabled)
+    .minimumTouchTarget(LocalMinimumInteractiveComponentSize.current)
+    .pressIndicated(shape, interactionSource)
 
 private fun Modifier.minimumTouchTarget(size: Dp): Modifier =
     if (size.isUnspecified || size <= 0.dp) this
@@ -37,10 +46,19 @@ private fun Modifier.minimumTouchTarget(size: Dp): Modifier =
     }
 
 @Composable
-internal fun Modifier.glassControl(shape: Shape, enabled: Boolean, interactionSource: InteractionSource): Modifier =
-    minimumTouchTarget(LocalMinimumInteractiveComponentSize.current)
-        .glass(shape, ControlGlassElevation, useGlow = enabled)
-        .pressIndicated(shape, interactionSource)
+internal fun Modifier.glassControl(
+    shape: Shape,
+    enabled: Boolean,
+    interactionSource: InteractionSource,
+    tint: Color = Theme.color.emphasis.background,
+    tintStrength: Float? = null
+): Modifier {
+    val glassShape = shape.asGlassShape()
+    return deniedWhenDisabled(enabled)
+        .minimumTouchTarget(LocalMinimumInteractiveComponentSize.current)
+        .glass(glassShape, ControlGlassElevation, useGlow = enabled, tint = tint, tintStrength = tintStrength)
+        .pressIndicated(glassShape, interactionSource)
+}
 
 @Composable
 internal fun ThemePressHost(content: @Composable () -> Unit) {
@@ -50,3 +68,7 @@ internal fun ThemePressHost(content: @Composable () -> Unit) {
         content = content
     )
 }
+
+internal const val FilledTintStrength = .93f
+internal const val ProminentTintStrength = .99f
+internal const val TonalTintStrength = .6f

@@ -1,5 +1,7 @@
 package lib.sketchbook.behavior
 
+import android.os.Build
+import android.view.HapticFeedbackConstants
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
@@ -191,21 +193,23 @@ abstract class ComponentPressIndicationBehavior : BehaviorTest() {
     }
 
     @Test
-    fun `pressing and releasing a button emits no haptic`() {
+    fun `pressing and releasing a button emits exactly one confirmation and no press tick`() {
         show { SketchbookButton({}, it) { Text("Go") } }
         composeRule.onNodeWithTag(Target).performTouchInput { down(center) }
         composeRule.mainClock.advanceTimeBy(150)
         composeRule.onNodeWithTag(Target).performTouchInput { up() }
         composeRule.mainClock.advanceTimeBy(600)
-        assertEquals(emptyList<HapticFeedbackType>(), haptics.performed)
+        assertEquals(listOf(HapticFeedbackType(HapticFeedbackConstants.CONTEXT_CLICK)), haptics.performed)
     }
 
     @Test
-    fun `a disabled button emits no press haptic`() {
+    fun `pressing a disabled button performs exactly one denial haptic`() {
         show { SketchbookButton({}, it, enabled = false) { Text("Go") } }
         composeRule.onNodeWithTag(Target).performTouchInput { down(center) }
         composeRule.mainClock.advanceTimeBy(150)
-        assertEquals(emptyList<HapticFeedbackType>(), haptics.performed)
+        val denial = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) HapticFeedbackConstants.REJECT
+        else HapticFeedbackConstants.LONG_PRESS
+        assertEquals(listOf(HapticFeedbackType(denial)), haptics.performed)
     }
 
     private fun assertIndicated(
@@ -225,8 +229,8 @@ abstract class ComponentPressIndicationBehavior : BehaviorTest() {
     private fun show(content: @Composable (Modifier) -> Unit) {
         composeRule.mainClock.autoAdvance = false
         composeRule.setContent {
-            CompositionLocalProvider(LocalHapticFeedback provides haptics) {
-                Theme(darkTheme = false, dynamicColor = false) {
+            Theme(darkTheme = false, dynamicColor = false) {
+                CompositionLocalProvider(LocalHapticFeedback provides haptics) {
                     Box(Modifier.size(280.dp).background(Color.Black), contentAlignment = Alignment.Center) {
                         content(Modifier.testTag(Target))
                     }

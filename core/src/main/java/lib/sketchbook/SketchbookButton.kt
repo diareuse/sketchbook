@@ -1,13 +1,11 @@
 package lib.sketchbook
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -15,22 +13,21 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.dp
+import lib.sketchbook.glass.asGlassShape
+import lib.sketchbook.haptic.rememberConfirmedClick
 import lib.sketchbook.theme.Theme
 import lib.sketchbook.theme.contentColorFor
 
-private const val DisabledContainerAlpha = .12f
 private const val DisabledContentAlpha = .38f
-private const val TonalAlpha = .2f
-private const val GlassOverlayAlpha = .05f
 
 @Composable
-internal fun buttonColors(container: Color, content: Color): ButtonColors {
+internal fun buttonColors(content: Color): ButtonColors {
     val onBackground = Theme.color.content.background
-    return remember(container, content, onBackground) {
+    return remember(content, onBackground) {
         ButtonColors(
-            containerColor = container,
+            containerColor = Color.Transparent,
             contentColor = content,
-            disabledContainerColor = onBackground.copy(DisabledContainerAlpha),
+            disabledContainerColor = Color.Transparent,
             disabledContentColor = onBackground.copy(DisabledContentAlpha)
         )
     }
@@ -42,25 +39,26 @@ internal fun ButtonCore(
     modifier: Modifier,
     enabled: Boolean,
     shape: Shape,
-    colors: ButtonColors,
-    border: BorderStroke?,
-    glass: Boolean,
+    content: Color,
+    tint: Color,
+    tintStrength: Float?,
     interactionSource: MutableInteractionSource,
-    content: @Composable RowScope.() -> Unit
+    label: @Composable RowScope.() -> Unit
 ) {
-    val control = if (glass) modifier.glassControl(shape, enabled, interactionSource)
-    else modifier.pressControl(shape, interactionSource)
+    val glassShape = shape.asGlassShape()
+    val confirmed = rememberConfirmedClick(onClick)
+    val control = modifier.glassControl(glassShape, enabled, interactionSource, tint, tintStrength)
     ThemePressHost {
         Button(
-            onClick = onClick,
+            onClick = confirmed,
             modifier = control,
             enabled = enabled,
-            shape = shape,
-            colors = colors,
+            shape = glassShape,
+            colors = buttonColors(content),
             elevation = null,
-            border = border,
+            border = null,
             interactionSource = interactionSource,
-            content = content
+            content = label
         )
     }
 }
@@ -78,11 +76,11 @@ fun SketchbookButton(
     modifier = modifier,
     enabled = enabled,
     shape = shape,
-    colors = buttonColors(Theme.color.emphasis.primary, Theme.color.overlay.primary),
-    border = null,
-    glass = false,
+    content = Theme.color.overlay.primary,
+    tint = Theme.color.emphasis.primary,
+    tintStrength = FilledTintStrength,
     interactionSource = interactionSource,
-    content = content
+    label = content
 )
 
 @Composable
@@ -99,14 +97,11 @@ fun SketchbookTonalButton(
     modifier = modifier,
     enabled = enabled,
     shape = shape,
-    colors = buttonColors(
-        Theme.color.emphasis.primary.copy(TonalAlpha),
-        Theme.color.contentColorFor(compositeColor)
-    ),
-    border = null,
-    glass = true,
+    content = Theme.color.contentColorFor(compositeColor),
+    tint = Theme.color.container.secondary,
+    tintStrength = TonalTintStrength,
     interactionSource = interactionSource,
-    content = content
+    label = content
 )
 
 @Composable
@@ -118,23 +113,17 @@ fun SketchbookOutlinedButton(
     compositeColor: Color = Theme.color.emphasis.background,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     content: @Composable RowScope.() -> Unit
-) {
-    val outline = Theme.color.content.outline
-    val border = remember(outline, enabled) {
-        BorderStroke(1.dp, if (enabled) outline else outline.copy(DisabledContainerAlpha))
-    }
-    ButtonCore(
-        onClick = onClick,
-        modifier = modifier,
-        enabled = enabled,
-        shape = shape,
-        colors = buttonColors(Color.Transparent, Theme.color.contentColorFor(compositeColor)),
-        border = border,
-        glass = false,
-        interactionSource = interactionSource,
-        content = content
-    )
-}
+) = ButtonCore(
+    onClick = onClick,
+    modifier = modifier,
+    enabled = enabled,
+    shape = shape,
+    content = Theme.color.contentColorFor(compositeColor),
+    tint = Theme.color.emphasis.background,
+    tintStrength = null,
+    interactionSource = interactionSource,
+    label = content
+)
 
 @Composable
 fun SketchbookGlassButton(
@@ -150,14 +139,11 @@ fun SketchbookGlassButton(
     modifier = modifier,
     enabled = enabled,
     shape = shape,
-    colors = buttonColors(
-        Theme.color.overlay.background.copy(GlassOverlayAlpha),
-        Theme.color.contentColorFor(compositeColor)
-    ),
-    border = null,
-    glass = true,
+    content = Theme.color.contentColorFor(compositeColor),
+    tint = Theme.color.emphasis.background,
+    tintStrength = null,
     interactionSource = interactionSource,
-    content = content
+    label = content
 )
 
 @SketchbookComponentPreview
