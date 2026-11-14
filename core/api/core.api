@@ -96,6 +96,20 @@ public final class lib/sketchbook/ComposableSingletons$SketchbookImageKt {
 	public final fun getLambda$377746939$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function4;
 }
 
+public final class lib/sketchbook/ComposableSingletons$SketchbookListItemKt {
+	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookListItemKt;
+	public fun <init> ()V
+	public final fun getLambda$-1092017078$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-2104882166$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-380275231$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-494005923$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-848480215$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$1681910398$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$1875426277$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$688448935$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$94960264$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+}
+
 public final class lib/sketchbook/ComposableSingletons$SketchbookMenuKt {
 	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookMenuKt;
 	public fun <init> ()V
@@ -316,6 +330,10 @@ public final class lib/sketchbook/SketchbookImageKt {
 	public static final fun hashString (Ljava/lang/Object;)Ljava/lang/String;
 	public static final fun rememberImageState (Ljava/lang/Object;Landroidx/compose/runtime/Composer;I)Llib/sketchbook/ImageState;
 	public static final fun rememberPaletteImageState-RIQooxk (Ljava/lang/Object;JJLandroidx/compose/runtime/Composer;II)Llib/sketchbook/PaletteImageState;
+}
+
+public final class lib/sketchbook/SketchbookListItemKt {
+	public static final fun SketchbookListItem-ygcbOzY (Lkotlin/jvm/functions/Function2;Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;ZZLandroidx/compose/ui/graphics/Shape;JLandroidx/compose/foundation/interaction/MutableInteractionSource;Landroidx/compose/runtime/Composer;III)V
 }
 
 public final class lib/sketchbook/SketchbookMenuKt {
