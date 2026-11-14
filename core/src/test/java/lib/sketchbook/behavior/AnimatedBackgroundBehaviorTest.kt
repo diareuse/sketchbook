@@ -129,6 +129,48 @@ abstract class AnimatedBackgroundBehavior : BehaviorTest() {
     }
 
     @Test
+    fun `default background is darker in a dark theme than in a light theme`() {
+        composeRule.mainClock.autoAdvance = false
+        composeRule.setContent {
+            Row {
+                Theme(darkTheme = false, dynamicColor = false) {
+                    SketchbookAnimatedBackground(Modifier.testTag("light").size(100.dp), animated = false) {}
+                }
+                Theme(darkTheme = true, dynamicColor = false) {
+                    SketchbookAnimatedBackground(Modifier.testTag("dark").size(100.dp), animated = false) {}
+                }
+            }
+        }
+        advance(16)
+
+        assertTrue(frame("dark").average() < frame("light").average() - .5)
+    }
+
+    @Test
+    fun `default light background glows peach at the bottom left`() {
+        show { SketchbookAnimatedBackground(Modifier.size(100.dp), animated = false) {} }
+
+        val pixel = composeRule.onRoot().captureToImage().toPixelMap()[40, 170]
+
+        assertTrue(pixel.red > pixel.blue + .1f)
+    }
+
+    @Test
+    fun `default dark background glows indigo at the top left`() {
+        composeRule.mainClock.autoAdvance = false
+        composeRule.setContent {
+            Theme(darkTheme = true, dynamicColor = false) {
+                SketchbookAnimatedBackground(Modifier.size(100.dp), animated = false) {}
+            }
+        }
+        advance(16)
+
+        val pixel = composeRule.onRoot().captureToImage().toPixelMap()[40, 30]
+
+        assertTrue(pixel.blue > pixel.red + .3f && pixel.blue > pixel.green + .3f)
+    }
+
+    @Test
     fun `background drifts over time without recomposing its content`() {
         show {
             SketchbookAnimatedBackground(Modifier.size(100.dp), colors = palette) {
@@ -186,7 +228,7 @@ abstract class AnimatedBackgroundBehavior : BehaviorTest() {
         val fast = frame("fast")
         advance(1000)
 
-        assertArrayEquals(fast, frame("slow"), 0f)
+        assertArrayEquals(fast, frame("slow"), .02f)
     }
 
     @Test

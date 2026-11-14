@@ -10,7 +10,6 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.currentStateAsState
 import lib.sketchbook.modifier.meshGradientBackground
-import lib.sketchbook.theme.Theme
 
 private const val BaseDurationMillis = 10_000f
 
@@ -21,16 +20,21 @@ internal fun drifts(speed: Float, animated: Boolean, started: Boolean): Boolean 
     animated && started && speed > 0f && speed.isFinite()
 
 @Composable
+private fun isDark(): Boolean = MaterialTheme.colorScheme.background.luminance() < .5f
+
+private fun defaultBase(dark: Boolean): Color = if (dark) Color(0xFF0A0A12) else Color(0xFFF7F6FC)
+
+private fun defaultColors(dark: Boolean): List<Color> =
+    if (dark) listOf(Color(0xFF4338CA), Color(0xFF9D2A8C), Color(0xFF1D5FC9), Color(0xFFCF5A3C))
+    else listOf(Color(0xFFA5B1FF), Color(0xFFFFADCF), Color(0xFF9BD8FF), Color(0xFFFFCB9A))
+
+@Composable
 fun SketchbookAnimatedBackground(
     modifier: Modifier = Modifier,
-    colors: List<Color> = listOf(
-        Theme.color.emphasis.primary,
-        Theme.color.emphasis.tertiary,
-        Theme.color.emphasis.secondary
-    ),
+    colors: List<Color> = defaultColors(isDark()),
     speed: Float = 0.25f,
     animated: Boolean = true,
-    baseColor: Color = Theme.color.container.background,
+    baseColor: Color = defaultBase(isDark()),
     content: @Composable BoxScope.() -> Unit
 ) {
     val lifecycleState by LocalLifecycleOwner.current.lifecycle.currentStateAsState()
