@@ -76,6 +76,14 @@ class TopAppBarGlassBehaviorTest : BehaviorTest() {
     }
 
     @Test
+    @Config(sdk = [34])
+    fun `collapsed bar without a glass source is a tint on android 14`() {
+        render(Collapsed, source = false)
+
+        assertTrue(distance(Color.Red, fieldPixel(10)) > 60)
+    }
+
+    @Test
     @Config(sdk = [26])
     fun `bar backdrop fades in progressively while collapsing`() {
         render(Expanded)

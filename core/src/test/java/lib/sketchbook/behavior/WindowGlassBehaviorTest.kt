@@ -68,6 +68,16 @@ class WindowGlassBehaviorTest : BehaviorTest() {
     }
 
     @Test
+    @Config(sdk = [34])
+    fun `dialog surface without a glass source is a sharp tinted pane on android 14`() {
+        val spread = surfaceSpread(source = false)
+        val image = composeRule.onRoot().captureToImage().toPixelMap()
+
+        assertTrue("spread $spread", spread > Sharp)
+        assertNotEquals(Color.Red, image.run { this[320, 200].let { Color(it.red, it.green, it.blue, 1f) } })
+    }
+
+    @Test
     @Config(sdk = [26])
     fun `dialog surface is a translucent tint over the backdrop`() {
         val spread = surfaceSpread()

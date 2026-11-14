@@ -2,11 +2,11 @@ package lib.sketchbook
 
 import androidx.activity.compose.BackHandler
 import dev.chrisbanes.haze.HazeState
-import dev.chrisbanes.haze.hazeSource
 import lib.sketchbook.glass.GlassDepthScope
 import lib.sketchbook.glass.GlassSource
 import lib.sketchbook.glass.LocalGlassHost
 import lib.sketchbook.glass.glassSource
+import lib.sketchbook.glass.glassSourceOf
 import androidx.compose.animation.core.animate
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloatAsState
@@ -74,7 +74,7 @@ import lib.sketchbook.util.toDpSize
 fun Modifier.popOutBackground(state: OverlayState) = composed {
     val blur by animateDpAsState(targetValue = if (state.expanded) 32.dp else 0.dp)
     val alpha by animateFloatAsState(targetValue = if (state.expanded) .5f else 1f)
-    alpha(alpha).blur(blur).glassSource().hazeSource(state.glassHost.state)
+    alpha(alpha).blur(blur).glassSource().glassSourceOf(state.glassHost)
 }
 
 @Stable
