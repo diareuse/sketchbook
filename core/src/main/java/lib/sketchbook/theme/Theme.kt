@@ -19,7 +19,7 @@ import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.text.TextStyle
 import lib.sketchbook.haptic.PlatformHapticFeedback
 import lib.sketchbook.glass.ProvideGlass
-import lib.sketchbook.haptic.rememberVibrateIndication
+import lib.sketchbook.indication.rememberGlassPressIndication
 
 @Composable
 fun Theme(
@@ -45,12 +45,13 @@ fun Theme(
     val container = remember(shapes) { ThemeContainerMaterial3(shapes) }
     val style = remember(scheme) { ThemeStyleMaterial3(scheme) }
     val haptics = remember(view) { PlatformHapticFeedback(view) }
+    val glassPress = rememberGlassPressIndication(LocalHapticFeedback.current)
     CompositionLocalProvider(
         LocalText provides text,
         LocalContainer provides container,
         LocalStyle provides style,
         LocalHapticFeedback provides haptics,
-        LocalIndication provides rememberVibrateIndication()
+        LocalIndication provides glassPress
     ) {
         CompositionLocalProvider(
             LocalTextStyle provides Theme.textStyle.body,
