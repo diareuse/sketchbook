@@ -1,3 +1,11 @@
+public final class lib/sketchbook/ComposableSingletons$SketchbookBottomSheetKt {
+	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookBottomSheetKt;
+	public fun <init> ()V
+	public final fun getLambda$-194663524$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$370634559$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function3;
+	public final fun getLambda$930532222$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+}
+
 public final class lib/sketchbook/ComposableSingletons$SketchbookButtonKt {
 	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookButtonKt;
 	public fun <init> ()V
@@ -320,6 +328,10 @@ public final class lib/sketchbook/PaletteImageState$Palette {
 	public fun hashCode ()I
 	public final fun toLongArray ()[J
 	public fun toString ()Ljava/lang/String;
+}
+
+public final class lib/sketchbook/SketchbookBottomSheetKt {
+	public static final fun SketchbookBottomSheet-NpZTi58 (ZLkotlin/jvm/functions/Function0;Landroidx/compose/ui/Modifier;Landroidx/compose/ui/graphics/Shape;JZLkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function3;Landroidx/compose/runtime/Composer;II)V
 }
 
 public final class lib/sketchbook/SketchbookButtonKt {
