@@ -17,7 +17,7 @@ internal fun HapticFeedback.confirmChange(on: Boolean?) {
 
 internal fun HapticFeedback.denial() {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-        performHapticFeedback(HapticFeedbackConstants.REJECT)
+        reject()
     } else {
         performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
     }

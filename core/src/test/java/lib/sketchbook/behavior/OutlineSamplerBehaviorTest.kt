@@ -98,6 +98,24 @@ class OutlineSamplerBehaviorTest {
         assertEquals(a.points[11], b.points[11], 1f)
     }
 
+    @Test
+    fun `a position along the border interpolates between neighbouring samples and wraps`() {
+        val outline = RoundedCornerShape(16.dp).createOutline(Size(400f, 160f), LayoutDirection.Ltr, density)
+        val samples = sampleOutline(outline, density.density)
+        val step = samples.perimeter / 64f
+
+        val start = samples.pointAt(0f)
+        val wrapped = samples.pointAt(samples.perimeter)
+        val between = samples.pointAt(step * 2.5f)
+
+        assertEquals(samples.points[0], start.x, 1e-3f)
+        assertEquals(samples.points[1], start.y, 1e-3f)
+        assertEquals(start.x, wrapped.x, 1e-2f)
+        assertEquals(start.y, wrapped.y, 1e-2f)
+        assertEquals((samples.points[4] + samples.points[6]) / 2f, between.x, 1e-2f)
+        assertEquals((samples.points[5] + samples.points[7]) / 2f, between.y, 1e-2f)
+    }
+
     private fun forEachShape(block: (String, OutlineSamples, Reference) -> Unit) {
         val size = Size(400f, 160f)
         shapes.forEach { (name, shape) ->

@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -165,17 +166,23 @@ abstract class BorderBeamBehavior : BehaviorTest() {
     }
 
     @Test
-    fun `reversing the direction changes the frame`() {
-        var direction by mutableStateOf(BeamDirection.Clockwise)
-        show(squircle) { Modifier.borderBeam(squircle, direction = direction) }
-        advance(500)
-        val clockwise = frame()
+    fun `clockwise and counter clockwise beams differ after the same time`() {
+        composeRule.mainClock.autoAdvance = false
+        composeRule.setContent {
+            Row(Modifier.background(Color.Black)) {
+                Box(Modifier.size(BoxWidth.dp, BoxHeight.dp).borderBeam(squircle, direction = BeamDirection.Clockwise))
+                Box(Modifier.size(BoxWidth.dp, BoxHeight.dp).borderBeam(squircle, direction = BeamDirection.CounterClockwise))
+            }
+        }
+        advance(700)
+        val image = image()
 
-        direction = BeamDirection.CounterClockwise
-        composeRule.waitForIdle()
-        advance(16)
+        var differing = 0
+        for (y in 0 until BoxHeightPx) for (x in 0 until BoxWidthPx) {
+            if (image[x, y] != image[x + BoxWidthPx, y]) differing++
+        }
 
-        assertFalse(clockwise.contentEquals(frame()))
+        assertTrue("differing pixels $differing", differing > 100)
     }
 
     @Test
@@ -186,15 +193,50 @@ abstract class BorderBeamBehavior : BehaviorTest() {
     }
 
     @Test
-    fun `the line style sweeps along the bottom edge`() {
+    fun `the line style sweeps along the bottom edge only`() {
         show(squircle) { Modifier.borderBeam(squircle, style = BeamStyle.Line) }
         var found = false
         repeat(12) {
             advance(200)
-            found = found || painted(image()).isNotEmpty()
+            val image = image()
+            for (y in 0 until image.height) for (x in 0 until image.width) {
+                if (!black(image, x, y)) {
+                    found = true
+                    assertTrue("pixel ($x,$y) above the bottom edge", y > Margin + BoxHeightPx / 2)
+                }
+            }
         }
 
         assertTrue(found)
+    }
+
+    @Test
+    fun `a beam that becomes active fades in gradually`() {
+        var active by mutableStateOf(false)
+        show(squircle) { Modifier.borderBeam(squircle, active = active) }
+
+        active = true
+        composeRule.waitForIdle()
+        advance(150)
+        val early = brightness()
+        advance(1_000)
+        val late = brightness()
+
+        assertTrue("early $early late $late", early < late)
+    }
+
+    @Test
+    fun `swapping the shape redraws the beam inside the new shape`() {
+        var shape by mutableStateOf<Shape>(RoundedCornerShape(2.dp))
+        show(squircle) { Modifier.borderBeam(shape) }
+        assertTrue(black(image(), Margin + 10, Margin + 10).not() || painted(image()).isNotEmpty())
+
+        shape = CircleShape
+        composeRule.waitForIdle()
+        advance(16)
+
+        assertTrue(black(image(), Margin + 4, Margin + 4))
+        assertOutsideIsUntouched(image())
     }
 
     @Test
@@ -217,7 +259,7 @@ abstract class BorderBeamBehavior : BehaviorTest() {
         assertOutsideIsUntouched(image())
     }
 
-    private fun show(shape: Shape, beam: () -> Modifier) {
+    private fun show(@Suppress("UNUSED_PARAMETER") shape: Shape, beam: () -> Modifier) {
         composeRule.mainClock.autoAdvance = false
         composeRule.setContent { Beamed(beam) }
         advance(16)
@@ -231,6 +273,8 @@ abstract class BorderBeamBehavior : BehaviorTest() {
     @Composable
     private fun Frame(content: @Composable BoxScope.() -> Unit) =
         Box(Modifier.size(FrameWidth.dp, FrameHeight.dp).background(Color.Black), content = content)
+
+    private fun brightness(): Float = frame().sum()
 
     private fun advance(millis: Long) = composeRule.mainClock.advanceTimeBy(millis)
 

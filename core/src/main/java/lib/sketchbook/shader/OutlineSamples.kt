@@ -1,12 +1,30 @@
 package lib.sketchbook.shader
 
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Outline
 import androidx.compose.ui.graphics.PathMeasure
 import lib.sketchbook.util.toPath
+import kotlin.math.floor
+import kotlin.math.min
 
 internal const val BeamSampleCount = 64
 
-internal class OutlineSamples(val points: FloatArray, val perimeter: Float)
+internal class OutlineSamples(val points: FloatArray, val perimeter: Float) {
+
+    fun pointAt(s: Float): Offset {
+        val count = points.size / 2
+        if (perimeter <= 0f) return Offset(points[0], points[1])
+        val wrapped = s - perimeter * floor(s / perimeter)
+        val position = wrapped / (perimeter / count)
+        val i = min(position.toInt(), count - 1)
+        val t = position - i
+        val j = (i + 1) % count
+        return Offset(
+            points[2 * i] + (points[2 * j] - points[2 * i]) * t,
+            points[2 * i + 1] + (points[2 * j + 1] - points[2 * i + 1]) * t
+        )
+    }
+}
 
 internal fun sampleOutline(outline: Outline, density: Float, count: Int = BeamSampleCount): OutlineSamples {
     val measure = PathMeasure()

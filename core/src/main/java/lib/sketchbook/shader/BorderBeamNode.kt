@@ -50,6 +50,10 @@ internal class BorderBeamNode(
 
     override fun onDetach() {
         driver.stop()
+        stopFade()
+    }
+
+    private fun stopFade() {
         fader.stop()
         lastFadeNanos = -1L
     }
@@ -74,7 +78,7 @@ internal class BorderBeamNode(
         fadeTarget = if (active) 1f else 0f
         if (!animated || !systemAnimationsAllowed()) {
             driver.stop()
-            fader.stop()
+            stopFade()
             phase = StaticPhase
             fade = fadeTarget
             invalidateDraw()
@@ -99,15 +103,15 @@ internal class BorderBeamNode(
     override fun ContentDrawScope.draw() {
         drawContent()
         if (fade <= 0f || look.intensity <= 0f || size.minDimension <= 0f) return
-        with(painter) { paint(geometry(this@draw), look, phase, fade) }
+        with(painter) { paint(geometry(), look, phase, fade) }
     }
 
-    private fun ContentDrawScope.geometry(scope: ContentDrawScope): BeamGeometry {
-        val outline = cache.outline(shape, size, layoutDirection, scope)
+    private fun ContentDrawScope.geometry(): BeamGeometry {
+        val outline = cache.outline(shape, size, layoutDirection, this)
         val current = geometry
         if (current != null && sampledOutline === outline) return current
         sampledOutline = outline
-        return BeamGeometry(cache.path(shape, size, layoutDirection, scope), sampleOutline(outline, density))
+        return BeamGeometry(cache.path(shape, size, layoutDirection, this), sampleOutline(outline, density))
             .also { geometry = it }
     }
 

@@ -32,7 +32,7 @@ internal data class BeamLook(
 
     val directionSign: Float get() = if (direction == BeamDirection.Clockwise) 1f else -1f
 
-    val palette: List<Color> get() = fitPalette(colors)
+    val palette: List<Color> = fitPalette(colors)
 
     private companion object {
         const val LargeArc = .36f
