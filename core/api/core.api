@@ -9,6 +9,16 @@ public final class lib/sketchbook/ComposableSingletons$SketchbookButtonKt {
 	public final fun getLambda$747361146$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function3;
 }
 
+public final class lib/sketchbook/ComposableSingletons$SketchbookCardKt {
+	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookCardKt;
+	public fun <init> ()V
+	public final fun getLambda$-1895406257$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function3;
+	public final fun getLambda$-2136153908$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-340625771$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function3;
+	public final fun getLambda$1183136851$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function3;
+	public final fun getLambda$421255540$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function3;
+}
+
 public final class lib/sketchbook/ComposableSingletons$SketchbookCheckboxKt {
 	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookCheckboxKt;
 	public fun <init> ()V
@@ -251,6 +261,11 @@ public final class lib/sketchbook/SketchbookButtonKt {
 	public static final fun SketchbookGlassButton-3f6hBDE (Lkotlin/jvm/functions/Function0;Landroidx/compose/ui/Modifier;ZLandroidx/compose/ui/graphics/Shape;JLandroidx/compose/foundation/interaction/MutableInteractionSource;Lkotlin/jvm/functions/Function3;Landroidx/compose/runtime/Composer;II)V
 	public static final fun SketchbookOutlinedButton-3f6hBDE (Lkotlin/jvm/functions/Function0;Landroidx/compose/ui/Modifier;ZLandroidx/compose/ui/graphics/Shape;JLandroidx/compose/foundation/interaction/MutableInteractionSource;Lkotlin/jvm/functions/Function3;Landroidx/compose/runtime/Composer;II)V
 	public static final fun SketchbookTonalButton-3f6hBDE (Lkotlin/jvm/functions/Function0;Landroidx/compose/ui/Modifier;ZLandroidx/compose/ui/graphics/Shape;JLandroidx/compose/foundation/interaction/MutableInteractionSource;Lkotlin/jvm/functions/Function3;Landroidx/compose/runtime/Composer;II)V
+}
+
+public final class lib/sketchbook/SketchbookCardKt {
+	public static final fun SketchbookCard-FU0evQE (Landroidx/compose/ui/Modifier;Landroidx/compose/ui/graphics/Shape;JZZLkotlin/jvm/functions/Function3;Landroidx/compose/runtime/Composer;II)V
+	public static final fun SketchbookCard-mxsUjTo (Lkotlin/jvm/functions/Function0;Landroidx/compose/ui/Modifier;ZLandroidx/compose/ui/graphics/Shape;JZZLandroidx/compose/foundation/interaction/MutableInteractionSource;Lkotlin/jvm/functions/Function3;Landroidx/compose/runtime/Composer;II)V
 }
 
 public final class lib/sketchbook/SketchbookCheckboxKt {
