@@ -182,6 +182,12 @@ public final class lib/sketchbook/ComposableSingletons$SketchbookNavigationRailK
 	public final fun getLambda$943540356$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function3;
 }
 
+public final class lib/sketchbook/ComposableSingletons$SketchbookPagerIndicatorKt {
+	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookPagerIndicatorKt;
+	public fun <init> ()V
+	public final fun getLambda$157152084$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+}
+
 public final class lib/sketchbook/ComposableSingletons$SketchbookProgressKt {
 	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookProgressKt;
 	public fun <init> ()V
@@ -369,6 +375,14 @@ public final class lib/sketchbook/OverlayState {
 	public final fun setExpanded (Z)V
 }
 
+public final class lib/sketchbook/PagerIndicatorStyle : java/lang/Enum {
+	public static final field Dots Llib/sketchbook/PagerIndicatorStyle;
+	public static final field Worm Llib/sketchbook/PagerIndicatorStyle;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Llib/sketchbook/PagerIndicatorStyle;
+	public static fun values ()[Llib/sketchbook/PagerIndicatorStyle;
+}
+
 public final class lib/sketchbook/PaletteImageState : lib/sketchbook/ImageState {
 	public static final field $stable I
 	public fun <init> (Ljava/lang/Object;Llib/sketchbook/PaletteImageState$Palette;Z)V
@@ -504,6 +518,11 @@ public final class lib/sketchbook/SketchbookNavigationBarKt {
 public final class lib/sketchbook/SketchbookNavigationRailKt {
 	public static final fun SketchbookNavigationRail (Landroidx/compose/ui/Modifier;Landroidx/compose/foundation/layout/WindowInsets;Landroidx/compose/ui/graphics/Shape;ZLkotlin/jvm/functions/Function3;Lkotlin/jvm/functions/Function3;Landroidx/compose/runtime/Composer;II)V
 	public static final fun SketchbookNavigationRailItem-FItCLgY (ZLkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function2;Landroidx/compose/ui/Modifier;ZLkotlin/jvm/functions/Function2;ZLkotlin/jvm/functions/Function2;JLandroidx/compose/foundation/interaction/MutableInteractionSource;Landroidx/compose/runtime/Composer;II)V
+}
+
+public final class lib/sketchbook/SketchbookPagerIndicatorKt {
+	public static final fun SketchbookPagerIndicator-T0bfq7A (Landroidx/compose/foundation/pager/PagerState;Landroidx/compose/ui/Modifier;Llib/sketchbook/PagerIndicatorStyle;JJFFLkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;II)V
+	public static final fun SketchbookPagerIndicator-y12PT0E (IILandroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function0;Llib/sketchbook/PagerIndicatorStyle;JJFFLkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;II)V
 }
 
 public final class lib/sketchbook/SketchbookPreviewLayoutKt {
