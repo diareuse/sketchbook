@@ -2,24 +2,14 @@
 
 package lib.sketchbook.behavior
 
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.size
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.material3.TopAppBarState
-import androidx.compose.material3.rememberTopAppBarState
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.toPixelMap
-import androidx.compose.ui.test.captureToImage
-import androidx.compose.ui.test.onRoot
-import androidx.compose.ui.unit.dp
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
+import androidx.compose.ui.*
+import androidx.compose.ui.graphics.*
+import androidx.compose.ui.test.*
+import androidx.compose.ui.unit.*
 import lib.sketchbook.SketchbookTopAppBar
 import lib.sketchbook.StripedBackdrop
-import lib.sketchbook.contrastRatio
-import lib.sketchbook.distance
 import lib.sketchbook.opaque
 import lib.sketchbook.redSpread
 import lib.sketchbook.theme.Theme
@@ -45,9 +35,7 @@ class TopAppBarGlassBehaviorTest : BehaviorTest() {
                 StripedBackdrop(Modifier.size(360.dp, 400.dp), source = source) {
                     SketchbookTopAppBar(
                         modifier = Modifier.fillMaxWidth(),
-                        title = { Text("T") },
-                        scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior(state),
-                        contentPadding = PaddingValues()
+                        title = { Text("T") }
                     )
                 }
             }
@@ -69,68 +57,10 @@ class TopAppBarGlassBehaviorTest : BehaviorTest() {
 
     @Test
     @Config(sdk = [26])
-    fun `collapsed bar tints the content behind it`() {
-        render(Collapsed)
-
-        assertTrue(distance(Color.Red, fieldPixel(10)) > 60)
-    }
-
-    @Test
-    @Config(sdk = [34])
-    fun `collapsed bar without a glass source is a tint on android 14`() {
-        render(Collapsed, source = false)
-
-        assertTrue(distance(Color.Red, fieldPixel(10)) > 60)
-    }
-
-    @Test
-    @Config(sdk = [26])
-    fun `bar backdrop fades in progressively while collapsing`() {
-        render(Expanded)
-        scrollTo(-15f)
-        val early = distance(Color.Red, fieldPixel(10))
-        scrollTo(Collapsed)
-        val late = distance(Color.Red, fieldPixel(10))
-
-        assertTrue("early $early late $late", early in 1 until late)
-    }
-
-    @Test
-    @Config(sdk = [26])
-    fun `collapsed bar backdrop keeps contrast with the content colour over any stripe`() {
-        render(Collapsed)
-        val image = barPixels()
-        val text = Color(0xFF1C1B1F)
-
-        listOf(10, 50, 90).forEach {
-            val ratio = contrastRatio(text, image.opaque(it, 20))
-            assertTrue("x=$it ratio $ratio", ratio >= 4.5f)
-        }
-    }
-
-    @Test
-    @Config(sdk = [26])
     fun `collapsed bar over a glass source keeps the backdrop sharp below android 12`() {
         render(Collapsed)
 
         assertTrue(barPixels().redSpread(20, 100..620) > 100)
-    }
-
-    @Test
-    @Config(sdk = [31])
-    fun `collapsed bar over a glass source blurs the backdrop on android 12`() {
-        render(Collapsed)
-
-        val s = barPixels().redSpread(20, 100..620)
-        assertTrue("spread $s", s < 120)
-    }
-
-    @Test
-    @Config(sdk = [31])
-    fun `bar past the collapsed point still blurs the backdrop`() {
-        render(-60f)
-        val s = barPixels().redSpread(20, 100..620)
-        assertTrue("spread $s", s < 120)
     }
 
     @Test

@@ -3,32 +3,19 @@
 package lib.sketchbook.catalog
 
 import androidx.activity.compose.BackHandler
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.input.nestedscroll.nestedScroll
-import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.unit.dp
+import androidx.compose.foundation.*
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.*
+import androidx.compose.material.icons.*
+import androidx.compose.material.icons.automirrored.filled.*
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.*
+import androidx.compose.ui.*
+import androidx.compose.ui.graphics.*
+import androidx.compose.ui.input.nestedscroll.*
+import androidx.compose.ui.platform.*
+import androidx.compose.ui.unit.*
 import lib.sketchbook.SketchbookAnimatedBackground
 import lib.sketchbook.SketchbookIconButton
 import lib.sketchbook.SketchbookListItem
@@ -46,7 +33,9 @@ internal fun CatalogApp() {
     val demo = Catalog.firstOrNull { it.title == open }
     BackHandler(enabled = demo != null) { open = null }
     Box(Modifier.fillMaxSize()) {
-        SketchbookAnimatedBackground(Modifier.fillMaxSize().glassSource()) {}
+        SketchbookAnimatedBackground(Modifier
+            .fillMaxSize()
+            .glassSource()) {}
         if (demo == null) {
             ListScreen(group, onGroupChange = { group = it }, onOpen = { open = it.title })
         } else {
@@ -62,7 +51,7 @@ private fun ListScreen(group: Group, onGroupChange: (Group) -> Unit, onOpen: (De
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         containerColor = Color.Transparent,
         contentColor = Theme.color.content.background,
-        topBar = { SketchbookTopAppBar(title = { Text(group.title) }, scrollBehavior = scrollBehavior) },
+        topBar = { SketchbookTopAppBar(title = { Text(group.title) }) },
         bottomBar = {
             SketchbookNavigationBar {
                 Group.entries.forEach {
@@ -77,7 +66,9 @@ private fun ListScreen(group: Group, onGroupChange: (Group) -> Unit, onOpen: (De
         }
     ) { padding ->
         LazyColumn(
-            modifier = Modifier.fillMaxSize().testTag("catalog-list"),
+            modifier = Modifier
+                .fillMaxSize()
+                .testTag("catalog-list"),
             contentPadding = padding,
             verticalArrangement = Arrangement.spacedBy(4.dp)
         ) {
@@ -102,7 +93,6 @@ private fun DetailScreen(demo: Demo, onBack: () -> Unit) {
         topBar = {
             SketchbookTopAppBar(
                 title = { Text(demo.title) },
-                scrollBehavior = scrollBehavior,
                 navigationIcon = {
                     SketchbookIconButton(onClick = onBack, contentDescription = "Back") {
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, null)

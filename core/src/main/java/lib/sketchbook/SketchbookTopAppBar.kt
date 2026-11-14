@@ -3,212 +3,52 @@
 
 package lib.sketchbook
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.calculateEndPadding
-import androidx.compose.foundation.layout.calculateStartPadding
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.statusBarsPadding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.MoreVert
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.ProvideTextStyle
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.material3.TopAppBarScrollBehavior
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.SideEffect
-import androidx.compose.runtime.derivedStateOf
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableFloatStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.*
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.*
+import androidx.compose.material.icons.*
+import androidx.compose.material.icons.automirrored.filled.*
+import androidx.compose.material.icons.filled.*
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.*
+import androidx.compose.ui.graphics.*
+import androidx.compose.ui.input.nestedscroll.*
+import androidx.compose.ui.text.*
+import androidx.compose.ui.tooling.preview.*
+import androidx.compose.ui.unit.*
 import lib.sketchbook.glass.glass
-import androidx.compose.ui.input.nestedscroll.nestedScroll
-import androidx.compose.ui.layout.Layout
-import androidx.compose.ui.layout.layoutId
-import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.semantics.clearAndSetSemantics
-import androidx.compose.ui.platform.LocalLayoutDirection
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.util.lerp
-import lib.sketchbook.layout.arrange
-import lib.sketchbook.layout.fixedWidth
-import lib.sketchbook.layout.minusWidth
 import lib.sketchbook.layout.plus
 import lib.sketchbook.theme.Theme
-import lib.sketchbook.util.fastLerp
-import lib.sketchbook.util.lerp
-import kotlin.math.max
-
-private const val StatusBar = "statusBar"
-private const val NavigationIcon = "navigationIcon"
-private const val Title = "title"
-private const val Actions = "actions"
-private const val ExpandedTitle = "expandedTitle"
-
-private val BarShape = RoundedCornerShape(0.dp)
-private val BarGlassElevation = 16.dp
-
-private fun TopAppBarScrollBehavior.collapsedGlassAlpha(): Float {
-    val limit = state.heightOffsetLimit
-    if (limit == 0f) return 0f
-    return (state.heightOffset / limit * 2f).coerceIn(0f, 1f)
-}
 
 @Composable
 fun SketchbookTopAppBar(
     title: @Composable () -> Unit,
     modifier: Modifier = Modifier,
-    scrollBehavior: TopAppBarScrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior(),
     navigationIcon: @Composable () -> Unit = {},
     actions: @Composable () -> Unit = {},
     minHeight: Dp = 48.dp,
     arrangement: Arrangement.Horizontal = Arrangement.spacedBy(8.dp),
-    contentPadding: PaddingValues = PaddingValues(top = 12.dp, start = 12.dp, end = 12.dp),
-    expandedTitlePadding: PaddingValues = PaddingValues(start = 12.dp, top = 12.dp, end = 12.dp),
-    titleStyle: TextStyle = Theme.textStyle.title,
-    expandedTextStyle: TextStyle = Theme.textStyle.display
+    titleStyle: TextStyle = Theme.textStyle.title
+) = Row(
+    modifier = modifier.padding(horizontal = 16.dp, vertical = 16.dp),
+    verticalAlignment = Alignment.Top,
+    horizontalArrangement = arrangement
 ) {
-    val alignment = Alignment.CenterVertically
-    val density = LocalDensity.current
-    val direction = LocalLayoutDirection.current
-    val expandedTitlePaddingStart = with(density) {
-        expandedTitlePadding.calculateStartPadding(direction).roundToPx()
-    }
-    val expandedTitlePaddingTop = with(density) {
-        expandedTitlePadding.calculateTopPadding().roundToPx()
-    }
-    val expandedTitlePaddingEnd = with(density) {
-        expandedTitlePadding.calculateEndPadding(direction).roundToPx()
-    }
-    var heightOffsetLimit by remember(scrollBehavior) {
-        mutableFloatStateOf(scrollBehavior.state.heightOffsetLimit)
-    }
-    val fraction = if (heightOffsetLimit != 0f) {
-        scrollBehavior.state.heightOffset / heightOffsetLimit
-    } else {
-        0f
-    }
-    val expandFraction = fraction.coerceAtMost(.5f) * 2
-    val hideFraction = (fraction - .5f).coerceIn(0f, .5f) * 2
-    val expandedTitleStyle by remember(expandFraction) {
-        derivedStateOf {
-            fastLerp(
-                expandedTextStyle,
-                titleStyle,
-                expandFraction
-            )
+    navigationIcon()
+    Box(
+        modifier = Modifier
+            .weight(1f)
+            .glass(MaterialTheme.shapes.medium)
+            .heightIn(min = minHeight)
+            .padding(horizontal = 16.dp),
+        contentAlignment = Alignment.CenterStart
+    ) {
+        ProvideTextStyle(titleStyle) {
+            title()
         }
     }
-    val spacing = with(density) { arrangement.spacing.roundToPx() }
-    val minHeight = with(density) { minHeight.roundToPx() }
-    Box(modifier, propagateMinConstraints = true) {
-        Box(
-            Modifier
-                .matchParentSize()
-                .graphicsLayer { alpha = scrollBehavior.collapsedGlassAlpha() }
-                .glass(BarShape, BarGlassElevation)
-        )
-        Layout(
-            modifier = Modifier.padding(contentPadding),
-            content = {
-                Box(
-                    Modifier
-                        .layoutId(StatusBar)
-                        .statusBarsPadding()
-                )
-                Box(Modifier.layoutId(NavigationIcon)) { navigationIcon() }
-                Box(Modifier.layoutId(Title).clearAndSetSemantics {}) {
-                    ProvideTextStyle(titleStyle) {
-                        title()
-                    }
-                }
-                Box(Modifier.layoutId(Actions)) { actions() }
-                Box(Modifier.layoutId(ExpandedTitle)) {
-                    ProvideTextStyle(expandedTitleStyle) {
-                        title()
-                    }
-                }
-            }
-        ) { measurables, constraints ->
-            // Stage 1: Measure
-            var cs = constraints.copy(minWidth = 0, minHeight = 0)
-            val statusBar = measurables.first { it.layoutId == StatusBar }.measure(cs)
-            cs = cs.minusWidth(spacing)
-            val navigationIcon = measurables.first { it.layoutId == NavigationIcon }.measure(cs)
-            cs = cs.minusWidth(navigationIcon.width)
-            val actions = measurables.first { it.layoutId == Actions }.measure(cs)
-            cs = cs.minusWidth(actions.width).fixedWidth()
-            val title = measurables.first { it.layoutId == Title }.measure(cs)
-            val expandedCS = lerp(constraints, cs, expandFraction).minusWidth(expandedTitlePaddingEnd)
-            val expandedTitle = measurables.first { it.layoutId == ExpandedTitle }.measure(expandedCS)
-
-            // Stage 2: Arrange
-            val pinnedHeight = maxOf(navigationIcon.height, actions.height, title.height, minHeight)
-            val (offsetNavigationIcon, offsetTitle, offsetActions) = arrangement.arrange(
-                density = density,
-                direction = direction,
-                fullSize = constraints.maxWidth,
-                navigationIcon.width, title.width, actions.width
-            )
-            val expandedX = lerp(
-                start = offsetNavigationIcon + expandedTitlePaddingStart,
-                stop = offsetTitle,
-                fraction = expandFraction
-            )
-            val expandedY = lerp(
-                start = pinnedHeight + expandedTitlePaddingTop,
-                stop = alignment.align(title.height, pinnedHeight),
-                fraction = expandFraction
-            )
-
-            // Stage 3: Modify scroll behavior
-            val statusBarOffset = statusBar.height
-            val height = (max(pinnedHeight, expandedY + expandedTitle.height) +
-                    statusBarOffset).toFloat()
-            if (scrollBehavior.state.heightOffsetLimit != -height) {
-                scrollBehavior.state.heightOffsetLimit = -height
-            }
-            if (heightOffsetLimit != -height) {
-                heightOffsetLimit = -height
-            }
-
-            // Stage 4: Layout
-            val offset = (height * hideFraction).toInt().coerceAtLeast(0)
-            layout(constraints.maxWidth, (height - offset).toInt()) {
-                navigationIcon.placeRelative(
-                    x = offsetNavigationIcon,
-                    y = alignment.align(navigationIcon.height, pinnedHeight) - offset + statusBarOffset
-                )
-                actions.placeRelative(
-                    x = offsetActions,
-                    y = alignment.align(actions.height, pinnedHeight) - offset + statusBarOffset
-                )
-                expandedTitle.placeRelative(
-                    x = expandedX,
-                    y = expandedY - offset + statusBarOffset
-                )
-            }
-        }
-    }
+    actions()
 }
 
 @Preview(showBackground = true)
@@ -221,7 +61,6 @@ private fun SketchbookTopAppBarPreview() = SketchbookPreviewLayout(padding = Pad
     Scaffold(
         topBar = {
             SketchbookTopAppBar(
-                scrollBehavior = behavior,
                 title = { Text("I'm title title title title title title title title title") },
                 navigationIcon = {
                     IconButton(onClick = {}) {
@@ -252,7 +91,6 @@ private fun SketchbookTopAppBarTitleOnlyPreview() =
         Scaffold(
             topBar = {
                 SketchbookTopAppBar(
-                    scrollBehavior = behavior,
                     title = { Text("I'm title") }
                 )
             }
@@ -270,15 +108,14 @@ private fun SketchbookTopAppBarExpandedPreview() =
         Scaffold(
             topBar = {
                 SketchbookTopAppBar(
-                    scrollBehavior = behavior,
                     title = { Text("I'm title") },
                     navigationIcon = {
-                        IconButton(onClick = {}) {
+                        SketchbookIconButton(onClick = {}, contentDescription = null) {
                             Icon(Icons.AutoMirrored.Default.ArrowBack, null)
                         }
                     },
                     actions = {
-                        IconButton(onClick = {}) {
+                        SketchbookIconButton(onClick = {}, contentDescription = null) {
                             Icon(Icons.Default.MoreVert, null)
                         }
                     }
