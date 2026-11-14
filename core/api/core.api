@@ -100,7 +100,7 @@ public final class lib/sketchbook/HardwareImageState : lib/sketchbook/ImageState
 
 public abstract class lib/sketchbook/ImageState {
 	public static final field $stable I
-	public fun getLoader (Landroid/content/Context;)Lcoil/ImageLoader;
+	public fun getLoader (Landroid/content/Context;)Lcoil3/ImageLoader;
 	public abstract fun getUrl ()Ljava/lang/Object;
 }
 
@@ -134,7 +134,7 @@ public final class lib/sketchbook/PaletteImageState : lib/sketchbook/ImageState 
 	public static synthetic fun copy$default (Llib/sketchbook/PaletteImageState;Ljava/lang/Object;Llib/sketchbook/PaletteImageState$Palette;ZILjava/lang/Object;)Llib/sketchbook/PaletteImageState;
 	public fun equals (Ljava/lang/Object;)Z
 	public final fun getHasNewPalette ()Z
-	public fun getLoader (Landroid/content/Context;)Lcoil/ImageLoader;
+	public fun getLoader (Landroid/content/Context;)Lcoil3/ImageLoader;
 	public final fun getPalette ()Llib/sketchbook/PaletteImageState$Palette;
 	public fun getUrl ()Ljava/lang/Object;
 	public fun hashCode ()I

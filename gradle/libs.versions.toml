@@ -1,13 +1,12 @@
 [versions]
 androidx-activity = "1.13.0"
 androidx-compose-bom = "2026.09.00"
-androidx-lifecycle = "2.10.0"
 androidx-palette = "1.1.0"
 androidx-paging = "3.5.3"
 kotlin = "2.4.21"
 collections = "0.5.2"
 android = "9.5.1"
-coil = "2.7.0"
+coil = "3.6.3"
 haze = "2.1.0"
 icons-core = "1.7.8"
 publishing = "0.37.0"
@@ -20,9 +19,8 @@ junit = "4.13.2"
 androidx-palette = { module = "androidx.palette:palette-ktx", version.ref = "androidx-palette" }
 androidx-activity = { module = "androidx.activity:activity-ktx", version.ref = "androidx-activity" }
 androidx-paging = { module = "androidx.paging:paging-compose", version.ref = "androidx-paging" }
-androidx-lifecycle-runtime-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "androidx-lifecycle" }
-coil-svg = { module = "io.coil-kt:coil-svg", version.ref = "coil" }
-coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
+coil-svg = { module = "io.coil-kt.coil3:coil-svg", version.ref = "coil" }
+coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" }
 coil-network-okhttp = { module = "io.coil-kt.coil3:coil-network-okhttp", version.ref = "coil" }
 haze = { module = "dev.chrisbanes.haze:haze", version.ref = "haze" }
 haze-blur = { module = "dev.chrisbanes.haze:haze-blur", version.ref = "haze" }

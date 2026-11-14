@@ -24,16 +24,17 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.core.content.edit
-import androidx.core.graphics.drawable.toBitmap
-import androidx.lifecycle.compose.LocalLifecycleOwner
-import coil.compose.AsyncImagePainter.State
-import coil.compose.SubcomposeAsyncImage
-import coil.compose.SubcomposeAsyncImageScope
-import coil.imageLoader
-import coil.request.CachePolicy
-import coil.request.ImageRequest
-import coil.size.Precision
-import coil.size.Scale
+import coil3.compose.AsyncImagePainter.State
+import coil3.compose.SubcomposeAsyncImage
+import coil3.compose.SubcomposeAsyncImageScope
+import coil3.imageLoader
+import coil3.request.CachePolicy
+import coil3.request.ImageRequest
+import coil3.request.allowHardware
+import coil3.request.crossfade
+import coil3.size.Precision
+import coil3.size.Scale
+import coil3.toBitmap
 import kotlinx.coroutines.launch
 import lib.sketchbook.theme.Theme
 import lib.sketchbook.theme.contentColorFor
@@ -125,12 +126,10 @@ fun Image(
 @Composable
 private fun rememberImageRequest(url: Any?): ImageRequest {
     val context = LocalContext.current
-    val owner = LocalLifecycleOwner.current
     return remember(url) {
         ImageRequest.Builder(context)
             .data(url)
             .diskCachePolicy(CachePolicy.ENABLED)
-            .lifecycle(owner)
             .precision(Precision.INEXACT)
             .scale(Scale.FILL)
             .crossfade(true)
@@ -217,7 +216,7 @@ data class PaletteImageState(
         super.processState(state)
         if (state !is State.Success || !resolvePalette) return
         try {
-            palette = AndroidPalette.from(state.result.drawable.toBitmap())
+            palette = AndroidPalette.from(state.result.image.toBitmap())
                 .resizeBitmapArea(200)
                 .generate()
                 .let(::Palette)

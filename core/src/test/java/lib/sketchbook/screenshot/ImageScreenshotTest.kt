@@ -12,7 +12,7 @@ import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.unit.dp
-import androidx.core.graphics.drawable.toBitmap
+import coil3.toBitmap
 import lib.sketchbook.Image
 import lib.sketchbook.SketchbookPreviewLayout
 import org.junit.Test
@@ -36,7 +36,7 @@ class ImageScreenshotTest : ScreenshotTest() {
             modifier = Modifier.size(128.dp),
             success = {
                 FoundationImage(
-                    bitmap = it.result.drawable.toBitmap().asImageBitmap(),
+                    bitmap = it.result.image.toBitmap().asImageBitmap(),
                     contentDescription = null,
                     modifier = Modifier.testTag("loaded")
                 )
