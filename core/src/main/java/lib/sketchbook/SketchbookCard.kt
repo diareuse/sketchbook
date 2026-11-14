@@ -18,7 +18,11 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import lib.sketchbook.glass.glass
-import lib.sketchbook.modifier.specularBorder
+import lib.sketchbook.modifier.BeamPalette
+import lib.sketchbook.modifier.borderBeam
+import lib.sketchbook.glass.asGlassShape
+import lib.sketchbook.haptic.deniedWhenDisabled
+import lib.sketchbook.haptic.rememberConfirmedClick
 import lib.sketchbook.theme.Theme
 import lib.sketchbook.theme.contentColorFor
 
@@ -28,10 +32,10 @@ private const val RimAlpha = .8f
 private const val DisabledContentAlpha = .38f
 
 @Composable
-private fun Modifier.cardGlass(shape: Shape, useGlow: Boolean, specularRim: Boolean): Modifier {
-    val glass = glass(shape, CardGlassElevation, useGlow)
-    return if (specularRim) {
-        glass.specularBorder(shape, RimWidth, Color.White.copy(RimAlpha))
+private fun Modifier.cardGlass(shape: Shape, enabled: Boolean, useGlow: Boolean, specularRim: Boolean): Modifier {
+    val glass = glass(shape, CardGlassElevation, useGlow && enabled, rimIntensity = if (enabled) null else 0f)
+    return if (specularRim && enabled) {
+        glass.borderBeam(shape, BeamPalette.glass(Color.White.copy(RimAlpha)), strokeWidth = RimWidth)
     } else {
         glass
     }
@@ -46,9 +50,10 @@ fun SketchbookCard(
     specularRim: Boolean = false,
     content: @Composable ColumnScope.() -> Unit
 ) {
+    val glassShape = shape.asGlassShape()
     Surface(
-        modifier = modifier.cardGlass(shape, useGlow, specularRim),
-        shape = shape,
+        modifier = modifier.cardGlass(glassShape, true, useGlow, specularRim),
+        shape = glassShape,
         color = Color.Transparent,
         contentColor = Theme.color.contentColorFor(compositeColor)
     ) {
@@ -69,19 +74,22 @@ fun SketchbookCard(
     content: @Composable ColumnScope.() -> Unit
 ) {
     val contentColor = Theme.color.contentColorFor(compositeColor)
+    val glassShape = shape.asGlassShape()
+    val confirmed = rememberConfirmedClick(onClick)
     Surface(
         modifier = modifier
             .minimumInteractiveComponentSize()
-            .cardGlass(shape, useGlow, specularRim)
-            .clip(shape)
+            .deniedWhenDisabled(enabled)
+            .cardGlass(glassShape, enabled, useGlow, specularRim)
+            .clip(glassShape)
             .clickable(
                 interactionSource = interactionSource,
                 indication = LocalIndication.current,
                 enabled = enabled,
                 role = Role.Button,
-                onClick = onClick
+                onClick = confirmed
             ),
-        shape = shape,
+        shape = glassShape,
         color = Color.Transparent,
         contentColor = if (enabled) contentColor else contentColor.copy(DisabledContentAlpha)
     ) {

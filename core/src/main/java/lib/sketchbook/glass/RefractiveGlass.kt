@@ -2,6 +2,7 @@ package lib.sketchbook.glass
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import dev.chrisbanes.haze.HazeInput
 import dev.chrisbanes.haze.glass.GlassStyle
@@ -16,6 +17,10 @@ internal class RefractiveGlass(
             shape(spec.shape as? RoundedCornerShape ?: DefaultCorner)
             tint(spec.tint.copy(alpha = spec.tintStrength))
             specularIntensity(0f)
+            if (spec.rimIntensity <= 0f) {
+                edgeShadow(Color.Transparent)
+                ambientResponse(0f)
+            }
         }
         return hazeGlass(HazeInput.Sources(source.state), style)
     }

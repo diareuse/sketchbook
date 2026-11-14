@@ -180,7 +180,7 @@ class CardBehaviorTest : BehaviorTest() {
     private fun strongestRimDifference(): Int {
         val image = pixels()
         var strongest = 0
-        for (y in 20..40 step 2) for (x in 30..310 step 2) {
+        for (y in 20..180 step 2) for (x in 20..320 step 2) {
             strongest = maxOf(strongest, distance(image.opaque(x, y), image.opaque(x + 360, y)))
         }
         return strongest
