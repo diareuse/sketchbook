@@ -15,52 +15,47 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import lib.sketchbook.DialogSurface
+import lib.sketchbook.OverlayState
 import lib.sketchbook.SketchbookDialog
 import lib.sketchbook.SketchbookMenu
 import lib.sketchbook.SketchbookPreviewLayout
-import lib.sketchbook.OverlayState
 import lib.sketchbook.rememberMenuState
-
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
-@RunWith(RobolectricTestRunner::class)
-@Config(sdk = [34])
 class WindowScreenshotTest : ScreenshotTest() {
 
     @Test
     @Config(qualifiers = Light)
-    fun DialogSurfaceLight() = captureRoot("DialogSurface_light") { DialogSurfaceContent() }
+    fun `dialog surface with text in light theme`() = captureRoot("DialogSurface_light") { DialogSurfaceContent() }
 
     @Test
     @Config(qualifiers = Dark)
-    fun DialogSurfaceDark() = captureRoot("DialogSurface_dark") { DialogSurfaceContent() }
+    fun `dialog surface with text in dark theme`() = captureRoot("DialogSurface_dark") { DialogSurfaceContent() }
 
     @Test
     @Config(qualifiers = Light)
-    fun DialogLight() = captureScreen("Dialog_light") { DialogContent() }
+    fun `visible dialog over blurred content in light theme`() = captureScreen("Dialog_light") { DialogContent() }
 
     @Test
     @Config(qualifiers = Dark)
-    fun DialogDark() = captureScreen("Dialog_dark") { DialogContent() }
+    fun `visible dialog over blurred content in dark theme`() = captureScreen("Dialog_dark") { DialogContent() }
 
     @Test
     @Config(qualifiers = Light)
-    fun MenuClosedLight() = captureRoot("MenuClosed_light") { MenuClosedContent() }
+    fun `closed menu anchor in light theme`() = captureRoot("MenuClosed_light") { MenuClosed() }
 
     @Test
     @Config(qualifiers = Dark)
-    fun MenuClosedDark() = captureRoot("MenuClosed_dark") { MenuClosedContent() }
+    fun `closed menu anchor in dark theme`() = captureRoot("MenuClosed_dark") { MenuClosed() }
 
     @Test
     @Config(qualifiers = Light)
-    fun MenuOpenLight() = captureScreen("MenuOpen_light") { MenuOpenContent() }
+    fun `opened menu with expansion in light theme`() = captureScreen("MenuOpen_light") { MenuOpen() }
 
     @Test
     @Config(qualifiers = Dark)
-    fun MenuOpenDark() = captureScreen("MenuOpen_dark") { MenuOpenContent() }
+    fun `opened menu with expansion in dark theme`() = captureScreen("MenuOpen_dark") { MenuOpen() }
 
     @Composable
     private fun DialogSurfaceContent() = SketchbookPreviewLayout {
@@ -85,10 +80,10 @@ class WindowScreenshotTest : ScreenshotTest() {
     }
 
     @Composable
-    private fun MenuClosedContent() = MenuContent(open = false)
+    private fun MenuClosed() = MenuContent(open = false)
 
     @Composable
-    private fun MenuOpenContent() = MenuContent(open = true)
+    private fun MenuOpen() = MenuContent(open = true)
 
     @Composable
     private fun MenuContent(open: Boolean) = SketchbookPreviewLayout {

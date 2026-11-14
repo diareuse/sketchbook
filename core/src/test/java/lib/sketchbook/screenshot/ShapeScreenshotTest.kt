@@ -2,10 +2,10 @@ package lib.sketchbook.screenshot
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -18,40 +18,34 @@ import lib.sketchbook.SketchbookPreviewLayout
 import lib.sketchbook.shape.CompositeShape
 import lib.sketchbook.shape.CutoutShape
 import lib.sketchbook.shape.SquircleShape
-import androidx.compose.foundation.shape.CircleShape
-
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
-@RunWith(RobolectricTestRunner::class)
-@Config(sdk = [34])
 class ShapeScreenshotTest : ScreenshotTest() {
 
     @Test
     @Config(qualifiers = Light)
-    fun SquircleLight() = captureRoot("Squircle_light") { SquircleContent() }
+    fun `squircle shapes with increasing smoothing in light theme`() = captureRoot("Squircle_light") { Squircle() }
 
     @Test
     @Config(qualifiers = Dark)
-    fun SquircleDark() = captureRoot("Squircle_dark") { SquircleContent() }
+    fun `squircle shapes with increasing smoothing in dark theme`() = captureRoot("Squircle_dark") { Squircle() }
 
     @Test
     @Config(qualifiers = Light)
-    fun CutoutLight() = captureRoot("Cutout_light") { CutoutContent() }
+    fun `cutout shape in all four orientations in light theme`() = captureRoot("Cutout_light") { Cutout() }
 
     @Test
     @Config(qualifiers = Dark)
-    fun CutoutDark() = captureRoot("Cutout_dark") { CutoutContent() }
+    fun `cutout shape in all four orientations in dark theme`() = captureRoot("Cutout_dark") { Cutout() }
 
     @Test
     @Config(qualifiers = Light)
-    fun CompositeLight() = captureRoot("Composite_light") { CompositeContent() }
+    fun `composite shape of squircle intersected with circle in light theme`() = captureRoot("Composite_light") { Composite() }
 
     @Test
     @Config(qualifiers = Dark)
-    fun CompositeDark() = captureRoot("Composite_dark") { CompositeContent() }
+    fun `composite shape of squircle intersected with circle in dark theme`() = captureRoot("Composite_dark") { Composite() }
 
     @Composable
     private fun ShapeBox(shape: Shape) = Box(
@@ -63,7 +57,7 @@ class ShapeScreenshotTest : ScreenshotTest() {
     )
 
     @Composable
-    private fun SquircleContent() = SketchbookPreviewLayout(modifier = Modifier.padding(16.dp)) {
+    private fun Squircle() = SketchbookPreviewLayout(modifier = Modifier.padding(16.dp)) {
         Row {
             ShapeBox(SquircleShape(percent = 50, cornerSmoothing = 0f))
             ShapeBox(SquircleShape(percent = 50, cornerSmoothing = .6f))
@@ -72,7 +66,7 @@ class ShapeScreenshotTest : ScreenshotTest() {
     }
 
     @Composable
-    private fun CutoutContent() = SketchbookPreviewLayout(modifier = Modifier.padding(16.dp)) {
+    private fun Cutout() = SketchbookPreviewLayout(modifier = Modifier.padding(16.dp)) {
         Row {
             CutoutShape.Orientation.entries.forEach {
                 ShapeBox(CutoutShape(CornerSize(16.dp), it))
@@ -81,14 +75,12 @@ class ShapeScreenshotTest : ScreenshotTest() {
     }
 
     @Composable
-    private fun CompositeContent() = SketchbookPreviewLayout(modifier = Modifier.padding(16.dp)) {
-        Column {
-            ShapeBox(
-                CompositeShape.build {
-                    setBaseline(SquircleShape(percent = 30))
-                    addShape(CircleShape, alignment = Alignment.Center)
-                }
-            )
-        }
+    private fun Composite() = SketchbookPreviewLayout(modifier = Modifier.padding(16.dp)) {
+        ShapeBox(
+            CompositeShape.build {
+                setBaseline(SquircleShape(percent = 30))
+                addShape(CircleShape, alignment = Alignment.Center)
+            }
+        )
     }
 }

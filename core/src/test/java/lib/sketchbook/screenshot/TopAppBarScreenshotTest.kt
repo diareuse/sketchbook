@@ -10,52 +10,44 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.withFrameNanos
 import lib.sketchbook.SketchbookPreviewLayout
 import lib.sketchbook.SketchbookTopAppBar
-
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
-@RunWith(RobolectricTestRunner::class)
-@Config(sdk = [34])
 class TopAppBarScreenshotTest : ScreenshotTest() {
 
     @Test
     @Config(qualifiers = Light)
-    fun TopAppBarExpandedLight() = captureRoot("TopAppBarExpanded_light") { TopAppBarExpandedContent() }
+    fun `top app bar expanded in light theme`() = captureRoot("TopAppBarExpanded_light") { Expanded() }
 
     @Test
     @Config(qualifiers = Dark)
-    fun TopAppBarExpandedDark() = captureRoot("TopAppBarExpanded_dark") { TopAppBarExpandedContent() }
+    fun `top app bar expanded in dark theme`() = captureRoot("TopAppBarExpanded_dark") { Expanded() }
 
     @Test
     @Config(qualifiers = Light)
-    fun TopAppBarCollapsedLight() = captureRoot("TopAppBarCollapsed_light") { TopAppBarCollapsedContent() }
+    fun `top app bar collapsed in light theme`() = captureRoot("TopAppBarCollapsed_light") { Collapsed() }
 
     @Test
     @Config(qualifiers = Dark)
-    fun TopAppBarCollapsedDark() = captureRoot("TopAppBarCollapsed_dark") { TopAppBarCollapsedContent() }
+    fun `top app bar collapsed in dark theme`() = captureRoot("TopAppBarCollapsed_dark") { Collapsed() }
 
     @Composable
-    private fun TopAppBarExpandedContent() = TopAppBarContent(collapse = false)
+    private fun Expanded() = Bar(initialHeightOffset = 0f)
 
     @Composable
-    private fun TopAppBarCollapsedContent() = TopAppBarContent(collapse = true)
+    private fun Collapsed() = Bar(initialHeightOffset = -60f)
 
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
-    private fun TopAppBarContent(collapse: Boolean) =
+    private fun Bar(initialHeightOffset: Float) =
         SketchbookPreviewLayout(padding = PaddingValues()) {
-            val behavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
-            if (collapse) LaunchedEffect(Unit) {
-                withFrameNanos { }
-                behavior.state.heightOffset = -60f
-            }
+            val behavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior(
+                state = rememberTopAppBarState(initialHeightOffset = initialHeightOffset)
+            )
             Column {
                 SketchbookTopAppBar(
                     scrollBehavior = behavior,

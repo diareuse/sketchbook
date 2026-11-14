@@ -52,7 +52,6 @@ dependencies {
     testImplementation libs.robolectric
     testImplementation libs.roborazzi
     testImplementation libs.roborazzi.compose
-    testImplementation libs.roborazzi.junit.rule
     testImplementation libs.compose.ui.test.junit4
     testImplementation libs.compose.ui.test.manifest
 

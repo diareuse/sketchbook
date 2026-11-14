@@ -12,62 +12,72 @@ import lib.sketchbook.SketchbookPreviewLayout
 import lib.sketchbook.SketchbookRockerCounter
 import lib.sketchbook.SketchbookSwitch
 import lib.sketchbook.SketchbookTextField
-
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
-@RunWith(RobolectricTestRunner::class)
-@Config(sdk = [34])
 class ControlsScreenshotTest : ScreenshotTest() {
 
     @Test
     @Config(qualifiers = Light)
-    fun ColorSliderLight() = captureRoot("ColorSlider_light") { ColorSliderContent() }
+    fun `color slider with default values in light theme`() = captureRoot("ColorSlider_light") { ColorSliderDefault() }
 
     @Test
     @Config(qualifiers = Dark)
-    fun ColorSliderDark() = captureRoot("ColorSlider_dark") { ColorSliderContent() }
+    fun `color slider with default values in dark theme`() = captureRoot("ColorSlider_dark") { ColorSliderDefault() }
 
     @Test
     @Config(qualifiers = Light)
-    fun FieldRowLight() = captureRoot("FieldRow_light") { FieldRowContent() }
+    fun `color slider with custom hue saturation and value in light theme`() = captureRoot("ColorSliderCustom_light") { ColorSliderCustom() }
 
     @Test
     @Config(qualifiers = Dark)
-    fun FieldRowDark() = captureRoot("FieldRow_dark") { FieldRowContent() }
+    fun `color slider with custom hue saturation and value in dark theme`() = captureRoot("ColorSliderCustom_dark") { ColorSliderCustom() }
 
     @Test
     @Config(qualifiers = Light)
-    fun RockerCounterLight() = captureRoot("RockerCounter_light") { RockerCounterContent() }
+    fun `field row with icon and two text fields in light theme`() = captureRoot("FieldRow_light") { FieldRow() }
 
     @Test
     @Config(qualifiers = Dark)
-    fun RockerCounterDark() = captureRoot("RockerCounter_dark") { RockerCounterContent() }
+    fun `field row with icon and two text fields in dark theme`() = captureRoot("FieldRow_dark") { FieldRow() }
 
     @Test
     @Config(qualifiers = Light)
-    fun SwitchesLight() = captureRoot("Switches_light") { SwitchesContent() }
+    fun `rocker counter with label in light theme`() = captureRoot("RockerCounter_light") { RockerCounter() }
 
     @Test
     @Config(qualifiers = Dark)
-    fun SwitchesDark() = captureRoot("Switches_dark") { SwitchesContent() }
+    fun `rocker counter with label in dark theme`() = captureRoot("RockerCounter_dark") { RockerCounter() }
+
+    @Test
+    @Config(qualifiers = Light)
+    fun `switch in checked unchecked and disabled states in light theme`() = captureRoot("Switches_light") { Switches() }
+
+    @Test
+    @Config(qualifiers = Dark)
+    fun `switch in checked unchecked and disabled states in dark theme`() = captureRoot("Switches_dark") { Switches() }
 
     @Composable
-    private fun ColorSliderContent() = SketchbookPreviewLayout(modifier = Modifier.padding(16.dp)) {
-        SketchbookColorSlider(
-            hue = 120f,
-            onHueChange = {},
-            saturation = .8f,
-            onSaturationChange = {},
-            value = .9f,
-            onValueChange = {}
-        )
-    }
+    private fun ColorSliderDefault() = ColorSliderContent(120f, .8f, .9f)
 
     @Composable
-    private fun FieldRowContent() = SketchbookPreviewLayout(modifier = Modifier.padding(16.dp)) {
+    private fun ColorSliderCustom() = ColorSliderContent(300f, .4f, .6f)
+
+    @Composable
+    private fun ColorSliderContent(hue: Float, saturation: Float, value: Float) =
+        SketchbookPreviewLayout(modifier = Modifier.padding(16.dp)) {
+            SketchbookColorSlider(
+                hue = hue,
+                onHueChange = {},
+                saturation = saturation,
+                onSaturationChange = {},
+                value = value,
+                onValueChange = {}
+            )
+        }
+
+    @Composable
+    private fun FieldRow() = SketchbookPreviewLayout(modifier = Modifier.padding(16.dp)) {
         SketchbookFieldRow(icon = { Text("+") }) {
             SketchbookTextField("", {}, modifier = Modifier.weight(1f), label = { Text("First") })
             SketchbookTextField("", {}, modifier = Modifier.weight(1f), label = { Text("Second") })
@@ -75,7 +85,7 @@ class ControlsScreenshotTest : ScreenshotTest() {
     }
 
     @Composable
-    private fun RockerCounterContent() = SketchbookPreviewLayout(modifier = Modifier.padding(16.dp)) {
+    private fun RockerCounter() = SketchbookPreviewLayout(modifier = Modifier.padding(16.dp)) {
         SketchbookRockerCounter(
             decrement = { Text("-", modifier = Modifier.padding(16.dp)) },
             increment = { Text("+", modifier = Modifier.padding(16.dp)) },
@@ -84,7 +94,7 @@ class ControlsScreenshotTest : ScreenshotTest() {
     }
 
     @Composable
-    private fun SwitchesContent() = SketchbookPreviewLayout(modifier = Modifier.padding(16.dp)) {
+    private fun Switches() = SketchbookPreviewLayout(modifier = Modifier.padding(16.dp)) {
         Column {
             SketchbookSwitch(checked = true, onCheckedChange = {})
             SketchbookSwitch(checked = false, onCheckedChange = {})

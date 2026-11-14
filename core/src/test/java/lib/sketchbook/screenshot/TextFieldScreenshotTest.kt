@@ -5,53 +5,74 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.unit.dp
 import lib.sketchbook.SketchbookPreviewLayout
 import lib.sketchbook.SketchbookTextField
-
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
-@RunWith(RobolectricTestRunner::class)
-@Config(sdk = [34])
 class TextFieldScreenshotTest : ScreenshotTest() {
 
     @Test
     @Config(qualifiers = Light)
-    fun TextFieldEmptyLight() = captureRoot("TextFieldEmpty_light") { TextFieldEmptyContent() }
+    fun `empty text field with label and placeholder in light theme`() = captureRoot("TextFieldEmpty_light") { Empty() }
 
     @Test
     @Config(qualifiers = Dark)
-    fun TextFieldEmptyDark() = captureRoot("TextFieldEmpty_dark") { TextFieldEmptyContent() }
+    fun `empty text field with label and placeholder in dark theme`() = captureRoot("TextFieldEmpty_dark") { Empty() }
 
     @Test
     @Config(qualifiers = Light)
-    fun TextFieldFocusedLight() = captureRoot("TextFieldFocused_light") { TextFieldFocusedContent() }
+    fun `focused text field with typed text in light theme`() = captureRoot("TextFieldFocused_light") { Focused() }
 
     @Test
     @Config(qualifiers = Dark)
-    fun TextFieldFocusedDark() = captureRoot("TextFieldFocused_dark") { TextFieldFocusedContent() }
+    fun `focused text field with typed text in dark theme`() = captureRoot("TextFieldFocused_dark") { Focused() }
+
+    @Test
+    @Config(qualifiers = Light)
+    fun `text fields in error with supporting text and disabled in light theme`() = captureRoot("TextFieldVariants_light") { Variants() }
+
+    @Test
+    @Config(qualifiers = Dark)
+    fun `text fields in error with supporting text and disabled in dark theme`() = captureRoot("TextFieldVariants_dark") { Variants() }
 
     @Composable
-    private fun TextFieldEmptyContent() = SketchbookPreviewLayout(modifier = Modifier.padding(16.dp)) {
+    private fun Empty() = SketchbookPreviewLayout(modifier = Modifier.padding(16.dp)) {
         SketchbookTextField("", {}, label = { Text("Label") }, placeholder = { Text("Hint") })
     }
 
     @Composable
-    private fun TextFieldFocusedContent() = SketchbookPreviewLayout(modifier = Modifier.padding(16.dp)) {
-        val requester = FocusRequester()
+    private fun Focused() = SketchbookPreviewLayout(modifier = Modifier.padding(16.dp)) {
+        val requester = remember { FocusRequester() }
         LaunchedEffect(Unit) { requester.requestFocus() }
+        SketchbookTextField(
+            "Typed text",
+            {},
+            modifier = Modifier.focusRequester(requester),
+            label = { Text("Label") }
+        )
+    }
+
+    @Composable
+    private fun Variants() = SketchbookPreviewLayout(modifier = Modifier.padding(16.dp)) {
         Column {
             SketchbookTextField(
-                "Typed text",
+                "Invalid",
                 {},
-                modifier = Modifier.focusRequester(requester),
-                label = { Text("Label") }
+                label = { Text("Error") },
+                isError = true,
+                supportingText = { Text("Something is wrong") }
+            )
+            SketchbookTextField(
+                "Disabled",
+                {},
+                label = { Text("Disabled") },
+                enabled = false
             )
         }
     }
