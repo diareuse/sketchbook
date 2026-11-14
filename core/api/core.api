@@ -1,3 +1,11 @@
+public final class lib/sketchbook/ComposableSingletons$SketchbookBadgeKt {
+	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookBadgeKt;
+	public fun <init> ()V
+	public final fun getLambda$-260797252$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-415888697$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function3;
+	public final fun getLambda$720055749$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function3;
+}
+
 public final class lib/sketchbook/ComposableSingletons$SketchbookBottomSheetKt {
 	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookBottomSheetKt;
 	public fun <init> ()V
@@ -328,6 +336,12 @@ public final class lib/sketchbook/PaletteImageState$Palette {
 	public fun hashCode ()I
 	public final fun toLongArray ()[J
 	public fun toString ()Ljava/lang/String;
+}
+
+public final class lib/sketchbook/SketchbookBadgeKt {
+	public static final fun SketchbookBadge-iJQMabo (Landroidx/compose/ui/Modifier;JLandroidx/compose/runtime/Composer;II)V
+	public static final fun SketchbookBadge-jA1GFJw (ILandroidx/compose/ui/Modifier;IJJLandroidx/compose/runtime/Composer;II)V
+	public static final fun SketchbookBadgedBox (Lkotlin/jvm/functions/Function3;Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function3;Landroidx/compose/runtime/Composer;II)V
 }
 
 public final class lib/sketchbook/SketchbookBottomSheetKt {
