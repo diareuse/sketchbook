@@ -279,6 +279,13 @@ public final class lib/sketchbook/ComposableSingletons$SketchbookToastKt {
 	public final fun getLambda$86411546$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function3;
 }
 
+public final class lib/sketchbook/ComposableSingletons$SketchbookTooltipKt {
+	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookTooltipKt;
+	public fun <init> ()V
+	public final fun getLambda$297463676$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$778475991$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+}
+
 public final class lib/sketchbook/ComposableSingletons$SketchbookTopAppBarKt {
 	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookTopAppBarKt;
 	public fun <init> ()V
@@ -545,6 +552,11 @@ public final class lib/sketchbook/SketchbookToastState {
 	public fun <init> ()V
 	public final fun show-uJCiS7s (Ljava/lang/String;JLkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public static synthetic fun show-uJCiS7s$default (Llib/sketchbook/SketchbookToastState;Ljava/lang/String;JLkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+}
+
+public final class lib/sketchbook/SketchbookTooltipKt {
+	public static final fun SketchbookTooltip-uDo3WH8 (Ljava/lang/String;Landroidx/compose/ui/Modifier;Landroidx/compose/ui/graphics/Shape;JLkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;II)V
+	public static final fun SketchbookTooltip-uDo3WH8 (Lkotlin/jvm/functions/Function2;Landroidx/compose/ui/Modifier;Landroidx/compose/ui/graphics/Shape;JLkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;II)V
 }
 
 public final class lib/sketchbook/SketchbookTopAppBarKt {
