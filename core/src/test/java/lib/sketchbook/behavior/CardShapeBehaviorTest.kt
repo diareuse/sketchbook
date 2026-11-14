@@ -204,7 +204,7 @@ abstract class CardMatteBehavior : BehaviorTest() {
         val idle = pixels()
 
         composeRule.onNodeWithTag("card").performTouchInput { down(center) }
-        composeRule.mainClock.advanceTimeBy(150)
+        composeRule.mainClock.advanceTimeBy(400)
 
         assertEquals(0, clicks)
         var worst = 0
