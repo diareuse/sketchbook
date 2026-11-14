@@ -6,6 +6,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.compose.foundation.layout.fillMaxSize
+import lib.sketchbook.ColorfulStripes
+import lib.sketchbook.StripedBackdrop
 import lib.sketchbook.SketchbookColorSlider
 import lib.sketchbook.SketchbookFieldRow
 import lib.sketchbook.SketchbookPreviewLayout
@@ -56,6 +59,40 @@ class ControlsScreenshotTest : ScreenshotTest() {
     @Test
     @Config(qualifiers = Dark)
     fun `switch in checked unchecked and disabled states in dark theme`() = captureRoot("Switches_dark") { Switches() }
+
+    @Test
+    @Config(sdk = [26], qualifiers = Light)
+    fun `switches and rocker counter over stripes on android 8 in light theme`() = captureRoot("ControlsGlass_sdk26_light") { OverStripes() }
+
+    @Test
+    @Config(sdk = [26], qualifiers = Dark)
+    fun `switches and rocker counter over stripes on android 8 in dark theme`() = captureRoot("ControlsGlass_sdk26_dark") { OverStripes() }
+
+    @Test
+    @Config(sdk = [33], qualifiers = Light)
+    fun `switches and rocker counter over stripes on android 13 in light theme`() = captureRoot("ControlsGlass_sdk33_light") { OverStripes() }
+
+    @Test
+    @Config(sdk = [33], qualifiers = Dark)
+    fun `switches and rocker counter over stripes on android 13 in dark theme`() = captureRoot("ControlsGlass_sdk33_dark") { OverStripes() }
+
+    @Composable
+    private fun OverStripes() = SketchbookPreviewLayout {
+        StripedBackdrop(Modifier.fillMaxSize(), colors = ColorfulStripes) {
+            Column(Modifier.padding(24.dp)) {
+                SketchbookSwitch(checked = true, onCheckedChange = {})
+                SketchbookSwitch(checked = false, onCheckedChange = {})
+                SketchbookSwitch(checked = true, onCheckedChange = {}, enabled = false)
+                SketchbookSwitch(checked = false, onCheckedChange = {}, enabled = false)
+                SketchbookRockerCounter(
+                    modifier = Modifier.padding(top = 16.dp),
+                    decrement = { Text("-", modifier = Modifier.padding(16.dp)) },
+                    increment = { Text("+", modifier = Modifier.padding(16.dp)) },
+                    label = { Text("3", modifier = Modifier.padding(16.dp)) }
+                )
+            }
+        }
+    }
 
     @Composable
     private fun ColorSliderDefault() = ColorSliderContent(120f, .8f, .9f)

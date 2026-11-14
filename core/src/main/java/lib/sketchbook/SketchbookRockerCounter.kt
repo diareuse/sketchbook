@@ -1,6 +1,5 @@
 package lib.sketchbook
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.defaultMinSize
@@ -15,11 +14,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.Dp
+import lib.sketchbook.glass.glass
 import lib.sketchbook.theme.Theme
+
+private val RockerGlassElevation: Dp = 4.dp
 
 @Composable
 fun SketchbookRockerCounter(
@@ -30,8 +32,7 @@ fun SketchbookRockerCounter(
 ) {
     Row(
         modifier = modifier
-            .background(Theme.color.overlay.background.copy(.05f), Theme.container.button)
-            .clip(Theme.container.button)
+            .glass(Theme.container.button, RockerGlassElevation, tint = Theme.color.overlay.background)
             .defaultMinSize(minHeight = 40.dp)
             .width(IntrinsicSize.Min),
         verticalAlignment = Alignment.CenterVertically
