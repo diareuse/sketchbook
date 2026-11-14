@@ -25,6 +25,7 @@ class ControlCase(
     val name: String,
     val on: Boolean?,
     val width: Boolean = false,
+    val disableable: Boolean = true,
     val content: @Composable (modifier: Modifier, enabled: Boolean, act: () -> Unit) -> Unit
 )
 
@@ -71,7 +72,7 @@ abstract class ControlInteractionBehavior : BehaviorTest() {
     @Test
     fun `a disabled control performs exactly one denial haptic and reports no change`() {
         show(enabled = false)
-        cases.forEach { case ->
+        cases.filter { it.disableable }.forEach { case ->
             haptics.performed.clear()
 
             composeRule.onNodeWithTag(case.name).performClick()
