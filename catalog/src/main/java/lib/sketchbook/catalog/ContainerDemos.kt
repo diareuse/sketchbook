@@ -2,6 +2,7 @@ package lib.sketchbook.catalog
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -97,8 +98,8 @@ internal val ContainerDemos = listOf(
     Demo(Group.Containers, "Navigation rail") {
         var selected by remember { mutableStateOf(0) }
         Showcase("Rail") {
-            Box(Modifier.height(280.dp)) {
-                SketchbookNavigationRail(header = { Text("Menu") }) {
+            Box(Modifier.height(400.dp)) {
+                SketchbookNavigationRail(windowInsets = WindowInsets(0), header = { Text("Menu") }) {
                     Items.forEachIndexed { index, (name, icon) ->
                         SketchbookNavigationRailItem(selected == index, { selected = index }, { Icon(icon, null) }, label = { Text(name) })
                     }
