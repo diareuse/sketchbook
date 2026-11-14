@@ -16,9 +16,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
+import lib.sketchbook.glass.asGlassShape
 import lib.sketchbook.glass.glass
 import lib.sketchbook.theme.Theme
 
@@ -41,8 +43,9 @@ fun SketchbookSearchBar(
     val currentQuery by rememberUpdatedState(query)
     val currentOnSearch by rememberUpdatedState(onSearch)
     val keyboardActions = remember { KeyboardActions(onSearch = { currentOnSearch(currentQuery) }) }
+    val resultsShape = Theme.container.card.asGlassShape()
     Column(modifier = modifier) {
-        SketchbookTextField(
+        SketchbookGlassTextField(
             value = query,
             onValueChange = onQueryChange,
             modifier = Modifier.fillMaxWidth(),
@@ -67,7 +70,8 @@ fun SketchbookSearchBar(
                 modifier = Modifier
                     .padding(top = 8.dp)
                     .fillMaxWidth()
-                    .glass(Theme.container.card, ResultsGlassElevation),
+                    .glass(resultsShape, ResultsGlassElevation)
+                    .clip(resultsShape),
                 content = results
             )
         }
