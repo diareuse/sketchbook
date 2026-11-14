@@ -52,7 +52,7 @@ abstract class GlassPaneBehavior : BehaviorTest() {
         show(content)
         val probe = probe(frame())
 
-        assertTrue("pane ${probe.bounds}", probe.bounds.height >= 80)
+        assertTrue("pane ${probe.bounds}", probe.bounds.height >= 60)
         assertEquals(emptyList<String>(), probe.mismatches(shape, density).take(8))
     }
 

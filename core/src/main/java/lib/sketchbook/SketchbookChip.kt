@@ -1,6 +1,5 @@
 package lib.sketchbook
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
@@ -18,23 +17,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.dp
+import lib.sketchbook.glass.asGlassShape
+import lib.sketchbook.haptic.rememberConfirmedChange
+import lib.sketchbook.haptic.rememberConfirmedClick
 import lib.sketchbook.theme.Theme
 import lib.sketchbook.theme.contentColorFor
 
-private const val ChipOverlayAlpha = .06f
 private const val SelectedAlpha = .28f
 private const val DisabledAlpha = .38f
-private const val DisabledBorderAlpha = .12f
-
-@Composable
-private fun chipBorder(enabled: Boolean, selected: Boolean): BorderStroke {
-    val outline = Theme.color.content.outline
-    val primary = Theme.color.emphasis.primary
-    return remember(enabled, selected, outline, primary) {
-        val color = if (selected) primary else outline.copy(.5f)
-        BorderStroke(1.dp, if (enabled) color else color.copy(DisabledBorderAlpha))
-    }
-}
 
 @Composable
 fun SketchbookChip(
@@ -49,18 +39,20 @@ fun SketchbookChip(
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() }
 ) {
     val content = Theme.color.contentColorFor(compositeColor)
-    val overlay = Theme.color.overlay.background.copy(ChipOverlayAlpha)
+    val overlay = Color.Transparent
     val disabled = Theme.color.content.background.copy(DisabledAlpha)
-    val control = modifier.glassControl(shape, enabled, interactionSource)
+    val glassShape = shape.asGlassShape()
+    val confirmed = rememberConfirmedClick(onClick)
+    val control = modifier.glassControl(glassShape, enabled, interactionSource)
     ThemePressHost {
         AssistChip(
-            onClick = onClick,
+            onClick = confirmed,
             label = label,
             modifier = control,
             enabled = enabled,
             leadingIcon = leadingIcon,
             trailingIcon = trailingIcon,
-            shape = shape,
+            shape = glassShape,
             colors = AssistChipDefaults.assistChipColors(
                 containerColor = overlay,
                 labelColor = content,
@@ -72,7 +64,7 @@ fun SketchbookChip(
                 disabledTrailingIconContentColor = disabled
             ),
             elevation = null,
-            border = chipBorder(enabled, selected = false),
+            border = null,
             interactionSource = interactionSource
         )
     }
@@ -92,20 +84,22 @@ fun SketchbookFilterChip(
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() }
 ) {
     val content = Theme.color.contentColorFor(compositeColor)
-    val overlay = Theme.color.overlay.background.copy(ChipOverlayAlpha)
+    val overlay = Color.Transparent
     val disabled = Theme.color.content.background.copy(DisabledAlpha)
     val selectedContainer = Theme.color.emphasis.primary.copy(SelectedAlpha)
-    val control = modifier.glassControl(shape, enabled, interactionSource)
+    val glassShape = shape.asGlassShape()
+    val confirm = rememberConfirmedChange { onClick() }
+    val control = modifier.glassControl(glassShape, enabled, interactionSource)
     ThemePressHost {
         FilterChip(
             selected = selected,
-            onClick = onClick,
+            onClick = { confirm(!selected) },
             label = label,
             modifier = control,
             enabled = enabled,
             leadingIcon = leadingIcon,
             trailingIcon = trailingIcon,
-            shape = shape,
+            shape = glassShape,
             colors = FilterChipDefaults.filterChipColors(
                 containerColor = overlay,
                 labelColor = content,
@@ -121,7 +115,7 @@ fun SketchbookFilterChip(
                 selectedTrailingIconColor = content
             ),
             elevation = null,
-            border = chipBorder(enabled, selected),
+            border = null,
             interactionSource = interactionSource
         )
     }
