@@ -10,6 +10,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import lib.sketchbook.glass.asGlassShape
 import lib.sketchbook.glass.glass
 import lib.sketchbook.modifier.specularBorder
 import lib.sketchbook.theme.Theme
@@ -28,10 +29,11 @@ fun SketchbookGlassBorder(
     animated: Boolean = false,
     content: @Composable BoxScope.() -> Unit
 ) {
+    val glassShape = shape.asGlassShape()
     Box(
         modifier = modifier
-            .glass(shape, GlassBorderElevation, tint = compositeColor)
-            .then(if (borderWidth > 0.dp) Modifier.specularBorder(shape, borderWidth, borderColor, animated = animated) else Modifier),
+            .glass(glassShape, GlassBorderElevation, tint = compositeColor)
+            .then(if (borderWidth > 0.dp) Modifier.specularBorder(glassShape, borderWidth, borderColor, animated = animated) else Modifier),
         content = content
     )
 }
