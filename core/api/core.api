@@ -1,3 +1,14 @@
+public final class lib/sketchbook/ComposableSingletons$SketchbookButtonKt {
+	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookButtonKt;
+	public fun <init> ()V
+	public final fun getLambda$-1240890616$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-1325059602$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function3;
+	public final fun getLambda$1681511664$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function3;
+	public final fun getLambda$2088955153$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function3;
+	public final fun getLambda$408926706$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function3;
+	public final fun getLambda$747361146$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function3;
+}
+
 public final class lib/sketchbook/ComposableSingletons$SketchbookColorSliderKt {
 	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookColorSliderKt;
 	public fun <init> ()V
@@ -157,6 +168,13 @@ public final class lib/sketchbook/PaletteImageState$Palette {
 	public fun hashCode ()I
 	public final fun toLongArray ()[J
 	public fun toString ()Ljava/lang/String;
+}
+
+public final class lib/sketchbook/SketchbookButtonKt {
+	public static final fun SketchbookButton (Lkotlin/jvm/functions/Function0;Landroidx/compose/ui/Modifier;ZLandroidx/compose/ui/graphics/Shape;Landroidx/compose/foundation/interaction/MutableInteractionSource;Lkotlin/jvm/functions/Function3;Landroidx/compose/runtime/Composer;II)V
+	public static final fun SketchbookGlassButton-3f6hBDE (Lkotlin/jvm/functions/Function0;Landroidx/compose/ui/Modifier;ZLandroidx/compose/ui/graphics/Shape;JLandroidx/compose/foundation/interaction/MutableInteractionSource;Lkotlin/jvm/functions/Function3;Landroidx/compose/runtime/Composer;II)V
+	public static final fun SketchbookOutlinedButton-3f6hBDE (Lkotlin/jvm/functions/Function0;Landroidx/compose/ui/Modifier;ZLandroidx/compose/ui/graphics/Shape;JLandroidx/compose/foundation/interaction/MutableInteractionSource;Lkotlin/jvm/functions/Function3;Landroidx/compose/runtime/Composer;II)V
+	public static final fun SketchbookTonalButton-3f6hBDE (Lkotlin/jvm/functions/Function0;Landroidx/compose/ui/Modifier;ZLandroidx/compose/ui/graphics/Shape;JLandroidx/compose/foundation/interaction/MutableInteractionSource;Lkotlin/jvm/functions/Function3;Landroidx/compose/runtime/Composer;II)V
 }
 
 public final class lib/sketchbook/SketchbookColorSliderKt {
