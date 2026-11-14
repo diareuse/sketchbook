@@ -2,6 +2,9 @@
 
 package lib.sketchbook
 
+import androidx.compose.foundation.gestures.Orientation
+import androidx.compose.foundation.gestures.rememberScrollableState
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.fillMaxSize
@@ -33,7 +36,7 @@ fun SketchbookPullToRefresh(
         onRefresh = onRefresh,
         modifier = modifier,
         state = state,
-        contentAlignment = contentAlignment,
+        contentAlignment = Alignment.TopStart,
         indicator = {
             PullToRefreshDefaults.IndicatorBox(
                 state = state,
@@ -49,7 +52,13 @@ fun SketchbookPullToRefresh(
                 }
             }
         },
-        content = content
+        content = {
+            Box(
+                Modifier.fillMaxSize().scrollable(rememberScrollableState { 0f }, Orientation.Vertical),
+                contentAlignment = contentAlignment,
+                content = content
+            )
+        }
     )
 }
 

@@ -5,6 +5,10 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.ui.test.assertIsNotDisplayed
+import androidx.compose.ui.test.swipeUp
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
@@ -53,6 +57,30 @@ class PullToRefreshBehaviorTest : BehaviorTest() {
         }
     }
 
+    @Composable
+    private fun StaticRefreshable() {
+        SketchbookPullToRefresh(
+            isRefreshing = refreshing,
+            onRefresh = { refreshes++ },
+            modifier = Modifier.size(300.dp, 500.dp).testTag("box")
+        ) {
+            Text("Static content", Modifier.testTag("static"))
+        }
+    }
+
+    @Composable
+    private fun LazyRefreshable() {
+        SketchbookPullToRefresh(
+            isRefreshing = refreshing,
+            onRefresh = { refreshes++ },
+            modifier = Modifier.size(300.dp, 500.dp)
+        ) {
+            LazyColumn(Modifier.fillMaxSize().testTag("lazy")) {
+                items(20) { Text("Item $it", Modifier.height(80.dp)) }
+            }
+        }
+    }
+
     private fun show(content: @Composable () -> Unit = { Refreshable() }) {
         composeRule.mainClock.autoAdvance = false
         composeRule.setContent { Theme(darkTheme = false, dynamicColor = false) { content() } }
@@ -79,6 +107,37 @@ class PullToRefreshBehaviorTest : BehaviorTest() {
 
         pull(900f)
 
+        assertEquals(1, refreshes)
+    }
+
+    @Test
+    fun `pulling non scrollable content requests a refresh`() {
+        show { StaticRefreshable() }
+
+        composeRule.onNodeWithTag("box").performTouchInput {
+            swipeDown(startY = 40f, endY = 940f, durationMillis = 400)
+        }
+        composeRule.mainClock.advanceTimeBy(1000)
+
+        assertEquals(1, refreshes)
+    }
+
+    @Test
+    fun `pulling a lazy list at its top requests a refresh and scrolling it still works`() {
+        show { LazyRefreshable() }
+
+        composeRule.onNodeWithTag("lazy").performTouchInput {
+            swipeUp(startY = 400f, endY = 100f, durationMillis = 300)
+        }
+        composeRule.mainClock.advanceTimeBy(1000)
+        composeRule.onNodeWithText("Item 0").assertIsNotDisplayed()
+        assertEquals(0, refreshes)
+
+        composeRule.onNodeWithTag("lazy").performTouchInput {
+            swipeDown(startY = 40f, endY = 940f, durationMillis = 400)
+        }
+        composeRule.mainClock.advanceTimeBy(1000)
+        composeRule.onNodeWithText("Item 0").assertIsDisplayed()
         assertEquals(1, refreshes)
     }
 

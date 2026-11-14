@@ -7,7 +7,12 @@ import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.ui.platform.testTag
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -138,8 +143,10 @@ internal val FeedbackDemos = listOf(
             }
         }
         Showcase("Pull down inside the box") {
-            SketchbookPullToRefresh(refreshing, { refreshing = true }, Modifier.fillMaxWidth().height(240.dp)) {
-                Text("Pull to refresh", Modifier.padding(16.dp))
+            SketchbookPullToRefresh(refreshing, { refreshing = true }, Modifier.fillMaxWidth().height(240.dp).testTag("pull-refresh-demo")) {
+                Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                    repeat(8) { Text("Row ${it + 1}") }
+                }
             }
         }
     },

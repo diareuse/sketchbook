@@ -20,6 +20,17 @@ import lib.sketchbook.SketchbookOutlinedButton
 import lib.sketchbook.SketchbookSwitch
 import lib.sketchbook.SketchbookVerticalDivider
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.graphics.Color
+import lib.sketchbook.SketchbookButton
+import lib.sketchbook.SketchbookCard
+import lib.sketchbook.modifier.BeamDirection
+import lib.sketchbook.modifier.BeamPalette
+import lib.sketchbook.modifier.BeamStyle
+import lib.sketchbook.modifier.borderBeam
+import lib.sketchbook.theme.Theme
 
 internal val EffectDemos = listOf(
     Demo(Group.Effects, "Animated background") {
@@ -37,6 +48,41 @@ internal val EffectDemos = listOf(
         }
         Showcase("Light sweep") {
             SketchbookGlassBorder(Modifier.fillMaxWidth(), animated = true) { Text("Animated border", Modifier.padding(24.dp)) }
+        }
+    },
+    Demo(Group.Effects, "Border beam") {
+        val shape = RoundedCornerShape(24.dp)
+        Showcase("Box") {
+            Box(Modifier.fillMaxWidth().height(96.dp).borderBeam(shape), contentAlignment = Alignment.Center) { Text("Box") }
+        }
+        Showcase("Column") {
+            Column(Modifier.fillMaxWidth().borderBeam(shape, BeamPalette.glass(Color.White)).padding(24.dp)) {
+                Text("Column")
+                Text("Glass palette")
+            }
+        }
+        Showcase("Card") {
+            SketchbookCard(Modifier.fillMaxWidth().borderBeam(Theme.container.card, listOf(Color.Cyan, Color.Magenta, Color.Yellow))) {
+                Text("Card with custom palette", Modifier.padding(24.dp))
+            }
+        }
+        Showcase("Button") {
+            SketchbookButton({}, Modifier.borderBeam(Theme.container.button, style = BeamStyle.Small)) { Text("Button, small beam") }
+        }
+        Showcase("Counter clockwise") {
+            Box(Modifier.fillMaxWidth().height(72.dp).borderBeam(shape, direction = BeamDirection.CounterClockwise), contentAlignment = Alignment.Center) {
+                Text("Counter clockwise")
+            }
+        }
+        Showcase("Line") {
+            Box(Modifier.fillMaxWidth().height(72.dp).borderBeam(shape, style = BeamStyle.Line), contentAlignment = Alignment.Center) {
+                Text("Line style")
+            }
+        }
+        Showcase("Inactive") {
+            Box(Modifier.fillMaxWidth().height(72.dp).borderBeam(shape, active = false), contentAlignment = Alignment.Center) {
+                Text("Inactive")
+            }
         }
     },
     Demo(Group.Effects, "Divider") {

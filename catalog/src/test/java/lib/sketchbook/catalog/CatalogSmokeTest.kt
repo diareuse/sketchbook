@@ -1,7 +1,12 @@
 package lib.sketchbook.catalog
 
 import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.semantics.ProgressBarRangeInfo
+import androidx.compose.ui.semantics.SemanticsProperties
+import androidx.compose.ui.test.SemanticsMatcher
 import androidx.compose.ui.test.hasText
+import androidx.compose.ui.test.performTouchInput
+import androidx.compose.ui.test.swipeDown
 import androidx.compose.ui.test.junit4.createEmptyComposeRule
 import androidx.compose.ui.test.onAllNodesWithText
 import androidx.compose.ui.test.onNodeWithContentDescription
@@ -64,6 +69,34 @@ class CatalogSmokeTest {
 
     @Test
     fun `every existing component opens its detail screen`() = openEveryDemo("Existing")
+
+    @Test
+    fun `the effects group lists a border beam demo showing every beam variant`() {
+        composeRule.onNodeWithText("Effects").performClick()
+        composeRule.onNodeWithTag("catalog-list").performScrollToNode(hasText("Border beam"))
+        composeRule.onNodeWithText("Border beam").performSemanticsAction(SemanticsActions.OnClick)
+        listOf("Box", "Column", "Card", "Button", "Counter clockwise", "Line").forEach {
+            assertTrue(composeRule.onAllNodesWithText(it, substring = true).fetchSemanticsNodes().isNotEmpty())
+        }
+    }
+
+    @Test
+    fun `pulling down inside the pull to refresh demo starts a refresh`() {
+        composeRule.onNodeWithText("Feedback").performClick()
+        composeRule.onNodeWithTag("catalog-list").performScrollToNode(hasText("Pull to refresh"))
+        composeRule.onNodeWithText("Pull to refresh").performSemanticsAction(SemanticsActions.OnClick)
+        composeRule.onNodeWithTag("pull-refresh-demo").performTouchInput {
+            swipeDown(startY = 20f, endY = 700f, durationMillis = 400)
+        }
+        composeRule.waitUntil(5_000) {
+            composeRule.onAllNodes(indeterminate).fetchSemanticsNodes().isNotEmpty()
+        }
+    }
+
+    private val indeterminate = SemanticsMatcher.expectValue(
+        SemanticsProperties.ProgressBarRangeInfo,
+        ProgressBarRangeInfo.Indeterminate
+    )
 
     private fun openEveryDemo(group: String) {
         val titles = titlesOf(group)
