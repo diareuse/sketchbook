@@ -11,6 +11,9 @@ import androidx.compose.ui.graphics.toPixelMap
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.semantics.SemanticsProperties
+import androidx.compose.ui.test.SemanticsMatcher
+import androidx.compose.ui.test.assert
 import androidx.compose.ui.test.assertHasClickAction
 import androidx.compose.ui.test.assertHasNoClickAction
 import androidx.compose.ui.test.assertIsDisplayed
@@ -113,6 +116,15 @@ class ListItemBehaviorTest : BehaviorTest() {
     }
 
     @Test
+    fun `static list item does not announce a selected state`() {
+        show()
+
+        composeRule.onNodeWithTag("item").assert(
+            SemanticsMatcher.keyNotDefined(SemanticsProperties.Selected)
+        )
+    }
+
+    @Test
     fun `unselected list item is exposed as not selected`() {
         show(onClick = {}, selected = false)
 
@@ -140,7 +152,7 @@ class ListItemBehaviorTest : BehaviorTest() {
         composeRule.waitForIdle()
 
         val image = composeRule.onRoot().captureToImage().toPixelMap()
-        assertTrue(distance(image.opaque(300, 56), image.opaque(300, 56 + 168)) > 15)
+        assertTrue(distance(image.opaque(300, 56), image.opaque(300, 168)) > 15)
     }
 
     @Test

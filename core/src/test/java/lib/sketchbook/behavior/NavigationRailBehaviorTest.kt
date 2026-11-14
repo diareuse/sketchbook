@@ -24,8 +24,10 @@ import androidx.compose.ui.test.assertIsSelected
 import androidx.compose.ui.test.getBoundsInRoot
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
+import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.height
 import lib.sketchbook.SketchbookNavigationRail
 import lib.sketchbook.SketchbookNavigationRailItem
 import lib.sketchbook.theme.Theme
@@ -132,7 +134,9 @@ class NavigationRailBehaviorTest : BehaviorTest() {
         composeRule.onNodeWithText("Header").assertIsDisplayed()
         val header = composeRule.onNodeWithText("Header").getBoundsInRoot()
         val home = composeRule.onNodeWithTag("home").getBoundsInRoot()
+        val root = composeRule.onRoot().getBoundsInRoot()
         assertTrue(header.bottom <= home.top)
+        assertTrue("header ${header.top}", header.top < root.height / 4)
     }
 
     @Test

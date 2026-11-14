@@ -69,9 +69,8 @@ fun SketchbookListItem(
         modifier = modifier
             .clip(shape)
             .drawBehind { drawRect(selectedColor, alpha = highlight * SelectedAlpha) }
-            .semantics { this.selected = selected }
             .then(
-                if (onClick == null) Modifier else Modifier.clickable(
+                if (onClick == null) Modifier else Modifier.semantics { this.selected = selected }.clickable(
                     enabled = enabled,
                     role = Role.Button,
                     interactionSource = interactionSource,
