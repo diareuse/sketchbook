@@ -9,6 +9,16 @@ public final class lib/sketchbook/ComposableSingletons$SketchbookButtonKt {
 	public final fun getLambda$747361146$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function3;
 }
 
+public final class lib/sketchbook/ComposableSingletons$SketchbookChipKt {
+	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookChipKt;
+	public fun <init> ()V
+	public final fun getLambda$-1211707450$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-343780088$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-731342735$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$1671037633$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$586719572$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+}
+
 public final class lib/sketchbook/ComposableSingletons$SketchbookColorSliderKt {
 	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookColorSliderKt;
 	public fun <init> ()V
@@ -195,6 +205,11 @@ public final class lib/sketchbook/SketchbookButtonKt {
 	public static final fun SketchbookGlassButton-3f6hBDE (Lkotlin/jvm/functions/Function0;Landroidx/compose/ui/Modifier;ZLandroidx/compose/ui/graphics/Shape;JLandroidx/compose/foundation/interaction/MutableInteractionSource;Lkotlin/jvm/functions/Function3;Landroidx/compose/runtime/Composer;II)V
 	public static final fun SketchbookOutlinedButton-3f6hBDE (Lkotlin/jvm/functions/Function0;Landroidx/compose/ui/Modifier;ZLandroidx/compose/ui/graphics/Shape;JLandroidx/compose/foundation/interaction/MutableInteractionSource;Lkotlin/jvm/functions/Function3;Landroidx/compose/runtime/Composer;II)V
 	public static final fun SketchbookTonalButton-3f6hBDE (Lkotlin/jvm/functions/Function0;Landroidx/compose/ui/Modifier;ZLandroidx/compose/ui/graphics/Shape;JLandroidx/compose/foundation/interaction/MutableInteractionSource;Lkotlin/jvm/functions/Function3;Landroidx/compose/runtime/Composer;II)V
+}
+
+public final class lib/sketchbook/SketchbookChipKt {
+	public static final fun SketchbookChip-lmFMXvc (Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function2;Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;ZLandroidx/compose/ui/graphics/Shape;JLandroidx/compose/foundation/interaction/MutableInteractionSource;Landroidx/compose/runtime/Composer;II)V
+	public static final fun SketchbookFilterChip-FItCLgY (ZLkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function2;Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;ZLandroidx/compose/ui/graphics/Shape;JLandroidx/compose/foundation/interaction/MutableInteractionSource;Landroidx/compose/runtime/Composer;II)V
 }
 
 public final class lib/sketchbook/SketchbookColorSliderKt {
