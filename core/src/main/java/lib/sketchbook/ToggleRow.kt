@@ -15,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
+import lib.sketchbook.haptic.deniedWhenDisabled
 import lib.sketchbook.theme.Theme
 
 private const val DisabledLabelAlpha = .38f
@@ -74,7 +75,7 @@ private fun LabeledRow(
 ) {
     val content = Theme.color.content.background
     Row(
-        modifier = modifier.minimumInteractiveComponentSize(),
+        modifier = modifier.deniedWhenDisabled(enabled).minimumInteractiveComponentSize(),
         verticalAlignment = Alignment.CenterVertically
     ) {
         control()
