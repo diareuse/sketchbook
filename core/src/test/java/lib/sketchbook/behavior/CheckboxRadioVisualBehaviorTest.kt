@@ -70,9 +70,9 @@ class CheckboxVisualBehaviorTest : BehaviorTest() {
     fun `checked checkbox draws a thick check mark in the on primary colour`() {
         show(true, enabled = true)
 
-        val strokePixels = count(frame(), "subject", onPrimary)
+        val strokePixels = count(frame(), "subject", onPrimary, ThickStrokeTolerance)
 
-        assertTrue("check pixels $strokePixels", strokePixels >= 150)
+        assertTrue("check pixels $strokePixels", strokePixels >= 170)
     }
 
     @Test
@@ -136,11 +136,11 @@ class CheckboxVisualBehaviorTest : BehaviorTest() {
         return ((b.left + b.right).value).toInt() to ((b.top + b.bottom).value).toInt()
     }
 
-    private fun count(image: PixelMap, tag: String, color: Color): Int {
+    private fun count(image: PixelMap, tag: String, color: Color, tolerance: Int = StrokeTolerance): Int {
         val c = centre(tag)
         var n = 0
         for (y in c.second - 26..c.second + 26) for (x in c.first - 26..c.first + 26) {
-            if (distance(image.opaque(x, y), color) <= StrokeTolerance) n++
+            if (distance(image.opaque(x, y), color) <= tolerance) n++
         }
         return n
     }
@@ -278,6 +278,7 @@ class RadioVisualBehaviorTest : BehaviorTest() {
 }
 
 private const val StrokeTolerance = 140
+private const val ThickStrokeTolerance = 40
 private const val SolidCoverage = 250
 private const val AntiAliasingTolerance = 4
 

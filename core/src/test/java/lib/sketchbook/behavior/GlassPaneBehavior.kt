@@ -2,7 +2,6 @@ package lib.sketchbook.behavior
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -23,14 +22,6 @@ import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.IntRect
 import androidx.compose.ui.unit.dp
 import lib.sketchbook.PaneProbe
-import lib.sketchbook.SketchbookButton
-import lib.sketchbook.SketchbookFilledIconButton
-import lib.sketchbook.SketchbookGlassButton
-import lib.sketchbook.SketchbookGlassIconButton
-import lib.sketchbook.SketchbookIconButton
-import lib.sketchbook.SketchbookOutlinedButton
-import lib.sketchbook.SketchbookTonalButton
-import lib.sketchbook.SketchbookTonalIconButton
 import lib.sketchbook.StripeColors
 import lib.sketchbook.StripedBackdrop
 import lib.sketchbook.changedPixels
@@ -39,7 +30,6 @@ import lib.sketchbook.theme.Theme
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
-import org.robolectric.annotation.Config
 
 abstract class GlassPaneBehavior : BehaviorTest() {
 

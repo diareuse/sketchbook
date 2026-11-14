@@ -39,7 +39,6 @@ fun SketchbookChip(
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() }
 ) {
     val content = Theme.color.contentColorFor(compositeColor)
-    val overlay = Color.Transparent
     val disabled = Theme.color.content.background.copy(DisabledAlpha)
     val glassShape = shape.asGlassShape()
     val confirmed = rememberConfirmedClick(onClick)
@@ -54,11 +53,11 @@ fun SketchbookChip(
             trailingIcon = trailingIcon,
             shape = glassShape,
             colors = AssistChipDefaults.assistChipColors(
-                containerColor = overlay,
+                containerColor = Color.Transparent,
                 labelColor = content,
                 leadingIconContentColor = content,
                 trailingIconContentColor = content,
-                disabledContainerColor = overlay,
+                disabledContainerColor = Color.Transparent,
                 disabledLabelColor = disabled,
                 disabledLeadingIconContentColor = disabled,
                 disabledTrailingIconContentColor = disabled
@@ -84,7 +83,6 @@ fun SketchbookFilterChip(
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() }
 ) {
     val content = Theme.color.contentColorFor(compositeColor)
-    val overlay = Color.Transparent
     val disabled = Theme.color.content.background.copy(DisabledAlpha)
     val selectedContainer = Theme.color.emphasis.primary.copy(SelectedAlpha)
     val glassShape = shape.asGlassShape()
@@ -101,10 +99,10 @@ fun SketchbookFilterChip(
             trailingIcon = trailingIcon,
             shape = glassShape,
             colors = FilterChipDefaults.filterChipColors(
-                containerColor = overlay,
+                containerColor = Color.Transparent,
                 labelColor = content,
                 iconColor = content,
-                disabledContainerColor = overlay,
+                disabledContainerColor = Color.Transparent,
                 disabledLabelColor = disabled,
                 disabledLeadingIconColor = disabled,
                 disabledTrailingIconColor = disabled,

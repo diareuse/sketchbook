@@ -26,15 +26,6 @@ private val ControlGlassElevation = 12.dp
 internal fun Modifier.pressIndicated(shape: Shape, interactionSource: InteractionSource): Modifier =
     clip(shape).indication(interactionSource, LocalIndication.current)
 
-@Composable
-internal fun Modifier.pressControl(
-    shape: Shape,
-    interactionSource: InteractionSource,
-    enabled: Boolean = true
-): Modifier = deniedWhenDisabled(enabled)
-    .minimumTouchTarget(LocalMinimumInteractiveComponentSize.current)
-    .pressIndicated(shape, interactionSource)
-
 private fun Modifier.minimumTouchTarget(size: Dp): Modifier =
     if (size.isUnspecified || size <= 0.dp) this
     else layout { measurable, constraints ->

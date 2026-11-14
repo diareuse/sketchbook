@@ -117,6 +117,13 @@ class FabOpacityBehaviorTest : BehaviorTest() {
         assertTrue("leak ${leak(image, "fab")}", leak(image, "fab") < 12)
     }
 
+    @Test
+    fun `floating action button is still glass and lets some backdrop through`() {
+        val image = showOverRedAndBlue()
+
+        assertTrue(leak(image, "fab") > 0)
+    }
+
     private fun leak(image: PixelMap, name: String): Int =
         distance(sample(image, "${name}Red"), sample(image, "${name}Blue"))
 

@@ -109,6 +109,6 @@ class ButtonTintBehaviorTest : BehaviorTest() {
 
     private fun edge(image: PixelMap, tag: String): Color {
         val b = composeRule.onNodeWithTag(tag).getBoundsInRoot()
-        return image.opaque((b.left.value * 2 + 40).toInt(), (b.top.value * 2 + 10).toInt())
+        return image.opaque(((b.left.value + b.right.value) / 2 * 2).toInt(), (b.top.value * 2 + 9).toInt())
     }
 }
