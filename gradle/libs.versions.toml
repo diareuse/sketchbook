@@ -16,6 +16,7 @@ coil = "2.7.0"
 instant = "18.2.0"
 haze = "0.7.0"
 publishing = "0.34.0"
+bcv = "0.18.1"
 
 [libraries]
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "androidx-appcompat" }
@@ -46,6 +47,7 @@ kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 android-library = { id = "com.android.library", version.ref = "android" }
 android-application = { id = "com.android.application", version.ref = "android" }
+bcv = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version.ref = "bcv" }
 publish = { id = "com.vanniktech.maven.publish.base", version.ref = "publishing" }
 
 [bundles]
