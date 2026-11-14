@@ -30,7 +30,7 @@ class GlassScreenshotTest : ScreenshotTest() {
 
     @Test
     @Config(sdk = [33], qualifiers = Light)
-    fun `glass demo on android 13 renders glass`() = captureRoot("Glass_sdk33") { Demo() }
+    fun `glass demo on android 13`() = captureRoot("Glass_sdk33") { Demo() }
 
     @Composable
     private fun Demo() = Theme(darkTheme = false, dynamicColor = false) {

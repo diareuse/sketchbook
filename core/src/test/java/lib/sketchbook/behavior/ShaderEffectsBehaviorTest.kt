@@ -109,14 +109,26 @@ abstract class ShaderEffectsBehavior : BehaviorTest() {
     }
 
     @Test
-    fun `mesh gradient rejects an empty palette`() {
-        var failure: Throwable? = null
-        try {
-            show { Modifier.size(10.dp).meshGradientBackground(emptyList()) }
-        } catch (e: IllegalArgumentException) {
-            failure = e
+    fun `mesh gradient rejects an empty palette`() = assertRejected(emptyList())
+
+    @Test
+    fun `mesh gradient rejects more colors than it can blend`() = assertRejected(List(5) { Color.Red })
+
+    private fun assertRejected(palette: List<Color>) {
+        val failure = runCatching { show { Modifier.size(10.dp).meshGradientBackground(palette) } }
+        assertTrue(failure.exceptionOrNull() is IllegalArgumentException)
+    }
+
+    @Test
+    fun `static specular border and mesh gradient hold a stable frame`() {
+        show {
+            Modifier.size(100.dp)
+                .meshGradientBackground(listOf(Color.Red, Color.Blue), animated = false)
+                .specularBorder(shape, 3.dp, Color.White, animated = false)
         }
-        assertTrue(failure != null)
+        val first = frame()
+        advance(700)
+        assertArrayEquals(first, frame(), 0f)
     }
 
     private fun show(modifier: () -> Modifier) {

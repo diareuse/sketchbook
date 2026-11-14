@@ -91,26 +91,21 @@ internal class SpecularBorderNode(
     private var shape: Shape,
     private var width: Dp,
     private var color: Color,
-    private var durationMillis: Int,
+    durationMillis: Int,
     private var animated: Boolean
 ) : Modifier.Node(), DrawModifierNode {
 
     private var phase = 0f
-    private var clock = Phase(periodNanos(durationMillis))
     private val cache = OutlineCache()
     private val painter by lazy(LazyThreadSafetyMode.NONE) { rimPainter() }
-    private val loop = FrameLoop {
-        phase = clock.at(it)
+    private val driver = PhaseDriver(durationMillis) {
+        phase = it
         invalidateDraw()
-        true
     }
 
     override fun onAttach() = sync()
 
-    override fun onDetach() {
-        loop.stop()
-        clock.reset()
-    }
+    override fun onDetach() = driver.stop()
 
     fun update(shape: Shape, width: Dp, color: Color, durationMillis: Int, animated: Boolean) {
         if (this.shape != shape) cache.clear()
@@ -118,16 +113,13 @@ internal class SpecularBorderNode(
         this.width = width
         this.color = color
         this.animated = animated
-        if (this.durationMillis != durationMillis) {
-            this.durationMillis = durationMillis
-            clock = Phase(periodNanos(durationMillis))
-        }
+        driver.duration(durationMillis)
         sync()
         invalidateDraw()
     }
 
     private fun sync() {
-        if (animated && isAttached) loop.start(coroutineScope) else loop.stop()
+        driver.run(animated && isAttached, coroutineScope)
     }
 
     override fun ContentDrawScope.draw() {

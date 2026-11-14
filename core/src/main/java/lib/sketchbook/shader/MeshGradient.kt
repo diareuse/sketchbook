@@ -61,7 +61,7 @@ internal fun meshPainter(): MeshPainter =
     if (sdkAtLeast(Api.Agsl)) AgslMeshPainter() else LayeredRadialMeshPainter()
 
 internal fun List<Color>.toMeshColors(): List<Color> {
-    require(isNotEmpty()) { "colors must not be empty" }
+    require(size in 1..MeshColorCount) { "colors must hold 1 to $MeshColorCount entries" }
     return List(MeshColorCount) { this[it % size] }
 }
 
@@ -77,39 +77,31 @@ internal data class MeshGradientElement(
 
 internal class MeshGradientNode(
     private var colors: List<Color>,
-    private var durationMillis: Int,
+    durationMillis: Int,
     private var animated: Boolean
 ) : Modifier.Node(), DrawModifierNode {
 
     private var phase = 0f
-    private var clock = Phase(periodNanos(durationMillis))
     private val painter by lazy(LazyThreadSafetyMode.NONE) { meshPainter() }
-    private val loop = FrameLoop {
-        phase = clock.at(it)
+    private val driver = PhaseDriver(durationMillis) {
+        phase = it
         invalidateDraw()
-        true
     }
 
     override fun onAttach() = sync()
 
-    override fun onDetach() {
-        loop.stop()
-        clock.reset()
-    }
+    override fun onDetach() = driver.stop()
 
     fun update(colors: List<Color>, durationMillis: Int, animated: Boolean) {
         this.colors = colors
         this.animated = animated
-        if (this.durationMillis != durationMillis) {
-            this.durationMillis = durationMillis
-            clock = Phase(periodNanos(durationMillis))
-        }
+        driver.duration(durationMillis)
         sync()
         invalidateDraw()
     }
 
     private fun sync() {
-        if (animated && isAttached) loop.start(coroutineScope) else loop.stop()
+        driver.run(animated && isAttached, coroutineScope)
     }
 
     override fun ContentDrawScope.draw() {

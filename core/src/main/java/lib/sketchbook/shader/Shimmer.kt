@@ -60,39 +60,31 @@ internal data class ShimmerElement(
 
 internal class ShimmerNode(
     private var color: Color,
-    private var durationMillis: Int,
+    durationMillis: Int,
     private var enabled: Boolean
 ) : Modifier.Node(), DrawModifierNode {
 
     private var phase = 0f
-    private var clock = Phase(periodNanos(durationMillis))
     private val painter by lazy(LazyThreadSafetyMode.NONE) { shimmerPainter() }
-    private val loop = FrameLoop {
-        phase = clock.at(it)
+    private val driver = PhaseDriver(durationMillis) {
+        phase = it
         invalidateDraw()
-        true
     }
 
     override fun onAttach() = sync()
 
-    override fun onDetach() {
-        loop.stop()
-        clock.reset()
-    }
+    override fun onDetach() = driver.stop()
 
     fun update(color: Color, durationMillis: Int, enabled: Boolean) {
         this.color = color
         this.enabled = enabled
-        if (this.durationMillis != durationMillis) {
-            this.durationMillis = durationMillis
-            clock = Phase(periodNanos(durationMillis))
-        }
+        driver.duration(durationMillis)
         sync()
         invalidateDraw()
     }
 
     private fun sync() {
-        if (enabled && isAttached) loop.start(coroutineScope) else loop.stop()
+        driver.run(enabled && isAttached, coroutineScope)
     }
 
     override fun ContentDrawScope.draw() {

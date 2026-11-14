@@ -3,6 +3,7 @@
 package lib.sketchbook
 
 import androidx.activity.compose.BackHandler
+import lib.sketchbook.glass.GlassDepthScope
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.ExperimentalTransitionApi
@@ -116,7 +117,7 @@ fun SketchbookDialog(
                     targetOffsetY = { it }
                 )
             ) {
-                dialog()
+                GlassDepthScope { dialog() }
             }
         }
     }

@@ -79,7 +79,7 @@ internal class PressShaderNode(
         progress = ((nanos - startNanos).toFloat() / ExpandNanos).coerceIn(0f, 1f).let { 1f - (1f - it) * (1f - it) }
         fade = if (pressed) 1f else 1f - ((nanos - releaseNanos).toFloat() / FadeNanos).coerceIn(0f, 1f)
         invalidateDraw()
-        return pressed || fade > 0f
+        return !pressed && fade > 0f || pressed && progress < 1f
     }
 
     override fun ContentDrawScope.draw() {

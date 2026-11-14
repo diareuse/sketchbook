@@ -1,6 +1,7 @@
 package lib.sketchbook
 
 import androidx.activity.compose.BackHandler
+import lib.sketchbook.glass.GlassDepthScope
 import androidx.compose.animation.core.animate
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloatAsState
@@ -220,7 +221,7 @@ fun SketchbookMenu(
                         .alpha(state.expansionAlpha)
                         .scale(state.scale)
                 ) {
-                    expansion()
+                    GlassDepthScope { expansion() }
                 }
             }
             val top = if (state.verticalAlignment === Alignment.Bottom) expansion else null
@@ -238,7 +239,7 @@ fun SketchbookMenu(
                         .scale(state.scale),
                     propagateMinConstraints = true
                 ) {
-                    content()
+                    GlassDepthScope { content() }
                 }
             }
         }

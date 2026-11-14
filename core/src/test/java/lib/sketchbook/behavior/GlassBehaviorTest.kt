@@ -72,7 +72,7 @@ class GlassBehaviorTest : BehaviorTest() {
 
     @Test
     @Config(sdk = [33])
-    fun `glass tints the backdrop on android 13`() {
+    fun `glass renders a tinted pane over the backdrop on android 13`() {
         render()
         val image = composeRule.onRoot().captureToImage().toPixelMap()
         val inside = image[100, 100]
@@ -81,9 +81,10 @@ class GlassBehaviorTest : BehaviorTest() {
     }
 
     @Test
-    fun `glass source is harmless without a theme`() {
-        composeRule.setContent { Box(Modifier.size(20.dp).glassSource()) }
+    fun `glass source without a theme leaves the content visible`() {
+        composeRule.setContent { Box(Modifier.size(20.dp).glassSource().background(Color.Red)) }
         composeRule.waitForIdle()
+        assertEquals(Color.Red, composeRule.onRoot().captureToImage().toPixelMap()[5, 5])
     }
 
     @Test

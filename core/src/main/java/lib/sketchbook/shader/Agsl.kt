@@ -13,7 +13,8 @@ half4 main(float2 coord) {
     float radius = length(size) * progress + 1.0;
     float dist = length(coord - center);
     float fill = 1.0 - smoothstep(radius * 0.8, radius, dist);
-    float ring = exp(-pow((dist - radius * 0.92) / (radius * 0.1 + 1.0), 2.0));
+    float ringOffset = (dist - radius * 0.92) / (radius * 0.1 + 1.0);
+    float ring = exp(-(ringOffset * ringOffset));
     float a = (fill * 0.45 + ring * 0.35) * fade * color.a;
     return half4(color.rgb * a, a);
 }
