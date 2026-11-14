@@ -1,6 +1,15 @@
 package lib.sketchbook.catalog
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import lib.sketchbook.glass.glassSource
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.material.icons.Icons
@@ -36,6 +45,13 @@ internal val Catalog: List<Demo> = ActionDemos + ContainerDemos + FeedbackDemos 
 internal fun Showcase(label: String, content: @Composable ColumnScope.() -> Unit) {
     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
         Text(label, style = Theme.textStyle.caption)
-        content()
+        Box(Modifier.clip(RoundedCornerShape(16.dp))) {
+            Row(Modifier.matchParentSize().glassSource()) {
+                Backdrop.forEach { Box(Modifier.weight(1f).fillMaxHeight().background(it)) }
+            }
+            Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(8.dp), content = content)
+        }
     }
 }
+
+private val Backdrop = listOf(Color(0xFFE53935), Color(0xFFFDD835), Color(0xFF43A047), Color(0xFF1E88E5), Color(0xFF8E24AA))

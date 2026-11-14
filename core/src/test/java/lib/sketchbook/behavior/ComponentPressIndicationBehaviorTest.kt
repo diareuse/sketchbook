@@ -3,7 +3,6 @@ package lib.sketchbook.behavior
 import android.view.HapticFeedbackConstants
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -19,9 +18,12 @@ import androidx.compose.ui.graphics.toPixelMap
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.test.SemanticsNodeInteraction
 import androidx.compose.ui.test.captureToImage
+import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import androidx.compose.ui.test.center
 import androidx.compose.ui.test.down
+import androidx.compose.ui.test.up
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onRoot
@@ -162,14 +164,14 @@ abstract class ComponentPressIndicationBehavior : BehaviorTest() {
     }
 
     @Test
-    fun `a pressed navigation bar item shows the theme press indication`() = assertIndicated(tagged = false) {
+    fun `a pressed navigation bar item shows the theme press indication`() = assertIndicated {
         SketchbookNavigationBar(Modifier.testTag(Target)) {
             SketchbookNavigationBarItem(false, {}, { Icon(Icons.Default.Home, null) }, label = { Text("Home") })
         }
     }
 
     @Test
-    fun `a pressed navigation rail item shows the theme press indication`() = assertIndicated(tagged = false) {
+    fun `a pressed navigation rail item shows the theme press indication`() = assertIndicated {
         SketchbookNavigationRail(Modifier.testTag(Target)) {
             SketchbookNavigationRailItem(false, {}, { Icon(Icons.Default.Home, null) }, label = { Text("Home") })
         }
@@ -190,22 +192,29 @@ abstract class ComponentPressIndicationBehavior : BehaviorTest() {
         SketchbookSwitch(false, {}, it)
     }
 
+    @Test
+    fun `releasing a pressed button adds no further tick`() {
+        show { SketchbookButton({}, it) { Text("Go") } }
+        composeRule.onNodeWithTag(Target).performTouchInput { down(center) }
+        composeRule.mainClock.advanceTimeBy(150)
+        composeRule.onNodeWithTag(Target).performTouchInput { up() }
+        composeRule.mainClock.advanceTimeBy(600)
+        assertEquals(listOf(tick), haptics.performed)
+    }
+
+    @Test
+    fun `a disabled button does not tick when pressed`() {
+        show { SketchbookButton({}, it, enabled = false) { Text("Go") } }
+        composeRule.onNodeWithTag(Target).performTouchInput { down(center) }
+        composeRule.mainClock.advanceTimeBy(150)
+        assertEquals(emptyList<HapticFeedbackType>(), haptics.performed)
+    }
+
     private fun assertIndicated(
-        tagged: Boolean = true,
-        target: androidx.compose.ui.test.junit4.ComposeContentTestRule.() -> androidx.compose.ui.test.SemanticsNodeInteraction = { onNodeWithTag(Target) },
+        target: ComposeContentTestRule.() -> SemanticsNodeInteraction = { onNodeWithTag(Target) },
         content: @Composable (Modifier) -> Unit
     ) {
-        composeRule.mainClock.autoAdvance = false
-        composeRule.setContent {
-            CompositionLocalProvider(LocalHapticFeedback provides haptics) {
-                Theme(darkTheme = false, dynamicColor = false) {
-                    Box(Modifier.size(280.dp).background(Color.Black), contentAlignment = Alignment.Center) {
-                        content(if (tagged) Modifier.testTag(Target) else Modifier)
-                    }
-                }
-            }
-        }
-        composeRule.mainClock.advanceTimeBy(16)
+        show(content)
         val idle = frame()
 
         composeRule.target().performTouchInput { down(center) }
@@ -213,6 +222,20 @@ abstract class ComponentPressIndicationBehavior : BehaviorTest() {
 
         assertEquals(listOf(tick), haptics.performed)
         assertFalse(idle.contentEquals(frame()))
+    }
+
+    private fun show(content: @Composable (Modifier) -> Unit) {
+        composeRule.mainClock.autoAdvance = false
+        composeRule.setContent {
+            CompositionLocalProvider(LocalHapticFeedback provides haptics) {
+                Theme(darkTheme = false, dynamicColor = false) {
+                    Box(Modifier.size(280.dp).background(Color.Black), contentAlignment = Alignment.Center) {
+                        content(Modifier.testTag(Target))
+                    }
+                }
+            }
+        }
+        composeRule.mainClock.advanceTimeBy(16)
     }
 
     private fun frame(): FloatArray {

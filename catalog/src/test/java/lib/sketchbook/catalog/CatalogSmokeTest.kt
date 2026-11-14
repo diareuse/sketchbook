@@ -81,6 +81,7 @@ class CatalogSmokeTest {
         composeRule.onNodeWithText(group).performClick()
         composeRule.onNodeWithTag("catalog-list").performScrollToNode(hasText(title))
         composeRule.onNodeWithText(title).performSemanticsAction(SemanticsActions.OnClick)
+        composeRule.onNodeWithTag("catalog-list").assertDoesNotExist()
         assertTrue(composeRule.onAllNodesWithText(title).fetchSemanticsNodes().isNotEmpty())
         composeRule.onNodeWithContentDescription("Back").performClick()
         composeRule.onNodeWithTag("catalog-list").assertIsDisplayed()
