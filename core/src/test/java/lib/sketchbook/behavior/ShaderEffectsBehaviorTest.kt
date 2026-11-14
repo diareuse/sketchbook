@@ -89,7 +89,7 @@ abstract class ShaderEffectsBehavior : BehaviorTest() {
     }
 
     @Test
-    fun `mesh gradient fills the background with the given colors`() {
+    fun `mesh gradient fills the background with its base color`() {
         show { Modifier.size(100.dp).meshGradientBackground(listOf(Color.Red), animated = false, baseColor = Color.Red) }
         val center = composeRule.onRoot().captureToImage().toPixelMap()[100, 100]
         assertEquals(1f, center.red, .05f)

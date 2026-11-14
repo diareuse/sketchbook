@@ -54,7 +54,8 @@ internal class LayeredRadialMeshPainter : MeshPainter {
             val radius = blob.radius * unit * FalloffReach
             val stops = Array(FalloffStops) { step ->
                 val x = step / (FalloffStops - 1f)
-                val alpha = Aurora.alphaAt(Aurora.weightAt(x * FalloffReach * blob.radius, blob)) * colors[i].alpha
+                val weight = Aurora.weightAt(x * FalloffReach * blob.radius, blob) * colors[i].alpha
+                val alpha = if (step == FalloffStops - 1) 0f else Aurora.alphaAt(weight)
                 x to colors[i].copy(alpha = alpha)
             }
             drawRect(Brush.radialGradient(colorStops = stops, center = center, radius = radius))

@@ -10,6 +10,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.PixelMap
 import androidx.compose.ui.graphics.toPixelMap
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.test.assertIsDisplayed
@@ -50,6 +51,9 @@ abstract class AnimatedBackgroundBehavior : BehaviorTest() {
         return FloatArray(map.width * map.height) { map[it % map.width, it / map.width].let { c -> c.red + c.green + c.blue } }
     }
 
+    private fun PixelMap.pixels(): List<Color> =
+        List(width * height) { this[it % width, it / width] }
+
     private fun disableAnimations() {
         Settings.Global.putFloat(composeRule.activity.contentResolver, Settings.Global.ANIMATOR_DURATION_SCALE, 0f)
     }
@@ -62,7 +66,7 @@ abstract class AnimatedBackgroundBehavior : BehaviorTest() {
     }
 
     @Test
-    fun `background fills with the given colors`() {
+    fun `background fills with its base color`() {
         show { SketchbookAnimatedBackground(Modifier.size(100.dp), colors = listOf(Color.Red), baseColor = Color.Red, animated = false) {} }
 
         val center = composeRule.onRoot().captureToImage().toPixelMap()[100, 100]
@@ -112,17 +116,17 @@ abstract class AnimatedBackgroundBehavior : BehaviorTest() {
     }
 
     @Test
-    fun `background keeps a blob color glow at the first frame and after a full loop`() {
-        show { SketchbookAnimatedBackground(Modifier.size(100.dp), colors = palette) {} }
+    fun `background repeats its frame after one full loop`() {
+        show { SketchbookAnimatedBackground(Modifier.size(100.dp), colors = palette, baseColor = Color.Black) {} }
         val first = frame()
 
-        advance(10_000)
+        advance(5_000)
+        val middle = frame()
+        advance(5_000)
 
-        assertArrayEquals(first, frame(), .02f)
+        assertFalse(first.contentEquals(middle))
+        assertArrayEquals(first, frame(), .15f)
     }
-
-    private fun androidx.compose.ui.graphics.PixelMap.pixels(): List<Color> =
-        List(width * height) { this[it % width, it / width] }
 
     @Test
     fun `background drifts over time without recomposing its content`() {

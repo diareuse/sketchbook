@@ -9,7 +9,7 @@
 - Typography uses the true font weights (Medium, SemiBold, Bold, ExtraBold map to their own Sora files); text previously rendered with shifted weights looks different.
 - The `key` parameter of the `rememberSaveable` helpers (`Dp`, `TextUnit`, `DpOffset`, `Offset`, `IntOffset`, `Color`) is ignored; saved state is keyed by position and `inputs`. `TickOnChange` and `ClickOnChange` no longer save state across process death.
 - `SketchbookTopAppBar` counts its content padding once, so the default bar is 12dp shorter.
-- `SketchbookAnimatedBackground` and `meshGradientBackground` draw drifting light blobs over a base color instead of a four-corner gradient. `colors` no longer fill the whole area; the new `baseColor` parameter (default `Theme.color.container.background`) shows between the blobs. Default blob colors are the theme's emphasis colors.
+- `SketchbookAnimatedBackground` and `meshGradientBackground` draw drifting light blobs over a base color instead of a four-corner gradient. `colors` no longer fill the whole area; the new `baseColor` parameter (default `Theme.color.container.background`) shows between the blobs. Default blob colors are the theme's emphasis colors. Both functions gain a trailing `Color` parameter, so their JVM signatures change: recompile consumers.
 
 ## Other changes
 
