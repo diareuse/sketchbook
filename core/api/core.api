@@ -1,3 +1,10 @@
+public final class lib/sketchbook/ComposableSingletons$SketchbookAnimatedBackgroundKt {
+	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookAnimatedBackgroundKt;
+	public fun <init> ()V
+	public final fun getLambda$1054367612$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function3;
+	public final fun getLambda$1628397066$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+}
+
 public final class lib/sketchbook/ComposableSingletons$SketchbookBadgeKt {
 	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookBadgeKt;
 	public fun <init> ()V
@@ -386,6 +393,10 @@ public final class lib/sketchbook/PaletteImageState$Palette {
 	public fun hashCode ()I
 	public final fun toLongArray ()[J
 	public fun toString ()Ljava/lang/String;
+}
+
+public final class lib/sketchbook/SketchbookAnimatedBackgroundKt {
+	public static final fun SketchbookAnimatedBackground (Landroidx/compose/ui/Modifier;Ljava/util/List;FZLkotlin/jvm/functions/Function3;Landroidx/compose/runtime/Composer;II)V
 }
 
 public final class lib/sketchbook/SketchbookBadgeKt {
