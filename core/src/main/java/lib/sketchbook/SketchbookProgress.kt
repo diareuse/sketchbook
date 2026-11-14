@@ -11,6 +11,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
@@ -20,7 +21,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
-import androidx.compose.ui.graphics.drawscope.clipRect
 import androidx.compose.ui.graphics.drawscope.rotate
 import androidx.compose.ui.graphics.drawscope.translate
 import androidx.compose.ui.graphics.lerp
@@ -29,7 +29,6 @@ import androidx.compose.ui.semantics.progressBarRangeInfo
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
-import lib.sketchbook.glass.glass
 import lib.sketchbook.shader.PhasePainter
 import lib.sketchbook.shader.loopingDraw
 import lib.sketchbook.theme.Theme
@@ -38,13 +37,11 @@ import kotlin.math.cos
 private val LinearHeight = 6.dp
 private val CircularSize = 40.dp
 private val CircularStroke = 4.dp
-private val TrackElevation = 4.dp
 private const val DefaultLinearDurationMillis = 1600
 private const val DefaultCircularDurationMillis = 1800
 private const val HighlightMix = .35f
 private const val SegmentFraction = .4f
 private const val InitialOffset = .3f
-private const val TrackRingAlpha = .25f
 private const val FullTurn = 360f
 private const val TwoPi = (2 * Math.PI).toFloat()
 
@@ -90,10 +87,8 @@ private class LinearSegmentPainter(private val color: Color) : PhasePainter {
         }
         val travelled = ((phase + InitialOffset) % 1f) * (size.width + segment) - segment
         val left = if (layoutDirection == LayoutDirection.Rtl) size.width - travelled - segment else travelled
-        clipRect {
-            translate(left = left) {
-                drawRoundRect(checkNotNull(brush), Offset.Zero, Size(segment, size.height), CornerRadius(size.height / 2f))
-            }
+        translate(left = left) {
+            drawRoundRect(checkNotNull(brush), Offset.Zero, Size(segment, size.height), CornerRadius(size.height / 2f))
         }
     }
 
@@ -102,14 +97,13 @@ private class LinearSegmentPainter(private val color: Color) : PhasePainter {
     override fun hashCode() = color.hashCode()
 }
 
-private fun Modifier.circularFill(progress: () -> Float, color: Color, trackColor: Color): Modifier = drawWithCache {
+private fun Modifier.circularFill(progress: () -> Float, color: Color): Modifier = drawWithCache {
     val stroke = CircularStroke.toPx()
     val arcSize = Size(size.width - stroke, size.height - stroke)
     val topLeft = Offset(stroke / 2f, stroke / 2f)
     val brush = Brush.sweepGradient(listOf(color, highlightOf(color), color), Offset(size.width / 2f, size.height / 2f))
     val style = Stroke(stroke, cap = StrokeCap.Round)
     onDrawBehind {
-        drawArc(trackColor.copy(TrackRingAlpha), 0f, FullTurn, false, topLeft, arcSize, style = style)
         val fraction = progress().progressFraction()
         if (fraction > 0f) {
             rotate(-90f) {
@@ -148,7 +142,7 @@ fun SketchbookLinearProgress(
             .fillMaxWidth()
             .height(LinearHeight)
             .determinate(progress)
-            .glass(CircleShape, TrackElevation, tint = trackColor)
+            .clip(CircleShape)
             .linearFill(progress, color)
     )
 }
@@ -165,7 +159,7 @@ fun SketchbookLinearProgress(
             .fillMaxWidth()
             .height(LinearHeight)
             .indeterminate()
-            .glass(CircleShape, TrackElevation, tint = trackColor)
+            .clip(CircleShape)
             .loopingDraw(LinearSegmentPainter(color), durationMillis)
     )
 }
@@ -181,8 +175,8 @@ fun SketchbookCircularProgress(
         modifier
             .size(CircularSize)
             .determinate(progress)
-            .glass(CircleShape, TrackElevation, tint = trackColor)
-            .circularFill(progress, color, trackColor)
+            .clip(CircleShape)
+            .circularFill(progress, color)
     )
 }
 
@@ -197,7 +191,7 @@ fun SketchbookCircularProgress(
         modifier
             .size(CircularSize)
             .indeterminate()
-            .glass(CircleShape, TrackElevation, tint = trackColor)
+            .clip(CircleShape)
             .loopingDraw(CircularSweepPainter(color), durationMillis)
     )
 }
