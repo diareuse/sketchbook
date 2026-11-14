@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -20,9 +21,9 @@ internal fun Modifier.glass(
     shape: Shape,
     tonalElevation: Dp = 0.dp,
     useGlow: Boolean = false,
-    blurRadius: Dp = 24.dp
+    blurRadius: Dp = 24.dp,
+    tint: Color = Theme.color.emphasis.background
 ): Modifier {
-    val tint = Theme.color.emphasis.background
     val spec = remember(shape, tint, tonalElevation, useGlow, blurRadius) {
         GlassSpec.of(shape, tint, tonalElevation, useGlow, blurRadius)
     }

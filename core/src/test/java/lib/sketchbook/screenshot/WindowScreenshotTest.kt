@@ -19,6 +19,9 @@ import lib.sketchbook.OverlayState
 import lib.sketchbook.SketchbookDialog
 import lib.sketchbook.SketchbookMenu
 import lib.sketchbook.SketchbookPreviewLayout
+import lib.sketchbook.ColorfulStripes
+import lib.sketchbook.StripedBackdrop
+import lib.sketchbook.popOutBackground
 import lib.sketchbook.rememberMenuState
 import org.junit.Test
 import org.robolectric.annotation.Config
@@ -56,6 +59,100 @@ class WindowScreenshotTest : ScreenshotTest() {
     @Test
     @Config(qualifiers = Dark)
     fun `opened menu with expansion in dark theme`() = captureScreen("MenuOpen_dark") { MenuOpen() }
+
+    @Test
+    @Config(sdk = [26], qualifiers = Light)
+    fun `glass dialog surface over stripes on android 8 in light theme`() = captureRoot("DialogSurfaceGlass_sdk26_light") { GlassDialogSurface() }
+
+    @Test
+    @Config(sdk = [26], qualifiers = Dark)
+    fun `glass dialog surface over stripes on android 8 in dark theme`() = captureRoot("DialogSurfaceGlass_sdk26_dark") { GlassDialogSurface() }
+
+    @Test
+    @Config(sdk = [33], qualifiers = Light)
+    fun `glass dialog surface over stripes on android 13 in light theme`() = captureRoot("DialogSurfaceGlass_sdk33_light") { GlassDialogSurface() }
+
+    @Test
+    @Config(sdk = [33], qualifiers = Dark)
+    fun `glass dialog surface over stripes on android 13 in dark theme`() = captureRoot("DialogSurfaceGlass_sdk33_dark") { GlassDialogSurface() }
+
+    @Test
+    @Config(sdk = [26], qualifiers = Light)
+    fun `dialog over striped content on android 8 in light theme`() = captureScreen("DialogGlass_sdk26_light") { GlassDialog() }
+
+    @Test
+    @Config(sdk = [26], qualifiers = Dark)
+    fun `dialog over striped content on android 8 in dark theme`() = captureScreen("DialogGlass_sdk26_dark") { GlassDialog() }
+
+    @Test
+    @Config(sdk = [33], qualifiers = Light)
+    fun `dialog over striped content on android 13 in light theme`() = captureScreen("DialogGlass_sdk33_light") { GlassDialog() }
+
+    @Test
+    @Config(sdk = [33], qualifiers = Dark)
+    fun `dialog over striped content on android 13 in dark theme`() = captureScreen("DialogGlass_sdk33_dark") { GlassDialog() }
+
+    @Test
+    @Config(sdk = [26], qualifiers = Light)
+    fun `opened menu over striped content on android 8 in light theme`() = captureScreen("MenuGlass_sdk26_light") { GlassMenu() }
+
+    @Test
+    @Config(sdk = [26], qualifiers = Dark)
+    fun `opened menu over striped content on android 8 in dark theme`() = captureScreen("MenuGlass_sdk26_dark") { GlassMenu() }
+
+    @Test
+    @Config(sdk = [33], qualifiers = Light)
+    fun `opened menu over striped content on android 13 in light theme`() = captureScreen("MenuGlass_sdk33_light") { GlassMenu() }
+
+    @Test
+    @Config(sdk = [33], qualifiers = Dark)
+    fun `opened menu over striped content on android 13 in dark theme`() = captureScreen("MenuGlass_sdk33_dark") { GlassMenu() }
+
+    @Composable
+    private fun GlassDialogSurface() = SketchbookPreviewLayout {
+        StripedBackdrop(Modifier.fillMaxSize(), colors = ColorfulStripes) {
+            DialogSurface(Modifier.align(Alignment.Center)) {
+                Column(Modifier.padding(16.dp)) { Text("Dialog") }
+            }
+        }
+    }
+
+    @Composable
+    private fun GlassDialog() = SketchbookPreviewLayout {
+        SketchbookDialog(
+            visible = true,
+            onVisibleChange = {},
+            dialog = {
+                DialogSurface {
+                    Column(Modifier.padding(16.dp)) { Text("Dialog") }
+                }
+            }
+        ) {
+            StripedBackdrop(Modifier.fillMaxSize(), colors = ColorfulStripes) {}
+        }
+    }
+
+    @Composable
+    private fun GlassMenu() = SketchbookPreviewLayout {
+        val overlay = remember { OverlayState() }
+        val state = overlay.rememberMenuState()
+        LaunchedEffect(Unit) { state.open() }
+        StripedBackdrop(
+            Modifier.fillMaxSize().popOutBackground(overlay),
+            colors = ColorfulStripes
+        ) {
+            Box(Modifier.fillMaxSize().padding(32.dp), contentAlignment = Alignment.TopStart) {
+                SketchbookMenu(
+                    state = state,
+                    expansion = {
+                        DialogSurface { Text("Expansion", Modifier.padding(16.dp)) }
+                    }
+                ) {
+                    Box(Modifier.size(64.dp).background(Color(0xFF3F51B5)))
+                }
+            }
+        }
+    }
 
     @Composable
     private fun DialogSurfaceContent() = SketchbookPreviewLayout {

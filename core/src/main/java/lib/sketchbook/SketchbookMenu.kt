@@ -1,7 +1,12 @@
 package lib.sketchbook
 
 import androidx.activity.compose.BackHandler
+import dev.chrisbanes.haze.HazeState
+import dev.chrisbanes.haze.hazeSource
 import lib.sketchbook.glass.GlassDepthScope
+import lib.sketchbook.glass.GlassSource
+import lib.sketchbook.glass.LocalGlassHost
+import lib.sketchbook.glass.glassSource
 import androidx.compose.animation.core.animate
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloatAsState
@@ -21,6 +26,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
@@ -68,12 +74,14 @@ import lib.sketchbook.util.toDpSize
 fun Modifier.popOutBackground(state: OverlayState) = composed {
     val blur by animateDpAsState(targetValue = if (state.expanded) 32.dp else 0.dp)
     val alpha by animateFloatAsState(targetValue = if (state.expanded) .5f else 1f)
-    alpha(alpha).blur(blur)
+    alpha(alpha).blur(blur).glassSource().hazeSource(state.glassHost.state)
 }
 
 @Stable
 class OverlayState {
     var expanded: Boolean by mutableStateOf(false)
+
+    internal val glassHost = GlassSource(HazeState())
 }
 
 @Composable
@@ -133,6 +141,8 @@ class MenuState(
             else -> Alignment.CenterHorizontally
         }
     }
+
+    internal val glassHost get() = scope.glassHost
 
     private val transitions = Mutex()
 
@@ -203,43 +213,45 @@ fun SketchbookMenu(
                 window.setDimAmount(0f)
             }
         }
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .pointerInput(Unit) {
-                    detectTapGestures { scope.launch { state.close() } }
-                }
-        ) {
-            BackHandler {
-                scope.launch {
-                    state.close()
-                }
-            }
-            val expansion = @Composable {
-                Box(
-                    modifier = Modifier
-                        .alpha(state.expansionAlpha)
-                        .scale(state.scale)
-                ) {
-                    GlassDepthScope { expansion() }
-                }
-            }
-            val top = if (state.verticalAlignment === Alignment.Bottom) expansion else null
-            val bottom = if (state.verticalAlignment === Alignment.Top) expansion else null
-            AnchoredLayout(
+        CompositionLocalProvider(LocalGlassHost provides state.glassHost) {
+            Box(
                 modifier = Modifier
-                    .offset(state.offset.x, state.offset.y - statusBars.calculateTopPadding()),
-                horizontalAlignment = state.horizontalAlignment,
-                top = top,
-                bottom = bottom
+                    .fillMaxSize()
+                    .pointerInput(Unit) {
+                        detectTapGestures { scope.launch { state.close() } }
+                    }
             ) {
-                Box(
+                BackHandler {
+                    scope.launch {
+                        state.close()
+                    }
+                }
+                val expansion = @Composable {
+                    Box(
+                        modifier = Modifier
+                            .alpha(state.expansionAlpha)
+                            .scale(state.scale)
+                    ) {
+                        GlassDepthScope { expansion() }
+                    }
+                }
+                val top = if (state.verticalAlignment === Alignment.Bottom) expansion else null
+                val bottom = if (state.verticalAlignment === Alignment.Top) expansion else null
+                AnchoredLayout(
                     modifier = Modifier
-                        .size(state.size)
-                        .scale(state.scale),
-                    propagateMinConstraints = true
+                        .offset(state.offset.x, state.offset.y - statusBars.calculateTopPadding()),
+                    horizontalAlignment = state.horizontalAlignment,
+                    top = top,
+                    bottom = bottom
                 ) {
-                    GlassDepthScope { content() }
+                    Box(
+                        modifier = Modifier
+                            .size(state.size)
+                            .scale(state.scale),
+                        propagateMinConstraints = true
+                    ) {
+                        GlassDepthScope { content() }
+                    }
                 }
             }
         }

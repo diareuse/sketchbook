@@ -4,6 +4,8 @@ package lib.sketchbook
 
 import androidx.activity.compose.BackHandler
 import lib.sketchbook.glass.GlassDepthScope
+import lib.sketchbook.glass.glass
+import lib.sketchbook.glass.glassSource
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.ExperimentalTransitionApi
@@ -46,9 +48,6 @@ import androidx.compose.ui.window.DialogWindowProvider
 import androidx.core.view.WindowCompat
 import lib.sketchbook.animation.AnticipateOvershootEasing
 import lib.sketchbook.layout.alignForLargeScreen
-import lib.sketchbook.modifier.glow
-import lib.sketchbook.modifier.optional
-import lib.sketchbook.modifier.surface
 import lib.sketchbook.theme.Theme
 
 @Composable
@@ -64,7 +63,7 @@ fun SketchbookDialog(
     val blur by transition.animateDp { if (it) 32.dp else 0.dp }
     val dim by transition.animateFloat { if (it) .3f else 0f }
     Box(
-        modifier = modifier.blur(blur),
+        modifier = modifier.blur(blur).glassSource(),
         propagateMinConstraints = true
     ) {
         content()
@@ -123,6 +122,8 @@ fun SketchbookDialog(
     }
 }
 
+private val DialogGlassElevation = 8.dp
+
 @Composable
 fun DialogSurface(
     modifier: Modifier = Modifier,
@@ -136,8 +137,7 @@ fun DialogSurface(
         modifier = modifier
             .padding(padding)
             .alignForLargeScreen()
-            .surface(tonalElevation, shape)
-            .optional(useGlow) { glow(shape) },
+            .glass(shape, tonalElevation + DialogGlassElevation, useGlow),
         propagateMinConstraints = true
     ) {
         content()
