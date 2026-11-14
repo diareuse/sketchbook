@@ -1,6 +1,5 @@
 package lib.sketchbook.glass
 
-import androidx.compose.foundation.shape.CornerBasedShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -14,18 +13,12 @@ internal class RefractiveGlass(
     override fun Modifier.glass(spec: GlassSpec, source: GlassSource?): Modifier {
         if (source == null) return with(fallback) { glass(spec, null) }
         val style = GlassStyle.regular.then {
-            shape(spec.shape.rounded())
+            shape(spec.shape as? RoundedCornerShape ?: DefaultCorner)
             tint(spec.tint.copy(alpha = spec.tintStrength))
-            specularIntensity(spec.rimIntensity)
+            specularIntensity(0f)
         }
         return hazeGlass(HazeInput.Sources(source.state), style)
     }
 }
 
 private val DefaultCorner = RoundedCornerShape(24.dp)
-
-private fun androidx.compose.ui.graphics.Shape.rounded(): RoundedCornerShape = when (this) {
-    is RoundedCornerShape -> this
-    is CornerBasedShape -> RoundedCornerShape(topStart, topEnd, bottomEnd, bottomStart)
-    else -> DefaultCorner
-}

@@ -27,7 +27,7 @@ internal data class GlassSpec(
             useGlow: Boolean,
             blurRadius: Dp
         ) = GlassSpec(
-            shape = shape,
+            shape = glassShape(shape),
             tint = tint,
             tintStrength = (BaseTint + tonalElevation.value * TintPerElevationDp).coerceIn(BaseTint, MaxTint),
             rimIntensity = if (useGlow) GlowRim else QuietRim,
