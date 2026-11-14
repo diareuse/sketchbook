@@ -1,5 +1,7 @@
 package lib.sketchbook
 
+import androidx.compose.foundation.LocalIndication
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
@@ -10,11 +12,10 @@ import androidx.compose.material3.minimumInteractiveComponentSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.semantics.role
-import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import lib.sketchbook.glass.glass
 import lib.sketchbook.modifier.specularBorder
@@ -69,16 +70,20 @@ fun SketchbookCard(
 ) {
     val contentColor = Theme.color.contentColorFor(compositeColor)
     Surface(
-        onClick = onClick,
         modifier = modifier
             .minimumInteractiveComponentSize()
             .cardGlass(shape, useGlow, specularRim)
-            .semantics { role = Role.Button },
-        enabled = enabled,
+            .clip(shape)
+            .clickable(
+                interactionSource = interactionSource,
+                indication = LocalIndication.current,
+                enabled = enabled,
+                role = Role.Button,
+                onClick = onClick
+            ),
         shape = shape,
         color = Color.Transparent,
-        contentColor = if (enabled) contentColor else contentColor.copy(DisabledContentAlpha),
-        interactionSource = interactionSource
+        contentColor = if (enabled) contentColor else contentColor.copy(DisabledContentAlpha)
     ) {
         Column(content = content)
     }
