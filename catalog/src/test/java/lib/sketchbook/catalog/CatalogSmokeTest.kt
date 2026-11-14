@@ -75,8 +75,9 @@ class CatalogSmokeTest {
         composeRule.onNodeWithText("Effects").performClick()
         composeRule.onNodeWithTag("catalog-list").performScrollToNode(hasText("Border beam"))
         composeRule.onNodeWithText("Border beam").performSemanticsAction(SemanticsActions.OnClick)
-        listOf("Box", "Column", "Card", "Button", "Counter clockwise", "Line").forEach {
-            assertTrue(composeRule.onAllNodesWithText(it, substring = true).fetchSemanticsNodes().isNotEmpty())
+        composeRule.onNodeWithTag("catalog-list").assertDoesNotExist()
+        listOf("Box", "Column", "Card", "Button", "Counter clockwise", "Line", "Inactive").forEach {
+            assertTrue(it, composeRule.onAllNodesWithText(it, substring = true).fetchSemanticsNodes().isNotEmpty())
         }
     }
 

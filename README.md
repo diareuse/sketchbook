@@ -54,6 +54,8 @@ Glass samples a source registered with `Modifier.glassSource()`. Without a sourc
 
 Glass components clip, press and rim with one Haze `RoundedCornerShape` carrying the same corner sizes as the theme shape, so every layer of a control matches on all API levels. Glass controls are at least 48dp.
 
+`SketchbookScaffold` registers its content as the glass source for its bars, so glass placed inside the scaffold content itself does not refract; place a separate `glassSource()` sibling or use glass in the bars.
+
 ## Border beam
 
 `Modifier.borderBeam` draws an animated multi-colour gradient comet along the outline of any shape and works on any composable.
@@ -75,9 +77,8 @@ Below API 33 the beam falls back to stroked path segments.
 
 ## Haptics
 
-Changing a value (switch, checkbox, radio button, segmented button, filter chip) performs the platform confirm feedback (toggle on or off on API 34+, a lighter click below); clicking a button, icon button or floating action button performs a context click. Pressing a disabled control performs a reject (denial) feedback, falling back to a long press below API 30. Pressing down alone does not vibrate.
+Changing a value (switch, checkbox, radio button, segmented button, filter chip) performs the platform confirm feedback (toggle on or off on API 34+; below that, a click when turning on and a tick when turning off); clicking a button, icon button or floating action button performs a context click. Pressing a disabled control performs a reject (denial) feedback, falling back to a long press below API 30. Pressing down alone does not vibrate.
 
-`SketchbookScaffold` registers its content as the glass source for its bars, so glass placed inside the scaffold content itself does not refract; place a separate `glassSource()` sibling or use glass in the bars.
 
 ## Catalog and tests
 

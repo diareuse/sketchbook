@@ -21,7 +21,6 @@
 - Progress indicators no longer draw a background track; `trackColor` is ignored.
 - `specularBorder` now draws a gradient beam instead of a single-colour glint; `borderBeam` is the new general modifier.
 - `SketchbookPullToRefresh` pulls on non-scrollable content as well as scrollable content.
-
 - Material 3 controls (buttons, icon buttons, floating action buttons, chips, checkbox, radio button, switch, tabs, segmented buttons) use the theme press indication instead of their own ripple.
 - Many components were added; see the component list in [README.md](README.md).
 - The public API is otherwise unchanged apart from additions.

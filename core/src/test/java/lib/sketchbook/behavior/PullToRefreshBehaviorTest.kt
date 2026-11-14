@@ -123,22 +123,53 @@ class PullToRefreshBehaviorTest : BehaviorTest() {
     }
 
     @Test
-    fun `pulling a lazy list at its top requests a refresh and scrolling it still works`() {
+    fun `a lazy list scrolls normally inside the refresh container`() {
         show { LazyRefreshable() }
 
         composeRule.onNodeWithTag("lazy").performTouchInput {
             swipeUp(startY = 400f, endY = 100f, durationMillis = 300)
         }
         composeRule.mainClock.advanceTimeBy(1000)
+
         composeRule.onNodeWithText("Item 0").assertIsNotDisplayed()
         assertEquals(0, refreshes)
+    }
+
+    @Test
+    fun `pulling a lazy list at its top requests a refresh`() {
+        show { LazyRefreshable() }
 
         composeRule.onNodeWithTag("lazy").performTouchInput {
             swipeDown(startY = 40f, endY = 940f, durationMillis = 400)
         }
         composeRule.mainClock.advanceTimeBy(1000)
-        composeRule.onNodeWithText("Item 0").assertIsDisplayed()
+
         assertEquals(1, refreshes)
+    }
+
+    @Test
+    fun `dragging a scrolled lazy list back by less than its offset does not request a refresh`() {
+        show { LazyRefreshable() }
+        composeRule.onNodeWithTag("lazy").performTouchInput {
+            swipeUp(startY = 450f, endY = 50f, durationMillis = 300)
+        }
+        composeRule.mainClock.advanceTimeBy(1000)
+
+        composeRule.onNodeWithTag("lazy").performTouchInput {
+            swipeDown(startY = 100f, endY = 200f, durationMillis = 300)
+        }
+        composeRule.mainClock.advanceTimeBy(1000)
+
+        assertEquals(0, refreshes)
+    }
+
+    @Test
+    fun `an active refresh shows the spinner over non scrollable content`() {
+        refreshing = true
+        show { StaticRefreshable() }
+
+        composeRule.onNodeWithTag("static").assertIsDisplayed()
+        composeRule.onNode(indeterminate).assertExists()
     }
 
     @Test
