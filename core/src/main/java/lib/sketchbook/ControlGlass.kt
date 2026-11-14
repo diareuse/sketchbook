@@ -5,7 +5,6 @@ import androidx.compose.foundation.indication
 import androidx.compose.foundation.interaction.InteractionSource
 import androidx.compose.material3.LocalMinimumInteractiveComponentSize
 import androidx.compose.material3.LocalRippleConfiguration
-import androidx.compose.material3.minimumInteractiveComponentSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
@@ -39,7 +38,7 @@ private fun Modifier.minimumTouchTarget(size: Dp): Modifier =
 
 @Composable
 internal fun Modifier.glassControl(shape: Shape, enabled: Boolean, interactionSource: InteractionSource): Modifier =
-    minimumInteractiveComponentSize()
+    minimumTouchTarget(LocalMinimumInteractiveComponentSize.current)
         .glass(shape, ControlGlassElevation, useGlow = enabled)
         .pressIndicated(shape, interactionSource)
 

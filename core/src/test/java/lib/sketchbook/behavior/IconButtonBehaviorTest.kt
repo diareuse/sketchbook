@@ -110,9 +110,14 @@ class IconButtonBehaviorTest : BehaviorTest() {
     }
 
     @Test
-    fun `glass icon button keeps the compact visual size`() {
-        showAll()
-        composeRule.onNodeWithTag("glass").assertHeightIsEqualTo(40.dp)
+    fun `glass icon button is as tall as the other icon buttons`() {
+        composeRule.setContent {
+            Theme(darkTheme = false, dynamicColor = false) {
+                Box(Modifier.testTag("host")) { variants[3].second({}, true, Modifier) }
+            }
+        }
+        composeRule.waitForIdle()
+        composeRule.onNodeWithTag("host").assertHeightIsEqualTo(48.dp)
     }
 
     @Test

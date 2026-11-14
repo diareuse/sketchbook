@@ -107,9 +107,14 @@ class ButtonBehaviorTest : BehaviorTest() {
     }
 
     @Test
-    fun `glass button keeps the compact visual height`() {
-        showAll()
-        composeRule.onNodeWithTag("glass").assertHeightIsEqualTo(40.dp)
+    fun `glass button is as tall as the other buttons`() {
+        composeRule.setContent {
+            Theme(darkTheme = false, dynamicColor = false) {
+                Box(Modifier.testTag("host")) { variants[3].second({}, true, Modifier) }
+            }
+        }
+        composeRule.waitForIdle()
+        composeRule.onNodeWithTag("host").assertHeightIsEqualTo(48.dp)
     }
 
     @Test
