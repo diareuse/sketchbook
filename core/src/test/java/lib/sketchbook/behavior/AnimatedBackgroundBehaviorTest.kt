@@ -117,7 +117,7 @@ abstract class AnimatedBackgroundBehavior : BehaviorTest() {
 
     @Test
     fun `background repeats its frame after one full loop`() {
-        show { SketchbookAnimatedBackground(Modifier.size(100.dp), colors = palette, baseColor = Color.Black) {} }
+        show { SketchbookAnimatedBackground(Modifier.size(100.dp), colors = palette, speed = 1f, baseColor = Color.Black) {} }
         val first = frame()
 
         advance(5_000)
