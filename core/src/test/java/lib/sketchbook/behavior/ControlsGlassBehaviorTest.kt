@@ -72,14 +72,14 @@ class ControlsGlassBehaviorTest : BehaviorTest() {
     }
 
     @Test
-    fun `disabled switch ignores clicks`() {
+    fun `disabled switch ignores clicks and performs exactly one denial haptic`() {
         val haptics = RecordingHapticFeedback()
         switchOnly(enabled = false, haptics = haptics)
 
         composeRule.onNodeWithTag("switch").performClick()
 
         assertEquals(0, changes)
-        assertEquals(emptyList<HapticFeedbackType>(), haptics.performed)
+        assertEquals(listOf(HapticFeedbackType.Reject), haptics.performed)
     }
 
     @Test
