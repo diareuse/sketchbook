@@ -29,8 +29,10 @@ abstract class ScreenshotTest {
     protected fun captureRoot(
         name: String,
         ready: () -> Boolean = { true },
+        animated: Boolean = false,
         content: @Composable () -> Unit
     ) {
+        if (animated) composeRule.mainClock.autoAdvance = false
         settle(ready, content)
         composeRule.onRoot().captureRoboImage(file(name), roborazziOptions = options)
     }

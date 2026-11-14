@@ -375,6 +375,15 @@ public final class lib/sketchbook/modifier/OverlayKt {
 	public static synthetic fun verticalOverlay-lG28NQ4$default (Landroidx/compose/ui/Modifier;FLlib/sketchbook/modifier/VerticalGravity;ILjava/lang/Object;)Landroidx/compose/ui/Modifier;
 }
 
+public final class lib/sketchbook/modifier/ShaderKt {
+	public static final fun meshGradientBackground (Landroidx/compose/ui/Modifier;Ljava/util/List;IZ)Landroidx/compose/ui/Modifier;
+	public static synthetic fun meshGradientBackground$default (Landroidx/compose/ui/Modifier;Ljava/util/List;IZILjava/lang/Object;)Landroidx/compose/ui/Modifier;
+	public static final fun shimmer-RPmYEkk (Landroidx/compose/ui/Modifier;JIZ)Landroidx/compose/ui/Modifier;
+	public static synthetic fun shimmer-RPmYEkk$default (Landroidx/compose/ui/Modifier;JIZILjava/lang/Object;)Landroidx/compose/ui/Modifier;
+	public static final fun specularBorder-N3hlwXA (Landroidx/compose/ui/Modifier;Landroidx/compose/ui/graphics/Shape;FJIZ)Landroidx/compose/ui/Modifier;
+	public static synthetic fun specularBorder-N3hlwXA$default (Landroidx/compose/ui/Modifier;Landroidx/compose/ui/graphics/Shape;FJIZILjava/lang/Object;)Landroidx/compose/ui/Modifier;
+}
+
 public final class lib/sketchbook/modifier/ShapeKt {
 	public static final fun glow-MVrX58E (Landroidx/compose/ui/Modifier;Landroidx/compose/ui/graphics/Shape;JLlib/sketchbook/modifier/LightSource;FFF)Landroidx/compose/ui/Modifier;
 	public static synthetic fun glow-MVrX58E$default (Landroidx/compose/ui/Modifier;Landroidx/compose/ui/graphics/Shape;JLlib/sketchbook/modifier/LightSource;FFFILjava/lang/Object;)Landroidx/compose/ui/Modifier;
