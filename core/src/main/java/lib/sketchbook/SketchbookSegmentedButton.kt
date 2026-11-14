@@ -57,7 +57,7 @@ fun SketchbookSegmentedButton(
     compositeColor: Color = Theme.color.emphasis.background
 ) {
     val colors = segmentedColors(compositeColor)
-    SingleChoiceSegmentedButtonRow(modifier = modifier.glass(shape, SegmentedGlassElevation)) {
+    SingleChoiceSegmentedButtonRow(modifier = modifier.glass(shape, SegmentedGlassElevation, useGlow = enabled)) {
         repeat(count) { index ->
             SegmentedButton(
                 selected = index == selectedIndex,
@@ -83,7 +83,7 @@ fun SketchbookMultiChoiceSegmentedButton(
     compositeColor: Color = Theme.color.emphasis.background
 ) {
     val colors = segmentedColors(compositeColor)
-    MultiChoiceSegmentedButtonRow(modifier = modifier.glass(shape, SegmentedGlassElevation)) {
+    MultiChoiceSegmentedButtonRow(modifier = modifier.glass(shape, SegmentedGlassElevation, useGlow = enabled)) {
         repeat(count) { index ->
             SegmentedButton(
                 checked = index in selectedIndices,

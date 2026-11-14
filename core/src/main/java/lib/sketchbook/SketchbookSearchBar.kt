@@ -12,7 +12,9 @@ import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.ImeAction
@@ -36,7 +38,9 @@ fun SketchbookSearchBar(
     compositeColor: Color = Theme.color.emphasis.background
 ) {
     val keyboardOptions = remember { KeyboardOptions(imeAction = ImeAction.Search) }
-    val keyboardActions = remember(onSearch, query) { KeyboardActions(onSearch = { onSearch(query) }) }
+    val currentQuery by rememberUpdatedState(query)
+    val currentOnSearch by rememberUpdatedState(onSearch)
+    val keyboardActions = remember { KeyboardActions(onSearch = { currentOnSearch(currentQuery) }) }
     Column(modifier = modifier) {
         SketchbookTextField(
             value = query,

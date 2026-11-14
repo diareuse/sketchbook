@@ -68,6 +68,16 @@ class SearchBarBehaviorTest : BehaviorTest() {
     }
 
     @Test
+    fun `search ime action reports text typed after the first composition`() {
+        show()
+
+        composeRule.onNode(hasSetTextAction()).performTextInput("typed")
+        composeRule.onNode(hasSetTextAction()).performImeAction()
+
+        assertEquals(listOf("typed"), searches)
+    }
+
+    @Test
     fun `clear button empties the query and then disappears`() {
         show(initial = "compose")
 
