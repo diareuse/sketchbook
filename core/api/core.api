@@ -43,6 +43,12 @@ public final class lib/sketchbook/ComposableSingletons$SketchbookDialogKt {
 	public final fun getLambda$404804572$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
 }
 
+public final class lib/sketchbook/ComposableSingletons$SketchbookDividerKt {
+	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookDividerKt;
+	public fun <init> ()V
+	public final fun getLambda$-328210372$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+}
+
 public final class lib/sketchbook/ComposableSingletons$SketchbookFieldRowKt {
 	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookFieldRowKt;
 	public fun <init> ()V
@@ -266,6 +272,11 @@ public abstract interface annotation class lib/sketchbook/SketchbookComponentPre
 public final class lib/sketchbook/SketchbookDialogKt {
 	public static final fun DialogSurface-WH-ejsw (Landroidx/compose/ui/Modifier;Landroidx/compose/foundation/layout/PaddingValues;Landroidx/compose/ui/graphics/Shape;ZFLkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;II)V
 	public static final fun SketchbookDialog (ZLkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function2;Landroidx/compose/ui/Modifier;Landroidx/compose/ui/Alignment;Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;II)V
+}
+
+public final class lib/sketchbook/SketchbookDividerKt {
+	public static final fun SketchbookHorizontalDivider-5_Ve2oQ (Landroidx/compose/ui/Modifier;FJFLandroidx/compose/runtime/Composer;II)V
+	public static final fun SketchbookVerticalDivider-5_Ve2oQ (Landroidx/compose/ui/Modifier;FJFLandroidx/compose/runtime/Composer;II)V
 }
 
 public final class lib/sketchbook/SketchbookFieldRowKt {
