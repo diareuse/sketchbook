@@ -35,6 +35,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.foundation.shape.RoundedCornerShape
+import lib.sketchbook.glass.glass
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.layout.layoutId
@@ -60,6 +63,15 @@ private const val NavigationIcon = "navigationIcon"
 private const val Title = "title"
 private const val Actions = "actions"
 private const val ExpandedTitle = "expandedTitle"
+
+private val BarShape = RoundedCornerShape(0.dp)
+private val BarGlassElevation = 16.dp
+
+private fun TopAppBarScrollBehavior.collapsedGlassAlpha(): Float {
+    val limit = state.heightOffsetLimit
+    if (limit == 0f) return 0f
+    return (state.heightOffset / limit * 2f).coerceIn(0f, 1f)
+}
 
 @Composable
 fun SketchbookTopAppBar(
@@ -108,86 +120,93 @@ fun SketchbookTopAppBar(
     }
     val spacing = with(density) { arrangement.spacing.roundToPx() }
     val minHeight = with(density) { minHeight.roundToPx() }
-    Layout(
-        modifier = modifier
-            .padding(contentPadding),
-        content = {
-            Box(
-                Modifier
-                    .layoutId(StatusBar)
-                    .statusBarsPadding()
-            )
-            Box(Modifier.layoutId(NavigationIcon)) { navigationIcon() }
-            Box(Modifier.layoutId(Title).clearAndSetSemantics {}) {
-                ProvideTextStyle(titleStyle) {
-                    title()
+    Box(modifier, propagateMinConstraints = true) {
+        Box(
+            Modifier
+                .matchParentSize()
+                .graphicsLayer { alpha = scrollBehavior.collapsedGlassAlpha() }
+                .glass(BarShape, BarGlassElevation)
+        )
+        Layout(
+            modifier = Modifier.padding(contentPadding),
+            content = {
+                Box(
+                    Modifier
+                        .layoutId(StatusBar)
+                        .statusBarsPadding()
+                )
+                Box(Modifier.layoutId(NavigationIcon)) { navigationIcon() }
+                Box(Modifier.layoutId(Title).clearAndSetSemantics {}) {
+                    ProvideTextStyle(titleStyle) {
+                        title()
+                    }
+                }
+                Box(Modifier.layoutId(Actions)) { actions() }
+                Box(Modifier.layoutId(ExpandedTitle)) {
+                    ProvideTextStyle(expandedTitleStyle) {
+                        title()
+                    }
                 }
             }
-            Box(Modifier.layoutId(Actions)) { actions() }
-            Box(Modifier.layoutId(ExpandedTitle)) {
-                ProvideTextStyle(expandedTitleStyle) {
-                    title()
-                }
+        ) { measurables, constraints ->
+            // Stage 1: Measure
+            var cs = constraints.copy(minWidth = 0, minHeight = 0)
+            val statusBar = measurables.first { it.layoutId == StatusBar }.measure(cs)
+            cs = cs.minusWidth(spacing)
+            val navigationIcon = measurables.first { it.layoutId == NavigationIcon }.measure(cs)
+            cs = cs.minusWidth(navigationIcon.width)
+            val actions = measurables.first { it.layoutId == Actions }.measure(cs)
+            cs = cs.minusWidth(actions.width).fixedWidth()
+            val title = measurables.first { it.layoutId == Title }.measure(cs)
+            val expandedCS = lerp(constraints, cs, expandFraction).minusWidth(expandedTitlePaddingEnd)
+            val expandedTitle = measurables.first { it.layoutId == ExpandedTitle }.measure(expandedCS)
+
+            // Stage 2: Arrange
+            val pinnedHeight = maxOf(navigationIcon.height, actions.height, title.height, minHeight)
+            val (offsetNavigationIcon, offsetTitle, offsetActions) = arrangement.arrange(
+                density = density,
+                direction = direction,
+                fullSize = constraints.maxWidth,
+                navigationIcon.width, title.width, actions.width
+            )
+            val expandedX = lerp(
+                start = offsetNavigationIcon + expandedTitlePaddingStart,
+                stop = offsetTitle,
+                fraction = expandFraction
+            )
+            val expandedY = lerp(
+                start = pinnedHeight + expandedTitlePaddingTop,
+                stop = alignment.align(title.height, pinnedHeight),
+                fraction = expandFraction
+            )
+
+            // Stage 3: Modify scroll behavior
+            val statusBarOffset = statusBar.height
+            val height = (max(pinnedHeight, expandedY + expandedTitle.height) +
+                    statusBarOffset).toFloat()
+            if (scrollBehavior.state.heightOffsetLimit != -height) {
+                scrollBehavior.state.heightOffsetLimit = -height
             }
-        }
-    ) { measurables, constraints ->
-        // Stage 1: Measure
-        var cs = constraints.copy(minWidth = 0, minHeight = 0)
-        val statusBar = measurables.first { it.layoutId == StatusBar }.measure(cs)
-        cs = cs.minusWidth(spacing)
-        val navigationIcon = measurables.first { it.layoutId == NavigationIcon }.measure(cs)
-        cs = cs.minusWidth(navigationIcon.width)
-        val actions = measurables.first { it.layoutId == Actions }.measure(cs)
-        cs = cs.minusWidth(actions.width).fixedWidth()
-        val title = measurables.first { it.layoutId == Title }.measure(cs)
-        val expandedCS = lerp(constraints, cs, expandFraction).minusWidth(expandedTitlePaddingEnd)
-        val expandedTitle = measurables.first { it.layoutId == ExpandedTitle }.measure(expandedCS)
+            if (heightOffsetLimit != -height) {
+                heightOffsetLimit = -height
+            }
 
-        // Stage 2: Arrange
-        val pinnedHeight = maxOf(navigationIcon.height, actions.height, title.height, minHeight)
-        val (offsetNavigationIcon, offsetTitle, offsetActions) = arrangement.arrange(
-            density = density,
-            direction = direction,
-            fullSize = constraints.maxWidth,
-            navigationIcon.width, title.width, actions.width
-        )
-        val expandedX = lerp(
-            start = offsetNavigationIcon + expandedTitlePaddingStart,
-            stop = offsetTitle,
-            fraction = expandFraction
-        )
-        val expandedY = lerp(
-            start = pinnedHeight + expandedTitlePaddingTop,
-            stop = alignment.align(title.height, pinnedHeight),
-            fraction = expandFraction
-        )
-
-        // Stage 3: Modify scroll behavior
-        val statusBarOffset = statusBar.height
-        val height = (max(pinnedHeight, expandedY + expandedTitle.height) +
-                statusBarOffset).toFloat()
-        if (scrollBehavior.state.heightOffsetLimit != -height) {
-            scrollBehavior.state.heightOffsetLimit = -height
-        }
-        if (heightOffsetLimit != -height) {
-            heightOffsetLimit = -height
-        }
-
-        // Stage 4: Layout
-        val offset = (height * hideFraction).toInt().coerceAtLeast(0)
-        layout(constraints.maxWidth, (height - offset).toInt()) {
-            navigationIcon.placeRelative(
-                x = offsetNavigationIcon,
-                y = alignment.align(navigationIcon.height, pinnedHeight) - offset + statusBarOffset
-            )
-            actions.placeRelative(
-                x = offsetActions,
-                y = alignment.align(actions.height, pinnedHeight) - offset + statusBarOffset
-            )
-            expandedTitle.placeRelative(
-                x = expandedX,
-                y = expandedY - offset + statusBarOffset
-            )
+            // Stage 4: Layout
+            val offset = (height * hideFraction).toInt().coerceAtLeast(0)
+            layout(constraints.maxWidth, (height - offset).toInt()) {
+                navigationIcon.placeRelative(
+                    x = offsetNavigationIcon,
+                    y = alignment.align(navigationIcon.height, pinnedHeight) - offset + statusBarOffset
+                )
+                actions.placeRelative(
+                    x = offsetActions,
+                    y = alignment.align(actions.height, pinnedHeight) - offset + statusBarOffset
+                )
+                expandedTitle.placeRelative(
+                    x = expandedX,
+                    y = expandedY - offset + statusBarOffset
+                )
+            }
         }
     }
 }
