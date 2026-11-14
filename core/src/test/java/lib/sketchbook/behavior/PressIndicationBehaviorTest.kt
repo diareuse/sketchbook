@@ -1,6 +1,5 @@
 package lib.sketchbook.behavior
 
-import android.view.HapticFeedbackConstants
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -30,40 +29,39 @@ import org.robolectric.annotation.Config
 
 abstract class PressIndicationBehavior : BehaviorTest() {
 
-    private val tick = HapticFeedbackType(HapticFeedbackConstants.CLOCK_TICK)
     private val haptics = RecordingHapticFeedback()
     private var clicks = 0
 
     @Test
-    fun `pressing a themed control ticks exactly once`() {
+    fun `pressing a themed control emits no haptic`() {
         show()
         press()
         advance(100)
-        assertEquals(listOf(tick), haptics.performed)
+        assertEquals(emptyList<HapticFeedbackType>(), haptics.performed)
     }
 
     @Test
-    fun `releasing a themed control adds no further tick`() {
+    fun `releasing a themed control emits no haptic`() {
         show()
         press()
         advance(100)
         release()
         advance(600)
-        assertEquals(listOf(tick), haptics.performed)
+        assertEquals(emptyList<HapticFeedbackType>(), haptics.performed)
     }
 
     @Test
-    fun `cancelling a press adds no further tick`() {
+    fun `cancelling a press emits no haptic`() {
         show()
         press()
         advance(100)
         composeRule.onNodeWithTag(Target).performTouchInput { cancel() }
         advance(600)
-        assertEquals(listOf(tick), haptics.performed)
+        assertEquals(emptyList<HapticFeedbackType>(), haptics.performed)
     }
 
     @Test
-    fun `an untouched control never ticks`() {
+    fun `an untouched control never emits a haptic`() {
         show()
         advance(600)
         assertEquals(emptyList<HapticFeedbackType>(), haptics.performed)

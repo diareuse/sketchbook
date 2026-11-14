@@ -1,6 +1,5 @@
 package lib.sketchbook.behavior
 
-import android.view.HapticFeedbackConstants
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.CompositionLocalProvider
@@ -46,7 +45,7 @@ abstract class CardPressIndicationBehavior : BehaviorTest() {
     }
 
     @Test
-    fun `a pressed clickable card shows the theme press indication and ticks once`() {
+    fun `a pressed clickable card shows the theme press indication and emits no haptic`() {
         show()
         val idle = frame()
 
@@ -54,7 +53,7 @@ abstract class CardPressIndicationBehavior : BehaviorTest() {
         composeRule.mainClock.advanceTimeBy(150)
 
         assertFalse(idle.contentEquals(frame()))
-        assertEquals(listOf(HapticFeedbackType(HapticFeedbackConstants.CLOCK_TICK)), haptics.performed)
+        assertEquals(emptyList<HapticFeedbackType>(), haptics.performed)
     }
 }
 

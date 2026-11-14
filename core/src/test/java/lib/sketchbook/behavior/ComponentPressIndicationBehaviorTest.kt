@@ -1,6 +1,5 @@
 package lib.sketchbook.behavior
 
-import android.view.HapticFeedbackConstants
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
@@ -62,7 +61,6 @@ import org.robolectric.annotation.Config
 
 abstract class ComponentPressIndicationBehavior : BehaviorTest() {
 
-    private val tick = HapticFeedbackType(HapticFeedbackConstants.CLOCK_TICK)
     private val haptics = RecordingHapticFeedback()
 
     @Test
@@ -193,17 +191,17 @@ abstract class ComponentPressIndicationBehavior : BehaviorTest() {
     }
 
     @Test
-    fun `releasing a pressed button adds no further tick`() {
+    fun `pressing and releasing a button emits no haptic`() {
         show { SketchbookButton({}, it) { Text("Go") } }
         composeRule.onNodeWithTag(Target).performTouchInput { down(center) }
         composeRule.mainClock.advanceTimeBy(150)
         composeRule.onNodeWithTag(Target).performTouchInput { up() }
         composeRule.mainClock.advanceTimeBy(600)
-        assertEquals(listOf(tick), haptics.performed)
+        assertEquals(emptyList<HapticFeedbackType>(), haptics.performed)
     }
 
     @Test
-    fun `a disabled button does not tick when pressed`() {
+    fun `a disabled button emits no press haptic`() {
         show { SketchbookButton({}, it, enabled = false) { Text("Go") } }
         composeRule.onNodeWithTag(Target).performTouchInput { down(center) }
         composeRule.mainClock.advanceTimeBy(150)
@@ -220,7 +218,7 @@ abstract class ComponentPressIndicationBehavior : BehaviorTest() {
         composeRule.target().performTouchInput { down(center) }
         composeRule.mainClock.advanceTimeBy(150)
 
-        assertEquals(listOf(tick), haptics.performed)
+        assertEquals(emptyList<HapticFeedbackType>(), haptics.performed)
         assertFalse(idle.contentEquals(frame()))
     }
 

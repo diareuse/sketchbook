@@ -45,7 +45,7 @@ fun Theme(
     val container = remember(shapes) { ThemeContainerMaterial3(shapes) }
     val style = remember(scheme) { ThemeStyleMaterial3(scheme) }
     val haptics = remember(view) { PlatformHapticFeedback(view) }
-    val glassPress = rememberGlassPressIndication(LocalHapticFeedback.current)
+    val glassPress = rememberGlassPressIndication()
     CompositionLocalProvider(
         LocalText provides text,
         LocalContainer provides container,
