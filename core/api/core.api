@@ -236,6 +236,14 @@ public final class lib/sketchbook/ComposableSingletons$SketchbookSliderKt {
 	public final fun getLambda$-1517110230$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
 }
 
+public final class lib/sketchbook/ComposableSingletons$SketchbookSnackbarKt {
+	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookSnackbarKt;
+	public fun <init> ()V
+	public final fun getLambda$-1141052383$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function3;
+	public final fun getLambda$1078949921$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$1230335650$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+}
+
 public final class lib/sketchbook/ComposableSingletons$SketchbookSwitchKt {
 	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookSwitchKt;
 	public fun <init> ()V
@@ -499,6 +507,11 @@ public final class lib/sketchbook/SketchbookSkeletonKt {
 
 public final class lib/sketchbook/SketchbookSliderKt {
 	public static final fun SketchbookSlider-lmFMXvc (FLkotlin/jvm/functions/Function1;Landroidx/compose/ui/Modifier;Lkotlin/ranges/ClosedFloatingPointRange;ILkotlin/jvm/functions/Function0;ZJLandroidx/compose/foundation/interaction/MutableInteractionSource;Landroidx/compose/runtime/Composer;II)V
+}
+
+public final class lib/sketchbook/SketchbookSnackbarKt {
+	public static final fun SketchbookSnackbar-jB83MbM (Landroidx/compose/material3/SnackbarData;Landroidx/compose/ui/Modifier;Landroidx/compose/ui/graphics/Shape;JJLjava/lang/String;Landroidx/compose/runtime/Composer;II)V
+	public static final fun SketchbookSnackbarHost (Landroidx/compose/material3/SnackbarHostState;Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function3;Landroidx/compose/runtime/Composer;II)V
 }
 
 public final class lib/sketchbook/SketchbookSwitchKt {
