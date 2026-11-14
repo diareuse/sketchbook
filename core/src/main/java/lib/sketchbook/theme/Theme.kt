@@ -9,6 +9,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.Immutable
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.luminance
@@ -27,11 +28,19 @@ fun Theme(
     typography = ThemeTypography,
     shapes = ThemeShapes
 ) {
+    val typography = MaterialTheme.typography
+    val shapes = MaterialTheme.shapes
+    val scheme = MaterialTheme.colorScheme
+    val view = LocalView.current
+    val text = remember(typography) { ThemeTextMaterial3(typography) }
+    val container = remember(shapes) { ThemeContainerMaterial3(shapes) }
+    val style = remember(scheme) { ThemeStyleMaterial3(scheme) }
+    val haptics = remember(view) { PlatformHapticFeedback(view) }
     CompositionLocalProvider(
-        LocalText provides ThemeTextMaterial3(MaterialTheme.typography),
-        LocalContainer provides ThemeContainerMaterial3(MaterialTheme.shapes),
-        LocalStyle provides ThemeStyleMaterial3(MaterialTheme.colorScheme),
-        LocalHapticFeedback provides PlatformHapticFeedback(LocalView.current),
+        LocalText provides text,
+        LocalContainer provides container,
+        LocalStyle provides style,
+        LocalHapticFeedback provides haptics,
         LocalIndication provides rememberVibrateIndication()
     ) {
         CompositionLocalProvider(

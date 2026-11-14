@@ -32,5 +32,6 @@ fun CornerBasedShape.extendBy(padding: Dp, density: Density) = copy(
 )
 
 private fun CornerSize.toDp(density: Density): Dp {
-    return with(density) { toPx(Size.Unspecified, this).toDp() }
+    val px = with(density) { toPx(Size.Unspecified, this) }
+    return if (px.isNaN()) 0.dp else with(density) { px.toDp() }
 }
