@@ -28,3 +28,9 @@ internal fun rememberConfirmedChange(onChange: (Boolean) -> Unit): (Boolean) -> 
         }
     }
 }
+
+@Composable
+internal fun rememberConfirmation(): (Boolean?) -> Unit {
+    val haptics = LocalHapticFeedback.current
+    return remember(haptics) { { on -> haptics.confirmChange(on) } }
+}

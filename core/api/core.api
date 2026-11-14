@@ -248,6 +248,8 @@ public final class lib/sketchbook/ComposableSingletons$SketchbookSearchBarKt {
 public final class lib/sketchbook/ComposableSingletons$SketchbookSegmentedButtonKt {
 	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookSegmentedButtonKt;
 	public fun <init> ()V
+	public final fun getLambda$-1097208921$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-646902960$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
 	public final fun getLambda$201512604$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
 }
 
