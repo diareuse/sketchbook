@@ -9,6 +9,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ShaderBrush
 import androidx.compose.ui.graphics.drawscope.ContentDrawScope
 import androidx.compose.ui.graphics.drawscope.DrawScope
+import androidx.compose.ui.node.CompositionLocalConsumerModifierNode
 import androidx.compose.ui.node.DrawModifierNode
 import androidx.compose.ui.node.ModifierNodeElement
 import androidx.compose.ui.node.invalidateDraw
@@ -79,7 +80,7 @@ internal class MeshGradientNode(
     private var colors: List<Color>,
     durationMillis: Int,
     private var animated: Boolean
-) : Modifier.Node(), DrawModifierNode {
+) : Modifier.Node(), DrawModifierNode, CompositionLocalConsumerModifierNode {
 
     private var phase = 0f
     private val painter by lazy(LazyThreadSafetyMode.NONE) { meshPainter() }
@@ -101,7 +102,7 @@ internal class MeshGradientNode(
     }
 
     private fun sync() {
-        driver.run(animated && isAttached, coroutineScope)
+        driver.run(animated && isAttached && systemAnimationsAllowed(), coroutineScope)
     }
 
     override fun ContentDrawScope.draw() {

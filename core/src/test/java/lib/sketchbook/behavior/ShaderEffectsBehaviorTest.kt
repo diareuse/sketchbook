@@ -1,5 +1,6 @@
 package lib.sketchbook.behavior
 
+import android.provider.Settings
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
@@ -113,6 +114,42 @@ abstract class ShaderEffectsBehavior : BehaviorTest() {
 
     @Test
     fun `mesh gradient rejects more colors than it can blend`() = assertRejected(List(5) { Color.Red })
+
+    @Test
+    fun `shimmer holds still when the system disabled animations`() {
+        disableAnimations()
+        show { Modifier.size(100.dp, 40.dp).background(Color.Black).shimmer(Color.White, 1000) }
+        val first = frame()
+        advance(400)
+        assertArrayEquals(first, frame(), 0f)
+    }
+
+    @Test
+    fun `animated specular border holds still when the system disabled animations`() {
+        disableAnimations()
+        show { Modifier.size(100.dp).background(Color.Black, shape).specularBorder(shape, 3.dp, Color.White, 2000) }
+        val first = frame()
+        advance(500)
+        assertArrayEquals(first, frame(), 0f)
+    }
+
+    @Test
+    fun `animated mesh gradient holds still when the system disabled animations`() {
+        disableAnimations()
+        show {
+            Modifier.size(100.dp).meshGradientBackground(
+                listOf(Color.Red, Color.Green, Color.Blue, Color.Yellow),
+                durationMillis = 2000
+            )
+        }
+        val first = frame()
+        advance(700)
+        assertArrayEquals(first, frame(), 0f)
+    }
+
+    private fun disableAnimations() {
+        Settings.Global.putFloat(composeRule.activity.contentResolver, Settings.Global.ANIMATOR_DURATION_SCALE, 0f)
+    }
 
     private fun assertRejected(palette: List<Color>) {
         val failure = runCatching { show { Modifier.size(10.dp).meshGradientBackground(palette) } }

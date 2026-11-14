@@ -15,6 +15,7 @@ import androidx.compose.ui.graphics.drawscope.ContentDrawScope
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.node.CompositionLocalConsumerModifierNode
 import androidx.compose.ui.node.DrawModifierNode
 import androidx.compose.ui.node.ModifierNodeElement
 import androidx.compose.ui.node.invalidateDraw
@@ -93,7 +94,7 @@ internal class SpecularBorderNode(
     private var color: Color,
     durationMillis: Int,
     private var animated: Boolean
-) : Modifier.Node(), DrawModifierNode {
+) : Modifier.Node(), DrawModifierNode, CompositionLocalConsumerModifierNode {
 
     private var phase = 0f
     private val cache = OutlineCache()
@@ -119,7 +120,7 @@ internal class SpecularBorderNode(
     }
 
     private fun sync() {
-        driver.run(animated && isAttached, coroutineScope)
+        driver.run(animated && isAttached && systemAnimationsAllowed(), coroutineScope)
     }
 
     override fun ContentDrawScope.draw() {

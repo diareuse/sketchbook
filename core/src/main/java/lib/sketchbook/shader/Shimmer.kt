@@ -9,6 +9,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ShaderBrush
 import androidx.compose.ui.graphics.drawscope.ContentDrawScope
 import androidx.compose.ui.graphics.drawscope.DrawScope
+import androidx.compose.ui.node.CompositionLocalConsumerModifierNode
 import androidx.compose.ui.node.DrawModifierNode
 import androidx.compose.ui.node.ModifierNodeElement
 import androidx.compose.ui.node.invalidateDraw
@@ -62,7 +63,7 @@ internal class ShimmerNode(
     private var color: Color,
     durationMillis: Int,
     private var enabled: Boolean
-) : Modifier.Node(), DrawModifierNode {
+) : Modifier.Node(), DrawModifierNode, CompositionLocalConsumerModifierNode {
 
     private var phase = 0f
     private val painter by lazy(LazyThreadSafetyMode.NONE) { shimmerPainter() }
@@ -84,7 +85,7 @@ internal class ShimmerNode(
     }
 
     private fun sync() {
-        driver.run(enabled && isAttached, coroutineScope)
+        driver.run(enabled && isAttached && systemAnimationsAllowed(), coroutineScope)
     }
 
     override fun ContentDrawScope.draw() {
