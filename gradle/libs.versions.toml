@@ -45,6 +45,7 @@ compose-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest" }
 kotlinx-collections = { module = "org.jetbrains.kotlinx:kotlinx-collections-immutable", version.ref = "collections" }
 
 [plugins]
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 android-library = { id = "com.android.library", version.ref = "android" }
 bcv = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version.ref = "bcv" }

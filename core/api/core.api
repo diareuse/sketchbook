@@ -1,89 +1,89 @@
 public final class lib/sketchbook/ComposableSingletons$SketchbookColorSliderKt {
 	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookColorSliderKt;
 	public fun <init> ()V
-	public final fun getLambda$60901788$core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$60901788$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
 }
 
 public final class lib/sketchbook/ComposableSingletons$SketchbookDialogKt {
 	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookDialogKt;
 	public fun <init> ()V
-	public final fun getLambda$-1278257221$core_release ()Lkotlin/jvm/functions/Function2;
-	public final fun getLambda$-2138271507$core_release ()Lkotlin/jvm/functions/Function2;
-	public final fun getLambda$-992911856$core_release ()Lkotlin/jvm/functions/Function2;
-	public final fun getLambda$404804572$core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-1278257221$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-2138271507$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-992911856$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$404804572$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
 }
 
 public final class lib/sketchbook/ComposableSingletons$SketchbookFieldRowKt {
 	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookFieldRowKt;
 	public fun <init> ()V
-	public final fun getLambda$-1820348038$core_release ()Lkotlin/jvm/functions/Function2;
-	public final fun getLambda$1091514083$core_release ()Lkotlin/jvm/functions/Function2;
-	public final fun getLambda$1842853304$core_release ()Lkotlin/jvm/functions/Function2;
-	public final fun getLambda$2133419556$core_release ()Lkotlin/jvm/functions/Function3;
-	public final fun getLambda$819393146$core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-1820348038$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$1091514083$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$1842853304$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$2133419556$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function3;
+	public final fun getLambda$819393146$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
 }
 
 public final class lib/sketchbook/ComposableSingletons$SketchbookImageKt {
 	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookImageKt;
 	public fun <init> ()V
-	public final fun getLambda$-346275759$core_release ()Lkotlin/jvm/functions/Function4;
-	public final fun getLambda$377746939$core_release ()Lkotlin/jvm/functions/Function4;
+	public final fun getLambda$-346275759$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function4;
+	public final fun getLambda$377746939$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function4;
 }
 
 public final class lib/sketchbook/ComposableSingletons$SketchbookMenuKt {
 	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookMenuKt;
 	public fun <init> ()V
-	public final fun getLambda$-198701684$core_release ()Lkotlin/jvm/functions/Function2;
-	public final fun getLambda$1026392444$core_release ()Lkotlin/jvm/functions/Function3;
+	public final fun getLambda$-198701684$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$1026392444$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function3;
 }
 
 public final class lib/sketchbook/ComposableSingletons$SketchbookRockerCounterKt {
 	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookRockerCounterKt;
 	public fun <init> ()V
-	public final fun getLambda$-1460237201$core_release ()Lkotlin/jvm/functions/Function2;
-	public final fun getLambda$-168351140$core_release ()Lkotlin/jvm/functions/Function2;
-	public final fun getLambda$-1868260816$core_release ()Lkotlin/jvm/functions/Function2;
-	public final fun getLambda$1261714771$core_release ()Lkotlin/jvm/functions/Function2;
-	public final fun getLambda$1669738386$core_release ()Lkotlin/jvm/functions/Function2;
-	public final fun getLambda$853691156$core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-168351140$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-395982223$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$12041392$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$1261714771$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$1669738386$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$853691156$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
 }
 
 public final class lib/sketchbook/ComposableSingletons$SketchbookSwitchKt {
 	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookSwitchKt;
 	public fun <init> ()V
-	public final fun getLambda$-172970308$core_release ()Lkotlin/jvm/functions/Function2;
-	public final fun getLambda$1403615748$core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-172970308$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$1403615748$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
 }
 
 public final class lib/sketchbook/ComposableSingletons$SketchbookTextFieldKt {
 	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookTextFieldKt;
 	public fun <init> ()V
-	public final fun getLambda$-1177725188$core_release ()Lkotlin/jvm/functions/Function2;
-	public final fun getLambda$-1443128238$core_release ()Lkotlin/jvm/functions/Function2;
-	public final fun getLambda$-423102912$core_release ()Lkotlin/jvm/functions/Function2;
-	public final fun getLambda$880645802$core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-1177725188$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-1443128238$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-423102912$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$880645802$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
 }
 
 public final class lib/sketchbook/ComposableSingletons$SketchbookTopAppBarKt {
 	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookTopAppBarKt;
 	public fun <init> ()V
-	public final fun getLambda$-124849045$core_release ()Lkotlin/jvm/functions/Function2;
-	public final fun getLambda$-1338282813$core_release ()Lkotlin/jvm/functions/Function2;
-	public final fun getLambda$-1390919830$core_release ()Lkotlin/jvm/functions/Function2;
-	public final fun getLambda$-1668792588$core_release ()Lkotlin/jvm/functions/Function2;
-	public final fun getLambda$-178223883$core_release ()Lkotlin/jvm/functions/Function2;
-	public final fun getLambda$-1845531407$core_release ()Lkotlin/jvm/functions/Function2;
-	public final fun getLambda$-2025131817$core_release ()Lkotlin/jvm/functions/Function2;
-	public final fun getLambda$-2034657192$core_release ()Lkotlin/jvm/functions/Function2;
-	public final fun getLambda$-631829972$core_release ()Lkotlin/jvm/functions/Function4;
-	public final fun getLambda$-876822254$core_release ()Lkotlin/jvm/functions/Function2;
-	public final fun getLambda$1068680289$core_release ()Lkotlin/jvm/functions/Function2;
-	public final fun getLambda$1653006101$core_release ()Lkotlin/jvm/functions/Function2;
-	public final fun getLambda$1752048974$core_release ()Lkotlin/jvm/functions/Function2;
-	public final fun getLambda$1927576337$core_release ()Lkotlin/jvm/functions/Function2;
-	public final fun getLambda$1941370300$core_release ()Lkotlin/jvm/functions/Function2;
-	public final fun getLambda$485978189$core_release ()Lkotlin/jvm/functions/Function2;
-	public final fun getLambda$982733130$core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-1338282813$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-1356141588$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-1668792588$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-178223883$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-1845531407$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-2025131817$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-2034657192$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-631829972$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function4;
+	public final fun getLambda$-798701165$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$1068680289$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$1653006101$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$1672754923$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$1752048974$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$1941370300$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$2005697426$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$485978189$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$982733130$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
 }
 
 public final class lib/sketchbook/HardwareImageState : lib/sketchbook/ImageState {
@@ -331,7 +331,7 @@ public final class lib/sketchbook/modifier/BrightnessKt {
 public final class lib/sketchbook/modifier/ComposableSingletons$StrokeKt {
 	public static final field INSTANCE Llib/sketchbook/modifier/ComposableSingletons$StrokeKt;
 	public fun <init> ()V
-	public final fun getLambda$650509546$core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$650509546$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
 }
 
 public final class lib/sketchbook/modifier/LayoutKt {
