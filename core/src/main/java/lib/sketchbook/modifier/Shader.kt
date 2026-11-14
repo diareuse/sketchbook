@@ -34,5 +34,6 @@ fun Modifier.specularBorder(
 fun Modifier.meshGradientBackground(
     colors: List<Color>,
     durationMillis: Int = 10_000,
-    animated: Boolean = true
-): Modifier = this then MeshGradientElement(colors.toMeshColors(), durationMillis, animated)
+    animated: Boolean = true,
+    baseColor: Color = Color.Transparent
+): Modifier = this then MeshGradientElement(colors.toMeshColors(), durationMillis, animated, baseColor)

@@ -15,14 +15,11 @@ import androidx.compose.ui.node.ModifierNodeElement
 import androidx.compose.ui.node.invalidateDraw
 import lib.sketchbook.util.Api
 import lib.sketchbook.util.sdkAtLeast
-import kotlin.math.cos
-import kotlin.math.max
-import kotlin.math.sin
 
 internal const val MeshColorCount = 4
 
 internal fun interface MeshPainter {
-    fun DrawScope.paint(colors: List<Color>, phase: Float)
+    fun DrawScope.paint(base: Color, colors: List<Color>, phase: Float)
 }
 
 @RequiresApi(Api.Agsl)
@@ -30,31 +27,43 @@ internal class AgslMeshPainter : MeshPainter {
     private val shader = RuntimeShader(Agsl.MeshGradient)
     private val brush = ShaderBrush(shader)
 
-    override fun DrawScope.paint(colors: List<Color>, phase: Float) {
+    override fun DrawScope.paint(base: Color, colors: List<Color>, phase: Float) {
         shader.setFloatUniform("size", size.width, size.height)
         shader.setFloatUniform("time", phase * TwoPi)
-        shader.setColor("c0", colors[0])
-        shader.setColor("c1", colors[1])
-        shader.setColor("c2", colors[2])
-        shader.setColor("c3", colors[3])
+        shader.setOklab("base", base)
+        shader.setOklab("c0", colors[0])
+        shader.setOklab("c1", colors[1])
+        shader.setOklab("c2", colors[2])
+        shader.setOklab("c3", colors[3])
         drawRect(brush)
+    }
+
+    private fun RuntimeShader.setOklab(name: String, color: Color) {
+        val lab = color.toOklab()
+        setFloatUniform(name, lab.l, lab.a, lab.b, color.alpha)
     }
 }
 
 internal class LayeredRadialMeshPainter : MeshPainter {
-    override fun DrawScope.paint(colors: List<Color>, phase: Float) {
+    override fun DrawScope.paint(base: Color, colors: List<Color>, phase: Float) {
         val t = phase * TwoPi
-        val radius = max(size.width, size.height) * .8f
-        drawRect(colors[0])
-        for (i in 1 until MeshColorCount) {
-            val center = Offset(
-                size.width * (.5f + .4f * cos(t + i * 2.1f)),
-                size.height * (.5f + .4f * sin(t + i * 1.7f))
-            )
-            drawRect(Brush.radialGradient(listOf(colors[i], colors[i].copy(alpha = 0f)), center, radius))
+        val unit = Aurora.unit(size.width, size.height)
+        drawRect(base)
+        Aurora.blobs.forEachIndexed { i, blob ->
+            val center = Aurora.center(blob, t).let { Offset(it.x * size.width, it.y * size.height) }
+            val radius = blob.radius * unit * FalloffReach
+            val stops = Array(FalloffStops) { step ->
+                val x = step / (FalloffStops - 1f)
+                val alpha = Aurora.alphaAt(Aurora.weightAt(x * FalloffReach * blob.radius, blob)) * colors[i].alpha
+                x to colors[i].copy(alpha = alpha)
+            }
+            drawRect(Brush.radialGradient(colorStops = stops, center = center, radius = radius))
         }
     }
 }
+
+private const val FalloffStops = 9
+private const val FalloffReach = 2f
 
 private const val TwoPi = (2 * Math.PI).toFloat()
 
@@ -69,17 +78,19 @@ internal fun List<Color>.toMeshColors(): List<Color> {
 internal data class MeshGradientElement(
     val colors: List<Color>,
     val durationMillis: Int,
-    val animated: Boolean
+    val animated: Boolean,
+    val base: Color
 ) : ModifierNodeElement<MeshGradientNode>() {
-    override fun create() = MeshGradientNode(colors, durationMillis, animated)
+    override fun create() = MeshGradientNode(colors, durationMillis, animated, base)
 
-    override fun update(node: MeshGradientNode) = node.update(colors, durationMillis, animated)
+    override fun update(node: MeshGradientNode) = node.update(colors, durationMillis, animated, base)
 }
 
 internal class MeshGradientNode(
     private var colors: List<Color>,
     durationMillis: Int,
-    private var animated: Boolean
+    private var animated: Boolean,
+    private var base: Color
 ) : Modifier.Node(), DrawModifierNode, CompositionLocalConsumerModifierNode {
 
     private var phase = 0f
@@ -93,8 +104,9 @@ internal class MeshGradientNode(
 
     override fun onDetach() = driver.stop()
 
-    fun update(colors: List<Color>, durationMillis: Int, animated: Boolean) {
+    fun update(colors: List<Color>, durationMillis: Int, animated: Boolean, base: Color) {
         this.colors = colors
+        this.base = base
         this.animated = animated
         driver.duration(durationMillis)
         sync()
@@ -106,7 +118,7 @@ internal class MeshGradientNode(
     }
 
     override fun ContentDrawScope.draw() {
-        with(painter) { paint(colors, phase) }
+        with(painter) { paint(base, colors, phase) }
         drawContent()
     }
 }

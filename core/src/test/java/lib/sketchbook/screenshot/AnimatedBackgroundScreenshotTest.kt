@@ -36,6 +36,35 @@ class AnimatedBackgroundScreenshotTest : ScreenshotTest() {
     fun `animated background on android 13 in dark theme`() =
         captureRoot("AnimatedBackground_sdk33_dark", animated = true) { Background() }
 
+    @Test
+    @Config(sdk = [33], qualifiers = Light)
+    fun `default animated background on android 13 in light theme`() =
+        captureRoot("AnimatedBackgroundDefault_sdk33_light", animated = true) { DefaultBackground() }
+
+    @Test
+    @Config(sdk = [33], qualifiers = Dark)
+    fun `default animated background on android 13 in dark theme`() =
+        captureRoot("AnimatedBackgroundDefault_sdk33_dark", animated = true) { DefaultBackground() }
+
+    @Test
+    @Config(sdk = [26], qualifiers = Light)
+    fun `default animated background on android 8 in light theme`() =
+        captureRoot("AnimatedBackgroundDefault_sdk26_light", animated = true) { DefaultBackground() }
+
+    @Test
+    @Config(sdk = [26], qualifiers = Dark)
+    fun `default animated background on android 8 in dark theme`() =
+        captureRoot("AnimatedBackgroundDefault_sdk26_dark", animated = true) { DefaultBackground() }
+
+    @Composable
+    private fun DefaultBackground() = SketchbookPreviewLayout {
+        SketchbookAnimatedBackground(modifier = Modifier.fillMaxSize()) {
+            SketchbookCard(Modifier.align(Alignment.Center).padding(24.dp)) {
+                Text("Glass over the default background", Modifier.padding(24.dp))
+            }
+        }
+    }
+
     @Composable
     private fun Background() = SketchbookPreviewLayout {
         SketchbookAnimatedBackground(

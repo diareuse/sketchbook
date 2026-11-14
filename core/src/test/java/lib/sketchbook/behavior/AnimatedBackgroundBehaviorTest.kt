@@ -27,6 +27,7 @@ import lib.sketchbook.theme.Theme
 import org.junit.Assert.assertArrayEquals
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
+import org.junit.Assert.assertTrue
 import org.junit.Test
 import org.robolectric.annotation.Config
 
@@ -62,12 +63,66 @@ abstract class AnimatedBackgroundBehavior : BehaviorTest() {
 
     @Test
     fun `background fills with the given colors`() {
-        show { SketchbookAnimatedBackground(Modifier.size(100.dp), colors = listOf(Color.Red), animated = false) {} }
+        show { SketchbookAnimatedBackground(Modifier.size(100.dp), colors = listOf(Color.Red), baseColor = Color.Red, animated = false) {} }
 
         val center = composeRule.onRoot().captureToImage().toPixelMap()[100, 100]
         assertEquals(1f, center.red, .05f)
         assertEquals(0f, center.green, .05f)
     }
+
+    @Test
+    fun `background shows its base color where no light reaches`() {
+        show {
+            SketchbookAnimatedBackground(
+                Modifier.size(100.dp),
+                colors = listOf(Color.Blue),
+                baseColor = Color.Red,
+                animated = false
+            ) {}
+        }
+
+        val pixels = composeRule.onRoot().captureToImage().toPixelMap().pixels()
+
+        assertTrue(pixels.any { it.red > it.blue + .3f })
+    }
+
+    @Test
+    fun `background glows with the given colors over its base`() {
+        show {
+            SketchbookAnimatedBackground(
+                Modifier.size(100.dp),
+                colors = listOf(Color.Blue),
+                baseColor = Color.Red,
+                animated = false
+            ) {}
+        }
+
+        val pixels = composeRule.onRoot().captureToImage().toPixelMap().pixels()
+
+        assertTrue(pixels.any { it.blue > it.red + .15f })
+    }
+
+    @Test
+    fun `default background is not a flat wash`() {
+        show { SketchbookAnimatedBackground(Modifier.size(100.dp), animated = false) {} }
+
+        val sums = composeRule.onRoot().captureToImage().toPixelMap().pixels().map { it.red + it.green + it.blue }
+
+        assertTrue(sums.max() - sums.min() > .25f)
+    }
+
+    @Test
+    fun `background keeps a blob color glow at the first frame and after a full loop`() {
+        show { SketchbookAnimatedBackground(Modifier.size(100.dp), colors = palette) {} }
+        val first = frame()
+
+        advance(10_000)
+
+        assertArrayEquals(first, frame(), .02f)
+    }
+
+    private fun androidx.compose.ui.graphics.PixelMap.pixels(): List<Color> =
+        List(width * height) { this[it % width, it / width] }
 
     @Test
     fun `background drifts over time without recomposing its content`() {

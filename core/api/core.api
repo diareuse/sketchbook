@@ -1,7 +1,7 @@
 public final class lib/sketchbook/ComposableSingletons$SketchbookAnimatedBackgroundKt {
 	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookAnimatedBackgroundKt;
 	public fun <init> ()V
-	public final fun getLambda$1054367612$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function3;
+	public final fun getLambda$-1129908325$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function3;
 	public final fun getLambda$1628397066$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
 }
 
@@ -419,7 +419,7 @@ public final class lib/sketchbook/PaletteImageState$Palette {
 }
 
 public final class lib/sketchbook/SketchbookAnimatedBackgroundKt {
-	public static final fun SketchbookAnimatedBackground (Landroidx/compose/ui/Modifier;Ljava/util/List;FZLkotlin/jvm/functions/Function3;Landroidx/compose/runtime/Composer;II)V
+	public static final fun SketchbookAnimatedBackground-FHprtrg (Landroidx/compose/ui/Modifier;Ljava/util/List;FZJLkotlin/jvm/functions/Function3;Landroidx/compose/runtime/Composer;II)V
 }
 
 public final class lib/sketchbook/SketchbookBadgeKt {
@@ -829,8 +829,8 @@ public final class lib/sketchbook/modifier/OverlayKt {
 }
 
 public final class lib/sketchbook/modifier/ShaderKt {
-	public static final fun meshGradientBackground (Landroidx/compose/ui/Modifier;Ljava/util/List;IZ)Landroidx/compose/ui/Modifier;
-	public static synthetic fun meshGradientBackground$default (Landroidx/compose/ui/Modifier;Ljava/util/List;IZILjava/lang/Object;)Landroidx/compose/ui/Modifier;
+	public static final fun meshGradientBackground-xwkQ0AY (Landroidx/compose/ui/Modifier;Ljava/util/List;IZJ)Landroidx/compose/ui/Modifier;
+	public static synthetic fun meshGradientBackground-xwkQ0AY$default (Landroidx/compose/ui/Modifier;Ljava/util/List;IZJILjava/lang/Object;)Landroidx/compose/ui/Modifier;
 	public static final fun shimmer-RPmYEkk (Landroidx/compose/ui/Modifier;JIZ)Landroidx/compose/ui/Modifier;
 	public static synthetic fun shimmer-RPmYEkk$default (Landroidx/compose/ui/Modifier;JIZILjava/lang/Object;)Landroidx/compose/ui/Modifier;
 	public static final fun specularBorder-N3hlwXA (Landroidx/compose/ui/Modifier;Landroidx/compose/ui/graphics/Shape;FJIZ)Landroidx/compose/ui/Modifier;

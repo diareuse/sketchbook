@@ -34,23 +34,5 @@ half4 main(float2 coord) {
 }
 """
 
-    const val MeshGradient = """
-uniform float2 size;
-uniform float time;
-uniform half4 c0;
-uniform half4 c1;
-uniform half4 c2;
-uniform half4 c3;
-
-half4 main(float2 coord) {
-    float2 uv = coord / size;
-    float2 w = uv + 0.1 * float2(sin(time + uv.y * 3.0), cos(time * 0.8 + uv.x * 3.0));
-    float sx = smoothstep(0.0, 1.0, w.x);
-    float sy = smoothstep(0.0, 1.0, w.y);
-    half4 top = mix(c0, c1, half(sx));
-    half4 bottom = mix(c2, c3, half(sx));
-    half4 m = mix(top, bottom, half(sy));
-    return half4(m.rgb * m.a, m.a);
-}
-"""
+    val MeshGradient: String = auroraShaderSource()
 }

@@ -27,13 +27,13 @@ internal fun drifts(speed: Float, animated: Boolean, started: Boolean): Boolean 
 fun SketchbookAnimatedBackground(
     modifier: Modifier = Modifier,
     colors: List<Color> = listOf(
-        Theme.color.container.primary,
-        Theme.color.container.secondary,
-        Theme.color.container.tertiary,
-        Theme.color.container.background
+        Theme.color.emphasis.primary,
+        Theme.color.emphasis.tertiary,
+        Theme.color.emphasis.secondary
     ),
     speed: Float = 1f,
     animated: Boolean = true,
+    baseColor: Color = Theme.color.container.background,
     content: @Composable BoxScope.() -> Unit
 ) {
     val lifecycleState by LocalLifecycleOwner.current.lifecycle.currentStateAsState()
@@ -43,7 +43,8 @@ fun SketchbookAnimatedBackground(
         modifier = modifier.meshGradientBackground(
             colors = colors,
             durationMillis = if (running) driftDurationMillis(speed) else driftDurationMillis(1f),
-            animated = running
+            animated = running,
+            baseColor = baseColor
         ),
         content = content
     )
