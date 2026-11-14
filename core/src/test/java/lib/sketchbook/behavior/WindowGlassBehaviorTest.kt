@@ -18,6 +18,8 @@ import lib.sketchbook.StripedBackdrop
 import lib.sketchbook.popOutBackground
 import lib.sketchbook.glass.glassSource
 import lib.sketchbook.redSpread
+import lib.sketchbook.contrastRatio
+import lib.sketchbook.opaque
 import lib.sketchbook.theme.Theme
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotEquals
@@ -78,13 +80,6 @@ class WindowGlassBehaviorTest : BehaviorTest() {
     }
 
     @Test
-    @Config(sdk = [26])
-    fun `dialog surface is a translucent tint over the backdrop`() {
-        val spread = surfaceSpread()
-        assertTrue(spread in 1 until 255)
-    }
-
-    @Test
     @Config(sdk = [31])
     fun `dialog is a glass source for a dialog surface placed over its content`() {
         composeRule.setContent {
@@ -141,8 +136,61 @@ class WindowGlassBehaviorTest : BehaviorTest() {
         assertNotEquals(Color.Red, image.run { this[320, 200].let { Color(it.red, it.green, it.blue, 1f) } })
     }
 
+    private fun paneContrast(dark: Boolean): List<Float> {
+        var text = Color.Unspecified
+        composeRule.setContent {
+            Theme(darkTheme = dark, dynamicColor = false) {
+                text = Theme.color.content.background
+                StripedBackdrop(Modifier.size(360.dp, 200.dp)) {
+                    DialogSurface(
+                        modifier = Modifier.align(Alignment.Center),
+                        padding = PaddingValues(0.dp)
+                    ) { Box(Modifier.size(280.dp, 100.dp)) }
+                }
+            }
+        }
+        composeRule.waitForIdle()
+        val image = composeRule.onRoot().captureToImage().toPixelMap()
+        return listOf(300, 340).map { contrastRatio(text, image.opaque(it, 200)) }
+    }
+
+    @Test
+    @Config(sdk = [26])
+    fun `dialog surface text stays readable over saturated backdrop in light theme`() {
+        paneContrast(dark = false).forEach { assertTrue("ratio $it", it >= 4.5f) }
+    }
+
+    @Test
+    @Config(sdk = [26], qualifiers = "w360dp-h640dp-normal-night-xhdpi")
+    fun `dialog surface text stays readable over saturated backdrop in dark theme`() {
+        paneContrast(dark = true).forEach { assertTrue("ratio $it", it >= 4.5f) }
+    }
+
+    @Test
+    @Config(sdk = [31])
+    fun `dialog surface nested in another glass stays a sharp tint`() {
+        composeRule.setContent {
+            Theme(darkTheme = false, dynamicColor = false) {
+                StripedBackdrop(Modifier.size(360.dp, 200.dp)) {
+                    SketchbookDialog(visible = false, onVisibleChange = {}, dialog = {}) {
+                        Box(Modifier.size(360.dp, 200.dp)) {
+                            DialogSurface(
+                                modifier = Modifier.align(Alignment.Center),
+                                padding = PaddingValues(0.dp)
+                            ) { Box(Modifier.size(280.dp, 100.dp)) }
+                        }
+                    }
+                }
+            }
+        }
+        composeRule.waitForIdle()
+        val image = composeRule.onRoot().captureToImage().toPixelMap()
+
+        assertTrue(image.redSpread(200, 140..580) > Sharp)
+    }
+
     private companion object {
-        const val Sharp = 150
-        const val Soft = 120
+        const val Sharp = 100
+        const val Soft = 70
     }
 }

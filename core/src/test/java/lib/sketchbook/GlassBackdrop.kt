@@ -47,43 +47,10 @@ fun StripedBackdrop(
     content()
 }
 
-@Composable
-fun StripedColumn(
-    modifier: Modifier = Modifier,
-    source: Boolean = true,
-    colors: List<Color> = ColorfulStripes,
-    content: @Composable BoxScope.() -> Unit
-) = Box(modifier) {
-    androidx.compose.foundation.layout.Column(
-        Modifier.matchParentSize().let { if (source) it.glassSource() else it }
-    ) {
-        repeat(StripeCount) {
-            Box(
-                Modifier
-                    .weight(1f)
-                    .fillMaxWidth()
-                    .background(colors[it % colors.size])
-            )
-        }
-    }
-    content()
-}
-
 fun PixelMap.redSpread(y: Int, xs: IntProgression): Int {
     var lo = 255
     var hi = 0
     for (x in xs) {
-        val r = (this[x, y].red * 255).toInt()
-        lo = min(lo, r)
-        hi = max(hi, r)
-    }
-    return hi - lo
-}
-
-fun PixelMap.verticalRedSpread(x: Int, ys: IntProgression): Int {
-    var lo = 255
-    var hi = 0
-    for (y in ys) {
         val r = (this[x, y].red * 255).toInt()
         lo = min(lo, r)
         hi = max(hi, r)

@@ -97,7 +97,7 @@ class TopAppBarGlassBehaviorTest : BehaviorTest() {
 
     @Test
     @Config(sdk = [26])
-    fun `collapsed bar keeps dark title text readable over any backdrop colour`() {
+    fun `collapsed bar backdrop keeps contrast with the content colour over any stripe`() {
         render(Collapsed)
         val image = barPixels()
         val text = Color(0xFF1C1B1F)
@@ -121,6 +121,14 @@ class TopAppBarGlassBehaviorTest : BehaviorTest() {
     fun `collapsed bar over a glass source blurs the backdrop on android 12`() {
         render(Collapsed)
 
+        val s = barPixels().redSpread(20, 100..620)
+        assertTrue("spread $s", s < 120)
+    }
+
+    @Test
+    @Config(sdk = [31])
+    fun `bar past the collapsed point still blurs the backdrop`() {
+        render(-60f)
         val s = barPixels().redSpread(20, 100..620)
         assertTrue("spread $s", s < 120)
     }

@@ -122,7 +122,7 @@ fun SketchbookDialog(
     }
 }
 
-private val DialogGlassElevation = 8.dp
+private val DialogGlassElevation = 16.dp
 
 @Composable
 fun DialogSurface(

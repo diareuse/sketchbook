@@ -4,7 +4,6 @@ import androidx.activity.compose.BackHandler
 import dev.chrisbanes.haze.HazeState
 import lib.sketchbook.glass.GlassDepthScope
 import lib.sketchbook.glass.GlassSource
-import lib.sketchbook.glass.LocalGlassHost
 import lib.sketchbook.glass.glassSource
 import lib.sketchbook.glass.glassSourceOf
 import androidx.compose.animation.core.animate
@@ -26,7 +25,6 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
@@ -213,45 +211,43 @@ fun SketchbookMenu(
                 window.setDimAmount(0f)
             }
         }
-        CompositionLocalProvider(LocalGlassHost provides state.glassHost) {
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .pointerInput(Unit) {
-                        detectTapGestures { scope.launch { state.close() } }
-                    }
-            ) {
-                BackHandler {
-                    scope.launch {
-                        state.close()
-                    }
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .pointerInput(Unit) {
+                    detectTapGestures { scope.launch { state.close() } }
                 }
-                val expansion = @Composable {
-                    Box(
-                        modifier = Modifier
-                            .alpha(state.expansionAlpha)
-                            .scale(state.scale)
-                    ) {
-                        GlassDepthScope { expansion() }
-                    }
+        ) {
+            BackHandler {
+                scope.launch {
+                    state.close()
                 }
-                val top = if (state.verticalAlignment === Alignment.Bottom) expansion else null
-                val bottom = if (state.verticalAlignment === Alignment.Top) expansion else null
-                AnchoredLayout(
+            }
+            val expansion = @Composable {
+                Box(
                     modifier = Modifier
-                        .offset(state.offset.x, state.offset.y - statusBars.calculateTopPadding()),
-                    horizontalAlignment = state.horizontalAlignment,
-                    top = top,
-                    bottom = bottom
+                        .alpha(state.expansionAlpha)
+                        .scale(state.scale)
                 ) {
-                    Box(
-                        modifier = Modifier
-                            .size(state.size)
-                            .scale(state.scale),
-                        propagateMinConstraints = true
-                    ) {
-                        GlassDepthScope { content() }
-                    }
+                    GlassDepthScope { expansion() }
+                }
+            }
+            val top = if (state.verticalAlignment === Alignment.Bottom) expansion else null
+            val bottom = if (state.verticalAlignment === Alignment.Top) expansion else null
+            AnchoredLayout(
+                modifier = Modifier
+                    .offset(state.offset.x, state.offset.y - statusBars.calculateTopPadding()),
+                horizontalAlignment = state.horizontalAlignment,
+                top = top,
+                bottom = bottom
+            ) {
+                Box(
+                    modifier = Modifier
+                        .size(state.size)
+                        .scale(state.scale),
+                    propagateMinConstraints = true
+                ) {
+                    GlassDepthScope { content() }
                 }
             }
         }

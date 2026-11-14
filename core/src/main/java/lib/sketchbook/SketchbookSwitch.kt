@@ -17,26 +17,20 @@ import lib.sketchbook.theme.contentColorFor
 private const val TrackTint = .45f
 private const val DisabledTrackTint = .3f
 
-private val DefaultThumbContent: @Composable () -> Unit = {}
-
-private fun (@Composable () -> Unit)?.withRim(enabled: Boolean): (@Composable () -> Unit)? =
-    if (this === DefaultThumbContent) {
-        { ThumbRim(enabled) }
-    } else {
-        this
-    }
-
 @Composable
-private fun ThumbRim(enabled: Boolean) = Box(
-    Modifier
+private fun ThumbRim(enabled: Boolean, content: @Composable () -> Unit) = Box(
+    modifier = Modifier
         .fillMaxSize()
         .specularBorder(
             shape = CircleShape,
             width = 1.dp,
             color = Color.White.copy(alpha = if (enabled) .9f else .35f),
             animated = false
-        )
-)
+        ),
+    contentAlignment = Alignment.Center
+) {
+    content()
+}
 
 @Composable
 fun SketchbookSwitch(
@@ -62,7 +56,7 @@ fun SketchbookSwitch(
         disabledCheckedThumbColor = Theme.color.contentColorFor(compositeColor).copy(.15f),
         disabledUncheckedThumbColor = Theme.color.contentColorFor(compositeColor).copy(.15f)
     ),
-    thumbContent: (@Composable () -> Unit)? = DefaultThumbContent,
+    thumbContent: (@Composable () -> Unit)? = {},
     enabled: Boolean = true,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() }
 ) {
@@ -76,7 +70,7 @@ fun SketchbookSwitch(
             haptics.performHapticFeedback(feedback)
         },
         colors = colors,
-        thumbContent = thumbContent.withRim(enabled),
+        thumbContent = thumbContent?.let { inner -> { ThumbRim(enabled, inner) } },
         enabled = enabled,
         interactionSource = interactionSource
     )

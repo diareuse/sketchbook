@@ -25,6 +25,7 @@ import androidx.compose.ui.test.performClick
 import androidx.compose.ui.unit.dp
 import lib.sketchbook.SketchbookRockerCounter
 import lib.sketchbook.SketchbookSwitch
+import lib.sketchbook.contrastRatio
 import lib.sketchbook.distance
 import lib.sketchbook.opaque
 import lib.sketchbook.theme.Theme
@@ -123,7 +124,7 @@ class ControlsGlassBehaviorTest : BehaviorTest() {
         val blue = image.opaque(bx, y)
 
         assertTrue(distance(red, blue) > 30)
-        assertTrue(distance(Color.Red, red) > 60)
+        assertTrue(distance(Color.Red, red) > 150)
     }
 
     @Test
@@ -138,6 +139,37 @@ class ControlsGlassBehaviorTest : BehaviorTest() {
         val image = composeRule.onRoot().captureToImage().toPixelMap()
 
         assertEquals(Color.Red, image.opaque(0, 0))
+    }
+
+    private fun rockerContrast(dark: Boolean): List<Float> {
+        var text = Color.Unspecified
+        composeRule.setContent {
+            Theme(darkTheme = dark, dynamicColor = false) {
+                text = Theme.color.content.background
+                Row {
+                    Box(Modifier.background(Color.Red)) { Rocker("a") }
+                    Box(Modifier.background(Color.Blue)) { Rocker("b") }
+                }
+            }
+        }
+        composeRule.waitForIdle()
+        val image = composeRule.onRoot().captureToImage().toPixelMap()
+        return listOf("a", "b").map {
+            val b = composeRule.onNodeWithTag(it).getBoundsInRoot()
+            contrastRatio(text, image.opaque(((b.left + b.right).value).toInt(), ((b.top + b.bottom).value).toInt()))
+        }
+    }
+
+    @Test
+    @Config(sdk = [26])
+    fun `rocker counter label stays readable over saturated backdrop in light theme`() {
+        rockerContrast(dark = false).forEach { assertTrue("ratio $it", it >= 4.5f) }
+    }
+
+    @Test
+    @Config(sdk = [26], qualifiers = "w360dp-h640dp-normal-night-xhdpi")
+    fun `rocker counter label stays readable over saturated backdrop in dark theme`() {
+        rockerContrast(dark = true).forEach { assertTrue("ratio $it", it >= 4.5f) }
     }
 
     @Test

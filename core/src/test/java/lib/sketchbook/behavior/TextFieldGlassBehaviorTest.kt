@@ -51,7 +51,7 @@ class TextFieldGlassBehaviorTest : BehaviorTest() {
         )
     }
 
-    private fun container(image: PixelMap) = image.opaque(NarrowStripeX, 60)
+    private fun container(image: PixelMap) = image.opaque(RedStripeX, 60)
 
     @Test
     @Config(sdk = [26])
@@ -117,7 +117,6 @@ class TextFieldGlassBehaviorTest : BehaviorTest() {
     }
 
     private companion object {
-        const val NarrowStripeX = 20
         const val RedStripeX = 20
         const val BlueStripeX = 60
     }

@@ -51,8 +51,8 @@ public final class lib/sketchbook/ComposableSingletons$SketchbookRockerCounterKt
 public final class lib/sketchbook/ComposableSingletons$SketchbookSwitchKt {
 	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookSwitchKt;
 	public fun <init> ()V
+	public final fun getLambda$-172970308$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
 	public final fun getLambda$1403615748$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
-	public final fun getLambda$542533113$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
 }
 
 public final class lib/sketchbook/ComposableSingletons$SketchbookTextFieldKt {
