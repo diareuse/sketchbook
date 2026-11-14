@@ -29,7 +29,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -84,7 +86,14 @@ fun SketchbookTopAppBar(
     val expandedTitlePaddingEnd = with(density) {
         expandedTitlePadding.calculateEndPadding(direction).roundToPx()
     }
-    val fraction = scrollBehavior.state.collapsedFraction
+    var heightOffsetLimit by remember(scrollBehavior) {
+        mutableFloatStateOf(scrollBehavior.state.heightOffsetLimit)
+    }
+    val fraction = if (heightOffsetLimit != 0f) {
+        scrollBehavior.state.heightOffset / heightOffsetLimit
+    } else {
+        0f
+    }
     val expandFraction = fraction.coerceAtMost(.5f) * 2
     val hideFraction = (fraction - .5f).coerceIn(0f, .5f) * 2
     val expandedTitleStyle by remember(expandFraction) {
@@ -159,6 +168,9 @@ fun SketchbookTopAppBar(
                 contentPadding.calculateBottomPadding().toPx()
         if (scrollBehavior.state.heightOffsetLimit != -height) {
             scrollBehavior.state.heightOffsetLimit = -height
+        }
+        if (heightOffsetLimit != -height) {
+            heightOffsetLimit = -height
         }
 
         // Stage 4: Layout
