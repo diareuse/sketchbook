@@ -120,6 +120,22 @@ class DeniedWhenDisabledBehaviorTest : BehaviorTest() {
     }
 
     @Test
+    fun `pressing again mid-wiggle continues from the current offset without a jump`() {
+        show(enabled = false)
+        composeRule.mainClock.autoAdvance = false
+
+        composeRule.onNodeWithTag(Target).performTouchInput { down(center) }
+        composeRule.mainClock.advanceTimeBy(120)
+        composeRule.onNodeWithTag(Target).performTouchInput { up() }
+        val before = leftOfTarget()
+        composeRule.onNodeWithTag(Target).performTouchInput { down(center) }
+        composeRule.mainClock.advanceTimeBy(16)
+        val after = leftOfTarget()
+
+        assertTrue("jumped ${kotlin.math.abs(after - before)}", kotlin.math.abs(after - before) <= 7f)
+    }
+
+    @Test
     fun `an enabled target does not wiggle`() {
         show(enabled = true)
         composeRule.mainClock.autoAdvance = false

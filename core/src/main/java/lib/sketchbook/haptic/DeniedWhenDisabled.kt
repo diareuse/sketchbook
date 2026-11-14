@@ -19,6 +19,7 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 internal fun Modifier.deniedWhenDisabled(enabled: Boolean): Modifier =
@@ -42,13 +43,15 @@ private class DeniedPressNode : DelegatingNode(), CompositionLocalConsumerModifi
     LayoutModifierNode {
 
     private val offset = Animatable(0f)
+    private var wiggleJob: Job? = null
 
     init {
         delegate(SuspendingPointerInputModifierNode {
             awaitEachGesture {
                 awaitFirstDown(requireUnconsumed = false)
                 currentValueOf(LocalHapticFeedback).denial()
-                coroutineScope.launch { wiggle() }
+                wiggleJob?.cancel()
+                wiggleJob = coroutineScope.launch { wiggle() }
             }
         })
     }
@@ -65,7 +68,6 @@ private class DeniedPressNode : DelegatingNode(), CompositionLocalConsumerModifi
 
     private suspend fun wiggle() {
         val amplitude = with(currentValueOf(LocalDensity)) { WiggleAmplitude.toPx() }
-        offset.snapTo(0f)
         WiggleSteps.forEach { step ->
             offset.animateTo(step * amplitude, tween(WiggleStepMillis))
         }
