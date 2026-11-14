@@ -39,6 +39,7 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
@@ -117,7 +118,7 @@ fun SketchbookTopAppBar(
                     .statusBarsPadding()
             )
             Box(Modifier.layoutId(NavigationIcon)) { navigationIcon() }
-            Box(Modifier.layoutId(Title)) {
+            Box(Modifier.layoutId(Title).clearAndSetSemantics {}) {
                 ProvideTextStyle(titleStyle) {
                     title()
                 }
@@ -163,9 +164,8 @@ fun SketchbookTopAppBar(
 
         // Stage 3: Modify scroll behavior
         val statusBarOffset = statusBar.height
-        val height = max(pinnedHeight, expandedY + expandedTitle.height) +
-                statusBarOffset + contentPadding.calculateTopPadding().toPx() +
-                contentPadding.calculateBottomPadding().toPx()
+        val height = (max(pinnedHeight, expandedY + expandedTitle.height) +
+                statusBarOffset).toFloat()
         if (scrollBehavior.state.heightOffsetLimit != -height) {
             scrollBehavior.state.heightOffsetLimit = -height
         }

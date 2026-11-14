@@ -45,7 +45,7 @@ fun SketchbookTextField(
         enabled = enabled,
         placeholder = placeholder,
         supportingText = supportingText,
-        maxLines = 1,
+        maxLines = if (singleLine) 1 else Int.MAX_VALUE,
         singleLine = singleLine,
         isError = isError,
         readOnly = readOnly,

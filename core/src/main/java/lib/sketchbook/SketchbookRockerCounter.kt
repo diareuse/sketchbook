@@ -1,18 +1,19 @@
-@file:OptIn(ExperimentalMaterial3Api::class)
-
 package lib.sketchbook
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.IntrinsicSize
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.defaultMinSize
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.ProvideTextStyle
-import androidx.compose.material3.SingleChoiceSegmentedButtonRow
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
@@ -27,11 +28,13 @@ fun SketchbookRockerCounter(
     label: @Composable () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    SingleChoiceSegmentedButtonRow(
+    Row(
         modifier = modifier
             .background(Theme.color.overlay.background.copy(.05f), Theme.container.button)
-            .clip(Theme.container.button),
-        space = 0.dp
+            .clip(Theme.container.button)
+            .defaultMinSize(minHeight = 40.dp)
+            .width(IntrinsicSize.Min),
+        verticalAlignment = Alignment.CenterVertically
     ) {
         decrement()
         ProvideTextStyle(

@@ -4,6 +4,8 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.isUnspecified
 import androidx.compose.ui.unit.lerp
 import androidx.compose.ui.util.lerp
 import kotlin.math.pow
@@ -13,12 +15,21 @@ fun lerp(start: Float, stop: Float, fraction: Float) =
 
 fun fastLerp(start: TextStyle, end: TextStyle, fraction: Float) = start.copy(
     fontSize = lerp(start.fontSize, end.fontSize, fraction),
+    lineHeight = lerpTextUnit(start.lineHeight, end.lineHeight, fraction),
+    letterSpacing = lerpTextUnit(start.letterSpacing, end.letterSpacing, fraction),
     fontWeight = when {
         start.fontWeight == null -> end.fontWeight
         end.fontWeight == null -> start.fontWeight
         else -> FontWeight(lerp(start.fontWeight!!.weight, end.fontWeight!!.weight, fraction))
     }
 )
+
+private fun lerpTextUnit(start: TextUnit, end: TextUnit, fraction: Float): TextUnit = when {
+    start.isUnspecified -> end
+    end.isUnspecified -> start
+    start.type != end.type -> if (fraction < .5f) start else end
+    else -> lerp(start, end, fraction)
+}
 
 fun lerp(start: Constraints, end: Constraints, fraction: Float) = start.copy(
     minWidth = lerp(start.minWidth, end.minWidth, fraction),

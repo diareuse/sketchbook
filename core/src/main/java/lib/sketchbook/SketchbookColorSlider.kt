@@ -51,7 +51,7 @@ fun SketchbookColorSlider(
             value = hue,
             onValueChange = onHueChange,
             valueRange = 0f..360f,
-            background = { List(360) { Color.hsv(it.toFloat(), saturation, value) } },
+            background = remember(saturation, value) { List(360) { Color.hsv(it.toFloat(), saturation, value) } },
             color = { Color.hsv(it, saturation, value) },
             trackHeight = trackHeight,
             thumbSize = thumbSize,
@@ -62,7 +62,7 @@ fun SketchbookColorSlider(
             value = saturation,
             onValueChange = onSaturationChange,
             valueRange = 0f..1f,
-            background = { List(10) { Color.hsv(hue, it / 10f, value) } },
+            background = remember(hue, value) { List(10) { Color.hsv(hue, it / 10f, value) } },
             color = { Color.hsv(hue, it, value) },
             trackHeight = trackHeight,
             thumbSize = thumbSize,
@@ -73,7 +73,7 @@ fun SketchbookColorSlider(
             value = value,
             onValueChange = onValueChange,
             valueRange = 0f..1f,
-            background = { List(10) { Color.hsv(hue, saturation, it / 10f) } },
+            background = remember(hue, saturation) { List(10) { Color.hsv(hue, saturation, it / 10f) } },
             color = { Color.hsv(hue, saturation, it) },
             trackHeight = trackHeight,
             thumbSize = thumbSize,
@@ -89,7 +89,7 @@ private fun SketchbookColorSliderSimple(
     value: Float,
     onValueChange: (Float) -> Unit,
     valueRange: ClosedFloatingPointRange<Float>,
-    background: () -> List<Color>,
+    background: List<Color>,
     color: (Float) -> Color,
     trackHeight: Dp,
     thumbSize: Dp,
@@ -117,7 +117,7 @@ private fun SketchbookColorSliderSimple(
         thumb = {
             val interactionSource = remember { MutableInteractionSource() }
             Spacer(
-                modifier
+                Modifier
                     .size(thumbSize)
                     .hoverable(interactionSource = interactionSource)
                     .surface(
@@ -136,7 +136,7 @@ private fun SketchbookColorSliderSimple(
             ) {
                 val outline = trackShape.createOutline(size, layoutDirection, this)
                 clipPath(outline.toPath()) {
-                    drawRect(Brush.horizontalGradient(background()))
+                    drawRect(Brush.horizontalGradient(background))
                 }
             }
         }

@@ -58,6 +58,8 @@ import androidx.compose.ui.window.DialogWindowProvider
 import androidx.core.view.WindowCompat
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import lib.sketchbook.haptic.tick
 import lib.sketchbook.util.toDpOffset
 import lib.sketchbook.util.toDpSize
@@ -131,7 +133,9 @@ class MenuState(
         }
     }
 
-    suspend fun open() {
+    private val transitions = Mutex()
+
+    suspend fun open() = transitions.withLock {
         expanded = true
         shadowAlpha = 0f
         scope.expanded = true
@@ -142,7 +146,7 @@ class MenuState(
         animate(expansionAlpha, 1f) { it, _ -> expansionAlpha = it }
     }
 
-    suspend fun close() {
+    suspend fun close() = transitions.withLock {
         animate(expansionAlpha, 0f) { it, _ -> expansionAlpha = it }
         scope.expanded = false
         animate(scale, 1.1f) { it, _ -> scale = it }
