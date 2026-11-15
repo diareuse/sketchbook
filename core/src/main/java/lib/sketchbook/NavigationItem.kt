@@ -1,40 +1,33 @@
 package lib.sketchbook
 
-import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.foundation.LocalIndication
-import androidx.compose.foundation.background
-import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.defaultMinSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.selection.selectable
-import androidx.compose.material3.LocalContentColor
-import androidx.compose.material3.LocalTextStyle
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.util.lerp
+import androidx.compose.animation.core.*
+import androidx.compose.foundation.*
+import androidx.compose.foundation.interaction.*
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.selection.*
+import androidx.compose.foundation.shape.*
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.*
+import androidx.compose.ui.draw.*
+import androidx.compose.ui.geometry.*
+import androidx.compose.ui.graphics.*
+import androidx.compose.ui.semantics.*
+import androidx.compose.ui.unit.*
+import androidx.compose.ui.util.*
 import lib.sketchbook.glass.asGlassShape
 import lib.sketchbook.theme.Theme
 import lib.sketchbook.theme.contentColorFor
 
-private val IndicatorWidth = 56.dp
+private val IndicatorWidth = 32.dp
 private val IndicatorHeight = 32.dp
 private val ItemMinSize = 56.dp
-private const val IndicatorAlpha = .28f
-private const val IndicatorMinScale = .4f
-private const val UnselectedAlpha = .8f
+private const val IndicatorAlpha = 1f
+private const val IndicatorMinScale = .0f
+private const val UnselectedAlpha = .5f
 private const val DisabledAlpha = .38f
+private const val AnimationDuration = 500
+private val AnimationEasing = FastOutSlowInEasing
 
 @Composable
 internal fun NavigationItemCore(
@@ -47,20 +40,25 @@ internal fun NavigationItemCore(
     alwaysShowLabel: Boolean,
     compositeColor: Color,
     interactionSource: MutableInteractionSource,
-    modifier: Modifier
+    modifier: Modifier,
+    color: Color = Theme.color.emphasis.primary
 ) {
-    val progress by animateFloatAsState(if (selected) 1f else 0f, label = "indicator")
+    val progress by animateFloatAsState(
+        targetValue = if (selected) 1f else 0f,
+        animationSpec = tween(AnimationDuration, easing = AnimationEasing),
+        label = "indicator"
+    )
     val content = Theme.color.contentColorFor(compositeColor)
     val tint = when {
         !enabled -> content.copy(DisabledAlpha)
         selected -> content
         else -> content.copy(UnselectedAlpha)
     }
-    val indicatorColor = Theme.color.emphasis.primary.copy(IndicatorAlpha)
-    val shape = Theme.container.buttonSmall.asGlassShape()
+    val indicatorColor = color.copy(IndicatorAlpha)
+    val shape = CircleShape.asGlassShape()
     Column(
         modifier = modifier
-            .defaultMinSize(minWidth = ItemMinSize, minHeight = ItemMinSize)
+            .defaultMinSize(minWidth = ItemMinSize)
             .clip(shape)
             .selectable(
                 selected = selected,
@@ -68,31 +66,53 @@ internal fun NavigationItemCore(
                 enabled = enabled,
                 role = Role.Tab,
                 interactionSource = interactionSource,
-                indication = LocalIndication.current
+                indication = null
             )
-            .padding(vertical = 4.dp),
+            .graphicsLayer(compositingStrategy = CompositingStrategy.Offscreen)
+            .drawWithContent {
+                drawContent()
+                if (progress > 0) drawRect(
+                    brush = Brush.radialGradient(
+                        colors = listOf(tint, content.copy(alpha = UnselectedAlpha)),
+                        center = Offset(size.width / 2, 0f),
+                        radius = size.height * progress
+                    ),
+                    blendMode = BlendMode.SrcIn
+                ) else drawRect(
+                    color = content.copy(alpha = UnselectedAlpha),
+                    blendMode = BlendMode.SrcIn
+                )
+            },
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        CompositionLocalProvider(LocalContentColor provides tint) {
-            Box(Modifier.size(IndicatorWidth, IndicatorHeight), contentAlignment = Alignment.Center) {
-                Box(
-                    Modifier
-                        .matchParentSize()
-                        .graphicsLayer {
-                            alpha = progress
-                            scaleX = lerp(IndicatorMinScale, 1f, progress)
-                        }
-                        .background(indicatorColor, shape)
-                )
-                icon()
-                if (badge != null) {
-                    Box(Modifier.align(Alignment.TopEnd)) { badge() }
+        Box(
+            Modifier
+                .size(24.dp, 4.dp)
+                .graphicsLayer {
+                    alpha = progress
+                    scaleX = lerp(IndicatorMinScale, 1f, progress)
                 }
+                .background(
+                    color = indicatorColor,
+                    shape = RoundedCornerShape(bottomStart = 4.dp, bottomEnd = 4.dp)
+                )
+        )
+        Spacer(Modifier.height(4.dp))
+        CompositionLocalProvider {
+            SketchbookBadgedBox(
+                modifier = Modifier
+                    .size(IndicatorWidth, IndicatorHeight)
+                    .clip(CircleShape)
+                    .indication(interactionSource, LocalIndication.current),
+                badge = { badge?.invoke() }
+            ) {
+                icon()
             }
             if (label != null && (selected || alwaysShowLabel)) {
                 CompositionLocalProvider(LocalTextStyle provides Theme.textStyle.caption) { label() }
             }
         }
+        Spacer(Modifier.height(8.dp))
     }
 }

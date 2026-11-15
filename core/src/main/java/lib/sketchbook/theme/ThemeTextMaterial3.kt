@@ -1,14 +1,14 @@
 package lib.sketchbook.theme
 
-import androidx.compose.material3.Typography
-import androidx.compose.ui.text.TextStyle
+import androidx.compose.material3.*
+import androidx.compose.ui.text.*
 
 internal class ThemeTextMaterial3(
     private val typography: Typography
 ) : Theme.Text {
 
     override val caption: TextStyle
-        get() = typography.bodySmall
+        get() = typography.labelSmall
     override val body: TextStyle
         get() = typography.bodyMedium
     override val emphasis: TextStyle
