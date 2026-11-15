@@ -1,20 +1,14 @@
 package lib.sketchbook
 
-import androidx.compose.foundation.LocalIndication
-import androidx.compose.foundation.indication
-import androidx.compose.foundation.interaction.InteractionSource
-import androidx.compose.material3.LocalMinimumInteractiveComponentSize
-import androidx.compose.material3.LocalRippleConfiguration
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.layout.layout
-import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.isUnspecified
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.graphics.Color
+import androidx.compose.foundation.*
+import androidx.compose.foundation.interaction.*
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.*
+import androidx.compose.ui.draw.*
+import androidx.compose.ui.graphics.*
+import androidx.compose.ui.layout.*
+import androidx.compose.ui.unit.*
 import lib.sketchbook.glass.asGlassShape
 import lib.sketchbook.glass.glass
 import lib.sketchbook.haptic.deniedWhenDisabled
@@ -47,7 +41,13 @@ internal fun Modifier.glassControl(
     val glassShape = shape.asGlassShape()
     return deniedWhenDisabled(enabled)
         .minimumTouchTarget(LocalMinimumInteractiveComponentSize.current)
-        .glass(glassShape, ControlGlassElevation, useGlow = enabled, tint = tint, tintStrength = tintStrength)
+        .glass(
+            glassShape,
+            ControlGlassElevation,
+            useGlow = enabled,
+            tint = tint,
+            tintStrength = tintStrength
+        )
         .pressIndicated(glassShape, interactionSource)
 }
 
@@ -60,6 +60,6 @@ internal fun ThemePressHost(content: @Composable () -> Unit) {
     )
 }
 
-internal const val FilledTintStrength = .93f
-internal const val ProminentTintStrength = .99f
+internal const val FilledTintStrength = .7f
+internal const val ProminentTintStrength = .8f
 internal const val TonalTintStrength = .6f
