@@ -1,13 +1,12 @@
 package lib.sketchbook.shader
 
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.Outline
-import androidx.compose.ui.graphics.PathMeasure
+import androidx.compose.ui.geometry.*
+import androidx.compose.ui.graphics.*
 import lib.sketchbook.util.toPath
 import kotlin.math.floor
 import kotlin.math.min
 
-internal const val BeamSampleCount = 64
+internal const val BeamSampleCount = 128
 
 internal class OutlineSamples(val points: FloatArray, val perimeter: Float) {
 

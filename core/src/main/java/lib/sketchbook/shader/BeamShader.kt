@@ -23,15 +23,18 @@ package lib.sketchbook.shader
 
 import android.graphics.RuntimeShader
 import androidx.annotation.RequiresApi
-import androidx.compose.ui.graphics.ShaderBrush
-import androidx.compose.ui.graphics.drawscope.DrawScope
-import androidx.compose.ui.graphics.drawscope.Stroke
-import androidx.compose.ui.graphics.drawscope.clipPath
+import androidx.compose.ui.graphics.*
+import androidx.compose.ui.graphics.drawscope.*
 import lib.sketchbook.modifier.BeamStyle
 import lib.sketchbook.util.Api
 import kotlin.math.floor
 import kotlin.math.max
 import kotlin.math.min
+
+internal const val BeamBlobCount = 24
+internal const val BeamGlowReachSigmas = 3f
+internal const val BeamGlowSigmaScale = .7f
+internal const val BeamSpreadScale = .8f
 
 internal const val BeamAgsl = """
 uniform float2 size;
@@ -44,9 +47,9 @@ uniform float glow;
 uniform float stroke;
 uniform float intensity;
 uniform float count;
-uniform float4 colors[8];
-uniform float2 pts[64];
-uniform float2 blobs[24];
+uniform float4 colors[$MaxBeamColors];
+uniform float2 pts[$BeamSampleCount];
+uniform float2 blobs[$BeamBlobCount];
 uniform float perim;
 
 const float PI = 3.14159265;
@@ -58,7 +61,7 @@ float4 samplePalette(float t) {
         return result;
     }
     float x = clamp(t, 0.0, 1.0) * float(n - 1);
-    for (int i = 0; i < 7; i++) {
+    for (int i = 0; i < ${MaxBeamColors - 1}; i++) {
         if (i + 1 < n) {
             result = mix(result, colors[i + 1], clamp(x - float(i), 0.0, 1.0));
         }
@@ -74,34 +77,34 @@ float2 scanSegment(float2 p, float2 a, float2 b) {
 }
 
 float2 nearestOnBorder(float2 p) {
-    float stepLen = perim / 64.0;
+    float stepLen = perim / float($BeamSampleCount);
     float best = 1000000000.0;
     float along = 0.0;
-    for (int i = 0; i < 63; i++) {
+    for (int i = 0; i < ${BeamSampleCount - 1}; i++) {
         float2 hit = scanSegment(p, pts[i], pts[i + 1]);
         if (hit.x < best) {
             best = hit.x;
             along = (float(i) + hit.y) * stepLen;
         }
     }
-    float2 last = scanSegment(p, pts[63], pts[0]);
+    float2 last = scanSegment(p, pts[${BeamSampleCount - 1}], pts[0]);
     if (last.x < best) {
         best = last.x;
-        along = (63.0 + last.y) * stepLen;
+        along = (float(${BeamSampleCount - 1}) + last.y) * stepLen;
     }
     return float2(sqrt(best), along);
 }
 
 float4 orbitGlowBlobs(float2 p, float dist, float sigmaBase) {
-    float delta = arc * perim / 24.0;
-    float sigma = max(sigmaBase, 0.8 * delta);
-    if (dist > 3.0 * sigma) { return float4(0.0); }
+    float delta = arc * perim / float($BeamBlobCount);
+    float sigma = max(sigmaBase, $BeamSpreadScale * delta);
+    if (dist > $BeamGlowReachSigmas * sigma) { return float4(0.0); }
     float inv2s2 = 0.5 / (sigma * sigma);
     float norm = delta / (sigma * 2.50663);
 
     float4 acc = float4(0.0);
-    for (int k = 0; k < 24; k++) {
-        float t = (float(k) + 0.5) / 24.0;
+    for (int k = 0; k < $BeamBlobCount; k++) {
+        float t = (float(k) + 0.5) / float($BeamBlobCount);
         float2 dv = p - blobs[k];
         float g = exp(-min(dot(dv, dv) * inv2s2, 16.0));
         float bell = pow(max(sin(PI * t), 0.0), 1.6);
@@ -129,7 +132,7 @@ half4 main(float2 fragCoord) {
             float w = (crisp + halo) * profile * clamp(c4.a, 0.0, 1.0);
             acc += float4(c4.rgb * w, w);
         }
-        acc += 0.55 * orbitGlowBlobs(position, dist, max(glow, 0.001) * 0.7);
+        acc += 0.55 * orbitGlowBlobs(position, dist, max(glow, 0.001) * $BeamGlowSigmaScale);
     } else {
         float u = position.x / size.x;
         float edgeDist = size.y - position.y;
@@ -165,7 +168,7 @@ internal class AgslBeamPainter : BeamPainter {
     private val brush = ShaderBrush(shader)
     private var uploadedGeometry: BeamGeometry? = null
     private var uploadedLook: BeamLook? = null
-    private val blobs = FloatArray(BlobCount * 2)
+    private val blobs = FloatArray(BeamBlobCount * 2)
 
     override fun DrawScope.paint(geometry: BeamGeometry, look: BeamLook, phase: Float, fade: Float) {
         if (uploadedGeometry !== geometry) {
@@ -194,13 +197,16 @@ internal class AgslBeamPainter : BeamPainter {
         }
         placeBlobs(geometry.samples, look, phase)
         shader.setFloatUniform("blobs", blobs)
-        val band = min(2f * GlowReachSigmas * glowSigma(look, geometry.samples) * density, size.minDimension)
+        val band = min(
+            2f * BeamGlowReachSigmas * glowSigma(look, geometry.samples) * density,
+            size.minDimension
+        )
         clipPath(geometry.path) { drawPath(geometry.path, brush, style = Stroke(band)) }
     }
 
     private fun placeBlobs(samples: OutlineSamples, look: BeamLook, phase: Float) {
-        for (k in 0 until BlobCount) {
-            val t = (k + .5f) / BlobCount
+        for (k in 0 until BeamBlobCount) {
+            val t = (k + .5f) / BeamBlobCount
             val along = (1f - look.arc) + t * look.arc + look.directionSign * phase
             val p = samples.pointAt((along - floor(along)) * samples.perimeter)
             blobs[2 * k] = p.x
@@ -209,12 +215,9 @@ internal class AgslBeamPainter : BeamPainter {
     }
 
     private fun glowSigma(look: BeamLook, samples: OutlineSamples): Float =
-        max(look.glowReach * GlowSigmaScale, SpreadScale * look.arc * samples.perimeter / BlobCount)
+        max(
+            look.glowReach * BeamGlowSigmaScale,
+            BeamSpreadScale * look.arc * samples.perimeter / BeamBlobCount
+        )
 
-    private companion object {
-        const val BlobCount = 24
-        const val GlowReachSigmas = 3f
-        const val GlowSigmaScale = .7f
-        const val SpreadScale = .8f
-    }
 }
