@@ -14,7 +14,12 @@ import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.graphics.toPixelMap
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.shape.RoundedCornerShape
+import dev.chrisbanes.haze.glass.GlassOptics
+import dev.chrisbanes.haze.glass.OpticalSizeValue
 import lib.sketchbook.glass.GlassDepthScope
+import lib.sketchbook.glass.GlassSpec
+import lib.sketchbook.glass.refractiveOptics
 import lib.sketchbook.glass.GlassTier
 import lib.sketchbook.glass.glass
 import lib.sketchbook.glass.glassSource
@@ -78,6 +83,15 @@ class GlassBehaviorTest : BehaviorTest() {
         val inside = image[100, 100]
         assertNotEquals(Color.Red, Color(inside.red, inside.green, inside.blue, 1f))
         assertEquals(Color.Red, image[10, 100])
+    }
+
+    @Test
+    fun `refractive optics blur fully with the spec radius at every size`() {
+        val spec = GlassSpec.of(RoundedCornerShape(12.dp), Color.Black, 0.dp, useGlow = false, blurRadius = 24.dp)
+        val optics = refractiveOptics(spec, GlassOptics.regular)
+        assertEquals(OpticalSizeValue.Fixed(24.dp), optics.blurRadius)
+        assertEquals(OpticalSizeValue.Fixed(1f), optics.depth)
+        assertEquals(GlassOptics.regular.refractionProfile, optics.refractionProfile)
     }
 
     @Test
