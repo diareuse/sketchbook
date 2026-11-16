@@ -2,6 +2,7 @@ package lib.sketchbook
 
 import androidx.compose.foundation.interaction.*
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.*
@@ -95,6 +96,7 @@ fun SketchbookScrollableTabRow(
 fun SketchbookTab(
     selected: Boolean,
     onClick: () -> Unit,
+    style: TabStyle,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     text: (@Composable () -> Unit)? = null,
@@ -107,7 +109,10 @@ fun SketchbookTab(
         Tab(
             selected = selected,
             onClick = onClick,
-            modifier = modifier.pressIndicated(Theme.container.buttonSmall.asGlassShape(), interactionSource),
+            modifier = modifier.pressIndicated(
+                style.shape.asGlassShape(),
+                interactionSource
+            ),
             enabled = enabled,
             text = text,
             icon = icon,
@@ -118,13 +123,37 @@ fun SketchbookTab(
     }
 }
 
+enum class TabStyle {
+    Start,
+    Center,
+    End;
+
+    val shape: CornerBasedShape
+        @Composable get() = when (this) {
+            Start -> RoundedCornerShape(
+                CornerSize(50),
+                Theme.container.buttonSmall.topEnd,
+                Theme.container.buttonSmall.bottomEnd,
+                CornerSize(50)
+            )
+
+            Center -> Theme.container.buttonSmall
+            End -> RoundedCornerShape(
+                Theme.container.buttonSmall.topEnd,
+                CornerSize(50),
+                CornerSize(50),
+                Theme.container.buttonSmall.bottomEnd
+            )
+        }
+}
+
 @SketchbookComponentPreview
 @SketchbookValidation
 @Composable
 private fun SketchbookTabRowPreview() = SketchbookPreviewLayout {
     SketchbookTabRow(selectedTabIndex = 1, modifier = Modifier.padding(16.dp)) {
-        SketchbookTab(false, {}, text = { Text("Photos") })
-        SketchbookTab(true, {}, text = { Text("Albums") })
-        SketchbookTab(false, {}, text = { Text("Places") })
+        SketchbookTab(false, {}, TabStyle.Start, text = { Text("Photos") })
+        SketchbookTab(true, {}, TabStyle.Center, text = { Text("Albums") })
+        SketchbookTab(false, {}, TabStyle.End, text = { Text("Places") })
     }
 }
