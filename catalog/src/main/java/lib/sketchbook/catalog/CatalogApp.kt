@@ -32,7 +32,7 @@ internal fun CatalogApp() {
     var open by rememberSaveable { mutableStateOf<String?>(null) }
     val demo = Catalog.firstOrNull { it.title == open }
     BackHandler(enabled = demo != null) { open = null }
-    Box(Modifier.fillMaxSize()) {
+    Box(Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
         SketchbookAnimatedBackground(Modifier
             .fillMaxSize()
             .glassSource()) {}

@@ -1,5 +1,6 @@
 package lib.sketchbook.catalog
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.*
 import androidx.compose.material.icons.filled.*
@@ -35,7 +36,8 @@ internal fun Showcase(label: String, content: @Composable ColumnScope.() -> Unit
         Text(label, style = Theme.textStyle.caption)
         SketchbookAnimatedBackground(modifier = Modifier
             .fillMaxSize()
-            .clip(Theme.container.card)) {
+            .clip(Theme.container.card)
+            .background(MaterialTheme.colorScheme.surface)) {
             Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(8.dp), content = content)
         }
     }

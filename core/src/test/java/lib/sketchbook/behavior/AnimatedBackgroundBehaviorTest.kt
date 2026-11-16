@@ -1,7 +1,10 @@
 package lib.sketchbook.behavior
 
 import android.provider.Settings
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Text
@@ -11,6 +14,7 @@ import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.PixelMap
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.toPixelMap
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.test.assertIsDisplayed
@@ -18,6 +22,8 @@ import androidx.compose.ui.test.captureToImage
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.onRoot
+import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performTouchInput
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
@@ -27,6 +33,7 @@ import lib.sketchbook.SketchbookAnimatedBackground
 import lib.sketchbook.theme.Theme
 import org.junit.Assert.assertArrayEquals
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test
@@ -43,20 +50,35 @@ abstract class AnimatedBackgroundBehavior : BehaviorTest() {
         advance(16)
     }
 
+    private fun showOver(
+        modifier: Modifier = Modifier.size(100.dp),
+        backdrop: Color = Color.White,
+        content: @Composable () -> Unit
+    ) = show { Box(modifier.background(backdrop)) { content() } }
+
     private fun advance(millis: Long) = composeRule.mainClock.advanceTimeBy(millis)
 
     private fun frame(tag: String? = null): FloatArray {
         val node = if (tag == null) composeRule.onRoot() else composeRule.onNodeWithTag(tag)
         val map = node.captureToImage().toPixelMap()
-        return FloatArray(map.width * map.height) { map[it % map.width, it / map.width].let { c -> c.red + c.green + c.blue } }
+        return FloatArray(map.width * map.height * 3) {
+            val c = map[(it / 3) % map.width, (it / 3) / map.width]
+            when (it % 3) {
+                0 -> c.red
+                1 -> c.green
+                else -> c.blue
+            }
+        }
     }
 
-    private fun PixelMap.pixels(): List<Color> =
-        List(width * height) { this[it % width, it / width] }
+    private fun PixelMap.pixels(x: IntRange, y: IntRange): List<Color> =
+        y.flatMap { j -> x.map { i -> this[i, j] } }
 
     private fun disableAnimations() {
         Settings.Global.putFloat(composeRule.activity.contentResolver, Settings.Global.ANIMATOR_DURATION_SCALE, 0f)
     }
+
+    private fun Color.isWhite() = red > .9f && green > .9f && blue > .9f
 
     @Test
     fun `background wraps its content`() {
@@ -66,114 +88,154 @@ abstract class AnimatedBackgroundBehavior : BehaviorTest() {
     }
 
     @Test
-    fun `background fills with its base color`() {
-        show { SketchbookAnimatedBackground(Modifier.size(100.dp), colors = listOf(Color.Red), baseColor = Color.Red, animated = false) {} }
+    fun `background draws nothing behind its nodes`() {
+        showOver(Modifier.size(100.dp), Color.White) {
+            SketchbookAnimatedBackground(Modifier.fillMaxSize(), colors = listOf(Color.Red), nodeSize = 1.dp, density = .01f, animated = false) {}
+        }
 
-        val center = composeRule.onRoot().captureToImage().toPixelMap()[100, 100]
-        assertEquals(1f, center.red, .05f)
-        assertEquals(0f, center.green, .05f)
+        val map = composeRule.onRoot().captureToImage().toPixelMap()
+
+        assertTrue(map.pixels(0 until map.width, 0 until map.height).count { it.isWhite() } > map.width * map.height * .9)
     }
 
     @Test
-    fun `background shows its base color where no light reaches`() {
-        show {
+    fun `background draws nodes in the given colors near its center`() {
+        showOver(Modifier.size(150.dp)) {
             SketchbookAnimatedBackground(
-                Modifier.size(100.dp),
-                colors = listOf(Color.Blue),
-                baseColor = Color.Red,
+                Modifier.fillMaxSize(),
+                colors = listOf(Color.Red),
+                nodeSize = 14.dp,
+                density = 6f,
                 animated = false
             ) {}
         }
 
-        val pixels = composeRule.onRoot().captureToImage().toPixelMap().pixels()
+        val map = composeRule.onRoot().captureToImage().toPixelMap()
+        val q = map.width / 4
+        val center = map.pixels(q..3 * q, q..3 * q)
 
-        assertTrue(pixels.any { it.red > it.blue + .3f })
+        assertTrue(center.any { it.red > it.blue + .3f })
     }
 
     @Test
-    fun `background glows with the given colors over its base`() {
-        show {
+    fun `background fades to transparent at its corners`() {
+        showOver(Modifier.size(150.dp)) {
             SketchbookAnimatedBackground(
-                Modifier.size(100.dp),
-                colors = listOf(Color.Blue),
-                baseColor = Color.Red,
+                Modifier.fillMaxSize(),
+                colors = listOf(Color.Red),
+                nodeSize = 14.dp,
+                density = 6f,
                 animated = false
             ) {}
         }
 
-        val pixels = composeRule.onRoot().captureToImage().toPixelMap().pixels()
+        val map = composeRule.onRoot().captureToImage().toPixelMap()
+        val near = 0..3
+        val far = (map.width - 4) until map.width
+        val corners = listOf(near to near, far to near, near to far, far to far)
 
-        assertTrue(pixels.any { it.blue > it.red + .15f })
+        assertTrue(corners.all { (x, y) -> map.pixels(x, y).all { it.isWhite() } })
     }
 
     @Test
-    fun `default background is not a flat wash`() {
-        show { SketchbookAnimatedBackground(Modifier.size(100.dp), animated = false) {} }
+    fun `background without a vignette draws nodes at its edges`() {
+        showOver(Modifier.size(150.dp)) {
+            SketchbookAnimatedBackground(
+                Modifier.fillMaxSize(),
+                colors = listOf(Color.Red),
+                nodeSize = 14.dp,
+                density = 6f,
+                vignette = 0f,
+                animated = false
+            ) {}
+        }
 
-        val sums = composeRule.onRoot().captureToImage().toPixelMap().pixels().map { it.red + it.green + it.blue }
+        val map = composeRule.onRoot().captureToImage().toPixelMap()
+        val edgeBand = map.pixels(0 until map.width, 0 until map.height).filterIndexed { i, _ ->
+            val x = i % map.width
+            val y = i / map.width
+            x < map.width / 6 || y < map.height / 6 || x > map.width * 5 / 6 || y > map.height * 5 / 6
+        }
 
-        assertTrue(sums.max() - sums.min() > .25f)
+        assertTrue(edgeBand.any { it.red > it.blue + .3f })
     }
 
     @Test
-    fun `background repeats its frame after one full loop`() {
-        show { SketchbookAnimatedBackground(Modifier.size(100.dp), colors = palette, speed = 1f, baseColor = Color.Black) {} }
-        val first = frame()
+    fun `link distance connects nearby nodes with lines`() {
+        showOver(Modifier.size(300.dp)) {
+            Row {
+                SketchbookAnimatedBackground(Modifier.testTag("linked").size(150.dp), colors = listOf(Color.Blue), nodeSize = 1.dp, density = 6f, linkDistance = 300.dp, vignette = 0f, animated = false) {}
+                SketchbookAnimatedBackground(Modifier.testTag("bare").size(150.dp), colors = listOf(Color.Blue), nodeSize = 1.dp, density = 6f, linkDistance = 0.dp, vignette = 0f, animated = false) {}
+            }
+        }
 
-        advance(5_000)
-        val middle = frame()
-        advance(5_000)
+        fun drawn(tag: String) = composeRule.onNodeWithTag(tag).captureToImage().toPixelMap().let { it.pixels(0 until it.width, 0 until it.height) }.count { !it.isWhite() }
 
-        assertFalse(first.contentEquals(middle))
-        assertArrayEquals(first, frame(), .15f)
+        assertTrue(drawn("linked") > drawn("bare") * 3)
     }
 
     @Test
-    fun `default background is darker in a dark theme than in a light theme`() {
+    fun `a custom node shape draws differently than the default circle`() {
+        showOver(Modifier.size(200.dp)) {
+            Row {
+                SketchbookAnimatedBackground(Modifier.testTag("circle").size(100.dp), nodeSize = 14.dp, density = 6f, vignette = 0f, linkDistance = 0.dp, animated = false) {}
+                SketchbookAnimatedBackground(Modifier.testTag("square").size(100.dp), nodeShape = RectangleShape, nodeSize = 14.dp, density = 6f, vignette = 0f, linkDistance = 0.dp, animated = false) {}
+            }
+        }
+
+        assertFalse(frame("circle").contentEquals(frame("square")))
+    }
+
+    @Test
+    fun `identical backgrounds render identical frames`() {
+        showOver(Modifier.size(200.dp)) {
+            Row {
+                SketchbookAnimatedBackground(Modifier.testTag("a").size(100.dp), colors = palette) {}
+                SketchbookAnimatedBackground(Modifier.testTag("b").size(100.dp), colors = palette) {}
+            }
+        }
+        advance(1000)
+
+        assertArrayEquals(frame("a"), frame("b"), 0f)
+    }
+
+    @Test
+    fun `default background is not blank`() {
+        showOver(Modifier.size(150.dp)) {
+            SketchbookAnimatedBackground(Modifier.fillMaxSize(), density = 6f, nodeSize = 14.dp, animated = false) {}
+        }
+
+        val map = composeRule.onRoot().captureToImage().toPixelMap()
+
+        assertTrue(map.pixels(0 until map.width, 0 until map.height).any { !it.isWhite() })
+    }
+
+    @Test
+    fun `default colors differ between light and dark themes`() {
         composeRule.mainClock.autoAdvance = false
         composeRule.setContent {
             Row {
                 Theme(darkTheme = false, dynamicColor = false) {
-                    SketchbookAnimatedBackground(Modifier.testTag("light").size(100.dp), animated = false) {}
+                    Box(Modifier.testTag("light").size(100.dp).background(Color.Gray)) {
+                        SketchbookAnimatedBackground(Modifier.fillMaxSize(), nodeSize = 14.dp, density = 6f, vignette = 0f, animated = false) {}
+                    }
                 }
                 Theme(darkTheme = true, dynamicColor = false) {
-                    SketchbookAnimatedBackground(Modifier.testTag("dark").size(100.dp), animated = false) {}
+                    Box(Modifier.testTag("dark").size(100.dp).background(Color.Gray)) {
+                        SketchbookAnimatedBackground(Modifier.fillMaxSize(), nodeSize = 14.dp, density = 6f, vignette = 0f, animated = false) {}
+                    }
                 }
             }
         }
         advance(16)
 
-        assertTrue(frame("dark").average() < frame("light").average() - .5)
+        assertFalse(frame("light").contentEquals(frame("dark")))
     }
 
     @Test
-    fun `default light background glows peach at the bottom left`() {
-        show { SketchbookAnimatedBackground(Modifier.size(100.dp), animated = false) {} }
-
-        val pixel = composeRule.onRoot().captureToImage().toPixelMap()[40, 170]
-
-        assertTrue(pixel.red > pixel.blue + .1f)
-    }
-
-    @Test
-    fun `default dark background glows indigo at the top left`() {
-        composeRule.mainClock.autoAdvance = false
-        composeRule.setContent {
-            Theme(darkTheme = true, dynamicColor = false) {
-                SketchbookAnimatedBackground(Modifier.size(100.dp), animated = false) {}
-            }
-        }
-        advance(16)
-
-        val pixel = composeRule.onRoot().captureToImage().toPixelMap()[40, 30]
-
-        assertTrue(pixel.blue > pixel.red + .3f && pixel.blue > pixel.green + .3f)
-    }
-
-    @Test
-    fun `background drifts over time without recomposing its content`() {
-        show {
-            SketchbookAnimatedBackground(Modifier.size(100.dp), colors = palette) {
+    fun `nodes drift over time without recomposing the content`() {
+        showOver {
+            SketchbookAnimatedBackground(Modifier.fillMaxSize(), colors = palette, nodeSize = 10.dp, density = 4f) {
                 SideEffect { compositions++ }
             }
         }
@@ -188,7 +250,7 @@ abstract class AnimatedBackgroundBehavior : BehaviorTest() {
 
     @Test
     fun `static background holds a stable frame`() {
-        show { SketchbookAnimatedBackground(Modifier.size(100.dp), colors = palette, animated = false) {} }
+        showOver { SketchbookAnimatedBackground(Modifier.fillMaxSize(), colors = palette, nodeSize = 10.dp, density = 4f, animated = false) {} }
         val first = frame()
 
         advance(2000)
@@ -198,7 +260,7 @@ abstract class AnimatedBackgroundBehavior : BehaviorTest() {
 
     @Test
     fun `background with no speed holds a stable frame`() {
-        show { SketchbookAnimatedBackground(Modifier.size(100.dp), colors = palette, speed = 0f) {} }
+        showOver { SketchbookAnimatedBackground(Modifier.fillMaxSize(), colors = palette, nodeSize = 10.dp, density = 4f, speed = 0f) {} }
         val first = frame()
 
         advance(2000)
@@ -208,7 +270,7 @@ abstract class AnimatedBackgroundBehavior : BehaviorTest() {
 
     @Test
     fun `background with a negative speed holds a stable frame`() {
-        show { SketchbookAnimatedBackground(Modifier.size(100.dp), colors = palette, speed = -2f) {} }
+        showOver { SketchbookAnimatedBackground(Modifier.fillMaxSize(), colors = palette, nodeSize = 10.dp, density = 4f, speed = -2f) {} }
         val first = frame()
 
         advance(2000)
@@ -217,24 +279,9 @@ abstract class AnimatedBackgroundBehavior : BehaviorTest() {
     }
 
     @Test
-    fun `doubling the speed reaches in half the time what the base speed reaches later`() {
-        show {
-            Row {
-                SketchbookAnimatedBackground(Modifier.testTag("slow").size(100.dp), colors = palette, speed = 1f) {}
-                SketchbookAnimatedBackground(Modifier.testTag("fast").size(100.dp), colors = palette, speed = 2f) {}
-            }
-        }
-        advance(1000)
-        val fast = frame("fast")
-        advance(1000)
-
-        assertArrayEquals(fast, frame("slow"), .02f)
-    }
-
-    @Test
     fun `background holds still when the system disabled animations`() {
         disableAnimations()
-        show { SketchbookAnimatedBackground(Modifier.size(100.dp), colors = palette) {} }
+        showOver { SketchbookAnimatedBackground(Modifier.fillMaxSize(), colors = palette, nodeSize = 10.dp, density = 4f) {} }
         val first = frame()
 
         advance(2000)
@@ -245,9 +292,9 @@ abstract class AnimatedBackgroundBehavior : BehaviorTest() {
     @Test
     fun `background pauses while the screen is not started and resumes afterwards`() {
         val owner = TestLifecycleOwner()
-        show {
+        showOver {
             CompositionLocalProvider(LocalLifecycleOwner provides owner) {
-                SketchbookAnimatedBackground(Modifier.size(100.dp), colors = palette) {}
+                SketchbookAnimatedBackground(Modifier.fillMaxSize(), colors = palette, nodeSize = 10.dp, density = 4f) {}
             }
         }
         advance(500)
@@ -263,6 +310,36 @@ abstract class AnimatedBackgroundBehavior : BehaviorTest() {
         advance(1500)
 
         assertFalse(paused.contentEquals(frame()))
+    }
+
+    @Test
+    fun `touching the background pushes nodes away`() {
+        showOver(Modifier.size(200.dp)) {
+            Row {
+                SketchbookAnimatedBackground(Modifier.testTag("touched").size(100.dp), colors = palette, nodeSize = 10.dp, density = 6f, vignette = 0f) {}
+                SketchbookAnimatedBackground(Modifier.testTag("control").size(100.dp), colors = palette, nodeSize = 10.dp, density = 6f, vignette = 0f) {}
+            }
+        }
+        assertArrayEquals(frame("touched"), frame("control"), 0f)
+
+        composeRule.onNodeWithTag("touched").performTouchInput { down(center) }
+        advance(500)
+
+        assertFalse(frame("touched").contentEquals(frame("control")))
+    }
+
+    @Test
+    fun `touching content over the background still reaches the content`() {
+        var clicks = 0
+        show {
+            SketchbookAnimatedBackground(Modifier.size(100.dp)) {
+                Box(Modifier.testTag("target").size(50.dp).clickable { clicks++ })
+            }
+        }
+
+        composeRule.onNodeWithTag("target").performClick()
+
+        assertEquals(1, clicks)
     }
 }
 
