@@ -20,6 +20,9 @@ internal class RefractiveGlass(
             optics { refractiveOptics(spec, this) }
             tint(spec.tint.copy(alpha = spec.tintStrength))
             specularIntensity(0f)
+            whitePoint(0f)
+            contrast(0f)
+            chromaMultiplier(1f)
             if (spec.rimIntensity <= 0f) {
                 edgeShadow(Color.Transparent)
                 ambientResponse(0f)
