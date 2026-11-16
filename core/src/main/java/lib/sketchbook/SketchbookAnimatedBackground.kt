@@ -26,8 +26,8 @@ private fun isDark(): Boolean = MaterialTheme.colorScheme.background.luminance()
 private fun defaultBase(dark: Boolean): Color = if (dark) Color(0xFF0A0A12) else Color(0xFFF7F6FC)
 
 private fun defaultColors(dark: Boolean): List<Color> =
-    if (dark) listOf(Color(0xFF4338CA), Color(0xFF9D2A8C), Color(0xFF1D5FC9), Color(0xFFCF5A3C))
-    else listOf(Color(0xFFA5B1FF), Color(0xFFFFADCF), Color(0xFF9BD8FF), Color(0xFFFFCB9A))
+    if (dark) listOf(Color(0xFF4338CA), Color(0xFF7B2394), Color(0xFF0722C9), Color(0xFF9D2A8C))
+    else listOf(Color(0xFF81D4FA), Color(0xFFF48FB1), Color(0xFF80DEEA), Color(0xFFB39DDB))
 
 @Composable
 fun SketchbookAnimatedBackground(
