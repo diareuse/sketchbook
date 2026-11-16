@@ -97,7 +97,7 @@ fun ColumnScope.SketchbookNavigationRailItem(
             .size(4.dp, 24.dp)
             .graphicsLayer {
                 alpha = progress
-                scaleX = lerp(IndicatorMinScale, 1f, progress)
+                scaleY = lerp(IndicatorMinScale, 1f, progress)
             }
             .background(
                 color = indicatorColor,
