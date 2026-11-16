@@ -1,31 +1,20 @@
 package lib.sketchbook
 
-import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.PrimaryScrollableTabRow
-import androidx.compose.material3.PrimaryTabRow
-import androidx.compose.material3.Tab
-import androidx.compose.material3.TabIndicatorScope
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
+import androidx.compose.foundation.interaction.*
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.*
+import androidx.compose.ui.graphics.*
+import androidx.compose.ui.unit.*
 import lib.sketchbook.glass.asGlassShape
 import lib.sketchbook.glass.glass
 import lib.sketchbook.theme.Theme
 import lib.sketchbook.theme.contentColorFor
 
 private val RowGlassElevation = 12.dp
-private val IndicatorGlassElevation = 24.dp
+private val IndicatorGlassElevation = 4.dp
 private val IndicatorHeight = 4.dp
-private val IndicatorInset = 12.dp
 private val RowPadding = 4.dp
 private const val UnselectedAlpha = .8f
 
@@ -34,14 +23,12 @@ private fun TabIndicatorScope.GlassIndicator(selectedTabIndex: Int) {
     val shape = Theme.container.buttonSmall.asGlassShape()
     Box(
         Modifier
-            .tabIndicatorOffset(selectedTabIndex)
-            .padding(horizontal = IndicatorInset)
+            .tabIndicatorOffset(selectedTabIndex, matchContentSize = true)
             .height(IndicatorHeight)
             .glass(
                 shape = shape,
                 tonalElevation = IndicatorGlassElevation,
-                useGlow = true,
-                tint = Theme.color.emphasis.primary
+                tint = LocalContentColor.current
             )
     )
 }
