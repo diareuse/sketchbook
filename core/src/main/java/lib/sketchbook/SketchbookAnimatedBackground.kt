@@ -9,6 +9,7 @@ import androidx.compose.ui.unit.*
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.currentStateAsState
+import lib.sketchbook.glass.glassSource
 import lib.sketchbook.modifier.meshGradientBackground
 
 private const val BaseDurationMillis = 10_000f
@@ -40,15 +41,22 @@ fun SketchbookAnimatedBackground(
     val lifecycleState by LocalLifecycleOwner.current.lifecycle.currentStateAsState()
     val started = lifecycleState.isAtLeast(Lifecycle.State.STARTED)
     val running = drifts(speed, animated, started)
-    Box(
-        modifier = modifier.meshGradientBackground(
-            colors = colors,
-            durationMillis = if (running) driftDurationMillis(speed) else driftDurationMillis(1f),
-            animated = running,
-            baseColor = baseColor
-        ),
-        content = content
-    )
+    Box(modifier = modifier) {
+        Box(
+            modifier = Modifier
+                .matchParentSize()
+                .glassSource()
+                .meshGradientBackground(
+                    colors = colors,
+                    durationMillis = if (running) driftDurationMillis(speed) else driftDurationMillis(
+                        1f
+                    ),
+                    animated = running,
+                    baseColor = baseColor
+                )
+        )
+        content()
+    }
 }
 
 @SketchbookComponentPreview
