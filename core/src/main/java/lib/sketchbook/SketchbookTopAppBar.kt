@@ -31,7 +31,9 @@ fun SketchbookTopAppBar(
     arrangement: Arrangement.Horizontal = Arrangement.spacedBy(8.dp),
     titleStyle: TextStyle = Theme.textStyle.title
 ) = Row(
-    modifier = modifier.padding(horizontal = 16.dp, vertical = 16.dp),
+    modifier = modifier
+        .padding(horizontal = 16.dp, vertical = 16.dp)
+        .statusBarsPadding(),
     verticalAlignment = Alignment.Top,
     horizontalArrangement = arrangement
 ) {
