@@ -15,7 +15,6 @@ import androidx.compose.ui.graphics.*
 import androidx.compose.ui.semantics.*
 import androidx.compose.ui.unit.*
 import androidx.compose.ui.util.*
-import lib.sketchbook.glass.asGlassShape
 import lib.sketchbook.theme.Theme
 import lib.sketchbook.theme.contentColorFor
 
@@ -55,11 +54,9 @@ internal fun NavigationItemCore(
         else -> content.copy(UnselectedAlpha)
     }
     val indicatorColor = color.copy(IndicatorAlpha)
-    val shape = CircleShape.asGlassShape()
     Column(
         modifier = modifier
             .defaultMinSize(minWidth = ItemMinSize)
-            .clip(shape)
             .selectable(
                 selected = selected,
                 onClick = onClick,
