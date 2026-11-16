@@ -32,10 +32,11 @@ internal fun CatalogApp() {
     var open by rememberSaveable { mutableStateOf<String?>(null) }
     val demo = Catalog.firstOrNull { it.title == open }
     BackHandler(enabled = demo != null) { open = null }
-    Box(Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
+    Box(Modifier.fillMaxSize()) {
         SketchbookAnimatedBackground(Modifier
             .fillMaxSize()
-            .glassSource()) {}
+            .glassSource()
+            .background(MaterialTheme.colorScheme.background)) {}
         if (demo == null) {
             ListScreen(group, onGroupChange = { group = it }, onOpen = { open = it.title })
         } else {
