@@ -36,6 +36,7 @@ import lib.sketchbook.SketchbookNavigationRail
 import lib.sketchbook.SketchbookNavigationRailItem
 import lib.sketchbook.StripedBackdrop
 import lib.sketchbook.changedPixels
+import lib.sketchbook.navItem
 import lib.sketchbook.glass.asGlassShape
 import lib.sketchbook.theme.Theme
 import org.junit.Assert.assertEquals
@@ -115,52 +116,43 @@ abstract class NavigationShapeBehavior : GlassPaneBehavior() {
 
     private fun frame(): PixelMap = composeRule.onRoot().captureToImage().toPixelMap()
 
-    private fun limitOf(bounds: Rect, slack: Float): RoundRect {
-        val outline = itemShape.createOutline(Size(bounds.width, bounds.height), LayoutDirection.Ltr, density)
-        val radius = (outline as Outline.Rounded).roundRect.topLeftCornerRadius
-        return RoundRect(
-            bounds.left - slack, bounds.top - slack, bounds.right + slack, bounds.bottom + slack,
-            CornerRadius(radius.x + slack, radius.y + slack)
-        )
-    }
-
     @Test
-    fun `item press highlight stays inside the item glass shape`() {
+    fun `item press highlight stays inside the item icon circle`() {
         showStriped()
         composeRule.mainClock.autoAdvance = false
         composeRule.mainClock.advanceTimeBy(16)
         val idle = frame()
-        val bounds = composeRule.onNodeWithTag("item0").fetchSemanticsNode().boundsInRoot
+        val bounds = composeRule.navItem("item0").fetchSemanticsNode().boundsInRoot
+        val d = composeRule.density.density
 
-        composeRule.onNodeWithTag("item0").performTouchInput { down(center) }
+        composeRule.navItem("item0").performTouchInput { down(center) }
         composeRule.mainClock.advanceTimeBy(150)
         val changed = idle.changedPixels(frame(), 1).filter { bounds.inflate(40f).contains(Offset(it.first + .5f, it.second + .5f)) }
 
-        val limit = limitOf(bounds, 1f)
+        // The press indication is clipped to the 32dp circle around the icon, which is centered
+        // horizontally in the item and sits 4dp below the top of the 44dp tall content column.
+        val radius = 16f * d + 1f
+        val center = Offset(bounds.center.x, bounds.center.y - 22f * d + 20f * d)
         assertTrue("press changed nothing", changed.isNotEmpty())
-        assertEquals(emptyList<Pair<Int, Int>>(), changed.filter { !limit.contains(Offset(it.first + .5f, it.second + .5f)) }.take(8))
+        assertEquals(
+            emptyList<Pair<Int, Int>>(),
+            changed.filter { (Offset(it.first + .5f, it.second + .5f) - center).getDistance() > radius }.take(8)
+        )
     }
 
     @Test
-    fun `selection indicator follows the item glass shape inside its item`() {
+    fun `selection change only repaints the item and its indicator strip`() {
         selected = 2
         showStriped()
         val before = frame()
         selected = 0
         composeRule.waitForIdle()
         val after = frame()
-        val bounds = composeRule.onNodeWithTag("item0").fetchSemanticsNode().boundsInRoot
-        val indicatorWidth = 56f * composeRule.density.density
-        val indicatorHeight = 32f * composeRule.density.density
-        val indicator = Rect(
-            bounds.center.x - indicatorWidth / 2,
-            bounds.center.y - indicatorHeight / 2,
-            bounds.center.x + indicatorWidth / 2,
-            bounds.center.y + indicatorHeight / 2
-        )
+        val bounds = composeRule.navItem("item0").fetchSemanticsNode().boundsInRoot
 
         val changed = before.changedPixels(after, 1).filter { bounds.inflate(40f).contains(Offset(it.first + .5f, it.second + .5f)) }
-        val limit = limitOf(indicator, 1f)
+        // The 4dp indicator strip sits above a bar item and beside a rail item.
+        val limit = bounds.inflate(4f * composeRule.density.density + 1f)
 
         assertTrue("indicator not drawn", changed.isNotEmpty())
         assertEquals(emptyList<Pair<Int, Int>>(), changed.filter { !limit.contains(Offset(it.first + .5f, it.second + .5f)) }.take(8))

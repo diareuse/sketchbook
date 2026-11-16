@@ -127,20 +127,18 @@ abstract class CardMatteBehavior : BehaviorTest() {
     }
 
     @Test
-    fun `disabled card is a flat matte fill even when glow and rim are requested`() {
+    fun `disabled card ignores glow and specular rim requests`() {
         show(
             { SketchbookCard(onClick = {}, modifier = Modifier.size(150.dp, 80.dp), enabled = false, useGlow = true, specularRim = true) {} },
             { SketchbookCard(onClick = {}, modifier = Modifier.size(150.dp, 80.dp), enabled = false) {} }
         )
         val image = pixels()
-        val reference = image.opaque(160, 100)
 
         var worst = 0
-        for (y in 22 until 178 step 2) for (x in 80 until 260 step 2) {
-            worst = maxOf(worst, distance(image.opaque(x, y), reference))
-            worst = maxOf(worst, distance(image.opaque(x + 360, y), reference))
+        for (y in 20 until 180) for (x in 20 until 320) {
+            worst = maxOf(worst, distance(image.opaque(x, y), image.opaque(x + 360, y)))
         }
-        assertTrue("matte spread $worst", worst <= 4)
+        assertTrue("difference between requested and plain disabled card $worst", worst <= 2)
     }
 
     @Test
@@ -187,12 +185,14 @@ abstract class CardMatteBehavior : BehaviorTest() {
     }
 
     @Test
-    fun `disabled card over a glass host is flat while the enabled one shows glow and rim`() {
+    fun `enabled card over a glass host shows more rim detail than the disabled one`() {
         val disabled = hostedSpread(enabled = false)
         composeRule.activityRule.scenario.recreate()
         val enabled = hostedSpread(enabled = true)
 
-        assertTrue("enabled $enabled disabled $disabled", disabled <= 6 && enabled > disabled + 20)
+        // Every glass card with elevation keeps a quiet pane rim now, so the disabled card is no
+        // longer perfectly flat; only the enabled card adds the specular beam on top.
+        assertTrue("enabled $enabled disabled $disabled", enabled > disabled + 20)
     }
 
     @Test

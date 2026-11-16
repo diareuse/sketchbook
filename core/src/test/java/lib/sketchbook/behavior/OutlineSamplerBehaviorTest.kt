@@ -10,6 +10,7 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
+import lib.sketchbook.shader.BeamSampleCount
 import lib.sketchbook.shader.OutlineSamples
 import lib.sketchbook.shader.sampleOutline
 import lib.sketchbook.shape.SquircleShape
@@ -39,13 +40,13 @@ class OutlineSamplerBehaviorTest {
     )
 
     @Test
-    fun `every outline is sampled into 64 points`() = forEachShape { name, samples, _ ->
-        assertEquals(name, 64, samples.points.size / 2)
+    fun `every outline is sampled into the beam sample count of points`() = forEachShape { name, samples, _ ->
+        assertEquals(name, BeamSampleCount, samples.points.size / 2)
     }
 
     @Test
     fun `every sample lies within half a dp of the outline`() = forEachShape { name, samples, reference ->
-        for (i in 0 until 64) {
+        for (i in 0 until BeamSampleCount) {
             val p = Offset(samples.points[2 * i], samples.points[2 * i + 1])
             assertTrue("$name sample $i", reference.distanceTo(p) < .5f)
         }
@@ -53,11 +54,11 @@ class OutlineSamplerBehaviorTest {
 
     @Test
     fun `samples are evenly spaced by arc length`() = forEachShape { name, samples, reference ->
-        val step = reference.perimeter / 64f
-        for (i in 0 until 64) {
+        val step = reference.perimeter / BeamSampleCount.toFloat()
+        for (i in 0 until BeamSampleCount) {
             val a = reference.arcOf(Offset(samples.points[2 * i], samples.points[2 * i + 1]))
             val b = reference.arcOf(
-                Offset(samples.points[2 * ((i + 1) % 64)], samples.points[2 * ((i + 1) % 64) + 1])
+                Offset(samples.points[2 * ((i + 1) % BeamSampleCount)], samples.points[2 * ((i + 1) % BeamSampleCount) + 1])
             )
             val gap = (b - a + reference.perimeter) % reference.perimeter
             assertEquals("$name gap $i", step, min(gap, reference.perimeter - gap), step * .05f)
@@ -80,8 +81,8 @@ class OutlineSamplerBehaviorTest {
     @Test
     fun `samples run clockwise on screen`() = forEachShape { name, samples, _ ->
         var area = 0f
-        for (i in 0 until 64) {
-            val j = (i + 1) % 64
+        for (i in 0 until BeamSampleCount) {
+            val j = (i + 1) % BeamSampleCount
             area += samples.points[2 * i] * samples.points[2 * j + 1] - samples.points[2 * j] * samples.points[2 * i + 1]
         }
         assertTrue("$name area $area", area > 0f)
@@ -102,7 +103,7 @@ class OutlineSamplerBehaviorTest {
     fun `a position along the border interpolates between neighbouring samples and wraps`() {
         val outline = RoundedCornerShape(16.dp).createOutline(Size(400f, 160f), LayoutDirection.Ltr, density)
         val samples = sampleOutline(outline, density.density)
-        val step = samples.perimeter / 64f
+        val step = samples.perimeter / BeamSampleCount.toFloat()
 
         val start = samples.pointAt(0f)
         val wrapped = samples.pointAt(samples.perimeter)

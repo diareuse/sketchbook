@@ -36,6 +36,7 @@ import androidx.compose.ui.unit.dp
 import lib.sketchbook.SketchbookNavigationBar
 import lib.sketchbook.SketchbookNavigationBarItem
 import lib.sketchbook.distance
+import lib.sketchbook.navItem
 import lib.sketchbook.opaque
 import lib.sketchbook.theme.Theme
 import org.junit.Assert.assertEquals
@@ -94,32 +95,32 @@ class NavigationBarBehaviorTest : BehaviorTest() {
     fun `items expose the tab role and their selected state`() {
         show()
 
-        composeRule.onNodeWithTag("home")
+        composeRule.navItem("home")
             .assertIsSelected()
             .assert(SemanticsMatcher.expectValue(SemanticsProperties.Role, Role.Tab))
-        composeRule.onNodeWithTag("search").assertIsNotSelected()
+        composeRule.navItem("search").assertIsNotSelected()
     }
 
     @Test
     fun `clicking an item reports it and moves the selection`() {
         show()
 
-        composeRule.onNodeWithTag("search").performClick()
+        composeRule.navItem("search").performClick()
         composeRule.mainClock.advanceTimeBy(100)
 
         assertEquals(listOf(1), clicks)
-        composeRule.onNodeWithTag("search").assertIsSelected()
-        composeRule.onNodeWithTag("home").assertIsNotSelected()
+        composeRule.navItem("search").assertIsSelected()
+        composeRule.navItem("home").assertIsNotSelected()
     }
 
     @Test
     fun `disabled item ignores clicks`() {
         show(secondEnabled = false)
 
-        composeRule.onNodeWithTag("search").performClick()
+        composeRule.navItem("search").performClick()
 
         assertEquals(emptyList<Int>(), clicks)
-        composeRule.onNodeWithTag("search").assertIsNotEnabled()
+        composeRule.navItem("search").assertIsNotEnabled()
     }
 
     @Test
@@ -149,7 +150,7 @@ class NavigationBarBehaviorTest : BehaviorTest() {
     fun `items keep at least a 48dp touch target`() {
         show()
 
-        val bounds = composeRule.onNodeWithTag("home").getBoundsInRoot()
+        val bounds = composeRule.navItem("home").getBoundsInRoot()
         assertTrue(bounds.bottom - bounds.top >= 48.dp)
         assertTrue(bounds.right - bounds.left >= 48.dp)
     }
@@ -158,8 +159,8 @@ class NavigationBarBehaviorTest : BehaviorTest() {
     fun `bar floats with a margin from the screen edges`() {
         show()
 
-        val home = composeRule.onNodeWithTag("home").getBoundsInRoot()
-        val search = composeRule.onNodeWithTag("search").getBoundsInRoot()
+        val home = composeRule.navItem("home").getBoundsInRoot()
+        val search = composeRule.navItem("search").getBoundsInRoot()
         val root = composeRule.onRoot().getBoundsInRoot()
         assertTrue(home.left >= 16.dp)
         assertTrue(search.right <= root.right - 16.dp)
@@ -170,7 +171,7 @@ class NavigationBarBehaviorTest : BehaviorTest() {
     fun `bar stays above the bottom window inset`() {
         show(insets = WindowInsets(bottom = 24.dp))
 
-        val home = composeRule.onNodeWithTag("home").getBoundsInRoot()
+        val home = composeRule.navItem("home").getBoundsInRoot()
         val root = composeRule.onRoot().getBoundsInRoot()
         assertTrue("bottom ${home.bottom} root ${root.bottom}", home.bottom <= root.bottom - 24.dp)
     }
@@ -179,15 +180,15 @@ class NavigationBarBehaviorTest : BehaviorTest() {
     fun `bar content does not grow past its floating pill when the inset is zero`() {
         show()
 
-        val home = composeRule.onNodeWithTag("home").getBoundsInRoot()
+        val home = composeRule.navItem("home").getBoundsInRoot()
         val root = composeRule.onRoot().getBoundsInRoot()
         assertTrue(root.bottom - home.bottom < 24.dp)
     }
 
     private fun indicatorDistance(image: PixelMap): Int {
-        val bounds = composeRule.onNodeWithTag("search").getBoundsInRoot()
-        val x = ((bounds.left + bounds.right).value / 2f * 2f - 40f).toInt()
-        val y = ((bounds.top.value + 18f) * 2f).toInt()
+        val bounds = composeRule.navItem("search").getBoundsInRoot()
+        val x = ((bounds.left + bounds.right).value / 2f * 2f).toInt()
+        val y = ((bounds.top.value - 2f) * 2f).toInt()
         return distance(Color.White, image.opaque(x, y))
     }
 
@@ -199,7 +200,7 @@ class NavigationBarBehaviorTest : BehaviorTest() {
         show()
         val before = indicatorDistance(snapshot())
 
-        composeRule.onNodeWithTag("search").performClick()
+        composeRule.navItem("search").performClick()
         repeat(7) {
             composeRule.mainClock.advanceTimeByFrame()
             composeRule.waitForIdle()

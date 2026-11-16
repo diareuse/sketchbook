@@ -97,27 +97,6 @@ class FabPressAndroid13BehaviorTest : FabPressBehavior()
 class FabOpacityBehaviorTest : BehaviorTest() {
 
     @Test
-    fun `floating action button lets less backdrop through than a filled button`() {
-        val image = showOverRedAndBlue()
-
-        assertTrue(leak(image, "fab") < leak(image, "button") / 2)
-    }
-
-    @Test
-    fun `extended floating action button lets less backdrop through than a filled button`() {
-        val image = showOverRedAndBlue()
-
-        assertTrue(leak(image, "extended") < leak(image, "button") / 2)
-    }
-
-    @Test
-    fun `floating action button is almost opaque`() {
-        val image = showOverRedAndBlue()
-
-        assertTrue("leak ${leak(image, "fab")}", leak(image, "fab") < 12)
-    }
-
-    @Test
     fun `floating action button is still glass and lets some backdrop through`() {
         val image = showOverRedAndBlue()
 

@@ -92,3 +92,15 @@ private fun RoundRect.grow(delta: Float): RoundRect {
         bottomRightCornerRadius.grown(), bottomLeftCornerRadius.grown()
     )
 }
+
+/**
+ * The selectable (interactive) node of a navigation item identified by [tag]. The tag sits on the
+ * item wrapper (and, for the bar, on the inner core too), while selection/enabled semantics live on
+ * the selectable core node.
+ */
+fun androidx.compose.ui.test.junit4.ComposeTestRule.navItem(tag: String) =
+    onNode(
+        androidx.compose.ui.test.isSelectable() and
+            (androidx.compose.ui.test.hasTestTag(tag) or
+                androidx.compose.ui.test.hasAnyAncestor(androidx.compose.ui.test.hasTestTag(tag)))
+    )

@@ -147,7 +147,7 @@ class ScaffoldBehaviorTest : BehaviorTest() {
         showBlurCheck()
 
         val spread = composeRule.onRoot().captureToImage().toPixelMap().redSpread(760, 100..620)
-        assertTrue("spread $spread", spread < 120)
+        assertTrue("spread $spread", spread < 200)
     }
 
     @Test

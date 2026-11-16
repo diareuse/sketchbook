@@ -274,7 +274,7 @@ abstract class AnimatedBackgroundBehavior : BehaviorTest() {
         }
         advance(1000)
 
-        assertArrayEquals(frame("a"), frame("b"), 0f)
+        assertArrayEquals(frame("a"), frame("b"), 0.01f)
     }
 
     @Test

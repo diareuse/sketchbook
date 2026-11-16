@@ -29,6 +29,7 @@ import androidx.compose.ui.test.performClick
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.height
 import lib.sketchbook.SketchbookNavigationRail
+import lib.sketchbook.navItem
 import lib.sketchbook.SketchbookNavigationRailItem
 import lib.sketchbook.theme.Theme
 import org.junit.Assert.assertEquals
@@ -84,30 +85,30 @@ class NavigationRailBehaviorTest : BehaviorTest() {
     fun `items expose the tab role and their selected state`() {
         show()
 
-        composeRule.onNodeWithTag("home")
+        composeRule.navItem("home")
             .assertIsSelected()
             .assert(SemanticsMatcher.expectValue(SemanticsProperties.Role, Role.Tab))
-        composeRule.onNodeWithTag("search").assertIsNotSelected()
+        composeRule.navItem("search").assertIsNotSelected()
     }
 
     @Test
     fun `clicking an item reports it and moves the selection`() {
         show()
 
-        composeRule.onNodeWithTag("search").performClick()
+        composeRule.navItem("search").performClick()
 
         assertEquals(listOf(1), clicks)
-        composeRule.onNodeWithTag("search").assertIsSelected()
+        composeRule.navItem("search").assertIsSelected()
     }
 
     @Test
     fun `disabled item ignores clicks`() {
         show(secondEnabled = false)
 
-        composeRule.onNodeWithTag("search").performClick()
+        composeRule.navItem("search").performClick()
 
         assertEquals(emptyList<Int>(), clicks)
-        composeRule.onNodeWithTag("search").assertIsNotEnabled()
+        composeRule.navItem("search").assertIsNotEnabled()
     }
 
     @Test
