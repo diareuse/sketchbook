@@ -57,11 +57,11 @@ fun SketchbookAnimatedBackground(
     speed: Float = 0.25f,
     animated: Boolean = true,
     nodeShape: Shape = CircleShape,
-    nodeSize: Dp = 6.dp,
-    density: Float = 1f,
+    nodeSize: Dp = 12.dp,//6.dp
+    density: Float = 5f,//1f,
     linkDistance: Dp = 120.dp,
     touchRadius: Dp = 120.dp,
-    vignette: Float = 0.65f,
+    vignette: Float = .8f,//0.65f,
     content: @Composable BoxScope.() -> Unit
 ) {
     val lifecycleState by LocalLifecycleOwner.current.lifecycle.currentStateAsState()

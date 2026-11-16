@@ -35,15 +35,15 @@ internal fun Modifier.glassControl(
     shape: Shape,
     enabled: Boolean,
     interactionSource: InteractionSource,
-    tint: Color = Theme.color.emphasis.background,
+    tint: Color = Theme.color.emphasis.primary,
     tintStrength: Float? = null
 ): Modifier {
     val glassShape = shape.asGlassShape()
     return deniedWhenDisabled(enabled)
         .minimumTouchTarget(LocalMinimumInteractiveComponentSize.current)
         .glass(
-            glassShape,
-            ControlGlassElevation,
+            shape = glassShape,
+            tonalElevation = ControlGlassElevation,
             useGlow = enabled,
             tint = tint,
             tintStrength = tintStrength

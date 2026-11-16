@@ -1,9 +1,8 @@
 package lib.sketchbook.glass
 
-import androidx.compose.runtime.Immutable
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.unit.Dp
+import androidx.compose.runtime.*
+import androidx.compose.ui.graphics.*
+import androidx.compose.ui.unit.*
 
 @Immutable
 internal data class GlassSpec(
@@ -23,18 +22,14 @@ internal data class GlassSpec(
         fun of(
             shape: Shape,
             tint: Color,
-            tonalElevation: Dp,
-            useGlow: Boolean,
-            blurRadius: Dp,
-            tintStrength: Float? = null,
-            rimIntensity: Float? = null
+            tonalElevation: Dp
         ) = GlassSpec(
             shape = glassShape(shape),
             tint = tint,
-            tintStrength = tintStrength
-                ?: (BaseTint + tonalElevation.value * TintPerElevationDp).coerceIn(BaseTint, MaxTint),
-            rimIntensity = rimIntensity ?: if (useGlow) GlowRim else QuietRim,
-            blurRadius = blurRadius
+            tintStrength = (BaseTint + tonalElevation.value * TintPerElevationDp)
+                .coerceIn(BaseTint, MaxTint),
+            rimIntensity = if (tonalElevation > 0.dp) GlowRim else QuietRim,
+            blurRadius = tonalElevation
         )
     }
 }

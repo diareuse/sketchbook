@@ -37,7 +37,7 @@ internal fun Modifier.glass(
     rimIntensity: Float? = null
 ): Modifier {
     val spec = remember(shape, tint, tonalElevation, useGlow, blurRadius, tintStrength, rimIntensity) {
-        GlassSpec.of(shape, tint, tonalElevation, useGlow, blurRadius, tintStrength, rimIntensity)
+        GlassSpec.of(shape, tint, tonalElevation)
     }
     val glass = LocalGlass.current
     val source = if (LocalGlassDepth.current > 0) null else LocalGlassHost.current?.takeIf { it.active }

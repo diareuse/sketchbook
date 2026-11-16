@@ -41,7 +41,7 @@ fun SketchbookTopAppBar(
     Box(
         modifier = Modifier
             .weight(1f)
-            .glass(MaterialTheme.shapes.medium)
+            .glass(MaterialTheme.shapes.medium, tonalElevation = 8.dp)
             .heightIn(min = minHeight)
             .padding(horizontal = 16.dp),
         contentAlignment = Alignment.CenterStart
