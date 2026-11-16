@@ -11,6 +11,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.PixelMap
@@ -88,14 +92,88 @@ abstract class AnimatedBackgroundBehavior : BehaviorTest() {
     }
 
     @Test
-    fun `background draws nothing behind its nodes`() {
-        showOver(Modifier.size(100.dp), Color.White) {
-            SketchbookAnimatedBackground(Modifier.fillMaxSize(), colors = listOf(Color.Red), nodeSize = 1.dp, density = .01f, animated = false) {}
+    fun `background draws only its nodes over a transparent backdrop`() {
+        showOver(Modifier.size(150.dp)) {
+            SketchbookAnimatedBackground(Modifier.fillMaxSize(), colors = listOf(Color.Red), nodeSize = 14.dp, density = .4f, linkDistance = 0.dp, vignette = 0f, animated = false) {}
+        }
+
+        val map = composeRule.onRoot().captureToImage().toPixelMap()
+        val drawn = map.pixels(0 until map.width, 0 until map.height).count { !it.isWhite() }
+
+        assertTrue(drawn > 0)
+        assertTrue(drawn < map.width * map.height / 5)
+    }
+
+    @Test
+    fun `background without colors draws nothing`() {
+        showOver(Modifier.size(150.dp)) {
+            SketchbookAnimatedBackground(Modifier.fillMaxSize(), colors = emptyList(), density = 6f, animated = false) {}
         }
 
         val map = composeRule.onRoot().captureToImage().toPixelMap()
 
-        assertTrue(map.pixels(0 until map.width, 0 until map.height).count { it.isWhite() } > map.width * map.height * .9)
+        assertTrue(map.pixels(0 until map.width, 0 until map.height).all { it.isWhite() })
+    }
+
+    @Test
+    fun `background with a density that is not a number draws no nodes`() {
+        showOver(Modifier.size(150.dp)) {
+            SketchbookAnimatedBackground(Modifier.fillMaxSize(), colors = listOf(Color.Red), density = Float.NaN, animated = false) {}
+        }
+
+        val map = composeRule.onRoot().captureToImage().toPixelMap()
+
+        assertTrue(map.pixels(0 until map.width, 0 until map.height).all { it.isWhite() })
+    }
+
+    @Test
+    fun `touch with a radius that is not a number leaves the nodes alone`() {
+        showOver(Modifier.size(200.dp)) {
+            Row {
+                SketchbookAnimatedBackground(Modifier.testTag("touched").size(100.dp), colors = palette, nodeSize = 10.dp, density = 6f, touchRadius = Float.NaN.dp, vignette = 0f) {}
+                SketchbookAnimatedBackground(Modifier.testTag("control").size(100.dp), colors = palette, nodeSize = 10.dp, density = 6f, vignette = 0f) {}
+            }
+        }
+        composeRule.onNodeWithTag("touched").performTouchInput { down(center) }
+        advance(500)
+
+        assertArrayEquals(frame("touched"), frame("control"), 0f)
+    }
+
+    @Test
+    fun `nodes do not jump when the speed changes`() {
+        var speed by mutableStateOf(1f)
+        showOver {
+            SketchbookAnimatedBackground(Modifier.fillMaxSize(), colors = palette, nodeSize = 10.dp, density = 4f, speed = speed) {}
+        }
+        advance(500)
+        speed = 0f
+        advance(16)
+        val before = frame()
+
+        speed = 0.0001f
+        advance(16)
+
+        assertArrayEquals(before, frame(), .02f)
+    }
+
+    @Test
+    fun `releasing the pointer stops the repulsion`() {
+        showOver(Modifier.size(200.dp)) {
+            Row {
+                SketchbookAnimatedBackground(Modifier.testTag("held").size(100.dp), colors = palette, nodeSize = 10.dp, density = 6f, touchRadius = 80.dp, vignette = 0f) {}
+                SketchbookAnimatedBackground(Modifier.testTag("released").size(100.dp), colors = palette, nodeSize = 10.dp, density = 6f, touchRadius = 80.dp, vignette = 0f) {}
+            }
+        }
+        composeRule.onRoot().performTouchInput {
+            down(0, Offset(100f, 100f))
+            down(1, Offset(300f, 100f))
+        }
+        advance(300)
+        composeRule.onRoot().performTouchInput { up(1) }
+        advance(5000)
+
+        assertFalse(frame("held").contentEquals(frame("released")))
     }
 
     @Test

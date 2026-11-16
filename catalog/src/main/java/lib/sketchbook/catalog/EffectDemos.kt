@@ -1,11 +1,13 @@
 package lib.sketchbook.catalog
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -36,7 +38,7 @@ internal val EffectDemos = listOf(
     Demo(Group.Effects, "Animated background") {
         var animated by remember { mutableStateOf(true) }
         Showcase("Mesh background") {
-            SketchbookAnimatedBackground(Modifier.fillMaxWidth().height(200.dp), animated = animated) {
+            SketchbookAnimatedBackground(Modifier.fillMaxWidth().height(200.dp).background(MaterialTheme.colorScheme.surface), animated = animated) {
                 Text("Animated background", Modifier.padding(24.dp))
             }
         }

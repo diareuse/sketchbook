@@ -24,21 +24,18 @@ import androidx.lifecycle.compose.currentStateAsState
 import lib.sketchbook.glass.glassSource
 import lib.sketchbook.mesh.DriftingNodeField
 import lib.sketchbook.mesh.Touch
+import lib.sketchbook.mesh.nodeCount
 import lib.sketchbook.shader.animationsAllowed
 import kotlin.math.hypot
-import kotlin.math.roundToInt
+import kotlin.math.sqrt
 
 private const val BaseSpeedDp = 120f
 private const val CellDp = 90f
-private const val MaxNodes = 120
 private const val MaxFrameMillis = 50f
 private const val FieldSeed = 7
 
 internal fun drifts(speed: Float, animated: Boolean, started: Boolean): Boolean =
     animated && started && speed > 0f && speed.isFinite()
-
-internal fun nodeCount(widthPx: Float, heightPx: Float, cellPx: Float, density: Float): Int =
-    (widthPx * heightPx / (cellPx * cellPx) * density).roundToInt().coerceIn(0, MaxNodes)
 
 @Composable
 private fun isDark(): Boolean = MaterialTheme.colorScheme.background.luminance() < .5f
@@ -70,7 +67,9 @@ fun SketchbookAnimatedBackground(
     val lifecycleState by LocalLifecycleOwner.current.lifecycle.currentStateAsState()
     val started = lifecycleState.isAtLeast(Lifecycle.State.STARTED)
     val resolver = LocalContext.current.contentResolver
-    val systemAllows = animationsAllowed(Settings.Global.getFloat(resolver, Settings.Global.ANIMATOR_DURATION_SCALE, 1f))
+    val systemAllows = remember(resolver) {
+        animationsAllowed(Settings.Global.getFloat(resolver, Settings.Global.ANIMATOR_DURATION_SCALE, 1f))
+    }
     val running = drifts(speed, animated && systemAllows, started)
     val touch = remember { TouchPoint() }
     Box(modifier = modifier.trackTouch(touch)) {
@@ -121,25 +120,30 @@ private fun NodeMeshLayer(
 ) {
     val metrics = LocalDensity.current
     var size by remember { mutableStateOf(IntSize.Zero) }
-    val field = remember(size, density, speed, metrics.density) {
-        val count = nodeCount(size.width.toFloat(), size.height.toFloat(), with(metrics) { CellDp.dp.toPx() }, density)
-        DriftingNodeField(FieldSeed, count, speed * with(metrics) { BaseSpeedDp.dp.toPx() })
-            .also { it.step(0f, size.width.toFloat(), size.height.toFloat(), null) }
-    }
+    val count = nodeCount(size.width.toFloat(), size.height.toFloat(), with(metrics) { CellDp.dp.toPx() }, density)
+    val field = remember(count) { DriftingNodeField(FieldSeed, count) }
     val tick = remember { mutableLongStateOf(0L) }
-    val radius = with(metrics) { touchRadius.toPx() }
-    LaunchedEffect(running, field, radius) {
+    val radius = with(metrics) { touchRadius.toPx() }.takeIf { it.isFinite() && it > 0f }
+    val driftPx = speed * with(metrics) { BaseSpeedDp.dp.toPx() }
+    val currentSize by rememberUpdatedState(size)
+    val currentRadius by rememberUpdatedState(radius)
+    val currentDrift by rememberUpdatedState(driftPx)
+    LaunchedEffect(running, field) {
         if (!running) return@LaunchedEffect
         var last = 0L
         while (true) {
             withFrameNanos { now ->
                 val dt = if (last == 0L) 0f else ((now - last) / 1_000_000f).coerceAtMost(MaxFrameMillis)
                 last = now
-                val point = if (touch.active) Touch(touch.x, touch.y, radius) else null
-                field.step(dt, size.width.toFloat(), size.height.toFloat(), point)
+                val point = currentRadius?.takeIf { touch.active }?.let { Touch(touch.x, touch.y, it) }
+                field.step(dt, currentSize.width.toFloat(), currentSize.height.toFloat(), point, currentDrift)
                 tick.longValue++
             }
         }
+    }
+    LaunchedEffect(field, size) {
+        field.step(0f, size.width.toFloat(), size.height.toFloat(), null, 0f)
+        tick.longValue++
     }
     Canvas(
         modifier
@@ -167,13 +171,18 @@ private fun NodeMeshLayer(
                     if (colors.isEmpty()) return@onDrawBehind
                     val nodes = field.nodes
                     if (linkPx > 0f) for (i in nodes.indices) for (j in i + 1 until nodes.size) {
-                        val d = hypot(nodes[i].x - nodes[j].x, nodes[i].y - nodes[j].y)
-                        if (d < linkPx) drawLine(
-                            color = colors[i % colors.size].copy(alpha = (1f - d / linkPx) * .6f),
-                            start = Offset(nodes[i].x, nodes[i].y),
-                            end = Offset(nodes[j].x, nodes[j].y),
-                            strokeWidth = strokePx
-                        )
+                        val dx = nodes[i].x - nodes[j].x
+                        val dy = nodes[i].y - nodes[j].y
+                        val squared = dx * dx + dy * dy
+                        if (squared < linkPx * linkPx) {
+                            val d = sqrt(squared)
+                            drawLine(
+                                color = colors[i % colors.size].copy(alpha = (1f - d / linkPx) * .6f),
+                                start = Offset(nodes[i].x, nodes[i].y),
+                                end = Offset(nodes[j].x, nodes[j].y),
+                                strokeWidth = strokePx
+                            )
+                        }
                     }
                     nodes.forEachIndexed { i, node ->
                         translate(node.x - nodePx / 2f, node.y - nodePx / 2f) {
