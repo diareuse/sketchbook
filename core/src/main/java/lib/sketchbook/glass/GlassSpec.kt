@@ -14,7 +14,7 @@ internal data class GlassSpec(
     val blurRadius: Dp
 ) {
     companion object {
-        private const val BaseTint = .18f
+        private const val BaseTint = .09f
         private const val TintPerElevationDp = .02f
         private const val MaxTint = .6f
         private const val GlowRim = .9f

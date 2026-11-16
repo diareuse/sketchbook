@@ -31,7 +31,7 @@ internal fun Modifier.glass(
     shape: Shape,
     tonalElevation: Dp = 0.dp,
     useGlow: Boolean = false,
-    blurRadius: Dp = 24.dp,
+    blurRadius: Dp = 12.dp,
     tint: Color = Theme.color.emphasis.background,
     tintStrength: Float? = null,
     rimIntensity: Float? = null
