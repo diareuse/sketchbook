@@ -11,6 +11,7 @@ import lib.sketchbook.ColorfulStripes
 import lib.sketchbook.SketchbookPreviewLayout
 import lib.sketchbook.SketchbookScrollableTabRow
 import lib.sketchbook.SketchbookTab
+import lib.sketchbook.TabStyle
 import lib.sketchbook.SketchbookTabRow
 import lib.sketchbook.StripedBackdrop
 import org.junit.Test
@@ -39,13 +40,13 @@ class TabRowScreenshotTest : ScreenshotTest() {
         StripedBackdrop(Modifier.fillMaxSize(), colors = ColorfulStripes) {
             Column(Modifier.padding(24.dp)) {
                 SketchbookTabRow(selectedTabIndex = 1) {
-                    SketchbookTab(false, {}, text = { Text("Photos") })
-                    SketchbookTab(true, {}, text = { Text("Albums") })
-                    SketchbookTab(false, {}, text = { Text("Places") })
+                    SketchbookTab(false, {}, TabStyle.Start, text = { Text("Photos") })
+                    SketchbookTab(true, {}, TabStyle.Center, text = { Text("Albums") })
+                    SketchbookTab(false, {}, TabStyle.End, text = { Text("Places") })
                 }
                 SketchbookScrollableTabRow(selectedTabIndex = 0, modifier = Modifier.padding(top = 24.dp)) {
                     listOf("Recent", "Favourites", "Shared", "Archive", "Trash").forEachIndexed { index, title ->
-                        SketchbookTab(index == 0, {}, text = { Text(title) })
+                        SketchbookTab(index == 0, {}, TabStyle.Center, text = { Text(title) })
                     }
                 }
             }

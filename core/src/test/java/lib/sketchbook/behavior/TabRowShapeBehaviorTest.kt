@@ -35,6 +35,7 @@ import androidx.compose.ui.unit.dp
 import lib.sketchbook.SketchbookScrollableTabRow
 import lib.sketchbook.SketchbookTab
 import lib.sketchbook.SketchbookTabRow
+import lib.sketchbook.TabStyle
 import lib.sketchbook.StripedBackdrop
 import lib.sketchbook.changedPixels
 import lib.sketchbook.glass.asGlassShape
@@ -66,6 +67,7 @@ abstract class TabRowShapeBehavior : GlassPaneBehavior() {
             SketchbookTab(
                 selected = it == selected,
                 onClick = {},
+                style = TabStyle.Center,
                 modifier = Modifier.testTag("tab$it"),
                 icon = { Icon(Icons.Default.Home, null) },
                 text = { Text("Tab$it") }
@@ -160,6 +162,7 @@ abstract class TabRowIndicatorBehavior : BehaviorTest() {
             SketchbookTab(
                 selected = it == selected,
                 onClick = {},
+                style = TabStyle.Center,
                 modifier = Modifier.testTag("tab$it"),
                 icon = { Box(Modifier.size(24.dp)) }
             )

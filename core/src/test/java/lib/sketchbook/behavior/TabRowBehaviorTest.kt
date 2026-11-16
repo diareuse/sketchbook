@@ -33,6 +33,7 @@ import androidx.compose.ui.unit.dp
 import lib.sketchbook.SketchbookScrollableTabRow
 import lib.sketchbook.SketchbookTab
 import lib.sketchbook.SketchbookTabRow
+import lib.sketchbook.TabStyle
 import lib.sketchbook.distance
 import lib.sketchbook.opaque
 import lib.sketchbook.theme.Theme
@@ -61,6 +62,7 @@ class TabRowBehaviorTest : BehaviorTest() {
                             SketchbookTab(
                                 selected = selectedIndex == index,
                                 onClick = { clicks += index; selectedIndex = index },
+                                style = TabStyle.Center,
                                 modifier = Modifier.testTag("tab$index"),
                                 enabled = index != 1 || secondEnabled,
                                 text = { Text("Tab $index") }

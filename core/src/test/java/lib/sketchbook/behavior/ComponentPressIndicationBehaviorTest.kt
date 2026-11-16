@@ -52,6 +52,7 @@ import lib.sketchbook.SketchbookSearchBar
 import lib.sketchbook.SketchbookSegmentedButton
 import lib.sketchbook.SketchbookSwitch
 import lib.sketchbook.SketchbookTab
+import lib.sketchbook.TabStyle
 import lib.sketchbook.SketchbookTabRow
 import lib.sketchbook.SketchbookTonalButton
 import lib.sketchbook.SketchbookTonalIconButton
@@ -158,8 +159,8 @@ abstract class ComponentPressIndicationBehavior : BehaviorTest() {
     @Test
     fun `a pressed tab shows the theme press indication`() = assertIndicated {
         SketchbookTabRow(0, Modifier.size(200.dp, 56.dp)) {
-            SketchbookTab(true, {}, Modifier.testTag(Target), text = { Text("One") })
-            SketchbookTab(false, {}, text = { Text("Two") })
+            SketchbookTab(true, {}, TabStyle.Start, Modifier.testTag(Target), text = { Text("One") })
+            SketchbookTab(false, {}, TabStyle.End, text = { Text("Two") })
         }
     }
 
