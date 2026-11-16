@@ -1,8 +1,11 @@
 package lib.sketchbook
 
+import androidx.compose.animation.core.*
+import androidx.compose.foundation.*
 import androidx.compose.foundation.interaction.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.selection.*
+import androidx.compose.foundation.shape.*
 import androidx.compose.material.icons.*
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
@@ -10,6 +13,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.*
 import androidx.compose.ui.graphics.*
 import androidx.compose.ui.unit.*
+import androidx.compose.ui.util.*
 import lib.sketchbook.glass.asGlassShape
 import lib.sketchbook.glass.glass
 import lib.sketchbook.theme.Theme
@@ -42,6 +46,9 @@ fun SketchbookNavigationBar(
     }
 }
 
+private const val IndicatorAlpha = 1f
+private const val IndicatorMinScale = .0f
+
 @Composable
 fun RowScope.SketchbookNavigationBarItem(
     selected: Boolean,
@@ -54,26 +61,57 @@ fun RowScope.SketchbookNavigationBarItem(
     badge: (@Composable () -> Unit)? = null,
     compositeColor: Color = Theme.color.emphasis.background,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() }
-) = NavigationItemCore(
-    selected = selected,
-    onClick = onClick,
-    icon = icon,
-    label = label,
-    badge = badge,
-    enabled = enabled,
-    alwaysShowLabel = alwaysShowLabel,
-    compositeColor = compositeColor,
-    interactionSource = interactionSource,
-    modifier = modifier.weight(1f)
-)
+) = Column(
+    modifier = modifier.weight(1f),
+    horizontalAlignment = Alignment.CenterHorizontally
+) {
+    val progress by animateFloatAsState(
+        targetValue = if (selected) 1f else 0f,
+        animationSpec = spring(),
+        label = "indicator"
+    )
+    val indicatorColor = LocalContentColor.current.copy(IndicatorAlpha)
+    Box(
+        Modifier
+            .size(24.dp, 4.dp)
+            .graphicsLayer {
+                alpha = progress
+                scaleX = lerp(IndicatorMinScale, 1f, progress)
+            }
+            .background(
+                color = indicatorColor,
+                shape = RoundedCornerShape(bottomStart = 4.dp, bottomEnd = 4.dp)
+            )
+    )
+    NavigationItemCore(
+        selected = selected,
+        onClick = onClick,
+        icon = icon,
+        label = label,
+        badge = badge,
+        enabled = enabled,
+        alwaysShowLabel = alwaysShowLabel,
+        compositeColor = compositeColor,
+        interactionSource = interactionSource,
+        modifier = modifier
+    )
+}
 
 @SketchbookComponentPreview
 @SketchbookValidation
 @Composable
 private fun SketchbookNavigationBarPreview() = SketchbookPreviewLayout {
     SketchbookNavigationBar {
-        SketchbookNavigationBarItem(true, {}, { Icon(Icons.Default.Home, null) }, label = { Text("Home") })
-        SketchbookNavigationBarItem(false, {}, { Icon(Icons.Default.Search, null) }, label = { Text("Search") })
+        SketchbookNavigationBarItem(
+            true,
+            {},
+            { Icon(Icons.Default.Home, null) },
+            label = { Text("Home") })
+        SketchbookNavigationBarItem(
+            false,
+            {},
+            { Icon(Icons.Default.Search, null) },
+            label = { Text("Search") })
         SketchbookNavigationBarItem(
             false,
             {},

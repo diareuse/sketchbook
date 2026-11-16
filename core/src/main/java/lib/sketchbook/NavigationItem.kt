@@ -14,19 +14,14 @@ import androidx.compose.ui.geometry.*
 import androidx.compose.ui.graphics.*
 import androidx.compose.ui.semantics.*
 import androidx.compose.ui.unit.*
-import androidx.compose.ui.util.*
 import lib.sketchbook.theme.Theme
 import lib.sketchbook.theme.contentColorFor
 
 private val IndicatorWidth = 32.dp
 private val IndicatorHeight = 32.dp
 private val ItemMinSize = 56.dp
-private const val IndicatorAlpha = 1f
-private const val IndicatorMinScale = .0f
 private const val UnselectedAlpha = .5f
 private const val DisabledAlpha = .38f
-private const val AnimationDuration = 500
-private val AnimationEasing = FastOutSlowInEasing
 
 @Composable
 internal fun NavigationItemCore(
@@ -39,12 +34,11 @@ internal fun NavigationItemCore(
     alwaysShowLabel: Boolean,
     compositeColor: Color,
     interactionSource: MutableInteractionSource,
-    modifier: Modifier,
-    color: Color = Theme.color.emphasis.primary
+    modifier: Modifier = Modifier,
 ) {
     val progress by animateFloatAsState(
         targetValue = if (selected) 1f else 0f,
-        animationSpec = tween(AnimationDuration, easing = AnimationEasing),
+        animationSpec = spring(),
         label = "indicator"
     )
     val content = Theme.color.contentColorFor(compositeColor)
@@ -53,7 +47,6 @@ internal fun NavigationItemCore(
         selected -> content
         else -> content.copy(UnselectedAlpha)
     }
-    val indicatorColor = color.copy(IndicatorAlpha)
     Column(
         modifier = modifier
             .defaultMinSize(minWidth = ItemMinSize)
@@ -83,18 +76,6 @@ internal fun NavigationItemCore(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        Box(
-            Modifier
-                .size(24.dp, 4.dp)
-                .graphicsLayer {
-                    alpha = progress
-                    scaleX = lerp(IndicatorMinScale, 1f, progress)
-                }
-                .background(
-                    color = indicatorColor,
-                    shape = RoundedCornerShape(bottomStart = 4.dp, bottomEnd = 4.dp)
-                )
-        )
         Spacer(Modifier.height(4.dp))
         CompositionLocalProvider {
             SketchbookBadgedBox(
