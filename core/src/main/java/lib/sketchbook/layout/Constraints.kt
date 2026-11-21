@@ -10,5 +10,5 @@ fun Constraints.minusWidth(width: Int): Constraints {
 
 fun Constraints.fixedWidth(width: Int = maxWidth) = copy(
     minWidth = width,
-    maxWidth = maxWidth
+    maxWidth = width
 )

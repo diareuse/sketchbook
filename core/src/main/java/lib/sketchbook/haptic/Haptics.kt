@@ -5,12 +5,11 @@ import android.view.HapticFeedbackConstants
 import androidx.compose.foundation.*
 import androidx.compose.foundation.interaction.*
 import androidx.compose.runtime.*
-import androidx.compose.runtime.saveable.*
 import androidx.compose.ui.*
 import androidx.compose.ui.hapticfeedback.*
 import androidx.compose.ui.node.*
 import androidx.compose.ui.platform.*
-import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 fun HapticFeedback.click() {
@@ -49,7 +48,7 @@ fun HapticFeedback.reject() {
 
 @Composable
 fun <T> TickOnChange(value: T, key: Any? = Unit) {
-    var last by rememberSaveable(key) { mutableStateOf(value) }
+    var last by remember(key) { mutableStateOf(value) }
     val haptics = LocalHapticFeedback.current
     LaunchedEffect(value) {
         if (last != value) {
@@ -61,7 +60,7 @@ fun <T> TickOnChange(value: T, key: Any? = Unit) {
 
 @Composable
 fun <T> ClickOnChange(value: T, key: Any? = Unit) {
-    var last by rememberSaveable(key) { mutableStateOf(value) }
+    var last by remember(key) { mutableStateOf(value) }
     val haptics = LocalHapticFeedback.current
     LaunchedEffect(value) {
         if (last != value) {
@@ -87,43 +86,34 @@ fun rememberMutableInteractionSource(): MutableInteractionSourceState = remember
 }
 
 class MutableInteractionSourceState {
-    private val sources = mutableStateMapOf<Int, MutableInteractionSource>()
+    private val sources = arrayOfNulls<MutableInteractionSource>(12)
 
-    operator fun component1(): MutableInteractionSource =
-        sources.getOrPut(1, ::MutableInteractionSource)
+    private fun source(index: Int): MutableInteractionSource =
+        sources[index] ?: MutableInteractionSource().also { sources[index] = it }
 
-    operator fun component2(): MutableInteractionSource =
-        sources.getOrPut(2, ::MutableInteractionSource)
+    operator fun component1(): MutableInteractionSource = source(0)
 
-    operator fun component3(): MutableInteractionSource =
-        sources.getOrPut(3, ::MutableInteractionSource)
+    operator fun component2(): MutableInteractionSource = source(1)
 
-    operator fun component4(): MutableInteractionSource =
-        sources.getOrPut(4, ::MutableInteractionSource)
+    operator fun component3(): MutableInteractionSource = source(2)
 
-    operator fun component5(): MutableInteractionSource =
-        sources.getOrPut(5, ::MutableInteractionSource)
+    operator fun component4(): MutableInteractionSource = source(3)
 
-    operator fun component6(): MutableInteractionSource =
-        sources.getOrPut(6, ::MutableInteractionSource)
+    operator fun component5(): MutableInteractionSource = source(4)
 
-    operator fun component7(): MutableInteractionSource =
-        sources.getOrPut(7, ::MutableInteractionSource)
+    operator fun component6(): MutableInteractionSource = source(5)
 
-    operator fun component8(): MutableInteractionSource =
-        sources.getOrPut(8, ::MutableInteractionSource)
+    operator fun component7(): MutableInteractionSource = source(6)
 
-    operator fun component9(): MutableInteractionSource =
-        sources.getOrPut(9, ::MutableInteractionSource)
+    operator fun component8(): MutableInteractionSource = source(7)
 
-    operator fun component10(): MutableInteractionSource =
-        sources.getOrPut(10, ::MutableInteractionSource)
+    operator fun component9(): MutableInteractionSource = source(8)
 
-    operator fun component11(): MutableInteractionSource =
-        sources.getOrPut(11, ::MutableInteractionSource)
+    operator fun component10(): MutableInteractionSource = source(9)
 
-    operator fun component12(): MutableInteractionSource =
-        sources.getOrPut(12, ::MutableInteractionSource)
+    operator fun component11(): MutableInteractionSource = source(10)
+
+    operator fun component12(): MutableInteractionSource = source(11)
 }
 
 class HapticIndicationModifier(
@@ -171,18 +161,29 @@ class VibrateIndicationNodeFactory(
 }
 
 class VibrateNode(
-    var interactionSource: InteractionSource,
+    interactionSource: InteractionSource,
     var haptics: HapticFeedback
 ) : Modifier.Node() {
+
+    var interactionSource: InteractionSource = interactionSource
+        set(value) {
+            if (field == value) return
+            field = value
+            collect()
+        }
+
+    private var collecting: Job? = null
+
     override fun onAttach() {
-        coroutineScope.launch {
-            interactionSource.interactions.collectLatest { interaction ->
-                println("interaction $interaction")
-                when (interaction) {
-                    is PressInteraction.Press -> haptics.tick()
-                    is PressInteraction.Release -> haptics.fastTick()
-                    is PressInteraction.Cancel -> haptics.reject()
-                }
+        collect()
+    }
+
+    private fun collect() {
+        collecting?.cancel()
+        if (!isAttached) return
+        collecting = coroutineScope.launch {
+            interactionSource.interactions.collect { interaction ->
+                if (interaction is PressInteraction.Press) haptics.tick()
             }
         }
     }

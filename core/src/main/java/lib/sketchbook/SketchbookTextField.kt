@@ -4,6 +4,7 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldColors
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
@@ -13,10 +14,142 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.compositeOver
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.unit.dp
+import lib.sketchbook.glass.asGlassShape
+import lib.sketchbook.glass.glass
 import lib.sketchbook.theme.Theme
 import lib.sketchbook.theme.contentColorFor
+
+private const val UnfocusedTint = .75f
+private const val FocusedTint = .85f
+private const val DisabledTint = .5f
+private const val GlassTint = .8f
+private const val GlassDisabledTint = .5f
+private val GlassElevation = 8.dp
+
+private interface TextFieldContainer {
+    @Composable
+    fun shape(): Shape
+
+    @Composable
+    fun colors(compositeColor: Color): TextFieldColors
+
+    @Composable
+    fun Modifier.surface(compositeColor: Color, enabled: Boolean): Modifier
+}
+
+private object TintedTextFieldContainer : TextFieldContainer {
+    @Composable
+    override fun shape(): Shape = Theme.container.button
+
+    @Composable
+    override fun colors(compositeColor: Color): TextFieldColors = textFieldColors(
+        compositeColor,
+        unfocused = Theme.color.overlay.background.copy(.06f).compositeOver(compositeColor.copy(UnfocusedTint)),
+        focused = Theme.color.overlay.background.copy(.1f).compositeOver(compositeColor.copy(FocusedTint)),
+        error = Theme.color.overlay.error.copy(.3f).compositeOver(compositeColor.copy(UnfocusedTint)),
+        disabled = Theme.color.overlay.background.copy(.03f).compositeOver(compositeColor.copy(DisabledTint))
+    )
+
+    @Composable
+    override fun Modifier.surface(compositeColor: Color, enabled: Boolean): Modifier = this
+}
+
+private object GlassTextFieldContainer : TextFieldContainer {
+    @Composable
+    override fun shape(): Shape = Theme.container.button.asGlassShape()
+
+    @Composable
+    override fun colors(compositeColor: Color): TextFieldColors = textFieldColors(
+        compositeColor,
+        unfocused = Color.Transparent,
+        focused = Color.Transparent,
+        error = Color.Transparent,
+        disabled = Color.Transparent
+    )
+
+    @Composable
+    override fun Modifier.surface(compositeColor: Color, enabled: Boolean): Modifier {
+        return glass(
+            shape(),
+            GlassElevation,
+            tint = compositeColor,
+            tintStrength = if (enabled) GlassTint else GlassDisabledTint
+        )
+    }
+}
+
+@Composable
+private fun textFieldColors(
+    compositeColor: Color,
+    unfocused: Color,
+    focused: Color,
+    error: Color,
+    disabled: Color
+): TextFieldColors {
+    val content = Theme.color.contentColorFor(compositeColor)
+    return TextFieldDefaults.colors(
+        focusedTextColor = content,
+        unfocusedTextColor = content.copy(.8f),
+        disabledTextColor = content.copy(.5f),
+        focusedLabelColor = content,
+        unfocusedLabelColor = content.copy(.8f),
+        disabledLabelColor = content.copy(.5f),
+        disabledIndicatorColor = Color.Transparent,
+        errorIndicatorColor = Color.Transparent,
+        focusedIndicatorColor = Color.Transparent,
+        unfocusedIndicatorColor = Color.Transparent,
+        unfocusedContainerColor = unfocused,
+        focusedContainerColor = focused,
+        errorContainerColor = error,
+        disabledContainerColor = disabled
+    )
+}
+
+@Composable
+private fun TextFieldCore(
+    container: TextFieldContainer,
+    value: String,
+    onValueChange: (String) -> Unit,
+    modifier: Modifier,
+    label: (@Composable () -> Unit)?,
+    placeholder: (@Composable () -> Unit)?,
+    supportingText: (@Composable () -> Unit)?,
+    trailingIcon: (@Composable () -> Unit)?,
+    leadingIcon: (@Composable () -> Unit)?,
+    enabled: Boolean,
+    readOnly: Boolean,
+    singleLine: Boolean,
+    isError: Boolean,
+    visualTransformation: VisualTransformation,
+    keyboardOptions: KeyboardOptions,
+    keyboardActions: KeyboardActions,
+    compositeColor: Color
+) {
+    TextField(
+        modifier = with(container) { modifier.surface(compositeColor, enabled) },
+        value = value,
+        onValueChange = onValueChange,
+        label = label,
+        enabled = enabled,
+        placeholder = placeholder,
+        supportingText = supportingText,
+        maxLines = if (singleLine) 1 else Int.MAX_VALUE,
+        singleLine = singleLine,
+        isError = isError,
+        readOnly = readOnly,
+        visualTransformation = visualTransformation,
+        colors = container.colors(compositeColor),
+        shape = container.shape(),
+        trailingIcon = trailingIcon,
+        leadingIcon = leadingIcon,
+        keyboardOptions = keyboardOptions,
+        keyboardActions = keyboardActions
+    )
+}
 
 @Composable
 fun SketchbookTextField(
@@ -36,46 +169,29 @@ fun SketchbookTextField(
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     keyboardActions: KeyboardActions = KeyboardActions.Default,
     compositeColor: Color = Theme.color.emphasis.background
-) {
-    TextField(
-        modifier = modifier,
-        value = value,
-        onValueChange = onValueChange,
-        label = label,
-        enabled = enabled,
-        placeholder = placeholder,
-        supportingText = supportingText,
-        maxLines = 1,
-        singleLine = singleLine,
-        isError = isError,
-        readOnly = readOnly,
-        visualTransformation = visualTransformation,
-        colors = TextFieldDefaults.colors(
-            focusedTextColor = Theme.color.contentColorFor(compositeColor),
-            unfocusedTextColor = Theme.color.contentColorFor(compositeColor).copy(.8f),
-            disabledTextColor = Theme.color.contentColorFor(compositeColor).copy(.5f),
-            focusedLabelColor = Theme.color.contentColorFor(compositeColor),
-            unfocusedLabelColor = Theme.color.contentColorFor(compositeColor).copy(.8f),
-            disabledLabelColor = Theme.color.contentColorFor(compositeColor).copy(.5f),
-            disabledIndicatorColor = Color.Transparent,
-            errorIndicatorColor = Color.Transparent,
-            focusedIndicatorColor = Color.Transparent,
-            unfocusedIndicatorColor = Color.Transparent,
-            unfocusedContainerColor = Theme.color.overlay.background.copy(.1f)
-                .compositeOver(compositeColor),
-            focusedContainerColor = Theme.color.overlay.background.copy(.15f)
-                .compositeOver(compositeColor),
-            errorContainerColor = Theme.color.overlay.error.copy(.3f).compositeOver(compositeColor),
-            disabledContainerColor = Theme.color.overlay.background.copy(.05f)
-                .compositeOver(compositeColor)
-        ),
-        shape = Theme.container.button,
-        trailingIcon = trailingIcon,
-        leadingIcon = leadingIcon,
-        keyboardOptions = keyboardOptions,
-        keyboardActions = keyboardActions
-    )
-}
+) = TextFieldCore(
+    TintedTextFieldContainer, value, onValueChange, modifier, label, placeholder, supportingText,
+    trailingIcon, leadingIcon, enabled, readOnly, singleLine, isError, visualTransformation,
+    keyboardOptions, keyboardActions, compositeColor
+)
+
+@Composable
+internal fun SketchbookGlassTextField(
+    value: String,
+    onValueChange: (String) -> Unit,
+    modifier: Modifier = Modifier,
+    placeholder: (@Composable () -> Unit)? = null,
+    trailingIcon: (@Composable () -> Unit)? = null,
+    leadingIcon: (@Composable () -> Unit)? = null,
+    enabled: Boolean = true,
+    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+    keyboardActions: KeyboardActions = KeyboardActions.Default,
+    compositeColor: Color = Theme.color.emphasis.background
+) = TextFieldCore(
+    GlassTextFieldContainer, value, onValueChange, modifier, null, placeholder, null,
+    trailingIcon, leadingIcon, enabled, false, true, false, VisualTransformation.None,
+    keyboardOptions, keyboardActions, compositeColor
+)
 
 @SketchbookComponentPreview
 @Composable

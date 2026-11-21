@@ -1,5 +1,6 @@
 package lib.sketchbook.theme
 
+import android.os.Build
 import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.shape.CornerBasedShape
@@ -9,6 +10,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.Immutable
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.luminance
@@ -16,29 +18,46 @@ import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.text.TextStyle
 import lib.sketchbook.haptic.PlatformHapticFeedback
-import lib.sketchbook.haptic.rememberVibrateIndication
+import lib.sketchbook.glass.ProvideGlass
+import lib.sketchbook.indication.rememberGlassPressIndication
 
 @Composable
 fun Theme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
+) = Theme(darkTheme, Build.VERSION.SDK_INT >= Build.VERSION_CODES.S, content)
+
+@Composable
+fun Theme(
+    darkTheme: Boolean,
+    dynamicColor: Boolean,
+    content: @Composable () -> Unit
 ) = MaterialTheme(
-    colorScheme = themeColors(useDarkTheme = darkTheme),
+    colorScheme = themeColors(useDarkTheme = darkTheme, dynamicColor = dynamicColor),
     typography = ThemeTypography,
     shapes = ThemeShapes
 ) {
+    val typography = MaterialTheme.typography
+    val shapes = MaterialTheme.shapes
+    val scheme = MaterialTheme.colorScheme
+    val view = LocalView.current
+    val text = remember(typography) { ThemeTextMaterial3(typography) }
+    val container = remember(shapes) { ThemeContainerMaterial3(shapes) }
+    val style = remember(scheme) { ThemeStyleMaterial3(scheme) }
+    val haptics = remember(view) { PlatformHapticFeedback(view) }
+    val glassPress = rememberGlassPressIndication()
     CompositionLocalProvider(
-        LocalText provides ThemeTextMaterial3(MaterialTheme.typography),
-        LocalContainer provides ThemeContainerMaterial3(MaterialTheme.shapes),
-        LocalStyle provides ThemeStyleMaterial3(MaterialTheme.colorScheme),
-        LocalHapticFeedback provides PlatformHapticFeedback(LocalView.current),
-        LocalIndication provides rememberVibrateIndication()
+        LocalText provides text,
+        LocalContainer provides container,
+        LocalStyle provides style,
+        LocalHapticFeedback provides haptics,
+        LocalIndication provides glassPress
     ) {
         CompositionLocalProvider(
             LocalTextStyle provides Theme.textStyle.body,
             LocalContentColor provides Theme.color.content.background
         ) {
-            content()
+            ProvideGlass(content)
         }
     }
 }
@@ -49,7 +68,7 @@ private val LocalText =
 private val LocalContainer =
     staticCompositionLocalOf<Theme.Container> { error("Not provided") }
 
-private val LocalStyle =
+internal val LocalStyle =
     staticCompositionLocalOf<Theme.Style> { error("Not provided") }
 
 object Theme {

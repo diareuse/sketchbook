@@ -1,7 +1,6 @@
 package lib.sketchbook.modifier
 
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.composed
 import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
@@ -12,13 +11,29 @@ import androidx.compose.ui.graphics.CompositingStrategy
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.Dp
-import lib.sketchbook.theme.Theme
+import androidx.compose.ui.graphics.drawscope.ContentDrawScope
+import androidx.compose.ui.node.CompositionLocalConsumerModifierNode
+import androidx.compose.ui.node.DrawModifierNode
+import androidx.compose.ui.node.ModifierNodeElement
+import androidx.compose.ui.node.currentValueOf
+import lib.sketchbook.theme.LocalStyle
 
-fun Modifier.overlay() = composed {
-    overlay(
-        colorTop = Color.Transparent,
-        colorBottom = Theme.color.container.background
-    )
+fun Modifier.overlay(): Modifier = this then ThemeOverlayElement
+
+private data object ThemeOverlayElement : ModifierNodeElement<ThemeOverlayNode>() {
+
+    override fun create() = ThemeOverlayNode()
+
+    override fun update(node: ThemeOverlayNode) = Unit
+}
+
+private class ThemeOverlayNode : Modifier.Node(), DrawModifierNode, CompositionLocalConsumerModifierNode {
+
+    override fun ContentDrawScope.draw() {
+        val colors = listOf(Color.Transparent, currentValueOf(LocalStyle).container.background)
+        drawContent()
+        drawRect(Brush.verticalGradient(colors))
+    }
 }
 
 fun Modifier.overlay(
@@ -36,20 +51,19 @@ fun Modifier.overlay(
 fun Modifier.verticalOverlay(
     height: Dp,
     gravity: VerticalGravity = VerticalGravity.Top
-) = composed {
-    val color = Color.White
-    val colors = listOf(color, color.copy(alpha = .3f), color.copy(alpha = .1f), Color.Transparent)
-    verticalOverlay(colors, gravity) { height.toPx() }
-}
+) = verticalOverlay(FadeColors, gravity) { height.toPx() }
 
 fun Modifier.verticalOverlay(
     percent: Float,
     gravity: VerticalGravity = VerticalGravity.Top
-) = composed {
-    val color = Color.White
-    val colors = listOf(color, color.copy(alpha = .3f), color.copy(alpha = .1f), Color.Transparent)
-    verticalOverlay(colors, gravity) { it.height * percent }
-}
+) = verticalOverlay(FadeColors, gravity) { it.height * percent }
+
+private val FadeColors = listOf(
+    Color.White,
+    Color.White.copy(alpha = .3f),
+    Color.White.copy(alpha = .1f),
+    Color.Transparent
+)
 
 fun Modifier.verticalOverlay(
     colors: List<Color>,

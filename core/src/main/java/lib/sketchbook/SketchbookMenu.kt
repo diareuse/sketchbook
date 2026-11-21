@@ -1,6 +1,11 @@
 package lib.sketchbook
 
 import androidx.activity.compose.BackHandler
+import dev.chrisbanes.haze.HazeState
+import lib.sketchbook.glass.GlassDepthScope
+import lib.sketchbook.glass.GlassSource
+import lib.sketchbook.glass.glassSource
+import lib.sketchbook.glass.glassSourceOf
 import androidx.compose.animation.core.animate
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloatAsState
@@ -58,6 +63,8 @@ import androidx.compose.ui.window.DialogWindowProvider
 import androidx.core.view.WindowCompat
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import lib.sketchbook.haptic.tick
 import lib.sketchbook.util.toDpOffset
 import lib.sketchbook.util.toDpSize
@@ -65,12 +72,14 @@ import lib.sketchbook.util.toDpSize
 fun Modifier.popOutBackground(state: OverlayState) = composed {
     val blur by animateDpAsState(targetValue = if (state.expanded) 32.dp else 0.dp)
     val alpha by animateFloatAsState(targetValue = if (state.expanded) .5f else 1f)
-    alpha(alpha).blur(blur)
+    alpha(alpha).blur(blur).glassSource().glassSourceOf(state.glassHost)
 }
 
 @Stable
 class OverlayState {
     var expanded: Boolean by mutableStateOf(false)
+
+    internal val glassHost = GlassSource(HazeState())
 }
 
 @Composable
@@ -131,7 +140,11 @@ class MenuState(
         }
     }
 
-    suspend fun open() {
+    internal val glassHost get() = scope.glassHost
+
+    private val transitions = Mutex()
+
+    suspend fun open() = transitions.withLock {
         expanded = true
         shadowAlpha = 0f
         scope.expanded = true
@@ -142,7 +155,7 @@ class MenuState(
         animate(expansionAlpha, 1f) { it, _ -> expansionAlpha = it }
     }
 
-    suspend fun close() {
+    suspend fun close() = transitions.withLock {
         animate(expansionAlpha, 0f) { it, _ -> expansionAlpha = it }
         scope.expanded = false
         animate(scale, 1.1f) { it, _ -> scale = it }
@@ -216,7 +229,7 @@ fun SketchbookMenu(
                         .alpha(state.expansionAlpha)
                         .scale(state.scale)
                 ) {
-                    expansion()
+                    GlassDepthScope { expansion() }
                 }
             }
             val top = if (state.verticalAlignment === Alignment.Bottom) expansion else null
@@ -234,7 +247,7 @@ fun SketchbookMenu(
                         .scale(state.scale),
                     propagateMinConstraints = true
                 ) {
-                    content()
+                    GlassDepthScope { content() }
                 }
             }
         }

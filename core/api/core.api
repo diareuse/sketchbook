@@ -1,0 +1,1112 @@
+public final class lib/sketchbook/ComposableSingletons$SketchbookAnimatedBackgroundKt {
+	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookAnimatedBackgroundKt;
+	public fun <init> ()V
+	public final fun getLambda$-1129908325$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function3;
+	public final fun getLambda$1628397066$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+}
+
+public final class lib/sketchbook/ComposableSingletons$SketchbookBadgeKt {
+	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookBadgeKt;
+	public fun <init> ()V
+	public final fun getLambda$-260797252$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-415888697$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function3;
+	public final fun getLambda$720055749$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function3;
+}
+
+public final class lib/sketchbook/ComposableSingletons$SketchbookBottomSheetKt {
+	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookBottomSheetKt;
+	public fun <init> ()V
+	public final fun getLambda$-194663524$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$370634559$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function3;
+	public final fun getLambda$930532222$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+}
+
+public final class lib/sketchbook/ComposableSingletons$SketchbookButtonKt {
+	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookButtonKt;
+	public fun <init> ()V
+	public final fun getLambda$-1240890616$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-1325059602$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function3;
+	public final fun getLambda$1681511664$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function3;
+	public final fun getLambda$2088955153$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function3;
+	public final fun getLambda$408926706$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function3;
+	public final fun getLambda$747361146$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function3;
+}
+
+public final class lib/sketchbook/ComposableSingletons$SketchbookCardKt {
+	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookCardKt;
+	public fun <init> ()V
+	public final fun getLambda$-1895406257$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function3;
+	public final fun getLambda$-2136153908$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-340625771$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function3;
+	public final fun getLambda$1183136851$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function3;
+	public final fun getLambda$421255540$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function3;
+}
+
+public final class lib/sketchbook/ComposableSingletons$SketchbookCheckboxKt {
+	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookCheckboxKt;
+	public fun <init> ()V
+	public final fun getLambda$-1674782096$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-1918318959$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-411444826$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$1288193768$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+}
+
+public final class lib/sketchbook/ComposableSingletons$SketchbookChipKt {
+	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookChipKt;
+	public fun <init> ()V
+	public final fun getLambda$-1211707450$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-343780088$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-731342735$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$1671037633$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$586719572$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+}
+
+public final class lib/sketchbook/ComposableSingletons$SketchbookColorSliderKt {
+	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookColorSliderKt;
+	public fun <init> ()V
+	public final fun getLambda$60901788$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+}
+
+public final class lib/sketchbook/ComposableSingletons$SketchbookDialogKt {
+	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookDialogKt;
+	public fun <init> ()V
+	public final fun getLambda$-1278257221$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-2138271507$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-992911856$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$404804572$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+}
+
+public final class lib/sketchbook/ComposableSingletons$SketchbookDividerKt {
+	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookDividerKt;
+	public fun <init> ()V
+	public final fun getLambda$-328210372$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+}
+
+public final class lib/sketchbook/ComposableSingletons$SketchbookEmptyStateKt {
+	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookEmptyStateKt;
+	public fun <init> ()V
+	public final fun getLambda$-2063385511$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function3;
+	public final fun getLambda$-715287836$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$1415466555$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$663917402$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+}
+
+public final class lib/sketchbook/ComposableSingletons$SketchbookFieldRowKt {
+	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookFieldRowKt;
+	public fun <init> ()V
+	public final fun getLambda$-1820348038$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$1091514083$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$1842853304$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$2133419556$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function3;
+	public final fun getLambda$819393146$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+}
+
+public final class lib/sketchbook/ComposableSingletons$SketchbookFloatingActionButtonKt {
+	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookFloatingActionButtonKt;
+	public fun <init> ()V
+	public final fun getLambda$-1255020139$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$1275043168$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$24403984$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$498910075$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+}
+
+public final class lib/sketchbook/ComposableSingletons$SketchbookGlassBorderKt {
+	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookGlassBorderKt;
+	public fun <init> ()V
+	public final fun getLambda$-2116122063$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function3;
+	public final fun getLambda$-2132930532$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+}
+
+public final class lib/sketchbook/ComposableSingletons$SketchbookIconButtonKt {
+	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookIconButtonKt;
+	public fun <init> ()V
+	public final fun getLambda$-1314653282$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$1067619867$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$1657012797$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$1799370416$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$1989499734$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$208851506$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+}
+
+public final class lib/sketchbook/ComposableSingletons$SketchbookImageKt {
+	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookImageKt;
+	public fun <init> ()V
+	public final fun getLambda$-346275759$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function4;
+	public final fun getLambda$377746939$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function4;
+}
+
+public final class lib/sketchbook/ComposableSingletons$SketchbookListItemKt {
+	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookListItemKt;
+	public fun <init> ()V
+	public final fun getLambda$-1092017078$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-2104882166$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-380275231$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-494005923$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-848480215$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$1681910398$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$1875426277$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$688448935$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$94960264$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+}
+
+public final class lib/sketchbook/ComposableSingletons$SketchbookMenuKt {
+	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookMenuKt;
+	public fun <init> ()V
+	public final fun getLambda$-198701684$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$1026392444$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function3;
+}
+
+public final class lib/sketchbook/ComposableSingletons$SketchbookNavigationBarKt {
+	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookNavigationBarKt;
+	public fun <init> ()V
+	public final fun getLambda$-1581675487$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-1697796455$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-2019257370$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-2038627940$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-313688516$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-527301755$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-805810007$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function3;
+	public final fun getLambda$1591749220$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$594240834$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+}
+
+public final class lib/sketchbook/ComposableSingletons$SketchbookNavigationRailKt {
+	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookNavigationRailKt;
+	public fun <init> ()V
+	public final fun getLambda$-1985204893$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-2075862048$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-284468794$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-586371764$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$1733446895$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$269473571$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function3;
+	public final fun getLambda$943540356$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function3;
+}
+
+public final class lib/sketchbook/ComposableSingletons$SketchbookPagerIndicatorKt {
+	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookPagerIndicatorKt;
+	public fun <init> ()V
+	public final fun getLambda$157152084$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+}
+
+public final class lib/sketchbook/ComposableSingletons$SketchbookProgressKt {
+	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookProgressKt;
+	public fun <init> ()V
+	public final fun getLambda$1725919826$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+}
+
+public final class lib/sketchbook/ComposableSingletons$SketchbookPullToRefreshKt {
+	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookPullToRefreshKt;
+	public fun <init> ()V
+	public final fun getLambda$-184566052$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function3;
+	public final fun getLambda$391541948$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+}
+
+public final class lib/sketchbook/ComposableSingletons$SketchbookRadioButtonKt {
+	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookRadioButtonKt;
+	public fun <init> ()V
+	public final fun getLambda$-136146116$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-1458644603$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-276411868$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$711543836$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+}
+
+public final class lib/sketchbook/ComposableSingletons$SketchbookRockerCounterKt {
+	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookRockerCounterKt;
+	public fun <init> ()V
+	public final fun getLambda$-168351140$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-395982223$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$12041392$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$1261714771$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$1669738386$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$853691156$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+}
+
+public final class lib/sketchbook/ComposableSingletons$SketchbookScaffoldKt {
+	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookScaffoldKt;
+	public fun <init> ()V
+	public final fun getLambda$-1466741209$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-1823400137$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-416802745$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-467569978$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-872551740$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$1714360743$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$1868866688$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$1990226172$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function3;
+	public final fun getLambda$852056582$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+}
+
+public final class lib/sketchbook/ComposableSingletons$SketchbookSearchBarKt {
+	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookSearchBarKt;
+	public fun <init> ()V
+	public final fun getLambda$-1300050021$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function3;
+	public final fun getLambda$-336030176$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-487401706$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$1034222908$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$1098059187$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+}
+
+public final class lib/sketchbook/ComposableSingletons$SketchbookSegmentedButtonKt {
+	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookSegmentedButtonKt;
+	public fun <init> ()V
+	public final fun getLambda$-1097208921$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-646902960$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$201512604$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+}
+
+public final class lib/sketchbook/ComposableSingletons$SketchbookSkeletonKt {
+	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookSkeletonKt;
+	public fun <init> ()V
+	public final fun getLambda$-2117501422$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+}
+
+public final class lib/sketchbook/ComposableSingletons$SketchbookSliderKt {
+	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookSliderKt;
+	public fun <init> ()V
+	public final fun getLambda$-1517110230$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+}
+
+public final class lib/sketchbook/ComposableSingletons$SketchbookSnackbarKt {
+	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookSnackbarKt;
+	public fun <init> ()V
+	public final fun getLambda$-1141052383$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function3;
+	public final fun getLambda$1078949921$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$1230335650$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+}
+
+public final class lib/sketchbook/ComposableSingletons$SketchbookSwitchKt {
+	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookSwitchKt;
+	public fun <init> ()V
+	public final fun getLambda$-172970308$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$1403615748$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+}
+
+public final class lib/sketchbook/ComposableSingletons$SketchbookTabRowKt {
+	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookTabRowKt;
+	public fun <init> ()V
+	public final fun getLambda$-1379672458$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-1445523486$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-634302130$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-884636292$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$1389197421$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$1648396453$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$1861934486$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+}
+
+public final class lib/sketchbook/ComposableSingletons$SketchbookTextFieldKt {
+	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookTextFieldKt;
+	public fun <init> ()V
+	public final fun getLambda$-1177725188$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-1443128238$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-423102912$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$880645802$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+}
+
+public final class lib/sketchbook/ComposableSingletons$SketchbookToastKt {
+	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookToastKt;
+	public fun <init> ()V
+	public final fun getLambda$731181628$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$86411546$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function3;
+}
+
+public final class lib/sketchbook/ComposableSingletons$SketchbookTooltipKt {
+	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookTooltipKt;
+	public fun <init> ()V
+	public final fun getLambda$297463676$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$778475991$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+}
+
+public final class lib/sketchbook/ComposableSingletons$SketchbookTopAppBarKt {
+	public static final field INSTANCE Llib/sketchbook/ComposableSingletons$SketchbookTopAppBarKt;
+	public fun <init> ()V
+	public final fun getLambda$-1338282813$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-1356141588$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-1668792588$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-178223883$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-1845531407$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-2025131817$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-2034657192$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$-631829972$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function4;
+	public final fun getLambda$-798701165$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$1068680289$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$1653006101$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$1672754923$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$1752048974$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$1941370300$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$2005697426$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$485978189$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+	public final fun getLambda$982733130$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+}
+
+public final class lib/sketchbook/HardwareImageState : lib/sketchbook/ImageState {
+	public static final field $stable I
+	public fun <init> (Ljava/lang/Object;)V
+	public final fun component1 ()Ljava/lang/Object;
+	public final fun copy (Ljava/lang/Object;)Llib/sketchbook/HardwareImageState;
+	public static synthetic fun copy$default (Llib/sketchbook/HardwareImageState;Ljava/lang/Object;ILjava/lang/Object;)Llib/sketchbook/HardwareImageState;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getUrl ()Ljava/lang/Object;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract class lib/sketchbook/ImageState {
+	public static final field $stable I
+	public fun getLoader (Landroid/content/Context;)Lcoil3/ImageLoader;
+	public abstract fun getUrl ()Ljava/lang/Object;
+}
+
+public final class lib/sketchbook/MenuState {
+	public static final field $stable I
+	public fun <init> (Llib/sketchbook/OverlayState;Landroidx/compose/ui/hapticfeedback/HapticFeedback;)V
+	public final fun close (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun getExpanded ()Z
+	public final fun getExpansionAlpha ()F
+	public final fun getHorizontalAlignment ()Landroidx/compose/ui/Alignment$Horizontal;
+	public final fun getOffset-RKDOV3M ()J
+	public final fun getScale ()F
+	public final fun getShadowAlpha ()F
+	public final fun getSize-MYxV2XQ ()J
+	public final fun getVerticalAlignment ()Landroidx/compose/ui/Alignment$Vertical;
+	public final fun open (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class lib/sketchbook/OverlayState {
+	public static final field $stable I
+	public fun <init> ()V
+	public final fun getExpanded ()Z
+	public final fun setExpanded (Z)V
+}
+
+public final class lib/sketchbook/PagerIndicatorStyle : java/lang/Enum {
+	public static final field Dots Llib/sketchbook/PagerIndicatorStyle;
+	public static final field Worm Llib/sketchbook/PagerIndicatorStyle;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Llib/sketchbook/PagerIndicatorStyle;
+	public static fun values ()[Llib/sketchbook/PagerIndicatorStyle;
+}
+
+public final class lib/sketchbook/PaletteImageState : lib/sketchbook/ImageState {
+	public static final field $stable I
+	public fun <init> (Ljava/lang/Object;Llib/sketchbook/PaletteImageState$Palette;Z)V
+	public final fun component1 ()Ljava/lang/Object;
+	public final fun copy (Ljava/lang/Object;Llib/sketchbook/PaletteImageState$Palette;Z)Llib/sketchbook/PaletteImageState;
+	public static synthetic fun copy$default (Llib/sketchbook/PaletteImageState;Ljava/lang/Object;Llib/sketchbook/PaletteImageState$Palette;ZILjava/lang/Object;)Llib/sketchbook/PaletteImageState;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getHasNewPalette ()Z
+	public fun getLoader (Landroid/content/Context;)Lcoil3/ImageLoader;
+	public final fun getPalette ()Llib/sketchbook/PaletteImageState$Palette;
+	public fun getUrl ()Ljava/lang/Object;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class lib/sketchbook/PaletteImageState$Palette {
+	public static final field $stable I
+	public synthetic fun <init> (JJJLkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun <init> ([J)V
+	public final fun component1-0d7_KjU ()J
+	public final fun component2-0d7_KjU ()J
+	public final fun component3-0d7_KjU ()J
+	public final fun copy-ysEtTa8 (JJJ)Llib/sketchbook/PaletteImageState$Palette;
+	public static synthetic fun copy-ysEtTa8$default (Llib/sketchbook/PaletteImageState$Palette;JJJILjava/lang/Object;)Llib/sketchbook/PaletteImageState$Palette;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getColor-0d7_KjU ()J
+	public final fun getTextColor-0d7_KjU ()J
+	public final fun getTitleColor-0d7_KjU ()J
+	public fun hashCode ()I
+	public final fun toLongArray ()[J
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class lib/sketchbook/SketchbookAnimatedBackgroundKt {
+	public static final fun SketchbookAnimatedBackground-FHprtrg (Landroidx/compose/ui/Modifier;Ljava/util/List;FZJLkotlin/jvm/functions/Function3;Landroidx/compose/runtime/Composer;II)V
+}
+
+public final class lib/sketchbook/SketchbookBadgeKt {
+	public static final fun SketchbookBadge-iJQMabo (Landroidx/compose/ui/Modifier;JLandroidx/compose/runtime/Composer;II)V
+	public static final fun SketchbookBadge-jA1GFJw (ILandroidx/compose/ui/Modifier;IJJLandroidx/compose/runtime/Composer;II)V
+	public static final fun SketchbookBadgedBox (Lkotlin/jvm/functions/Function3;Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function3;Landroidx/compose/runtime/Composer;II)V
+}
+
+public final class lib/sketchbook/SketchbookBottomSheetKt {
+	public static final fun SketchbookBottomSheet-NpZTi58 (ZLkotlin/jvm/functions/Function0;Landroidx/compose/ui/Modifier;Landroidx/compose/ui/graphics/Shape;JZLkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function3;Landroidx/compose/runtime/Composer;II)V
+}
+
+public final class lib/sketchbook/SketchbookButtonKt {
+	public static final fun SketchbookButton (Lkotlin/jvm/functions/Function0;Landroidx/compose/ui/Modifier;ZLandroidx/compose/ui/graphics/Shape;Landroidx/compose/foundation/interaction/MutableInteractionSource;Lkotlin/jvm/functions/Function3;Landroidx/compose/runtime/Composer;II)V
+	public static final fun SketchbookGlassButton-3f6hBDE (Lkotlin/jvm/functions/Function0;Landroidx/compose/ui/Modifier;ZLandroidx/compose/ui/graphics/Shape;JLandroidx/compose/foundation/interaction/MutableInteractionSource;Lkotlin/jvm/functions/Function3;Landroidx/compose/runtime/Composer;II)V
+	public static final fun SketchbookOutlinedButton-3f6hBDE (Lkotlin/jvm/functions/Function0;Landroidx/compose/ui/Modifier;ZLandroidx/compose/ui/graphics/Shape;JLandroidx/compose/foundation/interaction/MutableInteractionSource;Lkotlin/jvm/functions/Function3;Landroidx/compose/runtime/Composer;II)V
+	public static final fun SketchbookTonalButton-3f6hBDE (Lkotlin/jvm/functions/Function0;Landroidx/compose/ui/Modifier;ZLandroidx/compose/ui/graphics/Shape;JLandroidx/compose/foundation/interaction/MutableInteractionSource;Lkotlin/jvm/functions/Function3;Landroidx/compose/runtime/Composer;II)V
+}
+
+public final class lib/sketchbook/SketchbookCardKt {
+	public static final fun SketchbookCard-FU0evQE (Landroidx/compose/ui/Modifier;Landroidx/compose/ui/graphics/Shape;JZZLkotlin/jvm/functions/Function3;Landroidx/compose/runtime/Composer;II)V
+	public static final fun SketchbookCard-mxsUjTo (Lkotlin/jvm/functions/Function0;Landroidx/compose/ui/Modifier;ZLandroidx/compose/ui/graphics/Shape;JZZLandroidx/compose/foundation/interaction/MutableInteractionSource;Lkotlin/jvm/functions/Function3;Landroidx/compose/runtime/Composer;II)V
+}
+
+public final class lib/sketchbook/SketchbookCheckboxKt {
+	public static final fun SketchbookCheckbox (ZLkotlin/jvm/functions/Function1;Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function2;ZLandroidx/compose/material3/CheckboxColors;Landroidx/compose/foundation/interaction/MutableInteractionSource;Landroidx/compose/runtime/Composer;II)V
+}
+
+public final class lib/sketchbook/SketchbookChipKt {
+	public static final fun SketchbookChip-lmFMXvc (Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function2;Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;ZLandroidx/compose/ui/graphics/Shape;JLandroidx/compose/foundation/interaction/MutableInteractionSource;Landroidx/compose/runtime/Composer;II)V
+	public static final fun SketchbookFilterChip-FItCLgY (ZLkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function2;Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;ZLandroidx/compose/ui/graphics/Shape;JLandroidx/compose/foundation/interaction/MutableInteractionSource;Landroidx/compose/runtime/Composer;II)V
+}
+
+public final class lib/sketchbook/SketchbookColorSliderKt {
+	public static final fun SketchbookColorSlider-ii5sN6A (FLkotlin/jvm/functions/Function1;FLkotlin/jvm/functions/Function1;FLkotlin/jvm/functions/Function1;Landroidx/compose/ui/Modifier;FFLandroidx/compose/foundation/layout/Arrangement$Vertical;Landroidx/compose/ui/graphics/Shape;Landroidx/compose/ui/graphics/Shape;Landroidx/compose/runtime/Composer;III)V
+}
+
+public abstract interface annotation class lib/sketchbook/SketchbookComponentPreview : java/lang/annotation/Annotation {
+}
+
+public final class lib/sketchbook/SketchbookDialogKt {
+	public static final fun DialogSurface-WH-ejsw (Landroidx/compose/ui/Modifier;Landroidx/compose/foundation/layout/PaddingValues;Landroidx/compose/ui/graphics/Shape;ZFLkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;II)V
+	public static final fun SketchbookDialog (ZLkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function2;Landroidx/compose/ui/Modifier;Landroidx/compose/ui/Alignment;Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;II)V
+}
+
+public final class lib/sketchbook/SketchbookDividerKt {
+	public static final fun SketchbookHorizontalDivider-5_Ve2oQ (Landroidx/compose/ui/Modifier;FJFLandroidx/compose/runtime/Composer;II)V
+	public static final fun SketchbookVerticalDivider-5_Ve2oQ (Landroidx/compose/ui/Modifier;FJFLandroidx/compose/runtime/Composer;II)V
+}
+
+public final class lib/sketchbook/SketchbookEmptyStateKt {
+	public static final fun SketchbookEmptyState (Ljava/lang/String;Landroidx/compose/ui/Modifier;Ljava/lang/String;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;II)V
+}
+
+public final class lib/sketchbook/SketchbookFieldRowKt {
+	public static final fun SketchbookFieldRow (Lkotlin/jvm/functions/Function2;Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function3;Landroidx/compose/runtime/Composer;II)V
+}
+
+public final class lib/sketchbook/SketchbookFloatingActionButtonKt {
+	public static final fun SketchbookExtendedFloatingActionButton-dNgdfXs (Lkotlin/jvm/functions/Function0;Landroidx/compose/ui/Modifier;ZLkotlin/jvm/functions/Function2;Landroidx/compose/ui/graphics/Shape;JJLandroidx/compose/foundation/interaction/MutableInteractionSource;Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;II)V
+	public static final fun SketchbookFloatingActionButton-bogVsAg (Lkotlin/jvm/functions/Function0;Ljava/lang/String;Landroidx/compose/ui/Modifier;Landroidx/compose/ui/graphics/Shape;JJLandroidx/compose/foundation/interaction/MutableInteractionSource;Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;II)V
+}
+
+public final class lib/sketchbook/SketchbookGlassBorderKt {
+	public static final fun SketchbookGlassBorder-8QY48No (Landroidx/compose/ui/Modifier;Landroidx/compose/ui/graphics/Shape;FJJZLkotlin/jvm/functions/Function3;Landroidx/compose/runtime/Composer;II)V
+}
+
+public final class lib/sketchbook/SketchbookIconButtonKt {
+	public static final fun SketchbookFilledIconButton (Lkotlin/jvm/functions/Function0;Ljava/lang/String;Landroidx/compose/ui/Modifier;ZLandroidx/compose/ui/graphics/Shape;Landroidx/compose/foundation/interaction/MutableInteractionSource;Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;II)V
+	public static final fun SketchbookGlassIconButton-1YH7lEI (Lkotlin/jvm/functions/Function0;Ljava/lang/String;Landroidx/compose/ui/Modifier;ZLandroidx/compose/ui/graphics/Shape;JLandroidx/compose/foundation/interaction/MutableInteractionSource;Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;II)V
+	public static final fun SketchbookIconButton-1YH7lEI (Lkotlin/jvm/functions/Function0;Ljava/lang/String;Landroidx/compose/ui/Modifier;ZLandroidx/compose/ui/graphics/Shape;JLandroidx/compose/foundation/interaction/MutableInteractionSource;Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;II)V
+	public static final fun SketchbookTonalIconButton-1YH7lEI (Lkotlin/jvm/functions/Function0;Ljava/lang/String;Landroidx/compose/ui/Modifier;ZLandroidx/compose/ui/graphics/Shape;JLandroidx/compose/foundation/interaction/MutableInteractionSource;Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;II)V
+}
+
+public final class lib/sketchbook/SketchbookImageKt {
+	public static final fun Image-MvsnxeU (Ljava/lang/Object;Landroidx/compose/ui/Modifier;Ljava/lang/String;Lkotlin/jvm/functions/Function4;Lkotlin/jvm/functions/Function4;Lkotlin/jvm/functions/Function4;Landroidx/compose/ui/Alignment;Landroidx/compose/ui/layout/ContentScale;FLandroidx/compose/ui/graphics/ColorFilter;ILandroidx/compose/runtime/Composer;III)V
+	public static final fun Image-MvsnxeU (Llib/sketchbook/ImageState;Landroidx/compose/ui/Modifier;Ljava/lang/String;Lkotlin/jvm/functions/Function4;Lkotlin/jvm/functions/Function4;Lkotlin/jvm/functions/Function4;Landroidx/compose/ui/Alignment;Landroidx/compose/ui/layout/ContentScale;FLandroidx/compose/ui/graphics/ColorFilter;ILandroidx/compose/runtime/Composer;III)V
+	public static final fun hashString (Ljava/lang/Object;)Ljava/lang/String;
+	public static final fun rememberImageState (Ljava/lang/Object;Landroidx/compose/runtime/Composer;I)Llib/sketchbook/ImageState;
+	public static final fun rememberPaletteImageState-RIQooxk (Ljava/lang/Object;JJLandroidx/compose/runtime/Composer;II)Llib/sketchbook/PaletteImageState;
+}
+
+public final class lib/sketchbook/SketchbookListItemKt {
+	public static final fun SketchbookListItem-ygcbOzY (Lkotlin/jvm/functions/Function2;Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;ZZLandroidx/compose/ui/graphics/Shape;JLandroidx/compose/foundation/interaction/MutableInteractionSource;Landroidx/compose/runtime/Composer;III)V
+}
+
+public final class lib/sketchbook/SketchbookMenuKt {
+	public static final fun SketchbookMenu (Llib/sketchbook/MenuState;Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;II)V
+	public static final fun popOutBackground (Landroidx/compose/ui/Modifier;Llib/sketchbook/OverlayState;)Landroidx/compose/ui/Modifier;
+	public static final fun rememberMenuState (Llib/sketchbook/OverlayState;Landroidx/compose/runtime/Composer;I)Llib/sketchbook/MenuState;
+}
+
+public final class lib/sketchbook/SketchbookNavigationBarKt {
+	public static final fun SketchbookNavigationBar (Landroidx/compose/ui/Modifier;Landroidx/compose/foundation/layout/WindowInsets;Landroidx/compose/ui/graphics/Shape;ZLkotlin/jvm/functions/Function3;Landroidx/compose/runtime/Composer;II)V
+	public static final fun SketchbookNavigationBarItem-bZJ3-2A (Landroidx/compose/foundation/layout/RowScope;ZLkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function2;Landroidx/compose/ui/Modifier;ZLkotlin/jvm/functions/Function2;ZLkotlin/jvm/functions/Function2;JLandroidx/compose/foundation/interaction/MutableInteractionSource;Landroidx/compose/runtime/Composer;III)V
+}
+
+public final class lib/sketchbook/SketchbookNavigationRailKt {
+	public static final fun SketchbookNavigationRail (Landroidx/compose/ui/Modifier;Landroidx/compose/foundation/layout/WindowInsets;Landroidx/compose/ui/graphics/Shape;ZLkotlin/jvm/functions/Function3;Lkotlin/jvm/functions/Function3;Landroidx/compose/runtime/Composer;II)V
+	public static final fun SketchbookNavigationRailItem-FItCLgY (ZLkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function2;Landroidx/compose/ui/Modifier;ZLkotlin/jvm/functions/Function2;ZLkotlin/jvm/functions/Function2;JLandroidx/compose/foundation/interaction/MutableInteractionSource;Landroidx/compose/runtime/Composer;II)V
+}
+
+public final class lib/sketchbook/SketchbookPagerIndicatorKt {
+	public static final fun SketchbookPagerIndicator-T0bfq7A (Landroidx/compose/foundation/pager/PagerState;Landroidx/compose/ui/Modifier;Llib/sketchbook/PagerIndicatorStyle;JJFFLkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;II)V
+	public static final fun SketchbookPagerIndicator-y12PT0E (IILandroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function0;Llib/sketchbook/PagerIndicatorStyle;JJFFLkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;II)V
+}
+
+public final class lib/sketchbook/SketchbookPreviewLayoutKt {
+	public static final fun SketchbookPreviewLayout (Landroidx/compose/ui/Modifier;Landroidx/compose/foundation/layout/PaddingValues;Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;II)V
+	public static final fun SketchbookPreviewWearLayout (Landroidx/compose/ui/Modifier;Landroidx/compose/foundation/layout/PaddingValues;Lkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;II)V
+}
+
+public final class lib/sketchbook/SketchbookProgressKt {
+	public static final fun SketchbookCircularProgress-eaDK9VM (Lkotlin/jvm/functions/Function0;Landroidx/compose/ui/Modifier;JJLandroidx/compose/runtime/Composer;II)V
+	public static final fun SketchbookCircularProgress-eopBjH0 (Landroidx/compose/ui/Modifier;JJILandroidx/compose/runtime/Composer;II)V
+	public static final fun SketchbookLinearProgress-eaDK9VM (Lkotlin/jvm/functions/Function0;Landroidx/compose/ui/Modifier;JJLandroidx/compose/runtime/Composer;II)V
+	public static final fun SketchbookLinearProgress-eopBjH0 (Landroidx/compose/ui/Modifier;JJILandroidx/compose/runtime/Composer;II)V
+}
+
+public final class lib/sketchbook/SketchbookPullToRefreshKt {
+	public static final fun SketchbookPullToRefresh (ZLkotlin/jvm/functions/Function0;Landroidx/compose/ui/Modifier;Landroidx/compose/ui/Alignment;Lkotlin/jvm/functions/Function3;Landroidx/compose/runtime/Composer;II)V
+}
+
+public final class lib/sketchbook/SketchbookRadioButtonKt {
+	public static final fun SketchbookRadioButton (ZLkotlin/jvm/functions/Function0;Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function2;ZLandroidx/compose/material3/RadioButtonColors;Landroidx/compose/foundation/interaction/MutableInteractionSource;Landroidx/compose/runtime/Composer;II)V
+}
+
+public final class lib/sketchbook/SketchbookRockerCounterKt {
+	public static final fun SketchbookRockerCounter (Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Landroidx/compose/ui/Modifier;Landroidx/compose/runtime/Composer;II)V
+}
+
+public final class lib/sketchbook/SketchbookScaffoldKt {
+	public static final fun SketchbookScaffold-TvnljyQ (Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;IJJLandroidx/compose/foundation/layout/WindowInsets;Lkotlin/jvm/functions/Function3;Landroidx/compose/runtime/Composer;II)V
+}
+
+public abstract interface annotation class lib/sketchbook/SketchbookScreenPreview : java/lang/annotation/Annotation {
+}
+
+public final class lib/sketchbook/SketchbookSearchBarKt {
+	public static final fun SketchbookSearchBar-6RhP_wg (Ljava/lang/String;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Ljava/lang/String;Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function3;ZJLandroidx/compose/runtime/Composer;II)V
+}
+
+public final class lib/sketchbook/SketchbookSegmentedButtonKt {
+	public static final fun SketchbookMultiChoiceSegmentedButton-88mDfTA (Ljava/util/Set;Lkotlin/jvm/functions/Function1;ILandroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function3;ZLandroidx/compose/foundation/shape/CornerBasedShape;JLandroidx/compose/runtime/Composer;II)V
+	public static final fun SketchbookSegmentedButton-88mDfTA (ILkotlin/jvm/functions/Function1;ILandroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function3;ZLandroidx/compose/foundation/shape/CornerBasedShape;JLandroidx/compose/runtime/Composer;II)V
+}
+
+public final class lib/sketchbook/SketchbookSkeletonKt {
+	public static final fun SketchbookSkeleton-t6yy7ic (Landroidx/compose/ui/Modifier;Landroidx/compose/ui/graphics/Shape;JJZLandroidx/compose/runtime/Composer;II)V
+	public static final fun SketchbookSkeletonCircle-9uvDSr4 (FLandroidx/compose/ui/Modifier;JJZLandroidx/compose/runtime/Composer;II)V
+	public static final fun SketchbookSkeletonText-MKEl8SI (Landroidx/compose/ui/Modifier;IFFFLandroidx/compose/ui/graphics/Shape;JJZLandroidx/compose/runtime/Composer;II)V
+}
+
+public final class lib/sketchbook/SketchbookSliderKt {
+	public static final fun SketchbookSlider-lmFMXvc (FLkotlin/jvm/functions/Function1;Landroidx/compose/ui/Modifier;Lkotlin/ranges/ClosedFloatingPointRange;ILkotlin/jvm/functions/Function0;ZJLandroidx/compose/foundation/interaction/MutableInteractionSource;Landroidx/compose/runtime/Composer;II)V
+}
+
+public final class lib/sketchbook/SketchbookSnackbarKt {
+	public static final fun SketchbookSnackbar-jB83MbM (Landroidx/compose/material3/SnackbarData;Landroidx/compose/ui/Modifier;Landroidx/compose/ui/graphics/Shape;JJLjava/lang/String;Landroidx/compose/runtime/Composer;II)V
+	public static final fun SketchbookSnackbarHost (Landroidx/compose/material3/SnackbarHostState;Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function3;Landroidx/compose/runtime/Composer;II)V
+}
+
+public final class lib/sketchbook/SketchbookSwitchKt {
+	public static final fun SketchbookSwitch-8r3B23s (ZLkotlin/jvm/functions/Function1;Landroidx/compose/ui/Modifier;JLandroidx/compose/material3/SwitchColors;Lkotlin/jvm/functions/Function2;ZLandroidx/compose/foundation/interaction/MutableInteractionSource;Landroidx/compose/runtime/Composer;II)V
+}
+
+public final class lib/sketchbook/SketchbookTabRowKt {
+	public static final fun SketchbookScrollableTabRow-zkFDczg (ILandroidx/compose/ui/Modifier;Landroidx/compose/ui/graphics/Shape;JZFLkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;II)V
+	public static final fun SketchbookTab-3csKH6Y (ZLkotlin/jvm/functions/Function0;Landroidx/compose/ui/Modifier;ZLkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;JLandroidx/compose/foundation/interaction/MutableInteractionSource;Landroidx/compose/runtime/Composer;II)V
+	public static final fun SketchbookTabRow-fWhpE4E (ILandroidx/compose/ui/Modifier;Landroidx/compose/ui/graphics/Shape;JZLkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;II)V
+}
+
+public final class lib/sketchbook/SketchbookTextFieldKt {
+	public static final fun SketchbookTextField-p-0c_MM (Ljava/lang/String;Lkotlin/jvm/functions/Function1;Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;ZZZZLandroidx/compose/ui/text/input/VisualTransformation;Landroidx/compose/foundation/text/KeyboardOptions;Landroidx/compose/foundation/text/KeyboardActions;JLandroidx/compose/runtime/Composer;III)V
+}
+
+public final class lib/sketchbook/SketchbookToastKt {
+	public static final fun SketchbookToast-ww6aTOc (Ljava/lang/String;Landroidx/compose/ui/Modifier;Landroidx/compose/ui/graphics/Shape;JLandroidx/compose/runtime/Composer;II)V
+	public static final fun SketchbookToastHost (Llib/sketchbook/SketchbookToastState;Landroidx/compose/ui/Modifier;Lkotlin/jvm/functions/Function3;Landroidx/compose/runtime/Composer;II)V
+}
+
+public final class lib/sketchbook/SketchbookToastState {
+	public static final field $stable I
+	public fun <init> ()V
+	public final fun show-uJCiS7s (Ljava/lang/String;JLkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun show-uJCiS7s$default (Llib/sketchbook/SketchbookToastState;Ljava/lang/String;JLkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+}
+
+public final class lib/sketchbook/SketchbookTooltipKt {
+	public static final fun SketchbookTooltip-uDo3WH8 (Ljava/lang/String;Landroidx/compose/ui/Modifier;Landroidx/compose/ui/graphics/Shape;JLkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;II)V
+	public static final fun SketchbookTooltip-uDo3WH8 (Lkotlin/jvm/functions/Function2;Landroidx/compose/ui/Modifier;Landroidx/compose/ui/graphics/Shape;JLkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;II)V
+}
+
+public final class lib/sketchbook/SketchbookTopAppBarKt {
+	public static final fun SketchbookTopAppBar-6qCrX9Q (Lkotlin/jvm/functions/Function2;Landroidx/compose/ui/Modifier;Landroidx/compose/material3/TopAppBarScrollBehavior;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;FLandroidx/compose/foundation/layout/Arrangement$Horizontal;Landroidx/compose/foundation/layout/PaddingValues;Landroidx/compose/foundation/layout/PaddingValues;Landroidx/compose/ui/text/TextStyle;Landroidx/compose/ui/text/TextStyle;Landroidx/compose/runtime/Composer;III)V
+}
+
+public abstract interface annotation class lib/sketchbook/SketchbookValidation : java/lang/annotation/Annotation {
+}
+
+public final class lib/sketchbook/ToastDuration {
+	public static final field Companion Llib/sketchbook/ToastDuration$Companion;
+	public static final synthetic fun box-impl (J)Llib/sketchbook/ToastDuration;
+	public static fun constructor-impl (J)J
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (JLjava/lang/Object;)Z
+	public static final fun equals-impl0 (JJ)Z
+	public final fun getMillis ()J
+	public fun hashCode ()I
+	public static fun hashCode-impl (J)I
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (J)Ljava/lang/String;
+	public final synthetic fun unbox-impl ()J
+}
+
+public final class lib/sketchbook/ToastDuration$Companion {
+	public final fun getLong-uWJjEEo ()J
+	public final fun getShort-uWJjEEo ()J
+}
+
+public final class lib/sketchbook/animation/AnticipateOvershootEasingKt {
+	public static final fun getAnticipateOvershootEasing ()Landroidx/compose/animation/core/Easing;
+}
+
+public final class lib/sketchbook/glass/GlassModifierKt {
+	public static final fun glassSource (Landroidx/compose/ui/Modifier;)Landroidx/compose/ui/Modifier;
+}
+
+public final class lib/sketchbook/haptic/HapticIndicationModifier : androidx/compose/ui/node/ModifierNodeElement {
+	public static final field $stable I
+	public fun <init> (Landroidx/compose/foundation/interaction/InteractionSource;Landroidx/compose/ui/hapticfeedback/HapticFeedback;)V
+	public synthetic fun create ()Landroidx/compose/ui/Modifier$Node;
+	public fun create ()Llib/sketchbook/haptic/VibrateNode;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public synthetic fun update (Landroidx/compose/ui/Modifier$Node;)V
+	public fun update (Llib/sketchbook/haptic/VibrateNode;)V
+}
+
+public final class lib/sketchbook/haptic/HapticsKt {
+	public static final fun ClickOnChange (Ljava/lang/Object;Ljava/lang/Object;Landroidx/compose/runtime/Composer;II)V
+	public static final fun TickOnChange (Ljava/lang/Object;Ljava/lang/Object;Landroidx/compose/runtime/Composer;II)V
+	public static final fun click (Landroidx/compose/ui/hapticfeedback/HapticFeedback;)V
+	public static final fun confirm (Landroidx/compose/ui/hapticfeedback/HapticFeedback;)V
+	public static final fun fastTick (Landroidx/compose/ui/hapticfeedback/HapticFeedback;)V
+	public static final fun hapticIndication (Landroidx/compose/ui/Modifier;Landroidx/compose/foundation/interaction/InteractionSource;)Landroidx/compose/ui/Modifier;
+	public static final fun performHapticFeedback (Landroidx/compose/ui/hapticfeedback/HapticFeedback;I)V
+	public static final fun reject (Landroidx/compose/ui/hapticfeedback/HapticFeedback;)V
+	public static final fun rememberMutableInteractionSource (Landroidx/compose/runtime/Composer;I)Llib/sketchbook/haptic/MutableInteractionSourceState;
+	public static final fun rememberVibrateIndication (Landroidx/compose/runtime/Composer;I)Landroidx/compose/foundation/Indication;
+	public static final fun tick (Landroidx/compose/ui/hapticfeedback/HapticFeedback;)V
+}
+
+public final class lib/sketchbook/haptic/MutableInteractionSourceState {
+	public static final field $stable I
+	public fun <init> ()V
+	public final fun component1 ()Landroidx/compose/foundation/interaction/MutableInteractionSource;
+	public final fun component10 ()Landroidx/compose/foundation/interaction/MutableInteractionSource;
+	public final fun component11 ()Landroidx/compose/foundation/interaction/MutableInteractionSource;
+	public final fun component12 ()Landroidx/compose/foundation/interaction/MutableInteractionSource;
+	public final fun component2 ()Landroidx/compose/foundation/interaction/MutableInteractionSource;
+	public final fun component3 ()Landroidx/compose/foundation/interaction/MutableInteractionSource;
+	public final fun component4 ()Landroidx/compose/foundation/interaction/MutableInteractionSource;
+	public final fun component5 ()Landroidx/compose/foundation/interaction/MutableInteractionSource;
+	public final fun component6 ()Landroidx/compose/foundation/interaction/MutableInteractionSource;
+	public final fun component7 ()Landroidx/compose/foundation/interaction/MutableInteractionSource;
+	public final fun component8 ()Landroidx/compose/foundation/interaction/MutableInteractionSource;
+	public final fun component9 ()Landroidx/compose/foundation/interaction/MutableInteractionSource;
+}
+
+public final class lib/sketchbook/haptic/PlatformHapticFeedback : androidx/compose/ui/hapticfeedback/HapticFeedback {
+	public static final field $stable I
+	public fun <init> (Landroid/view/View;)V
+	public fun performHapticFeedback-CdsT49E (I)V
+}
+
+public final class lib/sketchbook/haptic/VibrateIndicationNodeFactory : androidx/compose/foundation/IndicationNodeFactory {
+	public static final field $stable I
+	public fun <init> (Landroidx/compose/ui/hapticfeedback/HapticFeedback;)V
+	public fun create (Landroidx/compose/foundation/interaction/InteractionSource;)Landroidx/compose/ui/node/DelegatableNode;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public fun rememberUpdatedInstance (Landroidx/compose/foundation/interaction/InteractionSource;Landroidx/compose/runtime/Composer;I)Landroidx/compose/foundation/IndicationInstance;
+}
+
+public final class lib/sketchbook/haptic/VibrateNode : androidx/compose/ui/Modifier$Node {
+	public static final field $stable I
+	public fun <init> (Landroidx/compose/foundation/interaction/InteractionSource;Landroidx/compose/ui/hapticfeedback/HapticFeedback;)V
+	public final fun getHaptics ()Landroidx/compose/ui/hapticfeedback/HapticFeedback;
+	public final fun getInteractionSource ()Landroidx/compose/foundation/interaction/InteractionSource;
+	public fun onAttach ()V
+	public final fun setHaptics (Landroidx/compose/ui/hapticfeedback/HapticFeedback;)V
+	public final fun setInteractionSource (Landroidx/compose/foundation/interaction/InteractionSource;)V
+}
+
+public final class lib/sketchbook/layout/ArrangementKt {
+	public static final fun arrange (Landroidx/compose/foundation/layout/Arrangement$Horizontal;Landroidx/compose/ui/unit/Density;Landroidx/compose/ui/unit/LayoutDirection;I[I)[I
+}
+
+public final class lib/sketchbook/layout/ConstraintsKt {
+	public static final fun fixedWidth-K40F9xA (JI)J
+	public static synthetic fun fixedWidth-K40F9xA$default (JIILjava/lang/Object;)J
+	public static final fun minusWidth-K40F9xA (JI)J
+}
+
+public final class lib/sketchbook/layout/LargeScreenKt {
+	public static final fun alignForLargeScreen-eqLRuRQ (Landroidx/compose/ui/Modifier;Landroidx/compose/material3/windowsizeclass/WindowSizeClass;Landroidx/compose/ui/Alignment$Horizontal;F)Landroidx/compose/ui/Modifier;
+	public static synthetic fun alignForLargeScreen-eqLRuRQ$default (Landroidx/compose/ui/Modifier;Landroidx/compose/material3/windowsizeclass/WindowSizeClass;Landroidx/compose/ui/Alignment$Horizontal;FILjava/lang/Object;)Landroidx/compose/ui/Modifier;
+	public static final fun alignForLargeScreen-lG28NQ4 (Landroidx/compose/ui/Modifier;FLandroidx/compose/ui/Alignment$Horizontal;)Landroidx/compose/ui/Modifier;
+	public static synthetic fun alignForLargeScreen-lG28NQ4$default (Landroidx/compose/ui/Modifier;FLandroidx/compose/ui/Alignment$Horizontal;ILjava/lang/Object;)Landroidx/compose/ui/Modifier;
+	public static final fun alignForLargeScreen-wH6b6FI (Landroidx/compose/ui/Modifier;Landroidx/compose/ui/Alignment$Horizontal;F)Landroidx/compose/ui/Modifier;
+	public static synthetic fun alignForLargeScreen-wH6b6FI$default (Landroidx/compose/ui/Modifier;Landroidx/compose/ui/Alignment$Horizontal;FILjava/lang/Object;)Landroidx/compose/ui/Modifier;
+	public static final fun largeScreenPadding-lG28NQ4 (Landroidx/compose/ui/Modifier;FLkotlin/jvm/functions/Function1;)Landroidx/compose/ui/Modifier;
+	public static synthetic fun largeScreenPadding-lG28NQ4$default (Landroidx/compose/ui/Modifier;FLkotlin/jvm/functions/Function1;ILjava/lang/Object;)Landroidx/compose/ui/Modifier;
+	public static final fun rememberWindowSizeClass (Landroidx/compose/runtime/Composer;I)Landroidx/compose/material3/windowsizeclass/WindowSizeClass;
+	public static final fun widthCoerceAtMost-K40F9xA (JI)J
+}
+
+public final class lib/sketchbook/layout/PaddingValuesKt {
+	public static final fun plus (Landroidx/compose/foundation/layout/PaddingValues;Landroidx/compose/foundation/layout/PaddingValues;)Landroidx/compose/foundation/layout/PaddingValues;
+	public static final fun plus-3ABfNKs (Landroidx/compose/foundation/layout/PaddingValues;F)Landroidx/compose/foundation/layout/PaddingValues;
+	public static final fun plus-VpY3zN4 (Landroidx/compose/foundation/layout/PaddingValues;FF)Landroidx/compose/foundation/layout/PaddingValues;
+	public static synthetic fun plus-VpY3zN4$default (Landroidx/compose/foundation/layout/PaddingValues;FFILjava/lang/Object;)Landroidx/compose/foundation/layout/PaddingValues;
+	public static final fun plus-qDBjuR0 (Landroidx/compose/foundation/layout/PaddingValues;FFFF)Landroidx/compose/foundation/layout/PaddingValues;
+	public static synthetic fun plus-qDBjuR0$default (Landroidx/compose/foundation/layout/PaddingValues;FFFFILjava/lang/Object;)Landroidx/compose/foundation/layout/PaddingValues;
+}
+
+public final class lib/sketchbook/modifier/AnimationKt {
+	public static final fun animateItemAppearance-1k6DkX8 (Landroidx/compose/ui/Modifier;JFLandroidx/compose/animation/core/AnimationSpec;Landroidx/compose/animation/core/AnimationSpec;Landroidx/compose/runtime/Composer;II)Landroidx/compose/ui/Modifier;
+}
+
+public final class lib/sketchbook/modifier/BeamDirection : java/lang/Enum {
+	public static final field Clockwise Llib/sketchbook/modifier/BeamDirection;
+	public static final field CounterClockwise Llib/sketchbook/modifier/BeamDirection;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Llib/sketchbook/modifier/BeamDirection;
+	public static fun values ()[Llib/sketchbook/modifier/BeamDirection;
+}
+
+public final class lib/sketchbook/modifier/BeamPalette {
+	public static final field $stable I
+	public static final field INSTANCE Llib/sketchbook/modifier/BeamPalette;
+	public final fun getColorful ()Ljava/util/List;
+	public final fun glass-8_81llA (J)Ljava/util/List;
+}
+
+public final class lib/sketchbook/modifier/BeamStyle : java/lang/Enum {
+	public static final field Large Llib/sketchbook/modifier/BeamStyle;
+	public static final field Line Llib/sketchbook/modifier/BeamStyle;
+	public static final field Small Llib/sketchbook/modifier/BeamStyle;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Llib/sketchbook/modifier/BeamStyle;
+	public static fun values ()[Llib/sketchbook/modifier/BeamStyle;
+}
+
+public final class lib/sketchbook/modifier/BorderBeamKt {
+	public static final fun borderBeam-i-NP2pc (Landroidx/compose/ui/Modifier;Landroidx/compose/ui/graphics/Shape;Ljava/util/List;Llib/sketchbook/modifier/BeamStyle;Llib/sketchbook/modifier/BeamDirection;ZFFI)Landroidx/compose/ui/Modifier;
+	public static synthetic fun borderBeam-i-NP2pc$default (Landroidx/compose/ui/Modifier;Landroidx/compose/ui/graphics/Shape;Ljava/util/List;Llib/sketchbook/modifier/BeamStyle;Llib/sketchbook/modifier/BeamDirection;ZFFIILjava/lang/Object;)Landroidx/compose/ui/Modifier;
+}
+
+public final class lib/sketchbook/modifier/BrightnessKt {
+	public static final fun screenBrightness (Landroidx/compose/ui/Modifier;F)Landroidx/compose/ui/Modifier;
+	public static final fun screenBrightness (Landroidx/compose/ui/Modifier;Z)Landroidx/compose/ui/Modifier;
+}
+
+public final class lib/sketchbook/modifier/ComposableSingletons$StrokeKt {
+	public static final field INSTANCE Llib/sketchbook/modifier/ComposableSingletons$StrokeKt;
+	public fun <init> ()V
+	public final fun getLambda$650509546$sketchbook_android_core_release ()Lkotlin/jvm/functions/Function2;
+}
+
+public final class lib/sketchbook/modifier/LayoutKt {
+	public static final fun vertical (Landroidx/compose/ui/Modifier;F)Landroidx/compose/ui/Modifier;
+	public static synthetic fun vertical$default (Landroidx/compose/ui/Modifier;FILjava/lang/Object;)Landroidx/compose/ui/Modifier;
+}
+
+public final class lib/sketchbook/modifier/LightSource : java/lang/Enum {
+	public static final field Bottom Llib/sketchbook/modifier/LightSource;
+	public static final field BottomLeft Llib/sketchbook/modifier/LightSource;
+	public static final field BottomRight Llib/sketchbook/modifier/LightSource;
+	public static final field Left Llib/sketchbook/modifier/LightSource;
+	public static final field Right Llib/sketchbook/modifier/LightSource;
+	public static final field Top Llib/sketchbook/modifier/LightSource;
+	public static final field TopLeft Llib/sketchbook/modifier/LightSource;
+	public static final field TopRight Llib/sketchbook/modifier/LightSource;
+	public final fun getEnd-F1C5BW0 ()J
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public final fun getStart-F1C5BW0 ()J
+	public static fun valueOf (Ljava/lang/String;)Llib/sketchbook/modifier/LightSource;
+	public static fun values ()[Llib/sketchbook/modifier/LightSource;
+}
+
+public final class lib/sketchbook/modifier/OptionalKt {
+	public static final fun optional (Landroidx/compose/ui/Modifier;Ljava/lang/Object;Lkotlin/jvm/functions/Function2;)Landroidx/compose/ui/Modifier;
+	public static final fun optional (Landroidx/compose/ui/Modifier;ZLkotlin/jvm/functions/Function1;)Landroidx/compose/ui/Modifier;
+}
+
+public final class lib/sketchbook/modifier/OverlayKt {
+	public static final fun overlay (Landroidx/compose/ui/Modifier;)Landroidx/compose/ui/Modifier;
+	public static final fun overlay-WkMS-hQ (Landroidx/compose/ui/Modifier;JJ)Landroidx/compose/ui/Modifier;
+	public static synthetic fun overlay-WkMS-hQ$default (Landroidx/compose/ui/Modifier;JJILjava/lang/Object;)Landroidx/compose/ui/Modifier;
+	public static final fun verticalOverlay (Landroidx/compose/ui/Modifier;FLlib/sketchbook/modifier/VerticalGravity;)Landroidx/compose/ui/Modifier;
+	public static final fun verticalOverlay (Landroidx/compose/ui/Modifier;Ljava/util/List;Llib/sketchbook/modifier/VerticalGravity;Lkotlin/jvm/functions/Function2;)Landroidx/compose/ui/Modifier;
+	public static synthetic fun verticalOverlay$default (Landroidx/compose/ui/Modifier;FLlib/sketchbook/modifier/VerticalGravity;ILjava/lang/Object;)Landroidx/compose/ui/Modifier;
+	public static final fun verticalOverlay-lG28NQ4 (Landroidx/compose/ui/Modifier;FLlib/sketchbook/modifier/VerticalGravity;)Landroidx/compose/ui/Modifier;
+	public static synthetic fun verticalOverlay-lG28NQ4$default (Landroidx/compose/ui/Modifier;FLlib/sketchbook/modifier/VerticalGravity;ILjava/lang/Object;)Landroidx/compose/ui/Modifier;
+}
+
+public final class lib/sketchbook/modifier/ShaderKt {
+	public static final fun meshGradientBackground-xwkQ0AY (Landroidx/compose/ui/Modifier;Ljava/util/List;IZJ)Landroidx/compose/ui/Modifier;
+	public static synthetic fun meshGradientBackground-xwkQ0AY$default (Landroidx/compose/ui/Modifier;Ljava/util/List;IZJILjava/lang/Object;)Landroidx/compose/ui/Modifier;
+	public static final fun shimmer-RPmYEkk (Landroidx/compose/ui/Modifier;JIZ)Landroidx/compose/ui/Modifier;
+	public static synthetic fun shimmer-RPmYEkk$default (Landroidx/compose/ui/Modifier;JIZILjava/lang/Object;)Landroidx/compose/ui/Modifier;
+	public static final fun specularBorder-N3hlwXA (Landroidx/compose/ui/Modifier;Landroidx/compose/ui/graphics/Shape;FJIZ)Landroidx/compose/ui/Modifier;
+	public static synthetic fun specularBorder-N3hlwXA$default (Landroidx/compose/ui/Modifier;Landroidx/compose/ui/graphics/Shape;FJIZILjava/lang/Object;)Landroidx/compose/ui/Modifier;
+}
+
+public final class lib/sketchbook/modifier/ShapeKt {
+	public static final fun glow-MVrX58E (Landroidx/compose/ui/Modifier;Landroidx/compose/ui/graphics/Shape;JLlib/sketchbook/modifier/LightSource;FFF)Landroidx/compose/ui/Modifier;
+	public static synthetic fun glow-MVrX58E$default (Landroidx/compose/ui/Modifier;Landroidx/compose/ui/graphics/Shape;JLlib/sketchbook/modifier/LightSource;FFFILjava/lang/Object;)Landroidx/compose/ui/Modifier;
+}
+
+public final class lib/sketchbook/modifier/SquareKt {
+	public static final fun square (Landroidx/compose/ui/Modifier;)Landroidx/compose/ui/Modifier;
+}
+
+public final class lib/sketchbook/modifier/StrokeKt {
+	public static final fun stroke-POIbLQ4 (Landroidx/compose/ui/Modifier;JLandroidx/compose/ui/graphics/Shape;FF)Landroidx/compose/ui/Modifier;
+	public static synthetic fun stroke-POIbLQ4$default (Landroidx/compose/ui/Modifier;JLandroidx/compose/ui/graphics/Shape;FFILjava/lang/Object;)Landroidx/compose/ui/Modifier;
+}
+
+public final class lib/sketchbook/modifier/SurfaceKt {
+	public static final fun surface-NdFTVJQ (Landroidx/compose/ui/Modifier;FLandroidx/compose/ui/graphics/Shape;FJ)Landroidx/compose/ui/Modifier;
+	public static synthetic fun surface-NdFTVJQ$default (Landroidx/compose/ui/Modifier;FLandroidx/compose/ui/graphics/Shape;FJILjava/lang/Object;)Landroidx/compose/ui/Modifier;
+	public static final fun surface-SO87i5Q (Landroidx/compose/ui/Modifier;JLandroidx/compose/ui/graphics/Shape;FJ)Landroidx/compose/ui/Modifier;
+	public static synthetic fun surface-SO87i5Q$default (Landroidx/compose/ui/Modifier;JLandroidx/compose/ui/graphics/Shape;FJILjava/lang/Object;)Landroidx/compose/ui/Modifier;
+	public static final fun surface-TMaQ5Wc (Landroidx/compose/ui/Modifier;Landroidx/compose/ui/graphics/Brush;Landroidx/compose/ui/graphics/Shape;FJ)Landroidx/compose/ui/Modifier;
+	public static synthetic fun surface-TMaQ5Wc$default (Landroidx/compose/ui/Modifier;Landroidx/compose/ui/graphics/Brush;Landroidx/compose/ui/graphics/Shape;FJILjava/lang/Object;)Landroidx/compose/ui/Modifier;
+}
+
+public final class lib/sketchbook/modifier/VerticalGravity : java/lang/Enum {
+	public static final field Bottom Llib/sketchbook/modifier/VerticalGravity;
+	public static final field Top Llib/sketchbook/modifier/VerticalGravity;
+	public final fun getBrushBounds-TmRCtEA (JF)Lkotlin/ranges/ClosedFloatingPointRange;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public final fun getOffset-esNoTWg (JF)J
+	public static fun valueOf (Ljava/lang/String;)Llib/sketchbook/modifier/VerticalGravity;
+	public static fun values ()[Llib/sketchbook/modifier/VerticalGravity;
+}
+
+public final class lib/sketchbook/shape/CompositeShape : androidx/compose/ui/graphics/Shape {
+	public static final field $stable I
+	public static final field Companion Llib/sketchbook/shape/CompositeShape$Companion;
+	public fun <init> (Llib/sketchbook/shape/CompositeShape$Builder;)V
+	public fun createOutline-Pq9zytI (JLandroidx/compose/ui/unit/LayoutDirection;Landroidx/compose/ui/unit/Density;)Landroidx/compose/ui/graphics/Outline;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+}
+
+public final class lib/sketchbook/shape/CompositeShape$Builder {
+	public static final field $stable I
+	public fun <init> ()V
+	public final fun addShape-QFznX2Y (Landroidx/compose/ui/graphics/Shape;JLandroidx/compose/ui/Alignment;I)Llib/sketchbook/shape/CompositeShape$Builder;
+	public static synthetic fun addShape-QFznX2Y$default (Llib/sketchbook/shape/CompositeShape$Builder;Landroidx/compose/ui/graphics/Shape;JLandroidx/compose/ui/Alignment;IILjava/lang/Object;)Llib/sketchbook/shape/CompositeShape$Builder;
+	public final fun build ()Llib/sketchbook/shape/CompositeShape;
+	public final fun setBaseline (Landroidx/compose/ui/graphics/Shape;)Llib/sketchbook/shape/CompositeShape$Builder;
+}
+
+public final class lib/sketchbook/shape/CompositeShape$Companion {
+	public final fun build (Lkotlin/jvm/functions/Function1;)Llib/sketchbook/shape/CompositeShape;
+	public final fun invoke (Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Lkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;I)Llib/sketchbook/shape/CompositeShape;
+	public final fun invoke (Ljava/lang/Object;Ljava/lang/Object;Lkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;I)Llib/sketchbook/shape/CompositeShape;
+	public final fun invoke (Ljava/lang/Object;Lkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;I)Llib/sketchbook/shape/CompositeShape;
+	public final fun invoke ([Ljava/lang/Object;Lkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;I)Llib/sketchbook/shape/CompositeShape;
+}
+
+public final class lib/sketchbook/shape/CornerSmoothing {
+	public static final field $stable I
+	public static final field Full F
+	public static final field High F
+	public static final field INSTANCE Llib/sketchbook/shape/CornerSmoothing;
+	public static final field Medium F
+	public static final field None F
+	public static final field Small F
+}
+
+public final class lib/sketchbook/shape/CutoutShape : androidx/compose/ui/graphics/Shape {
+	public static final field $stable I
+	public fun <init> (Landroidx/compose/foundation/shape/CornerSize;Llib/sketchbook/shape/CutoutShape$Orientation;)V
+	public fun createOutline-Pq9zytI (JLandroidx/compose/ui/unit/LayoutDirection;Landroidx/compose/ui/unit/Density;)Landroidx/compose/ui/graphics/Outline;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+}
+
+public final class lib/sketchbook/shape/CutoutShape$Orientation : java/lang/Enum {
+	public static final field BottomLeft Llib/sketchbook/shape/CutoutShape$Orientation;
+	public static final field BottomRight Llib/sketchbook/shape/CutoutShape$Orientation;
+	public static final field TopLeft Llib/sketchbook/shape/CutoutShape$Orientation;
+	public static final field TopRight Llib/sketchbook/shape/CutoutShape$Orientation;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Llib/sketchbook/shape/CutoutShape$Orientation;
+	public static fun values ()[Llib/sketchbook/shape/CutoutShape$Orientation;
+}
+
+public abstract class lib/sketchbook/shape/SquircleBasedShape : androidx/compose/foundation/shape/CornerBasedShape {
+	public static final field $stable I
+	public fun <init> (Landroidx/compose/foundation/shape/CornerSize;Landroidx/compose/foundation/shape/CornerSize;Landroidx/compose/foundation/shape/CornerSize;Landroidx/compose/foundation/shape/CornerSize;F)V
+	public final fun copy (Landroidx/compose/foundation/shape/CornerSize;F)Llib/sketchbook/shape/SquircleBasedShape;
+	public abstract fun copy (Landroidx/compose/foundation/shape/CornerSize;Landroidx/compose/foundation/shape/CornerSize;Landroidx/compose/foundation/shape/CornerSize;Landroidx/compose/foundation/shape/CornerSize;F)Llib/sketchbook/shape/SquircleBasedShape;
+	public static synthetic fun copy$default (Llib/sketchbook/shape/SquircleBasedShape;Landroidx/compose/foundation/shape/CornerSize;FILjava/lang/Object;)Llib/sketchbook/shape/SquircleBasedShape;
+	public static synthetic fun copy$default (Llib/sketchbook/shape/SquircleBasedShape;Landroidx/compose/foundation/shape/CornerSize;Landroidx/compose/foundation/shape/CornerSize;Landroidx/compose/foundation/shape/CornerSize;Landroidx/compose/foundation/shape/CornerSize;FILjava/lang/Object;)Llib/sketchbook/shape/SquircleBasedShape;
+	public final fun createOutline-LjSzlW0 (JFFFFLandroidx/compose/ui/unit/LayoutDirection;)Landroidx/compose/ui/graphics/Outline;
+	public abstract fun createOutline-YLp_XPw (JFFFFFLandroidx/compose/ui/unit/LayoutDirection;)Landroidx/compose/ui/graphics/Outline;
+	public final fun getCornerSmoothing ()F
+}
+
+public final class lib/sketchbook/shape/SquircleShape : lib/sketchbook/shape/SquircleBasedShape {
+	public static final field $stable I
+	public synthetic fun <init> (FFFFFILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (FFFFFLkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (FFILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (FFLkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun <init> (IF)V
+	public synthetic fun <init> (IFILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun <init> (IIIIF)V
+	public synthetic fun <init> (IIIIFILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun <init> (Landroidx/compose/foundation/shape/CornerSize;Landroidx/compose/foundation/shape/CornerSize;Landroidx/compose/foundation/shape/CornerSize;Landroidx/compose/foundation/shape/CornerSize;F)V
+	public synthetic fun copy (Landroidx/compose/foundation/shape/CornerSize;Landroidx/compose/foundation/shape/CornerSize;Landroidx/compose/foundation/shape/CornerSize;Landroidx/compose/foundation/shape/CornerSize;)Landroidx/compose/foundation/shape/CornerBasedShape;
+	public fun copy (Landroidx/compose/foundation/shape/CornerSize;Landroidx/compose/foundation/shape/CornerSize;Landroidx/compose/foundation/shape/CornerSize;Landroidx/compose/foundation/shape/CornerSize;)Llib/sketchbook/shape/SquircleShape;
+	public synthetic fun copy (Landroidx/compose/foundation/shape/CornerSize;Landroidx/compose/foundation/shape/CornerSize;Landroidx/compose/foundation/shape/CornerSize;Landroidx/compose/foundation/shape/CornerSize;F)Llib/sketchbook/shape/SquircleBasedShape;
+	public fun copy (Landroidx/compose/foundation/shape/CornerSize;Landroidx/compose/foundation/shape/CornerSize;Landroidx/compose/foundation/shape/CornerSize;Landroidx/compose/foundation/shape/CornerSize;F)Llib/sketchbook/shape/SquircleShape;
+	public fun createOutline-YLp_XPw (JFFFFFLandroidx/compose/ui/unit/LayoutDirection;)Landroidx/compose/ui/graphics/Outline;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class lib/sketchbook/shape/SquircleShapeKt {
+	public static final fun squircleShapePath-LjSzlW0 (JFFFFF)Landroidx/compose/ui/graphics/Path;
+	public static synthetic fun squircleShapePath-LjSzlW0$default (JFFFFFILjava/lang/Object;)Landroidx/compose/ui/graphics/Path;
+}
+
+public final class lib/sketchbook/theme/ShapesKt {
+	public static final fun extendBy-lG28NQ4 (Landroidx/compose/foundation/shape/CornerBasedShape;FLandroidx/compose/ui/unit/Density;)Landroidx/compose/foundation/shape/CornerBasedShape;
+	public static final fun extendBy-ziNgDLE (Landroidx/compose/foundation/shape/CornerBasedShape;FLandroidx/compose/runtime/Composer;I)Landroidx/compose/foundation/shape/CornerBasedShape;
+}
+
+public final class lib/sketchbook/theme/Theme {
+	public static final field $stable I
+	public static final field INSTANCE Llib/sketchbook/theme/Theme;
+	public final fun getColor (Landroidx/compose/runtime/Composer;I)Llib/sketchbook/theme/Theme$Style;
+	public final fun getContainer (Landroidx/compose/runtime/Composer;I)Llib/sketchbook/theme/Theme$Container;
+	public final fun getTextStyle (Landroidx/compose/runtime/Composer;I)Llib/sketchbook/theme/Theme$Text;
+}
+
+public abstract interface class lib/sketchbook/theme/Theme$Container {
+	public abstract fun getButton ()Landroidx/compose/foundation/shape/CornerBasedShape;
+	public abstract fun getButtonSmall ()Landroidx/compose/foundation/shape/CornerBasedShape;
+	public abstract fun getCard ()Landroidx/compose/foundation/shape/CornerBasedShape;
+}
+
+public abstract interface class lib/sketchbook/theme/Theme$Style {
+	public abstract fun getContainer ()Llib/sketchbook/theme/Theme$Style$Scheme;
+	public abstract fun getContent ()Llib/sketchbook/theme/Theme$Style$Scheme;
+	public abstract fun getEmphasis ()Llib/sketchbook/theme/Theme$Style$Scheme;
+	public abstract fun getOverlay ()Llib/sketchbook/theme/Theme$Style$Scheme;
+}
+
+public abstract interface class lib/sketchbook/theme/Theme$Style$Scheme {
+	public abstract fun getBackground-0d7_KjU ()J
+	public abstract fun getError-0d7_KjU ()J
+	public abstract fun getOutline-0d7_KjU ()J
+	public abstract fun getPrimary-0d7_KjU ()J
+	public abstract fun getSecondary-0d7_KjU ()J
+	public abstract fun getSurface-0d7_KjU ()J
+	public abstract fun getTertiary-0d7_KjU ()J
+}
+
+public abstract interface class lib/sketchbook/theme/Theme$Text {
+	public abstract fun getBody ()Landroidx/compose/ui/text/TextStyle;
+	public abstract fun getCaption ()Landroidx/compose/ui/text/TextStyle;
+	public abstract fun getDisplay ()Landroidx/compose/ui/text/TextStyle;
+	public abstract fun getEmphasis ()Landroidx/compose/ui/text/TextStyle;
+	public abstract fun getHeadline ()Landroidx/compose/ui/text/TextStyle;
+	public abstract fun getTitle ()Landroidx/compose/ui/text/TextStyle;
+}
+
+public final class lib/sketchbook/theme/ThemeKt {
+	public static final fun Theme (ZLkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;II)V
+	public static final fun Theme (ZZLkotlin/jvm/functions/Function2;Landroidx/compose/runtime/Composer;I)V
+	public static final fun contentColorFor-4WTKRHQ (Llib/sketchbook/theme/Theme$Style;J)J
+}
+
+public final class lib/sketchbook/util/ActivityKt {
+	public static final fun findActivity (Landroid/content/Context;)Landroid/app/Activity;
+	public static final fun findActivityOrNull (Landroid/content/Context;)Landroid/app/Activity;
+	public static final fun setContent (Landroidx/activity/ComponentActivity;Landroidx/activity/SystemBarStyle;Landroidx/activity/SystemBarStyle;Landroidx/compose/runtime/CompositionContext;Lkotlin/jvm/functions/Function2;)V
+	public static synthetic fun setContent$default (Landroidx/activity/ComponentActivity;Landroidx/activity/SystemBarStyle;Landroidx/activity/SystemBarStyle;Landroidx/compose/runtime/CompositionContext;Lkotlin/jvm/functions/Function2;ILjava/lang/Object;)V
+}
+
+public final class lib/sketchbook/util/FocusRequesterKt {
+	public static final fun rememberFocusRequester (ZLandroidx/compose/runtime/Composer;II)Landroidx/compose/ui/focus/FocusRequester;
+}
+
+public final class lib/sketchbook/util/InterpolationKt {
+	public static final fun fastLerp (Landroidx/compose/ui/text/TextStyle;Landroidx/compose/ui/text/TextStyle;F)Landroidx/compose/ui/text/TextStyle;
+	public static final fun lerp (FFF)F
+	public static final fun lerp-52FF-y8 (JJF)J
+	public static final fun smoothStep (FFF)F
+	public static final fun smoothStep-Md-fbLM (FFF)F
+}
+
+public final class lib/sketchbook/util/LazyPagingItemsState {
+	public static final field Companion Llib/sketchbook/util/LazyPagingItemsState$Companion;
+	public static final synthetic fun box-impl (Landroidx/paging/compose/LazyPagingItems;)Llib/sketchbook/util/LazyPagingItemsState;
+	public static fun constructor-impl (Landroidx/paging/compose/LazyPagingItems;)Landroidx/paging/compose/LazyPagingItems;
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (Landroidx/paging/compose/LazyPagingItems;Ljava/lang/Object;)Z
+	public static final fun equals-impl0 (Landroidx/paging/compose/LazyPagingItems;Landroidx/paging/compose/LazyPagingItems;)Z
+	public fun hashCode ()I
+	public static fun hashCode-impl (Landroidx/paging/compose/LazyPagingItems;)I
+	public static final fun isEmpty-impl (Landroidx/paging/compose/LazyPagingItems;)Z
+	public static final fun isEndReached-impl (Landroidx/paging/compose/LazyPagingItems;Llib/sketchbook/util/LazyPagingItemsState$Type;)Z
+	public static synthetic fun isEndReached-impl$default (Landroidx/paging/compose/LazyPagingItems;Llib/sketchbook/util/LazyPagingItemsState$Type;ILjava/lang/Object;)Z
+	public static final fun isError-impl (Landroidx/paging/compose/LazyPagingItems;Llib/sketchbook/util/LazyPagingItemsState$Type;)Z
+	public static synthetic fun isError-impl$default (Landroidx/paging/compose/LazyPagingItems;Llib/sketchbook/util/LazyPagingItemsState$Type;ILjava/lang/Object;)Z
+	public static final fun isIdle-impl (Landroidx/paging/compose/LazyPagingItems;Llib/sketchbook/util/LazyPagingItemsState$Type;)Z
+	public static synthetic fun isIdle-impl$default (Landroidx/paging/compose/LazyPagingItems;Llib/sketchbook/util/LazyPagingItemsState$Type;ILjava/lang/Object;)Z
+	public static final fun isLoading-impl (Landroidx/paging/compose/LazyPagingItems;Llib/sketchbook/util/LazyPagingItemsState$Type;)Z
+	public static synthetic fun isLoading-impl$default (Landroidx/paging/compose/LazyPagingItems;Llib/sketchbook/util/LazyPagingItemsState$Type;ILjava/lang/Object;)Z
+	public static final fun isNotEmpty-impl (Landroidx/paging/compose/LazyPagingItems;)Z
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (Landroidx/paging/compose/LazyPagingItems;)Ljava/lang/String;
+	public final synthetic fun unbox-impl ()Landroidx/paging/compose/LazyPagingItems;
+}
+
+public final class lib/sketchbook/util/LazyPagingItemsState$Companion {
+	public final fun state-P2MJIYo (Landroidx/paging/compose/LazyPagingItems;)Landroidx/paging/compose/LazyPagingItems;
+}
+
+public final class lib/sketchbook/util/LazyPagingItemsState$Type : java/lang/Enum {
+	public static final field All Llib/sketchbook/util/LazyPagingItemsState$Type;
+	public static final field Any Llib/sketchbook/util/LazyPagingItemsState$Type;
+	public static final field Append Llib/sketchbook/util/LazyPagingItemsState$Type;
+	public static final field Prepend Llib/sketchbook/util/LazyPagingItemsState$Type;
+	public static final field Refresh Llib/sketchbook/util/LazyPagingItemsState$Type;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Llib/sketchbook/util/LazyPagingItemsState$Type;
+	public static fun values ()[Llib/sketchbook/util/LazyPagingItemsState$Type;
+}
+
+public final class lib/sketchbook/util/LazyPagingKt {
+	public static final fun asPagingData (Ljava/lang/Iterable;Landroidx/paging/LoadState;Landroidx/paging/LoadState;Landroidx/paging/LoadState;)Landroidx/paging/PagingData;
+	public static synthetic fun asPagingData$default (Ljava/lang/Iterable;Landroidx/paging/LoadState;Landroidx/paging/LoadState;Landroidx/paging/LoadState;ILjava/lang/Object;)Landroidx/paging/PagingData;
+	public static final fun rememberAsLazyPagingItems (Lkotlinx/collections/immutable/ImmutableList;Landroidx/paging/LoadState;Landroidx/compose/runtime/Composer;II)Landroidx/paging/compose/LazyPagingItems;
+	public static final fun rememberAsLazyPagingItems (Lkotlinx/collections/immutable/ImmutableList;Landroidx/paging/LoadState;Landroidx/paging/LoadState;Landroidx/paging/LoadState;Landroidx/compose/runtime/Composer;II)Landroidx/paging/compose/LazyPagingItems;
+}
+
+public final class lib/sketchbook/util/OutlineKt {
+	public static final fun toPath (Landroidx/compose/ui/graphics/Outline;)Landroidx/compose/ui/graphics/Path;
+}
+
+public final class lib/sketchbook/util/SaverKt {
+	public static final fun getSaver (Landroidx/compose/ui/geometry/Offset$Companion;)Landroidx/compose/runtime/saveable/Saver;
+	public static final fun getSaver (Landroidx/compose/ui/graphics/Color$Companion;)Landroidx/compose/runtime/saveable/Saver;
+	public static final fun getSaver (Landroidx/compose/ui/unit/Dp$Companion;)Landroidx/compose/runtime/saveable/Saver;
+	public static final fun getSaver (Landroidx/compose/ui/unit/DpOffset$Companion;)Landroidx/compose/runtime/saveable/Saver;
+	public static final fun getSaver (Landroidx/compose/ui/unit/IntOffset$Companion;)Landroidx/compose/runtime/saveable/Saver;
+	public static final fun getSaver (Landroidx/compose/ui/unit/TextUnit$Companion;)Landroidx/compose/runtime/saveable/Saver;
+	public static final fun rememberSaveable-8W_icM0 (J[Ljava/lang/Object;Ljava/lang/String;Landroidx/compose/runtime/Composer;II)Landroidx/compose/runtime/MutableState;
+	public static final fun rememberSaveable-KTwxG1Y (J[Ljava/lang/Object;Ljava/lang/String;Landroidx/compose/runtime/Composer;II)Landroidx/compose/runtime/MutableState;
+	public static final fun rememberSaveable-Kz89ssw (F[Ljava/lang/Object;Ljava/lang/String;Landroidx/compose/runtime/Composer;II)Landroidx/compose/runtime/MutableState;
+	public static final fun rememberSaveable-N6fFfp4 (J[Ljava/lang/Object;Ljava/lang/String;Landroidx/compose/runtime/Composer;II)Landroidx/compose/runtime/MutableState;
+	public static final fun rememberSaveable-Q3OD1TY ([Ljava/lang/Object;Ljava/lang/String;JLandroidx/compose/runtime/Composer;II)Landroidx/compose/runtime/MutableState;
+	public static final fun rememberSaveable-zYud4tw (J[Ljava/lang/Object;Ljava/lang/String;Landroidx/compose/runtime/Composer;II)Landroidx/compose/runtime/MutableState;
+}
+
+public final class lib/sketchbook/util/SizeKt {
+	public static final fun toDpOffset-3MmeM6k (JLandroidx/compose/ui/unit/Density;)J
+	public static final fun toDpSize-viCIZxY (JLandroidx/compose/ui/unit/Density;)J
+	public static final fun toIntSize-uvyYCjk (J)J
+	public static final fun toSize-itqla9I (JLandroidx/compose/ui/unit/Density;)J
+}
+
+public final class lib/sketchbook/util/StorageKt {
+	public static final fun getLongArray (Landroid/content/SharedPreferences;Ljava/lang/String;[J)[J
+	public static final fun putLongArray (Landroid/content/SharedPreferences$Editor;Ljava/lang/String;[J)V
+	public static final fun rememberSharedPrefs (Ljava/lang/String;Landroidx/compose/runtime/Composer;I)Landroid/content/SharedPreferences;
+}
+

@@ -27,3 +27,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "sketchbook-android"
 include(":core")
+include(":catalog")

@@ -1,0 +1,64 @@
+package lib.sketchbook.shader
+
+import androidx.compose.ui.geometry.*
+import androidx.compose.ui.graphics.*
+import lib.sketchbook.util.toPath
+import kotlin.math.floor
+import kotlin.math.min
+
+internal const val BeamSampleCount = 128
+
+internal class OutlineSamples(val points: FloatArray, val perimeter: Float) {
+
+    fun pointAt(s: Float): Offset {
+        val count = points.size / 2
+        if (perimeter <= 0f) return Offset(points[0], points[1])
+        val wrapped = s - perimeter * floor(s / perimeter)
+        val position = wrapped / (perimeter / count)
+        val i = min(position.toInt(), count - 1)
+        val t = position - i
+        val j = (i + 1) % count
+        return Offset(
+            points[2 * i] + (points[2 * j] - points[2 * i]) * t,
+            points[2 * i + 1] + (points[2 * j + 1] - points[2 * i + 1]) * t
+        )
+    }
+}
+
+internal fun sampleOutline(outline: Outline, density: Float, count: Int = BeamSampleCount): OutlineSamples {
+    val measure = PathMeasure()
+    measure.setPath(outline.toPath(), true)
+    val length = measure.length
+    val points = FloatArray(count * 2)
+    if (length <= 0f) return OutlineSamples(points, 0f)
+    for (i in 0 until count) {
+        val p = measure.getPosition(length * i / count)
+        points[2 * i] = p.x / density
+        points[2 * i + 1] = p.y / density
+    }
+    if (signedArea(points) < 0f) reverseAfterFirst(points)
+    return OutlineSamples(points, length / density)
+}
+
+private fun signedArea(points: FloatArray): Float {
+    val count = points.size / 2
+    var area = 0f
+    for (i in 0 until count) {
+        val j = (i + 1) % count
+        area += points[2 * i] * points[2 * j + 1] - points[2 * j] * points[2 * i + 1]
+    }
+    return area
+}
+
+private fun reverseAfterFirst(points: FloatArray) {
+    val count = points.size / 2
+    for (i in 1..(count - 1) / 2) {
+        val j = count - i
+        val x = points[2 * i]
+        val y = points[2 * i + 1]
+        points[2 * i] = points[2 * j]
+        points[2 * i + 1] = points[2 * j + 1]
+        points[2 * j] = x
+        points[2 * j + 1] = y
+    }
+}

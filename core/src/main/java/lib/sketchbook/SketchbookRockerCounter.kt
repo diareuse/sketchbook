@@ -1,24 +1,20 @@
-@file:OptIn(ExperimentalMaterial3Api::class)
-
 package lib.sketchbook
 
-import androidx.compose.foundation.background
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.FavoriteBorder
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.ProvideTextStyle
-import androidx.compose.material3.SingleChoiceSegmentedButtonRow
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
+import androidx.compose.foundation.*
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.icons.*
+import androidx.compose.material.icons.filled.*
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.*
+import androidx.compose.ui.text.font.*
+import androidx.compose.ui.text.style.*
+import androidx.compose.ui.unit.*
+import lib.sketchbook.glass.asGlassShape
+import lib.sketchbook.glass.glass
 import lib.sketchbook.theme.Theme
+
+private val RockerGlassElevation: Dp = 17.dp
 
 @Composable
 fun SketchbookRockerCounter(
@@ -27,11 +23,16 @@ fun SketchbookRockerCounter(
     label: @Composable () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    SingleChoiceSegmentedButtonRow(
+    Row(
         modifier = modifier
-            .background(Theme.color.overlay.background.copy(.05f), Theme.container.button)
-            .clip(Theme.container.button),
-        space = 0.dp
+            .glass(Theme.container.button.asGlassShape(), RockerGlassElevation)
+            .background(
+                Theme.color.overlay.background.copy(.05f),
+                Theme.container.button.asGlassShape()
+            )
+            .defaultMinSize(minHeight = 40.dp)
+            .width(IntrinsicSize.Min),
+        verticalAlignment = Alignment.CenterVertically
     ) {
         decrement()
         ProvideTextStyle(

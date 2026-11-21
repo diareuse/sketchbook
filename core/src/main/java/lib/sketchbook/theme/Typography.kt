@@ -9,10 +9,10 @@ import androidx.compose.ui.unit.sp
 import lib.sketchbook.R
 
 private val AppFontFamily = FontFamily(
-    Font(R.font.sora_extra_bold, weight = FontWeight.ExtraBold),
-    Font(R.font.sora_bold, weight = FontWeight.Medium),
-    Font(R.font.sora_medium, weight = FontWeight.Normal),
-    Font(R.font.sora_extra_bold, weight = FontWeight.Bold)
+    Font(R.font.sora_medium, weight = FontWeight.Medium),
+    Font(R.font.sora_semi_bold, weight = FontWeight.SemiBold),
+    Font(R.font.sora_bold, weight = FontWeight.Bold),
+    Font(R.font.sora_extra_bold, weight = FontWeight.ExtraBold)
 )
 
 internal val ThemeTypography = Typography(

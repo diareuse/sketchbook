@@ -6,10 +6,30 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.*
 import androidx.compose.ui.graphics.*
-import androidx.compose.ui.hapticfeedback.*
-import androidx.compose.ui.platform.*
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.ui.unit.dp
+import lib.sketchbook.haptic.rememberConfirmedChange
+import lib.sketchbook.modifier.specularBorder
 import lib.sketchbook.theme.Theme
-import lib.sketchbook.theme.contentColorFor
+
+private val SwitchOnTrack = Color(0xFF34C759).copy(alpha = .85f)
+private val SwitchOffTrack = Color(0xFFFF3B30).copy(alpha = .85f)
+private const val ThumbRimAlpha = .9f
+
+@Composable
+private fun ThumbRim(content: @Composable () -> Unit) = Box(
+    modifier = Modifier
+        .fillMaxSize()
+        .specularBorder(
+            shape = CircleShape,
+            width = 1.dp,
+            color = Color.White.copy(alpha = ThumbRimAlpha),
+            animated = false
+        ),
+    contentAlignment = Alignment.Center
+) {
+    content()
+}
 
 @Composable
 fun SketchbookSwitch(
@@ -22,37 +42,32 @@ fun SketchbookSwitch(
         disabledCheckedBorderColor = Color.Transparent,
         disabledUncheckedBorderColor = Color.Transparent,
         uncheckedBorderColor = Color.Transparent,
-        checkedTrackColor = Theme.color.emphasis.primary.copy(.15f)
-            .compositeOver(compositeColor),
-        disabledCheckedTrackColor = Theme.color.overlay.background.copy(.05f)
-            .compositeOver(compositeColor),
-        disabledUncheckedTrackColor = Theme.color.overlay.background.copy(.05f)
-            .compositeOver(compositeColor),
-        uncheckedTrackColor = Theme.color.overlay.background.copy(.1f)
-            .compositeOver(compositeColor),
-        checkedThumbColor = Theme.color.emphasis.primary,
-        uncheckedThumbColor = Theme.color.emphasis.background,
-        disabledCheckedThumbColor = Theme.color.contentColorFor(compositeColor).copy(.15f),
-        disabledUncheckedThumbColor = Theme.color.contentColorFor(compositeColor).copy(.15f)
+        checkedTrackColor = SwitchOnTrack,
+        disabledCheckedTrackColor = SwitchOnTrack,
+        disabledUncheckedTrackColor = SwitchOffTrack,
+        uncheckedTrackColor = SwitchOffTrack,
+        checkedThumbColor = Color.White,
+        uncheckedThumbColor = Color.White,
+        disabledCheckedThumbColor = Color.White,
+        disabledUncheckedThumbColor = Color.White
     ),
     thumbContent: (@Composable () -> Unit)? = {},
     enabled: Boolean = true,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() }
 ) {
-    val haptics = LocalHapticFeedback.current
-    Switch(
-        modifier = modifier,
-        checked = checked,
-        onCheckedChange = {
-            onCheckedChange(it)
-            val feedback = if (it) HapticFeedbackType.ToggleOn else HapticFeedbackType.ToggleOff
-            haptics.performHapticFeedback(feedback)
-        },
-        colors = colors,
-        thumbContent = thumbContent,
-        enabled = enabled,
-        interactionSource = interactionSource
-    )
+    val change = rememberConfirmedChange(onCheckedChange)
+    val control = modifier.glassControl(CircleShape, enabled, interactionSource)
+    ThemePressHost {
+        Switch(
+            modifier = control,
+            checked = checked,
+            onCheckedChange = change,
+            colors = colors,
+            thumbContent = thumbContent?.let { inner -> { ThumbRim(inner) } },
+            enabled = enabled,
+            interactionSource = interactionSource
+        )
+    }
 }
 
 @SketchbookComponentPreview

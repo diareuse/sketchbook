@@ -22,19 +22,22 @@ import androidx.compose.ui.graphics.FilterQuality
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.unit.dp
 import androidx.core.content.edit
-import androidx.core.graphics.drawable.toBitmap
-import coil.compose.AsyncImagePainter.State
-import coil.compose.SubcomposeAsyncImage
-import coil.compose.SubcomposeAsyncImageScope
-import coil.imageLoader
-import coil.request.CachePolicy
-import coil.request.ImageRequest
-import coil.size.Precision
-import coil.size.Scale
+import coil3.compose.AsyncImagePainter.State
+import coil3.compose.SubcomposeAsyncImage
+import coil3.compose.SubcomposeAsyncImageScope
+import coil3.imageLoader
+import coil3.request.CachePolicy
+import coil3.request.ImageRequest
+import coil3.request.allowHardware
+import coil3.request.crossfade
+import coil3.size.Precision
+import coil3.size.Scale
+import coil3.toBitmap
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import lib.sketchbook.theme.Theme
 import lib.sketchbook.theme.contentColorFor
 import lib.sketchbook.util.getLongArray
@@ -101,7 +104,7 @@ fun Image(
 ) {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
-    val loader = remember(context) { state.getLoader(context) }
+    val loader = remember(context, state) { state.getLoader(context) }
     val request = if (state.url != null) rememberImageRequest(state.url) else null
     SubcomposeAsyncImage(
         modifier = modifier,
@@ -125,12 +128,10 @@ fun Image(
 @Composable
 private fun rememberImageRequest(url: Any?): ImageRequest {
     val context = LocalContext.current
-    val owner = LocalLifecycleOwner.current
     return remember(url) {
         ImageRequest.Builder(context)
             .data(url)
             .diskCachePolicy(CachePolicy.ENABLED)
-            .lifecycle(owner)
             .precision(Precision.INEXACT)
             .scale(Scale.FILL)
             .crossfade(true)
@@ -140,6 +141,7 @@ private fun rememberImageRequest(url: Any?): ImageRequest {
 
 fun Any?.hashString() = "%08x".format(hashCode())
 private const val ImageRetentionStore = "image-retention-store"
+private const val OpaqueAlpha = 0xFF000000.toInt()
 
 @Composable
 fun rememberImageState(url: Any?): ImageState {
@@ -171,7 +173,7 @@ fun rememberPaletteImageState(
         )
     }
     LaunchedEffect(imageState.palette) {
-        if (imageState.hasNewPalette) prefs.edit(commit = true) {
+        if (imageState.hasNewPalette) prefs.edit {
             putLongArray(key, imageState.palette.toLongArray())
         }
     }
@@ -217,10 +219,12 @@ data class PaletteImageState(
         super.processState(state)
         if (state !is State.Success || !resolvePalette) return
         try {
-            palette = AndroidPalette.from(state.result.drawable.toBitmap())
-                .resizeBitmapArea(200)
-                .generate()
-                .let(::Palette)
+            val generated = withContext(Dispatchers.Default) {
+                AndroidPalette.from(state.result.image.toBitmap())
+                    .resizeBitmapArea(200)
+                    .generate()
+            }
+            palette = Palette(generated)
         } catch (ignore: IllegalStateException) {
         }
     }
@@ -228,9 +232,9 @@ data class PaletteImageState(
     private fun Palette(palette: AndroidPalette): Palette {
         val swatch = palette.vibrantSwatch ?: palette.mutedSwatch ?: palette.dominantSwatch
         return Palette(
-            color = Color(0xff000000 + (swatch?.rgb ?: 0)),
-            textColor = Color(0xff000000 + (swatch?.bodyTextColor ?: 0)),
-            titleColor = Color(0xff000000 + (swatch?.titleTextColor ?: 0))
+            color = Color((swatch?.rgb ?: 0) or OpaqueAlpha),
+            textColor = Color((swatch?.bodyTextColor ?: 0) or OpaqueAlpha),
+            titleColor = Color((swatch?.titleTextColor ?: 0) or OpaqueAlpha)
         )
     }
 

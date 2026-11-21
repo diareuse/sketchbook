@@ -1,6 +1,10 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     alias(libs.plugins.android.library)
+    alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.roborazzi)
     id "publish-conventions"
 }
 
@@ -9,7 +13,7 @@ android {
     compileSdk 37
 
     defaultConfig {
-        minSdk 21
+        minSdk 26
         consumerProguardFiles "consumer-rules.pro"
     }
 
@@ -17,6 +21,11 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
         }
     }
     buildFeatures {
@@ -28,17 +37,44 @@ android {
     }
 }
 
-dependencies {
+kotlin {
+    compilerOptions {
+        jvmTarget = JvmTarget.JVM_17
+    }
+}
 
-    implementation libs.bundles.compose
+dependencies {
+    implementation platform(libs.compose.bom)
+    androidTestImplementation platform(libs.compose.bom)
+    testImplementation platform(libs.compose.bom)
+
+    api libs.compose.ui.core
+    api libs.compose.foundation
+    api libs.compose.material3
+    api libs.compose.ui.window
+    api libs.compose.ui.preview
+    api libs.coil.compose
+    api libs.kotlinx.collections
+    api libs.androidx.paging
+    implementation libs.compose.icons.core
+    implementation libs.compose.activity
+    implementation libs.compose.ui.tooling
     implementation libs.androidx.palette
     implementation libs.androidx.activity
-    implementation libs.coil.compose
     implementation libs.coil.svg
-    compileOnly libs.google.haze
-    compileOnly libs.androidx.paging
+    implementation libs.coil.network.okhttp
+    implementation libs.haze
+    implementation libs.haze.blur
+    implementation libs.haze.glass
 
+    testImplementation libs.junit
+    testImplementation libs.robolectric
+    testImplementation libs.roborazzi
+    testImplementation libs.roborazzi.compose
+    testImplementation libs.compose.ui.test.junit4
+    testImplementation libs.compose.ui.test.manifest
 }
-kotlin {
-    jvmToolchain(17)
+
+roborazzi {
+    outputDir.set(layout.projectDirectory.dir("src/test/snapshots"))
 }
