@@ -1,6 +1,6 @@
 [versions]
 androidx-activity = "1.13.0"
-androidx-compose-bom = "2026.09.00"
+androidx-compose-bom = "2026.11.01"
 androidx-palette = "1.1.0"
 androidx-paging = "3.5.3"
 kotlin = "2.4.21"
